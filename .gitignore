@@ -5,6 +5,7 @@
 .yarnrc
 *.lock
 *.log
+.logs/
 *.cache
 *.swp
 .bkps/
