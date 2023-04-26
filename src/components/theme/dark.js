@@ -1,0 +1,16 @@
+export default {
+  background: '#fff',
+  backgroundSecondary: '#eee',
+  primary: '#FFBF00',
+  secondary: '#2ECC71',
+  text: '#fff',
+  textGray: '#757575',
+  textDark: '#A5A5A5',
+  textButton: '#fff',
+  borderColor: '#ECECECAA',
+  errorColor: '#FF0000',
+  validColor: '#2ECC71',
+  alertColor: '#FFBF00',
+  inputColor: '#E0E0E0',
+  placeholderColor: '#A4A4A4',
+}

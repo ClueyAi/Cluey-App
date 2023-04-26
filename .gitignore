@@ -1,3 +1,13 @@
+.env
+.pnp*
+.yarn/
+.yarnrc.yml
+.yarnrc
+*.lock
+*.cache
+*.swp
+.bkps/
+.apk/
 node_modules/
 .expo/
 dist/
