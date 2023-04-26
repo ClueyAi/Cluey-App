@@ -4,6 +4,7 @@
 .yarnrc.yml
 .yarnrc
 *.lock
+*.log
 *.cache
 *.swp
 .bkps/
