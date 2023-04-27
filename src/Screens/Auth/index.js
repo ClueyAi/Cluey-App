@@ -2,7 +2,7 @@ import React from 'react';
 import { createStackNavigator } from "@react-navigation/stack";
 import Ionicons from '@expo/vector-icons/Ionicons';
 
-import { LanguageButton } from '../../components/tools';
+import { LanguageSelector } from '../../components/tools';
 
 import Welcome from './Welcome';
 import SignIn from './SignIn';
@@ -19,8 +19,8 @@ const Auth = () => {
       <AuthStack.Screen
         name="Welcome"
         component={Welcome}
-        options={({ navigation }) => ({
-          headerRight: () => <LanguageButton navigation={navigation}/>,
+        options={() => ({
+          headerRight: () => <LanguageSelector/>,
           headerShown: true,
           headerShadowVisible: false,
           headerTitle: '',

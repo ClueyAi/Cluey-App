@@ -5,14 +5,16 @@ import { UserContext } from '../user';
 export const FirestoreContext = createContext();
 
 export const FirestoreProvider = ({ children }) => {
+  const {user, isAuth} = useContext(UserContext);
   const [messages, setMessages] = useState(null);
   const [isData, setIsData] = useState(false);
   const [hasData, setHasData] = useState(null);
-  const { isAuth } = useContext(UserContext);
+
+  const currentUser = user?.uid;
 
   useEffect(() => {
     if (isAuth) {
-      const unsubscribe = firestore.collection('public')
+      const unsubscribe = firestore.collection(currentUser)
         .orderBy('createdAt', 'desc')
         .onSnapshot((querySnapshot) => {
           const data = querySnapshot.docs.map(doc => ({
@@ -29,7 +31,11 @@ export const FirestoreProvider = ({ children }) => {
   }, [isAuth, hasData, isData]);
 
   const createMessage = async (message) => {
-    return await firestore.collection('public').add(message);
+    return await firestore.collection(currentUser).add(message);
+  };
+
+  const createBotMessage = async (message) => {
+    return await firestore.collection(currentUser).add(message);
   };
 
   const value = {
@@ -37,6 +43,7 @@ export const FirestoreProvider = ({ children }) => {
     isData,
     hasData,
     createMessage,
+    createBotMessage
   };
 
   return <FirestoreContext.Provider value={value}>{children}</FirestoreContext.Provider>;

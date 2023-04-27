@@ -3,7 +3,7 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 
 import { AuthContext } from '../../../api/firebase'
 
-import locale from '../../../components/locale'
+import { LocaleContext } from '../../../components/locale'
 import { 
   BgMark,
   LogoBg,
@@ -15,7 +15,6 @@ import {
   TextInput,
   H1, P,
   ButtonPrimary,
-  BackButton,
   TxtButton,
   TextError,
   TextValid,
@@ -23,6 +22,8 @@ import {
 } from '../../../components/styles';
 
 export default function SignUp({ navigation }) {
+  const {locale} = useContext(LocaleContext);
+  const {signUp} = useContext(AuthContext)
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [rePassword, setRePassword] = useState('');
@@ -40,7 +41,6 @@ export default function SignUp({ navigation }) {
 
   const errorColor = "#FFAAAA50"
 
-  const { signUp } = useContext(AuthContext)
 
   const emailValidate = (text) => {
     if (text !== '') {
@@ -128,9 +128,6 @@ export default function SignUp({ navigation }) {
         <LogoBg source={require('../../../../assets/images/cluey-happy.png')}/>
         <LogoName>{locale.global.app.name}</LogoName>
       </BgMark>
-      <BackButton onPress={() => navigation.goBack()} accessibilityLabel={locale.global.back_button.msg}>
-        <Ionicons name="arrow-back" size={28} color="#000000" />
-      </BackButton>
       <Heading style={{marginTop: "30%", marginBottom: 15}}>
         <H1 style={{marginBottom: 10}}>{locale.signup.title}</H1>
         <P>{locale.signup.description}</P>

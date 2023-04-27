@@ -1,6 +1,5 @@
 import React from 'react';
 import { View, Text } from 'react-native';
-import { MenuProvider } from 'react-native-popup-menu';
 import CustomMenu from './Components/menuPopup';
 
 export default function MyComponent() {
@@ -16,9 +15,7 @@ export default function MyComponent() {
   return (
     <View>
         <Text>My Text</Text>
-        <MenuProvider>
         <CustomMenu onPressDelete={handlePressDelete} onPressEdit={handlePressEdit} />
-    </MenuProvider>
       </View>
   );
 }

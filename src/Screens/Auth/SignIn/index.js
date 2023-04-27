@@ -4,7 +4,7 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 
 import { AuthContext } from '../../../api/firebase'
 
-import locale from '../../../components/locale'
+import { LocaleContext } from '../../../components/locale'
 import { 
   BgMark,
   LogoBg,
@@ -25,6 +25,8 @@ import {
 
 
 export default function SignIn({ navigation }) {
+  const {locale} = useContext(LocaleContext);
+  const {signIn} = useContext(AuthContext)
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -38,7 +40,6 @@ export default function SignIn({ navigation }) {
 
   const errorColor = "#FFAAAA50"
 
-  const { signIn } = useContext(AuthContext)
 
   const emailValidate = (text) => {
     const reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;

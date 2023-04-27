@@ -3,7 +3,7 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 
 import { AuthContext } from '../../../api/firebase'
 
-import locale from '../../../components/locale'
+import { LocaleContext } from '../../../components/locale'
 import { 
   BgMark,
   LogoBg,
@@ -15,12 +15,13 @@ import {
   TextInput,
   H1, H3, P, PMini,
   ButtonPrimary,
-  BackButton,
   TxtButton,
   TextError,
 } from '../../../components/styles';
 
 export default function Forgot({ navigation }) {
+  const {locale} = useContext(LocaleContext);
+  const {forgot} = useContext(AuthContext)
   const [email, setEmail] = useState('');
   const [emailValid, setEmailValid] = useState(null);
 
@@ -32,7 +33,6 @@ export default function Forgot({ navigation }) {
 
   const errorColor = "#FFAAAA50"
 
-  const { forgot } = useContext(AuthContext)
 
   const emailValidate = (text) => {
     const reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
@@ -58,7 +58,7 @@ export default function Forgot({ navigation }) {
     }
   }
 
-  const handleBack = () => {navigation.goBack()}
+  const handleContinue = () => {navigation.navigate('Loading')}
 
   if (sendRecovery == false) { 
     return (
@@ -67,9 +67,7 @@ export default function Forgot({ navigation }) {
           <LogoBg source={require('../../../../assets/images/cluey-happy.png')} />
           <LogoName>{locale.global.app.name}</LogoName>
         </BgMark>
-        <BackButton onPress={() => navigation.goBack()} accessibilityLabel={locale.global.back_button.msg}>
-          <Ionicons name="arrow-back" size={28} color="#000000" />
-        </BackButton>
+
         <Heading style={{marginTop: '65%', marginBottom: 15}}>
           <H1 style={{marginBottom: 10}}>{locale.forgot.title}</H1>
           <P>{locale.forgot.description}</P>
@@ -125,7 +123,7 @@ export default function Forgot({ navigation }) {
           <H3 style={{marginTop: 30 ,marginBottom: 5}}>{locale.forgot.success.alert_tittle}</H3>
           <PMini>{locale.forgot.success.alert_msg}</PMini>
         </Heading>
-        <ButtonPrimary style={{marginTop: 10}} onPress={handleBack} accessibilityLabel={locale.forgot.success.Button.msg}>
+        <ButtonPrimary style={{marginTop: 10}} onPress={handleContinue} accessibilityLabel={locale.forgot.success.Button.msg}>
           <TxtButton>{locale.forgot.success.Button.text}</TxtButton> 
         </ButtonPrimary>
       </Container>

@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { useFonts } from 'expo-font';
-import { Appearance, Platform } from 'react-native';
+import { Appearance, Platform, AppRegistry } from 'react-native';
 import { ThemeProvider } from 'styled-components';
+import { MenuProvider } from 'react-native-popup-menu';
 
 import Firebase from './src/api/firebase';
+import { BotProvider } from './src/api/chatbot';
+import { LocaleProvider } from './src/components/locale';
 import theme from './src/components/theme';
 import Screens from './src/Screens';
 
@@ -29,10 +32,16 @@ const Cluey = () => {
 
   return (
     <Firebase>
+            <BotProvider>
       <StatusBar style='dark'/>
       <ThemeProvider theme={AppTheme}>
-        <Screens />
+        <LocaleProvider>
+          <MenuProvider>
+              <Screens />
+          </MenuProvider>
+        </LocaleProvider>
       </ThemeProvider>
+            </BotProvider>
     </Firebase>
   );
 };

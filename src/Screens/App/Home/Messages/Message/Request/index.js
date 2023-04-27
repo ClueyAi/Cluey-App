@@ -1,23 +1,23 @@
 import React from 'react';
 
 import { 
-  Request,
+  MessageRight,
   MessageText,
   DateText
 } from '../../../../../../components/styles';
 import Options from '../Options';
 
-const Receive = ({ data }) => {
+const Request = ({ data }) => {
   const time = data?.createdAt.substring(11, 16);
 
   return (
     <Options data={data}>
-      <Request>
+      <MessageRight>
         <MessageText>{data?.text}</MessageText>
         <DateText>{time}</DateText>
-      </Request>
+      </MessageRight>
     </Options>
   );
 };
 
-export default Receive;
+export default Request;

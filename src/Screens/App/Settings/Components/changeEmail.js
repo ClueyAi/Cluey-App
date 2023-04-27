@@ -7,7 +7,7 @@ import { useFocusEffect } from '@react-navigation/native';
 
 import { UserContext } from '../../../../api/firebase';
 
-import locale from '../../../../components/locale'
+import { LocaleContext } from '../../../../components/locale'
 import { 
   BgMark,
   LogoBg,
@@ -42,6 +42,8 @@ import {
 } from '../../../../components/styles';
 
 export default function ChangeEmail({ navigation })  {
+  const {locale} = useContext(LocaleContext);
+  const {user, signIn, updateUserEmail} = useContext(UserContext);
   const [photo, setPhoto] = useState('');
   const [userName, setUserName] = useState('');
   const [email, setEmail] = useState('');
@@ -57,7 +59,6 @@ export default function ChangeEmail({ navigation })  {
 
   const errorColor = "#FFAAAA50"
 
-  const { user, signIn, updateUserEmail } = useContext(UserContext);
   const name = user?.email.split("@")[0]
 
   const handleBack = async () => {navigation.goBack()}

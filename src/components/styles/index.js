@@ -86,7 +86,7 @@ export const H1Mini = styled.Text`
   font-family: 'Nunito-Bold';
   text-align: center;
   font-size: 22px;
-  color: ${props => props.theme.background};
+  color: ${props => props.theme.text};
 `;
 export const H2 = styled.Text`
   font-family: 'Nunito-Bold';
@@ -214,13 +214,6 @@ export const WideButton = styled.TouchableOpacity`
   text-align: center;
   padding: 10px 30px;
 `;
-export const BackButton = styled.TouchableOpacity`
-  position: absolute;
-  justify-content: center;
-  align-items: center;
-  top: 50px;
-  left: 10px;
-`;
 export const LogoutButton = styled.TouchableOpacity`
   position: absolute;
   justify-content: center;
@@ -273,7 +266,7 @@ export const ResponseMessages = styled.View`
   flex-direction: row;
   align-self: flex-start;
 `;
-export const Request = styled.View`
+export const MessageRight = styled.View`
   max-width: 95%;
   align-self: flex-end;
   padding: 10px;
@@ -281,7 +274,7 @@ export const Request = styled.View`
   margin-left: 10px;
   background-color: ${props => props.theme.secondarySoft};
 `;
-export const Response = styled.View`
+export const MessageLeft = styled.View`
   max-width: 95%;
   align-self: flex-start;
   padding: 10px;
