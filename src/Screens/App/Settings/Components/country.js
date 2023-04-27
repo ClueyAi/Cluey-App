@@ -6,7 +6,7 @@ import * as ImagePicker from 'expo-image-picker';
 
 import { AuthContext } from '../../../../api/firebase';
 
-import locale from '../../../../components/locale'
+import { LocaleContext } from '../../../../components/locale'
 import { 
   BgMark,
   LogoBg,
@@ -36,12 +36,13 @@ import {
 } from '../../../../components/styles';
 
 export default function Country({ navigation })  {
+  const locale = useContext(LocaleContext);
+  const {user, updateUserPhoto, updateUserName, signOut} = useContext(AuthContext);
   const [error, setError] = useState('');
   const [editingName, setEditingName] = useState(false);
   const [photo, setPhoto] = useState('');
   const [userName, setUserName] = useState('');
 
-  const { user, updateUserPhoto, updateUserName, signOut } = useContext(AuthContext);
   const name = user?.email.split("@")[0]
 
   const handleBack = async () => {navigation.goBack()}

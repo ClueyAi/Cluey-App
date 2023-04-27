@@ -22,7 +22,6 @@ import {
   H1, H2, H3, P,
   TxtButton,
   StatusOnline,
-  BackButton,
   ButtonPrimary,
   WideButton,
   AbsoluteButton,
@@ -35,10 +34,10 @@ import {
 } from '../../../components/styles';
 
 export default function Blank({ navigation })  {
+  const {user, emailVerify, signOut} = useContext(AuthContext);
   const [error, setError] = useState('');
   const [image, setImage] = useState(null);
 
-  const { user, emailVerify, signOut } = useContext(AuthContext);
 
   const handleLogout = async () => {
     return Alert.alert(
@@ -80,12 +79,9 @@ export default function Blank({ navigation })  {
       quality: 1,
     });
 
-    console.log(result);
-
     if (!result.canceled) {
       setImage(result.assets[0].uri);
     }
-    console.log(image)
   }
   const handleEmailVerify = async () => {emailVerify()}
   const handleEditName = async () => {}
@@ -100,12 +96,6 @@ export default function Blank({ navigation })  {
   
   return(
     <Container>
-        <BackButton
-          onPress={handleLogout}
-          accessibilityLabel={locale.global.back_button.msg}
-        >
-          <Ionicons name="arrow-back" size={28} color="#000000" />
-        </BackButton>
         <Heading style={{marginTop: '50%', marginBottom: 15}}>
           <H1 style={{marginBottom: 10, fontSize: 25}}>{locale.custom.Verify.title}</H1>
           <P>{locale.forgot.success.description}</P>

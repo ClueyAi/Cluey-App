@@ -2,9 +2,10 @@ import React, { useState, useContext, useEffect } from 'react';
 import { Platform, StyleSheet } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
 
+import { BotContext } from '../../../../api/chatbot';
 import { UserContext, FirestoreContext } from '../../../../api/firebase';
 
-import locale from '../../../../components/locale';
+import { LocaleContext } from '../../../../components/locale';
 import { 
   Avoiding,
   ChatTextInput,
@@ -14,10 +15,12 @@ import {
 } from '../../../../components/styles';
 
 const Chat = () => {
-  const [textValue, setTextValue] = useState(null);
-  const [name, setName] = useState('');
-  const {user} = useContext(UserContext);
+  const {locale} = useContext(LocaleContext);
   const {createMessage} = useContext(FirestoreContext);
+  const {processeMessage} = useContext(BotContext);
+  const {user} = useContext(UserContext);
+  const [name, setName] = useState('');
+  const [textValue, setTextValue] = useState(null);
 
   const requestValidation = async (text) => {
     setTextValue(text);
@@ -34,6 +37,7 @@ const Chat = () => {
     if (message.text !== "" && message.userId !== null) {
       try {
         await createMessage(message)
+        processeMessage(message)
       } catch (error) {
         setTextValue(error.code);
       }

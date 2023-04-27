@@ -1,0 +1,277 @@
+{
+  "global": {
+    "language": {
+      "iso": "PT",
+      "name": "Português"
+      },
+    "app": {
+      "name":"Cluey",
+      "resume_title": "What is Cluey?",
+      "resume": "Cluey is a mobile app that helps you to find the best places to eat, drink, and have fun. It is a social network that allows you to share your experiences with your friends and other users. It is also a platform that allows you to discover new places and new experiences.",
+      "policy_terms": {
+        "title": "Privacy Policy & Terms of Use",
+        "shot_title": "Policy & Terms",
+        "policy": {
+          "title": "Privacy Policy",
+          "p1": "Your privacy is important to us. It is cluey's policy to respect your privacy regarding any information we may collect from you on the cluey website, and other websites that we own and operate.",
+          "p2": "We only ask for personal information when we truly need it to provide a service to you. We collect it by fair and lawful means, with your knowledge and consent. We also let you know why we’re collecting it and how it will be used.",
+          "p3": "We only retain collected information for as long as necessary to provide you with your requested service. What data we store, we’ll protect within commercially acceptable means to prevent loss and theft, as well as unauthorised access, disclosure, copying, use or modification.",
+          "p4": "We do not share personally identifiable information publicly or with third parties, except as required by law. Our website may have links to external websites that are not operated by us. Please be aware that we have no control over the content and",
+          "p5": "practices of these sites, and cannot accept responsibility or liability for their respective privacy policies.",
+          "p6": "You are free to refuse our request for your personal information, with the understanding that we may be unable to provide you with some of your desired services.",
+          "p7": "Your continued use of our website will be regarded as acceptance of our practices around privacy and personal information. If you have any questions about how we handle user data and personal information, feel free to contact us.",
+          "p8": "This policy is effective as of 1 January 2023."
+        },
+        "terms": {
+          "title": "Terms of Use",
+          "t1": "1. Terms",
+          "p1": "By accessing the cluey website, you agree to be bound by these terms of service, all applicable laws and regulations, and agree that you are responsible for compliance with all applicable local laws. If you do not agree to any of these terms, you are prohibited from using or accessing this website. The materials contained on this site are protected by applicable copyright and trademark laws.",
+          "t2": "2. Use License",
+          "p2": "Permission is granted to temporarily download one copy of the materials (information or software) on cluey's website for personal, non-commercial transitory viewing only. This is the grant of a license, not a transfer of title, and under this license you may not:",
+          "p2.1": "modify or copy the materials;",
+          "p2.2": "use the materials for any commercial purpose, or for any public display (commercial or non-commercial);",
+          "p2.3": "attempt to decompile or reverse engineer any software contained on cluey's website;",
+          "p2.4": "remove any copyright or other proprietary notations from the materials; or",
+          "p2.5": "transfer the materials to another person or 'mirror' the materials on any other server.",
+          "p2.6": "This license shall automatically terminate if you violate any of these restrictions and may be terminated by cluey at any time. Upon terminating your viewing of these materials or upon the termination of this license, you must destroy any downloaded materials in your possession whether in electronic or printed format.",
+          "t3": "3. Disclaimer",
+          "p3": "The materials on cluey's website are provided on an 'as is' basis. cluey makes no warranties, expressed or implied, and hereby disclaims and negates all other warranties including, without limitation, implied warranties or conditions of merchantability, fitness for a particular purpose, or non-infringement of intellectual property or other violation of rights.",
+          "p3.1": "Further, cluey does not warrant or make any representations concerning the accuracy, likely results, or reliability of the use of the materials on its website or otherwise relating to such materials or on any sites linked to this site.",
+          "t4": "4. Limitations",
+          "p4": "In no event shall cluey or its suppliers be liable for any damages (including, without limitation, damages for loss of data or profit, or due to business interruption) arising out of the use or inability to use the materials on cluey's website, even if cluey or a cluey authorized representative has been notified orally or in writing of the possibility of such damage. Because some jurisdictions do not allow limitations on implied warranties, or limitations of liability for consequential or incidental damages, these limitations may not apply to you.",
+          "t5": "5. Accuracy of materials",
+          "p5": "The materials appearing on cluey's website could include technical, typographical, or photographic errors. cluey does not warrant that any of the materials on its website are accurate, complete or current. cluey may make changes to the materials contained on its website at any time without notice. However cluey does not make any commitment to update the materials.",
+          "t6": "6. Links",
+          "p6": "cluey has not reviewed all of the sites linked to its website and is not responsible for the contents of any such linked site. The inclusion of any link does not imply endorsement by cluey of the site. Use of any such linked website is at the user's own risk.",
+          "t7": "7. Modifications",
+          "p7": "cluey may revise these terms of service for its website at any time without notice. By using this website you are agreeing to be bound by the then current version of these terms of service.",
+          "t8": "8. Governing Law",
+          "p8": "These terms and conditions are governed by and construed in accordance with the laws of Portugal and you irrevocably submit to the exclusive jurisdiction of the courts in that State or location."
+        }
+      },
+      "contact_us": {
+        "title": "Contact Us",
+        "website": "https://www.cluey.pt/",
+        "github": "https://github.com/ClueyAi",
+        "facebook": "https://www.facebook.com/"
+      }
+    },
+    "team": {
+      "title": "Developer by",
+      "designer": {
+        "name": "Gabriel Ferreira",
+        "office": "Designer",
+        "site_url": "https://www.beatstars.com/gakibeatz",
+        "photo_url": "https://yt3.ggpht.com/PVbtR9FIlpi9Y9QRtiuYDIxRh9FJeIrzBzVMNJzSjs8e_GnNohvI1fbJHQbeGRvADN7HEkkC=s176-c-k-c0x00ffffff-no-rj-mo"
+      },
+      "developer": {
+        "name": "Gustavo Falcão",
+        "office": "Developer",
+        "site_url": "https://github.com/gustavofalcao1",
+        "photo_url": "https://avatars.githubusercontent.com/u/26607023?v=4"
+      },
+      "tester": {
+        "name": "Gonçalo Silva",
+        "office": "Tester",
+        "site_url": "https://www.linkedin.com/in/gon%C3%A7alo-silva-7b5b1b194/",
+        "photo_url": "https://media.licdn.com/dms/image/C4D03AQEXYi5mvFcUCA/profile-displayphoto-shrink_400_400/0/1569583446493?e=1687392000&v=beta&t=MKXMUm0oQNWskTStlt3P-Sp2t-HpYCCe5-Dj0LYWbu0"
+      }
+    },
+    "mentor": {
+      "title": "Mentored by",
+      "mentor1": {
+        "name": "Ana Paula Pinto",
+        "site_url": "http://instituto.islagaia.pt/docentes/docente/APP",
+        "photo_url": "http://instituto.islagaia.pt/docentes/docfotos/3.png"
+      },
+      "mentor2": {
+        "name": "Joaquim Moreira",
+        "site_url": "http://instituto.islagaia.pt/docentes/docente/JJM",
+        "photo_url": "http://instituto.islagaia.pt/docentes/docfotos/38.jpg"
+      },
+      "mentor3": {
+        "name": "Jorge Godinho",
+        "site_url": "http://instituto.islagaia.pt/docentes/docente/ALG",
+        "photo_url": "http://instituto.islagaia.pt/docentes/docfotos/5.png"
+      }
+    },
+    "partners": {
+      "title": "Our Partners",
+      "islagaia": {
+        "name": "Isla Gaia",
+        "site_url": "https://islagaia.com",
+        "logo_url": "https://www.islagaia.pt/images/log_isla_novo.png"
+      }
+    }
+  },
+  "welcome": {
+    "title": "Sua IA de assistente pessoal",
+    "description": "Aumente sua produtividade com a ajuda da inteligência artificial em seu smartphone.",
+    "footer":"Ao continuar você concorda com nossos",
+    "button": {
+      "text":"Continuar",
+      "msg": "ir para autenticação"
+    }
+  },
+  "signin": {
+    "title": "Sign In",
+    "description": "Enter your account to Cluey help you.",
+    "button": {
+      "text":"Lets Go",
+      "msg": "enter and get started to Cluey",
+      "signup": "create a new account now"
+    },
+    "text_input": {
+      "email": "email",
+      "password": "password"
+    }
+  },
+  "signup": {
+    "title": "Sign Up",
+    "description": "Create a new account to Cluey help you.",
+    "button": {
+      "text":"Continue",
+      "msg": "create and get started to Cluey"
+    },
+    "text_input": {
+      "email": "email",
+      "password": "password",
+      "confirm_password": "confirm password"
+    }
+  },
+  "custom": {
+    "verify": {
+      "title": "Verify",
+      "description": "Please check your email from the link sent to you in order to proceed to Cluey.",
+      "verify_button": {
+        "text":"Send Email Verify",
+        "msg": "send verification email"
+      },
+      "continue_button": {
+        "text":"Continue",
+        "msg": "continue to Cluey"
+      }
+    }
+  },
+  "forgot": {
+    "title": "Forgot Password?",
+    "description": "Create a new account to Cluey help you.",
+    "button": {
+      "text":"Recovery",
+      "msg": "create and get started to Cluey"
+    },
+    "text_input": {
+      "email": "email"
+    },
+    "success": {
+      "title": "Password recovery successfully requested!",
+      "description": "You will receive an email with the steps to recover your account password, associated with the email entered.",
+      "alert_tittle": "Important!",
+      "alert_msg": "Remember to also check your 'spam' folder.",
+      "Button": {
+        "text": "Continue",
+        "msg": "continue to Sign In screen"
+      }
+    }
+  },
+  "logout": {
+    "text": "Logout",
+    "msg": "logout at your account"
+  },
+  "home": {
+    "title": "Home",
+    "description": "Welcome to Cluey, your personal AI assistant.",
+    "settings_button": {
+      "text":"Settings",
+      "msg": "go to settings"
+    },
+    "chat_box": {
+      "placeholder1": "Hi ",
+      "placeholder2": ", how can I help you?"
+      
+    },
+    "send_button": {
+      "text":"Sender",
+      "msg": "sender message"
+    }
+  },
+  "settings": {
+    "title": "Settings",
+    "button_logout": {
+      "msg": "desconnect from Cluey and go back to authentication",
+      "alert": {
+        "title": "Are your sure?",
+        "description": "Are you sure you want to logout?",
+        "msg": "are you sure you want to logout?"
+      }
+    },
+    "photo_button": {
+      "text": "Change your photo",
+      "msg": "change your photo",
+      "library_permission": "You've refused to allow this appp to access your photos!",
+      "camera_permission": "You've refused to allow this appp to access your camera!"
+    },
+    "name_button": {
+      "text": "Change your name",
+      "msg": "change your name"
+    },
+    "config": {
+      "email_config": {
+        "title": "Change email",
+        "description": "your account email",
+        "email": "new email",
+        "password": "password",
+        "change_button": {
+          "text": "Change",
+          "msg": "change your email"
+        }
+      },
+      "password_config": {
+        "title": "Change password"
+      },
+      "anddress_config": {
+        "title": "Country",
+        "description": "Choose your location."
+      },
+      "preferences_config": {
+        "title": "Preferences",
+        "description": "Customize to your experience"
+      }
+    }
+  },
+  "about": {
+    "title": "About"
+  },
+  "alert": {
+    "title": "Alert",
+    "yes": "Yes",
+    "no": "No",
+    "logout": {
+      "title": "Are your sure?",
+      "message": "Are you sure you want to log out of your account?"
+    },
+    "photo_change": {
+      "title": "Change your photo",
+      "message": "Choose how you want to change your photo",
+      "camera": "Camera",
+      "library": "Gallery"
+    }
+  },
+  "loading": {
+    "loading": "A carregar...",
+    "welcome": "Bem-Vindo!",
+    "welcome_back": "Bem-Vindo de volta!",
+    "welcome_user": "Bem-Vindo de volta, "
+  },
+  "error": {
+    "auth_connect_error": "Error to connect your account",
+    "auth_create_user": "Error to create your account",
+    "auth_user_not_found": "User not found",
+    "auth_missing_email": "Please enter your email",
+    "auth_invalid_email": "Please enter a valid email",
+    "auth_email_already_in_use": "Email already in use",
+    "auth_missing_password": "Please enter your password",
+    "auth_invalid_password": "Please enter a valid password",
+    "auth_wrong_password": "Wrong password"
+  }
+}

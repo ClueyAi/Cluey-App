@@ -9,8 +9,8 @@ import {
   RequestMessages
 } from '../../../../../components/styles';
 
-import Send from './Send';
-import Receive from './Receive';
+import Response from './Response';
+import Request from './Request';
 
 const Message = ({ data }) => {
   const {user} = useContext(UserContext);
@@ -23,12 +23,12 @@ const Message = ({ data }) => {
     <ChatMessages>
       <ResponseMessages>
         {data?.userId !== user?.uid ? (
-          <Send style={styles.shadow} data={data}/>
+          <Response style={styles.shadow} data={data}/>
         ) : null}
       </ResponseMessages>
       <RequestMessages>
         {data?.userId === user?.uid ? (
-          <Receive style={styles.shadow} data={data}/>
+          <Request style={styles.shadow} data={data}/>
         ) : null}
       </RequestMessages>
     </ChatMessages>

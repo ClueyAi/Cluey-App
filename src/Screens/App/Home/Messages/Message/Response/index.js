@@ -2,23 +2,23 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 
 import { 
-  Response,
+  MessageLeft,
   NameText,
   MessageText,
   DateText
 } from '../../../../../../components/styles';
 import Options from '../Options';
 
-const Send = ({ data }) => {
+const Response = ({ data }) => {
   const time = data?.createdAt.substring(11, 16);
 
   return (
     <Options style={styles.menu} data={data}>
-      <Response>
+      <MessageLeft>
         <NameText>{data?.senderName}</NameText>
         <MessageText>{data?.text}</MessageText>
         <DateText>{time}</DateText>
-      </Response>
+      </MessageLeft>
     </Options>
   );
 };
@@ -31,4 +31,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Send;
+export default Response;

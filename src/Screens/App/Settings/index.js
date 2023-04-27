@@ -7,7 +7,7 @@ import { useFocusEffect } from '@react-navigation/native';
 
 import { UserContext } from '../../../api/firebase';
 
-import locale from '../../../components/locale'
+import { LocaleContext } from '../../../components/locale'
 import { 
   Container,
   Avoiding,
@@ -31,12 +31,13 @@ import {
   Footer
 } from '../../../components/styles';
 
-export default function Settings({ navigation, route })  {
+export default function Settings({ navigation })  {
+  const {locale} = useContext(LocaleContext);
+  const {user, updateUserPhoto, updateUserName} = useContext(UserContext);
   const [error, setError] = useState('');
   const [editingName, setEditingName] = useState(false);
   const [photo, setPhoto] = useState('');
   const [userName, setUserName] = useState('');
-  const { user, updateUserPhoto, updateUserName } = useContext(UserContext);
 
   const handleEditPhoto = async () => {
     Alert.alert(
@@ -131,15 +132,17 @@ export default function Settings({ navigation, route })  {
   
   useEffect(() => {
     const name = user?.email.split("@")[0]
-    setPhoto(user?.photoURL)
-    setUserName(user?.displayName? user?.displayName : name)
-  }, [user, setUserName, setPhoto])
+    setPhoto(user?.photoURL);
+    setUserName(user?.displayName? user?.displayName : name);
+  }, [user, setUserName, setPhoto]);
 
   useFocusEffect(
     useCallback(() => {
       setEditingName(false);
     }, [])
   );
+
+  console.log(photo)
   
   return(
     <TouchableWithoutFeedback onPress={handleEditNameOf} accessible={false}>
@@ -244,5 +247,5 @@ export default function Settings({ navigation, route })  {
         </Body>
       </Container>
     </TouchableWithoutFeedback>
-  )
-}
+  );
+};

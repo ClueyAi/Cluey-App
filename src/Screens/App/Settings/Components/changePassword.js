@@ -3,7 +3,7 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 
 import { AuthContext } from '../../../../api/firebase'
 
-import locale from '../../../../components/locale'
+import { LocaleContext } from '../../../../components/locale'
 import { 
   BgMark,
   LogoBg,
@@ -15,12 +15,13 @@ import {
   TextInput,
   H1, H3, P, PMini,
   ButtonPrimary,
-  BackButton,
   TxtButton,
   TextError,
 } from '../../../../components/styles';
 
 export default function ChangePassword({ navigation }) {
+  const {locale} = useContext(LocaleContext);
+  const {forgot} = useContext(AuthContext)
   const [email, setEmail] = useState('');
   const [emailValid, setEmailValid] = useState(null);
 
@@ -32,7 +33,6 @@ export default function ChangePassword({ navigation }) {
 
   const errorColor = "#FFAAAA50"
 
-  const { forgot } = useContext(AuthContext)
 
   const emailValidate = (text) => {
     const reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
@@ -73,12 +73,6 @@ export default function ChangePassword({ navigation }) {
           <LogoBg source={require('../../../../../assets/images/cluey-happy.png')} />
           <LogoName>{locale.global.app.name}</LogoName>
         </BgMark>
-        <BackButton
-          onPress={() => navigation.goBack()}
-          accessibilityLabel={locale.global.back_button.msg}
-        >
-          <Ionicons name="arrow-back" size={28} color="#000000" />
-        </BackButton>
         <Heading style={{marginTop: '65%', marginBottom: 15}}>
           <H1 style={{marginBottom: 10}}>{locale.forgot.title}</H1>
           <P>{locale.forgot.description}</P>

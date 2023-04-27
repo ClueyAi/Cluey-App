@@ -4,7 +4,7 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 
 import { AuthContext } from '../../../api/firebase'
 
-import locale from '../../../components/locale'
+import { LocaleContext } from '../../../components/locale'
 import { 
   Container,
   Heading,
@@ -19,12 +19,13 @@ import {
 } from '../../../components/styles';
 
 export default function Verify({ navigation })  {
+  const {locale} = useContext(LocaleContext);
+  const {user, emailVerify, signOut} = useContext(AuthContext);
   const [error, setError] = useState('');
   const [verify, setVerify] = useState();
   const [dev, setDev] = useState(false);
   const [devSure, setDevSure] = useState(false);
 
-  const { user, emailVerify, signOut } = useContext(AuthContext);
 
   const emailVerified = user?.emailVerified
 

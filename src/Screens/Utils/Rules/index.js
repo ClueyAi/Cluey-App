@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import Ionicons from '@expo/vector-icons/Ionicons';
 
-import locale from '../../../components/locale'
+import { LocaleContext } from '../../../components/locale'
 import { 
   Container,
   Header,
@@ -15,6 +15,7 @@ import {
 } from '../../../components/styles';
 
 export default function PolicyTerms({ navigation })  {
+  const {locale} = useContext(LocaleContext);
   const [isPolicy, setIsPolicy] = useState(true);
   const [policyColor, setPolicyColor] = useState(FocusColor);
   const [termsColor, setTermsColor] = useState(DefaultColor);

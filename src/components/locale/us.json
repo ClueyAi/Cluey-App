@@ -1,7 +1,9 @@
 {
   "global": {
-    "language": "English",
-    "ISO": "en",
+    "language": {
+      "iso": "US",
+      "name": "English"
+      },
     "app": {
       "name":"Cluey",
       "resume_title": "What is Cluey?",
@@ -53,9 +55,6 @@
         "github": "https://github.com/ClueyAi",
         "facebook": "https://www.facebook.com/"
       }
-    },
-    "back_button": {
-      "msg":"go back to last screen"
     },
     "team": {
       "title": "Developer by",
@@ -110,7 +109,7 @@
     "description": "Boost your productivity with the help of artificial intelligence on your smartphone.",
     "footer":"By continuing you agree to our",
     "button": {
-      "text":"Get Start",
+      "text":"Continue",
       "msg": "go to authentication"
     }
   },

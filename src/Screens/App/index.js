@@ -18,7 +18,7 @@ const App = () => {
   return (
     <AppStack.Navigator screenOptions={{
       headerStyle: {
-        shadowColor: "#000000",
+        shadowColor: "#000",
         shadowOffset: {width: 0, height: 1},
         shadowOpacity:  0.10,
         shadowRadius: 1.51,
