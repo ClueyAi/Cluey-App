@@ -203,7 +203,7 @@ const SignIn = ({ navigation }) => {
 };
 
 SignIn.propTypes = {
-  navigation: PropTypes.func.isRequired
+  navigation: PropTypes.object.isRequired
 };
 
 export default SignIn;

@@ -287,7 +287,7 @@ const Country = ({ navigation }) => {
 };
 
 Country.propTypes = {
-  navigation: PropTypes.func.isRequired
+  navigation: PropTypes.object.isRequired
 };
 
 export default Country;
