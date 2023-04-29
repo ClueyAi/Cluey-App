@@ -1,6 +1,5 @@
 import React from 'react';
 import { createStackNavigator } from "@react-navigation/stack";
-import Ionicons from '@expo/vector-icons/Ionicons';
 
 import { LanguageSelector } from '../../components/tools';
 

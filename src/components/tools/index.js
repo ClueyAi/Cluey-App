@@ -47,7 +47,7 @@ export const LogoutButton = ({ navigation }) => {
 export const SettingsButton = ({ navigation }) => {
   return(
     <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Settings')}>
-      <Ionicons name="settings-outline" size={24} color="#FFBF00" />
+      <Ionicons name="settings" size={24} color="#FFBF00" />
     </TouchableOpacity>
   )
 }

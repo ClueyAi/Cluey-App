@@ -1,80 +1,56 @@
-import React, { useState, useContext } from 'react'
-import { Alert, Linking } from 'react-native';
-import Ionicons from '@expo/vector-icons/Ionicons';
+import React, { useContext, useEffect } from 'react'
+import { Linking } from 'react-native';
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
+import Ionicons from '@expo/vector-icons/Ionicons';
+import AntDesign from '@expo/vector-icons/AntDesign';
 import UserAvatar from 'react-native-user-avatar';
 
-import { AuthContext } from '../../../api/firebase';
-
-import locale from '../../../components/locale'
+import { LocaleContext} from '../../../components/locale';
 import { 
-  BgMark,
-  LogoBg,
-  LogoName,
-  Avoiding,
-  Header,
+  Container,
   Body,
   Main,
   Div,
   View,
   ScrollView,
-  Input,
-  TextInput,
-  H1, H1Mini, H2, H3, H3Bold, H4, H5, P, PMini,
-  TxtButton,
-  StatusOnline,
-  Button,
+  H1, H1Mini, H3, H3Bold, H5, P, PMini,
   ButtonEmpyte,
-  WideButton,
-  AbsoluteButton,
-  Profile,
   Picture,
   Image,
   ProfileTeam,
-  Infor,
-  Provider,
   Footer,
   Team, Mentor,
   Partners,
-  ProfilePartners
+  AbsoluteButton,
+  ButtonPrimary
 } from '../../../components/styles';
 
-export default function About({ navigation })  {
+export default function About({ navigation, route })  {
+  const {locale} = useContext(LocaleContext);
 
-  const handleBack = async () => {navigation.goBack()}
+  const handleDesigner = async () => {Linking.openURL(locale.global.team.designer.site_url)};
+  const handleDeveloper = async () => {Linking.openURL(locale.global.team.developer.site_url)};
+  const handleTester = async () => {Linking.openURL(locale.global.team.tester.site_url)};
 
-  const handleDesigner = async () => {Linking.openURL(locale.global.team.designer.site_url)}
-  const handleDeveloper = async () => {Linking.openURL(locale.global.team.developer.site_url)}
-  const handleTester = async () => {Linking.openURL(locale.global.team.tester.site_url)}
+  const handleMentor1 = async () => {Linking.openURL(locale.global.mentor.mentor1.site_url)};
+  const handleMentor2 = async () => {Linking.openURL(locale.global.mentor.mentor2.site_url)};
+  const handleMentor3 = async () => {Linking.openURL(locale.global.mentor.mentor3.site_url)};
 
-  const handleMentor1 = async () => {Linking.openURL(locale.global.mentor.mentor1.site_url)}
-  const handleMentor2 = async () => {Linking.openURL(locale.global.mentor.mentor2.site_url)}
-  const handleMentor3 = async () => {Linking.openURL(locale.global.mentor.mentor3.site_url)}
-
-  const handleIslagaia = async () => {Linking.openURL(locale.global.partners.islagaia.site_url)}
-  const handlePolicy = async () => {navigation.navigate("PolicyTerms")}
-  const handleWebsite = async () => {Linking.openURL(locale.global.app.contact_us.website)}
-  const handleGithub = async () => {Linking.openURL(locale.global.app.contact_us.github)}
-  const handleFacebook = async () => {Linking.openURL(locale.global.app.contact_us.facebook)}
+  const handleIslagaia = async () => {Linking.openURL(locale.global.partners.islagaia.site_url)};
+  const handlePolicy = async () => {navigation.navigate("Rules")};
+  const handleWebsite = async () => {Linking.openURL(locale.global.app.contact_us.website)};
+  const handleGithub = async () => {Linking.openURL(locale.global.app.contact_us.github)};
+  const handleFacebook = async () => {Linking.openURL(locale.global.app.contact_us.facebook)};
   
-  return(
-    <Avoiding behavior="height">
-      <Body>
-        <Header style={{marginTop: "8%"}}>
-          <Div style={{marginLeft: 20, alignItems: 'flex-start'}}>
-            <ButtonEmpyte onPress={handleBack} accessibilityLabel={locale.global.back_button.msg}>
-              <Ionicons name="arrow-back-outline" size={28} color="#000000" />
-            </ButtonEmpyte>
-          </Div>
-          <Div>
-            <H1>{locale.about.title}</H1>
-          </Div>
-          <Div style={{marginRight: 20, alignItems: 'flex-end'}}>
-            <ButtonEmpyte>
-              <Ionicons name="log-out-outline" size={28} color="#00000000" />
-            </ButtonEmpyte>
-          </Div>
-        </Header>
+  const handleGoBack = () => {navigation.goBack()};
+
+  return (
+    <Container>
+      <AbsoluteButton style={{top: 45, left: 10, flexDirection: 'row'}} onPress={handleGoBack}>
+        <Ionicons name="chevron-back" size={28} color="#FFBF00" />
+        <AntDesign name="home" size={16} color="#FFBF00" />
+      </AbsoluteButton>
+      <Body style={{marginTop: '20%'}}>
         <Main>
           <ScrollView style={{paddingTop: 20}}>
             <H3>{locale.global.team.title}</H3>
@@ -177,6 +153,6 @@ export default function About({ navigation })  {
           </Div>
         </Footer>
       </Body>
-    </Avoiding>
-  )
-}
+    </Container>
+  );
+};

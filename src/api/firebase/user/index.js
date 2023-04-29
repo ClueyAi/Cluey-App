@@ -1,5 +1,5 @@
 import React, { createContext, useState, useEffect } from 'react';
-import { auth } from '../config';
+import { auth, storage } from '../config';
 
 export const UserContext = createContext();
 
@@ -48,7 +48,12 @@ export const UserProvider = ({ children }) => {
     });
   };
 
-  const updateUserEmail = async (newEmail) => {
+  const updateUserEmail = async (currentEmail, password, newEmail) => {
+    const credential = auth.EmailAuthProvider.credential(
+      currentEmail,
+      password
+    );
+    await auth.currentUser.reauthenticateWithCredential(credential);
     await auth.currentUser.updateEmail(newEmail);
   };
   
