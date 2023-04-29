@@ -110,8 +110,8 @@ const Forgot = ({ navigation }) => {
               />
             : null }
           </Input>
-          {error ? <TextError>{errorMsg}</TextError> : <TextError></TextError> }
-          <ButtonPrimary onPress={handleForgot} accessibilityLabel={locale.forgot.button.msg}>
+          {error ? <TextError>{erroraccessibility}</TextError> : <TextError></TextError> }
+          <ButtonPrimary onPress={handleForgot} accessibilityLabel={locale.forgot.button.accessibility}>
             <TxtButton >{locale.forgot.button.text}</TxtButton> 
           </ButtonPrimary>
         </Form>
@@ -124,9 +124,9 @@ const Forgot = ({ navigation }) => {
           <H1 style={{marginBottom: 10, fontSize: 25}}>{locale.forgot.success.title}</H1>
           <P>{locale.forgot.success.description}</P>
           <H3 style={{marginTop: 30 ,marginBottom: 5}}>{locale.forgot.success.alert_tittle}</H3>
-          <PMini>{locale.forgot.success.alert_msg}</PMini>
+          <PMini>{locale.forgot.success.alert_accessibility}</PMini>
         </Heading>
-        <ButtonPrimary style={{marginTop: 10}} onPress={handleContinue} accessibilityLabel={locale.forgot.success.Button.msg}>
+        <ButtonPrimary style={{marginTop: 10}} onPress={handleContinue} accessibilityLabel={locale.forgot.success.Button.accessibility}>
           <TxtButton>{locale.forgot.success.Button.text}</TxtButton> 
         </ButtonPrimary>
       </Container>

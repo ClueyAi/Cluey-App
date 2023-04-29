@@ -183,8 +183,8 @@ const SignIn = ({ navigation }) => {
           <ButtonEmpyte onPress={() => navigation.navigate("Forgot")}>
             <TxtLink>{locale.forgot.title}</TxtLink>
           </ButtonEmpyte>
-          {error ? <TextError>{errorMsg}</TextError> : <TextError> </TextError> }
-          <ButtonPrimary onPress={handleSignIn} accessibilityLabel={locale.signin.button.msg}>
+          {error ? <TextError>{erroraccessibility}</TextError> : <TextError> </TextError> }
+          <ButtonPrimary onPress={handleSignIn} accessibilityLabel={locale.signin.button.accessibility}>
             <TxtButton>{locale.signin.button.text}</TxtButton> 
           </ButtonPrimary>
         </Form>

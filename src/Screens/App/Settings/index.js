@@ -138,7 +138,7 @@ const pickImage = async (sourceType) => {
           <Main>
             <Profile>
               <Picture>
-                <ButtonEmpyte onPress={handleEditPhoto} accessibilityLabel={locale.settings.photo_button.msg}>
+                <ButtonEmpyte onPress={handleEditPhoto} accessibilityLabel={locale.settings.photo_button.accessibility}>
                   <ProfilePicture>
                     <UserAvatar size={102} style={{width: 102, height: 102, borderRadius: 100}} name={userName} src={photo}/>
                   </ProfilePicture>
@@ -162,14 +162,14 @@ const pickImage = async (sourceType) => {
                       onChangeText={nameValidation}
                       onSubmitEditing={handleEditName}
                       />
-                    <ButtonEmpyte style={{marginLeft: 5, marginRight: 10}} onPress={handleEditNameOf} accessibilityLabel={locale.settings.name_button.msg}>
+                    <ButtonEmpyte style={{marginLeft: 5, marginRight: 10}} onPress={handleEditNameOf} accessibilityLabel={locale.settings.name_button.accessibility}>
                       <Ionicons name="close" size={19} color="#FF0000A0" />
                     </ButtonEmpyte> 
                   </Input>
                 </Infor>
               :
                 <Infor>
-                  <ButtonEmpyte style={{marginLeft: 30,flexDirection: 'row', alignItems: 'center'}} onPress={handleEditNameOn} accessibilityLabel={locale.settings.name_button.msg}>
+                  <ButtonEmpyte style={{marginLeft: 30,flexDirection: 'row', alignItems: 'center'}} onPress={handleEditNameOn} accessibilityLabel={locale.settings.name_button.accessibility}>
                     <H3 style={{marginRight: 10}}>{userName}</H3>
                     <Ionicons name="create-outline" size={19} color="#757575" />
                   </ButtonEmpyte> 

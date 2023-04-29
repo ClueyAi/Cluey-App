@@ -16,7 +16,7 @@ import {
 
 const Welcome = ({ navigation }) => {
   const {locale} = useContext(LocaleContext);
-  const handleStart = () => {navigation.navigate("SignIn")}
+  const handleStart = () => {navigation.navigate("Providers")}
   const handlePolicy = () => {navigation.navigate('Rules')}
   
   return (
@@ -33,14 +33,14 @@ const Welcome = ({ navigation }) => {
       />
       */}
       <View style={{top: "60%"}}>
-        <ButtonMulti onPress={handleStart} accessibilityLabel={locale.welcome.button.msg}>
+        <ButtonMulti onPress={handleStart} accessibilityLabel={locale.welcome.button.accessibility}>
           <Ionicons name="arrow-forward-outline" size={22} color="#FFFFFF00" />
           <TxtButton>{locale.welcome.button.text}</TxtButton>
           <Ionicons name="arrow-forward-outline" size={22} color="#FFFFFF" />
         </ButtonMulti>
         <View style={{marginTop: 15}}>
           <PMini>{locale.welcome.footer}</PMini>
-          <ButtonEmpyte style={{color: '#fff'}} onPress={handlePolicy}>
+          <ButtonEmpyte style={{color: '#fff'}} onPress={handlePolicy} ccessibilityLabel={locale.global.app.policy_terms.accessibility}>
             <PMini>{locale.global.app.policy_terms.title}</PMini>
           </ButtonEmpyte>
         </View>
