@@ -16,7 +16,7 @@ import {
 
 const Welcome = ({ navigation }) => {
   const {locale} = useContext(LocaleContext);
-  const handleStart = () => {navigation.navigate("Providers")}
+  const handleStart = () => {navigation.navigate("SignIn")}
   const handlePolicy = () => {navigation.navigate('Rules')}
   
   return (
@@ -25,7 +25,7 @@ const Welcome = ({ navigation }) => {
         <H1 style={{marginBottom: 10}}>{locale.welcome.title}</H1>
         <P>{locale.welcome.description}</P>
       </Heading>
-      <Lottie source={require('./bot.json')} autoPlay loop/>
+      <Lottie source={require('../../../../assets/lotties/bot.json')} autoPlay loop/>
       {/*
       <Image
         style={{marginTop: 40, marginBottom: 65}}

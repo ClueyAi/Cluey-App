@@ -126,17 +126,18 @@
     "button_github": {
       "text": "Continue with Github Account",
       "accessibility": "sign in with github account and get started to Cluey"
-    }
+    },
+    "or": "or"
   },
   "signin": {
     "title": "Sign In",
-    "description": "Enter your account to Cluey help you.",
+    "description": "Sign In to Cluey help you.",
     "text_input": {
       "email": "email",
       "password": "password"
     },
     "button": {
-      "text": "Lets Go",
+      "text": "Sign In",
       "accessibility": "sign in and get started to Cluey"
     },
     "button_signup": {
