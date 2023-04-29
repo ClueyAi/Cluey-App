@@ -1,5 +1,4 @@
 import React, { useState, useContext, useEffect, useCallback } from 'react'
-import { Alert } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
 
 import { AuthContext } from '../../../api/firebase'
@@ -20,53 +19,18 @@ import {
 } from '../../../components/styles';
 
 export default function Verify({ navigation })  {
+  const {user, emailVerify} = useContext(AuthContext);
   const {locale} = useContext(LocaleContext);
-  const {user, emailVerify, signOut} = useContext(AuthContext);
-  const [error, setError] = useState('');
-  const [verify, setVerify] = useState();
+  const [refresh, setRefresh] = useState(false);
   const [dev, setDev] = useState(false);
   const [devSure, setDevSure] = useState(false);
 
-
-  const emailVerified = user?.emailVerified
-
-  const isVerify = useCallback(() => {
-    if (emailVerified) {
-      setVerify(true)
-    } else {
-      setVerify(false)
-    }
-  }, [emailVerified])
-
-  const handleLogout = async () => {
-    return Alert.alert(
-      "Are your sure?",
-      "Are you sure you want to log out of your account?",
-      [
-        {
-          text: "Yes",
-          onPress: async () => {
-            try {
-              await signOut()
-              navigation.navigate("Loading")
-            } catch (error) {
-              setError(error.message)
-            }
-            if (error) {
-              Alert.alert(error)
-            }
-          },
-        },
-        {
-          text: "No",
-        },
-      ],
-    )
+  const handleRefresh = () => {
+    setRefresh(!refresh);
   }
 
   const handleSendEmailVerify = async () => {
-    isVerify()
-    if (!emailVerified) {
+    if (!user?.emailVerified) {
       emailVerify()
     }
   }
@@ -80,16 +44,15 @@ export default function Verify({ navigation })  {
   }
   const handleDev3 = async () => {
     if (devSure) {
-      navigation.navigate("Home")
+      navigation.navigate("AppStackNavigator")
     }
     console.log("is verifild?", user?.emailVerified)
     console.log("dev mod:", dev)
   }
 
   useEffect(() => {
-    isVerify()
     setDev(false)
-  }, [setDev, isVerify])
+  }, [user])
   
   return(
     <Container>
@@ -115,10 +78,10 @@ export default function Verify({ navigation })  {
         <ButtonEmpyte style={{marginTop: 10}} onPress={handleSendEmailVerify} accessibilityLabel={locale.custom.verify.verify_button.msg}>
           <Link>{locale.custom.verify.verify_button.text}</Link> 
         </ButtonEmpyte>
-        <ButtonSecondary style={{marginTop: 10}} onPress={handleSendEmailVerify} accessibilityLabel={locale.custom.verify.refresh_button.msg}>
-          <TxtButton>{locale.custom.verify.refresh_button.text}</TxtButton> 
-        </ButtonSecondary>
-        {verify ?
+        <ButtonPrimary style={{marginTop: 15}} onPress={handleContinue} accessibilityLabel={locale.custom.verify.continue_button.msg}>
+            <TxtButton>{locale.custom.verify.continue_button.text}</TxtButton> 
+        </ButtonPrimary>
+        {user?.emailVerified ?
           <View style={{marginTop: '25%'}}>
             <Ionicons name="checkmark" size={35} color="#2ECC71" />
           </View>
@@ -128,14 +91,6 @@ export default function Verify({ navigation })  {
               style={{marginTop: '25%', transform: [{ scaleX: 2 }, { scaleY: 2 }]}}
             />
           </View>
-        }
-        {verify ?
-          <ButtonPrimary style={{marginTop: "25%"}} onPress={handleContinue} accessibilityLabel={locale.custom.verify.continue_button.msg}>
-            <TxtButton>{locale.custom.verify.continue_button.text}</TxtButton> 
-          </ButtonPrimary>
-        
-        :
-          null
         }
       </Container>
   )

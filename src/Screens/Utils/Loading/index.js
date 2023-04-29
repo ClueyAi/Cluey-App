@@ -21,7 +21,6 @@ const Load = ({ navigation }) => {
       const msg = user?locale.loading.welcome_user+currentUser:locale.loading.welcome_back;
       setLoadedMsg(msg);
       AsyncStorage.setItem('isNewUser', 'false');
-      console.log('user', user?.emailVerified)
       setScreen('AppStackNavigator');
       if (!user?.emailVerified) {
         setScreen('AuthStackNavigator');

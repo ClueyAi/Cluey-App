@@ -27,6 +27,8 @@ import {
 export default function SignIn({ navigation }) {
   const {locale} = useContext(LocaleContext);
   const {signIn} = useContext(AuthContext)
+  const emailRef = useRef(null);
+  const passwordRef = useRef(null);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -123,14 +125,16 @@ export default function SignIn({ navigation }) {
         <Form>
           <Input style={{marginBottom: 10, backgroundColor: `${error === errorEmail && emailValid == false ? errorColor : '#E0E0E0'}`}}>
             <TextInput
+              ref={emailRef}
+              value={email}
               placeholder={locale.signin.text_input.email}
               placeholderTextColor="#A4A4A4"
               selectionColor="#FFBF00"
               autoCapitalize="none"
               autoComplete="email"
               returnKeyType="next"
-              h
               onChangeText={emailValidate}
+              onSubmitEditing={() => passwordRef.current.focus()}
             />
             {emailValid == false && email !== '' ?
               <Ionicons 
@@ -158,6 +162,7 @@ export default function SignIn({ navigation }) {
           </Input> 
           <Input style={{marginBottom: 10, backgroundColor: `${passwordValid == false ? errorColor : '#E0E0E0'}`}}>
             <TextInput
+              ref={passwordRef}
               placeholder={locale.signin.text_input.password}
               placeholderTextColor="#A4A4A4"
               selectionColor="#FFBF00"
@@ -166,6 +171,7 @@ export default function SignIn({ navigation }) {
               secureTextEntry={true}
               returnKeyType="next"
               onChangeText={passwordValidate}
+              onSubmitEditing={handleSignIn}
             />
           </Input>
           <ButtonEmpyte onPress={() => navigation.navigate("Forgot")}>

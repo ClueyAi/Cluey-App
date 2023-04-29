@@ -1,49 +1,37 @@
-import React, { useState, useContext, useEffect, useCallback } from 'react'
-import { Alert, TouchableWithoutFeedback, Keyboard } from 'react-native';
+import React, { useState, useContext, useEffect, useRef } from 'react'
+import { TouchableWithoutFeedback, Keyboard } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import UserAvatar from 'react-native-user-avatar';
-import * as ImagePicker from 'expo-image-picker';
-import { useFocusEffect } from '@react-navigation/native';
 
 import { UserContext } from '../../../../api/firebase';
 
 import { LocaleContext } from '../../../../components/locale'
 import { 
-  BgMark,
-  LogoBg,
-  LogoName,
   Container,
-  Header,
   Body,
   Main,
   Div,
   View,
-  ScrollView,
   Input,
   TextInput,
-  H1, H2, H3, H3Bold, P,
+  H1, H3, H3Bold,
   TxtButton,
-  StatusOnline,
-  Button,
   ButtonEmpyte,
-  WideButton,
-  AbsoluteButton,
   Profile,
   Picture,
   ProfilePicture,
-  PictureEdit,
   Infor,
-  Form,
   TxtLink,
   TextError,
   ButtonPrimary,
-  Provider,
   FooterSmall
 } from '../../../../components/styles';
 
 export default function ChangeEmail({ navigation })  {
   const {locale} = useContext(LocaleContext);
   const {user, updateUserEmail} = useContext(UserContext);
+  const emailRef = useRef(null);
+  const passwordRef = useRef(null);
   const [photo, setPhoto] = useState('');
   const [userName, setUserName] = useState('');
   const [newEmail, setNewEmail] = useState('');
@@ -79,9 +67,8 @@ export default function ChangeEmail({ navigation })  {
   const handleChange = async () => {
     try {
       await updateUserEmail(password, newEmail)
-      console.log("Email updated")
+      navigation.navigate('Loading')
     } catch (error) {
-      console.log(error)
       setError(error.code)
       if (error.code === "auth/missing-password") {
         setErrorMsg(locale.error.auth_missing_password)
@@ -93,6 +80,9 @@ export default function ChangeEmail({ navigation })  {
         setErrorEmail(error.code)
         setErrorMsg(locale.error.auth_user_not_found)
         setEmailValid(false)
+      }  else if (error.code === "auth/missing-email") {
+        setErrorMsg(locale.error.auth_missing_email)
+        setPasswordValid(false)
       } else if (error.code === "auth/invalid-email") {
         setErrorEmail(error.code)
         setErrorMsg(locale.error.auth_invalid_email)
@@ -102,10 +92,14 @@ export default function ChangeEmail({ navigation })  {
         setErrorMsg(locale.error.auth_connect_user)
         setEmailValid(emailValid == true? true: false)
         setPasswordValid(passwordValid == true? true: false)
-      }
-    }
-  }
-  
+      };
+    };
+  };
+
+  const handleForgot = () => {
+    navigation.navigate("AuthStackNavigator", {screen: 'Forgot'})
+  };
+
   useEffect(() => {
     setPhoto(user?.photoURL)
     setUserName(user?.displayName? user?.displayName : name)
@@ -130,6 +124,7 @@ export default function ChangeEmail({ navigation })  {
             <Div style={{marginTop: 40, justifyContent: 'flex-start', alignItems: 'center'}}>
               <Input style={{width: "90%", marginBottom: 10, backgroundColor: `${error === errorEmail && emailValid == false ? errorColor : '#E0E0E0'}`}}>
                 <TextInput
+                  ref={emailRef}
                   value={newEmail}
                   placeholder={locale.settings.config.email_config.email}
                   placeholderTextColor="#A4A4A4"
@@ -137,8 +132,8 @@ export default function ChangeEmail({ navigation })  {
                   autoCapitalize="none"
                   autoComplete="email"
                   returnKeyType="next"
-                  h
                   onChangeText={emailValidate}
+                  onSubmitEditing={() => passwordRef.current.focus()}
                 />
                 {emailValid == false && newEmail !== '' ?
                   <Ionicons 
@@ -166,17 +161,19 @@ export default function ChangeEmail({ navigation })  {
               </Input> 
               <Input style={{width: "90%", marginBottom: 10, backgroundColor: `${passwordValid == false ? errorColor : '#E0E0E0'}`}}>
                 <TextInput
+                  ref={passwordRef}
                   placeholder={locale.settings.config.email_config.password}
                   placeholderTextColor="#A4A4A4"
                   selectionColor="#FFBF00"
                   autoCapitalize="none"
                   autoComplete="current-password"
                   secureTextEntry={true}
-                  returnKeyType="next"
+                  returnKeyType="done"
                   onChangeText={passwordValidate}
+                  onSubmitEditing={handleChange}
                 />
               </Input>
-              <ButtonEmpyte onPress={() => navigation.navigate("Forgot")} accessibilityLabel={locale.forgot.button.msg}>
+              <ButtonEmpyte onPress={() => {handleForgot}} accessibilityLabel={locale.forgot.button.msg}>
                 <TxtLink>{locale.forgot.title}</TxtLink>
               </ButtonEmpyte>
               {error ? <TextError>{errorMsg}</TextError> : <TextError> </TextError> }

@@ -1,36 +1,16 @@
 import React, { useState, useContext } from 'react'
 import { Alert } from 'react-native';
-import Ionicons from '@expo/vector-icons/Ionicons';
 import * as ImagePicker from 'expo-image-picker';
 
 import { AuthContext } from '../../../api/firebase';
 
 import locale from '../../../components/locale'
 import { 
-  BgMark,
-  LogoBg,
-  LogoName,
   Container,
   Heading,
-  Body,
-  Main,
-  Div,
-  View,
-  ScrollView,
-  Input,
-  TextInput,
-  H1, H2, H3, P,
+  H1, H2, P,
   TxtButton,
-  StatusOnline,
   ButtonPrimary,
-  WideButton,
-  AbsoluteButton,
-  Profile,
-  Picture,
-  ProfilePicture,
-  Infor,
-  Provider,
-  Footer
 } from '../../../components/styles';
 
 export default function Blank({ navigation })  {
