@@ -1,9 +1,11 @@
-import React, { createContext, useState, useEffect } from 'react';
-import { auth, storage } from '../config';
+import React, { createContext, useState, useEffect, useContext } from 'react';
+import { auth, storage, EmailAuthProvider } from '../config';
+import { LocaleContext } from '../../../components/locale';
 
 export const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
+  const {locale} = useContext(LocaleContext);
   const [user, setUser] = useState(null);
   const [isAuth, setIsAuth] = useState(false);
   
@@ -11,6 +13,7 @@ export const UserProvider = ({ children }) => {
     const unsubscribe = auth.onAuthStateChanged(user => {
       setUser(user);
       user?setIsAuth(true):setIsAuth(false);
+      auth.languageCode = locale.global.language.iso;
     });
 
     return () =>  unsubscribe
@@ -48,13 +51,14 @@ export const UserProvider = ({ children }) => {
     });
   };
 
-  const updateUserEmail = async (currentEmail, password, newEmail) => {
-    const credential = auth.EmailAuthProvider.credential(
-      currentEmail,
+  const updateUserEmail = async (password, newEmail) => {
+    const credential = EmailAuthProvider.credential(
+      user.email,
       password
     );
     await auth.currentUser.reauthenticateWithCredential(credential);
     await auth.currentUser.updateEmail(newEmail);
+    await auth.currentUser.sendEmailVerification();
   };
   
   const value = {
