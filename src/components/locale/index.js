@@ -1,5 +1,6 @@
 import React, { createContext, useState, useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import PropTypes from "prop-types";
 
 /*
 import { Platform, NativeModules } from 'react-native'
@@ -70,6 +71,10 @@ export const LocaleProvider = ({ children }) => {
   return (
     <LocaleContext.Provider value={value}>{children}</LocaleContext.Provider>
   );
+};
+
+LocaleProvider.propTypes = {
+  children: PropTypes.node.isRequired
 };
 
 export { us, pt, es, fr };

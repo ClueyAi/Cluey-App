@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from "prop-types";
 
 import { AuthProvider, AuthContext } from './authentication';
 import { UserProvider, UserContext } from './user';
@@ -7,7 +8,7 @@ import { StorageProvider, StorageContext } from './storage';
 
 export { AuthContext, UserContext, FirestoreContext, StorageContext };
 
-const Firebase = ({ children }) => {
+export const Firebase = ({ children }) => {
   return (
     <AuthProvider>
       <UserProvider>
@@ -21,4 +22,6 @@ const Firebase = ({ children }) => {
   );
 };
 
-export default Firebase;
+Firebase.propTypes = {
+  children: PropTypes.node.isRequired
+};

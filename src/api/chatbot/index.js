@@ -1,5 +1,6 @@
 import React, { createContext, useContext } from 'react';
 import { FirestoreContext } from '../firebase';
+import PropTypes from "prop-types";
 
 export const BotContext = createContext();
 
@@ -39,4 +40,8 @@ export const BotProvider = ({ children }) => {
   };
 
   return <BotContext.Provider value={value}>{children}</BotContext.Provider>;
+};
+
+BotProvider.propTypes = {
+  children: PropTypes.node.isRequired
 };

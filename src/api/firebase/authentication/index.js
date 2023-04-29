@@ -1,5 +1,7 @@
 import React, { createContext, useState, useEffect } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import PropTypes from "prop-types";
+
 import { auth } from '../config';
 
 export const AuthContext = createContext();
@@ -14,7 +16,7 @@ export const AuthProvider = ({ children }) => {
         setIsNew(false);
       } else {
         setIsNew(true);
-      };
+      }
     });
 
     return () =>  unsubscribe
@@ -52,4 +54,8 @@ export const AuthProvider = ({ children }) => {
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+};
+
+AuthProvider.propTypes = {
+  children: PropTypes.node.isRequired
 };

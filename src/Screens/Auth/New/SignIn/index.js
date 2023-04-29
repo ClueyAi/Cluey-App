@@ -3,9 +3,9 @@ import { BackHandler, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import PropTypes from "prop-types";
 
-import { AuthContext } from '../../../api/firebase'
+import { AuthContext } from '../../../../api/firebase'
 
-import { LocaleContext } from '../../../components/locale'
+import { LocaleContext } from '../../../../components/locale'
 import { 
   BgMark,
   LogoBg,
@@ -23,7 +23,7 @@ import {
   ButtonEmpyte,
   TxtButton,
   TextError,
-} from '../../../components/styles';
+} from '../../../../components/styles';
 
 
 const SignIn = ({ navigation }) => {
@@ -183,7 +183,7 @@ const SignIn = ({ navigation }) => {
           <ButtonEmpyte onPress={() => navigation.navigate("Forgot")}>
             <TxtLink>{locale.forgot.title}</TxtLink>
           </ButtonEmpyte>
-          {error ? <TextError>{erroraccessibility}</TextError> : <TextError> </TextError> }
+          {error ? <TextError>{errorMsg}</TextError> : <TextError> </TextError> }
           <ButtonPrimary onPress={handleSignIn} accessibilityLabel={locale.signin.button.accessibility}>
             <TxtButton>{locale.signin.button.text}</TxtButton> 
           </ButtonPrimary>
