@@ -1,5 +1,6 @@
 import React, { useContext} from 'react'
-import Ionicons from '@expo/vector-icons/Ionicons'; 
+import Ionicons from '@expo/vector-icons/Ionicons';
+import Lottie from "lottie-react-native";
 
 import { LocaleContext } from '../../../components/locale'
 import { 
@@ -13,10 +14,10 @@ import {
   ButtonMulti
 } from '../../../components/styles';
 
-export default function Welcome({ navigation }) {
+const Welcome = ({ navigation }) => {
   const {locale} = useContext(LocaleContext);
   const handleStart = () => {navigation.navigate("SignIn")}
-  const handlePolicy = () => {navigation.navigate("UltilsStackNavigator", {screen: "Rules"})}
+  const handlePolicy = () => {navigation.navigate('Rules')}
   
   return (
     <Container>
@@ -24,21 +25,28 @@ export default function Welcome({ navigation }) {
         <H1 style={{marginBottom: 10}}>{locale.welcome.title}</H1>
         <P>{locale.welcome.description}</P>
       </Heading>
+      <Lottie source={require('./bot.json')} autoPlay loop/>
+      {/*
       <Image
         style={{marginTop: 40, marginBottom: 65}}
         source={require('../../../../assets/images/tour.png')}
       />
-      <ButtonMulti onPress={handleStart} accessibilityLabel={locale.welcome.button.msg}>
-        <Ionicons name="arrow-forward-outline" size={22} color="#FFFFFF00" />
-        <TxtButton>{locale.welcome.button.text}</TxtButton>
-        <Ionicons name="arrow-forward-outline" size={22} color="#FFFFFF" />
-      </ButtonMulti>
-      <View style={{marginTop: 15}}>
-        <PMini>{locale.welcome.footer}</PMini>
-        <ButtonEmpyte style={{color: '#fff'}} onPress={handlePolicy}>
-          <PMini>{locale.global.app.policy_terms.title}</PMini>
-        </ButtonEmpyte>
+      */}
+      <View style={{top: "60%"}}>
+        <ButtonMulti onPress={handleStart} accessibilityLabel={locale.welcome.button.msg}>
+          <Ionicons name="arrow-forward-outline" size={22} color="#FFFFFF00" />
+          <TxtButton>{locale.welcome.button.text}</TxtButton>
+          <Ionicons name="arrow-forward-outline" size={22} color="#FFFFFF" />
+        </ButtonMulti>
+        <View style={{marginTop: 15}}>
+          <PMini>{locale.welcome.footer}</PMini>
+          <ButtonEmpyte style={{color: '#fff'}} onPress={handlePolicy}>
+            <PMini>{locale.global.app.policy_terms.title}</PMini>
+          </ButtonEmpyte>
+        </View>
       </View>
     </Container>
   );
-}
+};
+
+export default Welcome;

@@ -1,13 +1,13 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { ImageBackground } from 'react-native';
 import { ActivityIndicator, Container, Body, Main, Heading, Image, H1Mini } from '../../../components/styles';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { UserContext } from '../../../api/firebase';
+import { UserContext, AuthContext } from '../../../api/firebase';
 import { LocaleContext } from '../../../components/locale';
 
 const Load = ({ navigation }) => {
   const {locale} = useContext(LocaleContext);
   const {user, isAuth} = useContext(UserContext);
+  const {isNew} = useContext(AuthContext);
   const [loadingMsg] = useState(locale.loading.loading);
   const [loadedMsg, setLoadedMsg] = useState('');
   const [isLoading, setIsLoading] = useState(true);
@@ -20,21 +20,18 @@ const Load = ({ navigation }) => {
       const currentUser = user?.displayName?user?.displayName:emailName;
       const msg = user?locale.loading.welcome_user+currentUser:locale.loading.welcome_back;
       setLoadedMsg(msg);
-      AsyncStorage.setItem('isNewUser', 'false');
-      setScreen('AppStackNavigator');
       if (!user?.emailVerified) {
         setScreen('AuthStackNavigator');
         setRoute('Verify');
-      }
+      };
+      setScreen('AppStackNavigator');
     } else {
-      AsyncStorage.getItem('isNewUser').then((value) => {
-        if (value === 'false') {
+        if (!isNew) {
           setLoadedMsg(locale.loading.welcome_back);
           setRoute('SignIn');
         } else {
           setLoadedMsg(locale.loading.welcome);
         };
-      });
       setScreen('AuthStackNavigator');
     };
   };

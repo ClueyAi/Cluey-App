@@ -25,7 +25,7 @@ import {
 } from '../../../components/styles';
 
 
-export default function SignIn({ navigation }) {
+export default function Providers({ navigation }) {
   const {locale} = useContext(LocaleContext);
   const {signIn} = useContext(AuthContext)
   const emailRef = useRef(null);

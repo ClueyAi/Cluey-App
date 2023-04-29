@@ -1,14 +1,32 @@
-import React, { createContext } from 'react';
+import React, { createContext, useState, useEffect } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { auth } from '../config';
 
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
+  const [isNew, setIsNew] = useState(true);
+  const notNew = async () => {AsyncStorage.setItem('isNewUser', 'false')};
+
+  useEffect(() => {
+    const unsubscribe = AsyncStorage.getItem('isNewUser').then((value) => {
+      if (value === 'false') {
+        setIsNew(false);
+      } else {
+        setIsNew(true);
+      };
+    });
+
+    return () =>  unsubscribe
+  }, []);
+
   const signIn = async (email, password) => {
+    notNew();
     return await auth.signInWithEmailAndPassword(email, password);
   };
 
   const signUp = async (email, password) => {
+    notNew();
     return await auth.createUserWithEmailAndPassword(email, password);
   };
 
@@ -25,6 +43,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   const value = {
+    isNew,
     signIn,
     signUp,
     emailVerify,

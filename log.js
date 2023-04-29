@@ -15,7 +15,7 @@ const errStream = fs.createWriteStream(`${pathLogs}.error`, { flags: 'a' });
   }
 });*/
 
-function logCommand(command) {
+const logCommand = (command) => {
   const parts = command.split(' ');
   const cmd = parts.shift();
   const args = parts;
