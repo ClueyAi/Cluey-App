@@ -25,7 +25,8 @@ import {
   PictureEdit,
   Infor,
   Provider,
-  Footer
+  Footer,
+  Image
 } from '../../../components/styles';
 
 export default function Settings({ navigation })  {
@@ -37,70 +38,60 @@ export default function Settings({ navigation })  {
   const [userName, setUserName] = useState('');
 
   const handleEditPhoto = async () => {
-    Alert.alert(
-      locale.alert.photo_change.title,
-      locale.alert.photo_change.message,
-      [
-        {
-          text: "cancel",
-          style: 'cancel',
-        },
-        {
-          text: locale.alert.photo_change.camera,
-          onPress: () => {cameraPicker()},
-        },
-        {
-          text: locale.alert.photo_change.library,
-          onPress: () => {libraryPicker()},
-        },
-      ],
-      { cancelable: true }
-    );
-  };
-  const libraryPicker = async () => {
+  Alert.alert(
+    locale.alert.photo_change.title,
+    locale.alert.photo_change.message,
+    [
+      {
+        text: "cancel",
+        style: 'cancel',
+      },
+      {
+        text: locale.alert.photo_change.camera,
+        onPress: () => { pickImage("camera")},
+      },
+      {
+        text: locale.alert.photo_change.library,
+        onPress: () => { pickImage("library")},
+      },
+    ],
+    { cancelable: true }
+  );
+};
+
+const pickImage = async (sourceType) => {
+  let result;
+  if (sourceType === "camera") {
+    const permissionResult = await ImagePicker.requestCameraPermissionsAsync();
+    if (permissionResult.granted === false) {
+      alert(locale.settings.photo_button.camera_permission);
+      return;
+    }
+    result = await ImagePicker.launchCameraAsync({});
+  } else if (sourceType === "library") {
     const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
     if (permissionResult.granted === false) {
       alert(locale.settings.photo_button.library_permission);
       return;
     }
-    let result = await ImagePicker.launchImageLibraryAsync({
+    result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
       allowsMultipleSelection: false,
       allowsEditing: true,
       aspect: [4, 4],
       quality: 1,
     });
-    if (!result.canceled) {
-      const uri = result.assets[0].uri
-      const photoName = user?.uid     
-      try {
-        await updateUserPhoto(uri, photoName)
-      } catch (error) {
-        setError(error.code)
-      }
+  }
+  if (!result.canceled) {
+    const uri = result.assets[0].uri;
+    try {
+      await updateUserPhoto(uri);
+    } catch (error) {
+      setError(error.code);
     }
-    setPhoto(user?.photoURL? user?.photoURL : result.assets[0].uri)
-  };
-  const cameraPicker = async () => {
-    const permissionResult = await ImagePicker.requestCameraPermissionsAsync();
-    if (permissionResult.granted === false) {
-      alert(locale.settings.photo_button.camera_permission);
-      return;
-    }
-    let result = await ImagePicker.launchCameraAsync({
-
-    });
-    if (!result.canceled) {
-      const uri = result.assets[0].uri
-      const photoName = user?.uid     
-      try {
-        await updateUserPhoto(uri, photoName)
-      } catch (error) {
-        setError(error.code)
-      }
-    }
-    setPhoto(user?.photoURL? user?.photoURL : result.assets[0].uri)
-  };
+  }
+  setPhoto(user?.photoURL ? user?.photoURL : result.assets[0].uri);
+};
 
   const handleEditNameOn = async () => {
     setEditingName(true)

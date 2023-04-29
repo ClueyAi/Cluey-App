@@ -1,7 +1,7 @@
 import React from 'react';
 import { createStackNavigator } from "@react-navigation/stack";
 
-import { LanguageSelector } from '../../components/tools';
+import { LanguageSelector, LogoutButton } from '../../components/tools';
 
 import Welcome from './Welcome';
 import SignIn from './SignIn';
@@ -28,7 +28,16 @@ const Auth = () => {
       <AuthStack.Screen name="SignIn" component={SignIn}/>
       <AuthStack.Screen name="SignUp" component={SignUp}/>
       <AuthStack.Screen name="Forgot" component={Forgot}/>
-      <AuthStack.Screen name="Verify" component={Verify}/>
+      <AuthStack.Screen
+        name="Verify"
+        component={Verify}
+        options={({navigation}) => ({
+          headerRight: () => <LogoutButton navigation={navigation}/>,
+          headerShown: true,
+          headerShadowVisible: false,
+          headerTitle: '',
+        })}
+      />
       <AuthStack.Screen name="Custom" component={Custom}/>
     </AuthStack.Navigator>
   );

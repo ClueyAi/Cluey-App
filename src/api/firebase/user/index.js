@@ -31,11 +31,11 @@ export const UserProvider = ({ children }) => {
     });
   };
 
-  const updateUserPhoto = async (uri, photoName) => {
+  const updateUserPhoto = async (uri) => {
     const response = await fetch(uri);
     const blob = await response.blob();
 
-    const ref = storage.ref().child(`usersPhoto/${photoName}.jpg`);
+    const ref = storage.ref().child(`${user?.uid}/photoURL.jpg`);
     const snapshot = await ref.put(blob);
 
     const photoURL = await snapshot.ref.getDownloadURL();

@@ -143,8 +143,12 @@
       "title": "Verify",
       "description": "Please check your email from the link sent to you in order to proceed to Cluey.",
       "verify_button": {
-        "text": "Send Email Verify",
+        "text": "Didn't you receive verification email? Resend",
         "msg": "send verification email"
+      },
+      "refresh_button": {
+        "text": "Refresh",
+        "msg": "refresh page"
       },
       "continue_button": {
         "text": "Continue",

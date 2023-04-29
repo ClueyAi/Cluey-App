@@ -14,7 +14,7 @@ export const FirestoreProvider = ({ children }) => {
 
   useEffect(() => {
     if (isAuth) {
-      const unsubscribe = firestore.collection(currentUser)
+      const unsubscribe = firestore.collection('ai-'+currentUser)
         .orderBy('createdAt', 'desc')
         .onSnapshot((querySnapshot) => {
           const data = querySnapshot.docs.map(doc => ({
@@ -30,19 +30,19 @@ export const FirestoreProvider = ({ children }) => {
     }
   }, [isAuth, hasData, isData]);
 
-  const createMessage = async (message) => {
-    return await firestore.collection(currentUser).add(message);
+  const createAiMessage = async (message) => {
+    return await firestore.collection('ai-'+currentUser).add(message);
   };
 
   const createBotMessage = async (message) => {
-    return await firestore.collection(currentUser).add(message);
+    return await firestore.collection('Ai-'+currentUser).add(message);
   };
 
   const value = {
     messages,
     isData,
     hasData,
-    createMessage,
+    createAiMessage,
     createBotMessage
   };
 
