@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import AntDesign from "@expo/vector-icons/AntDesign";
+import PropTypes from "prop-types";
 
 import { LocaleContext } from "../../../components/locale";
 import {
@@ -154,6 +155,10 @@ const Rules = ({ navigation }) => {
       </FooterSmall>
     </Container>
   );
+};
+
+Rules.propTypes = {
+  navigation: PropTypes.object.isRequired,
 };
 
 export default Rules;

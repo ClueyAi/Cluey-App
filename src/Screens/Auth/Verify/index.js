@@ -1,5 +1,6 @@
-import React, { useState, useContext, useEffect, useCallback } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import Ionicons from "@expo/vector-icons/Ionicons";
+import PropTypes from "prop-types";
 
 import { AuthContext } from "../../../api/firebase";
 
@@ -22,13 +23,8 @@ import {
 const Verify = ({ navigation }) => {
   const { user, emailVerify } = useContext(AuthContext);
   const { locale } = useContext(LocaleContext);
-  const [refresh, setRefresh] = useState(false);
   const [dev, setDev] = useState(false);
   const [devSure, setDevSure] = useState(false);
-
-  const handleRefresh = () => {
-    setRefresh(!refresh);
-  };
 
   const handleSendEmailVerify = async () => {
     if (!user?.emailVerified) {
@@ -124,6 +120,10 @@ const Verify = ({ navigation }) => {
       )}
     </Container>
   );
+};
+
+Verify.propTypes = {
+  navigation: PropTypes.object.isRequired
 };
 
 export default Verify;

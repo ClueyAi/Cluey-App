@@ -1,6 +1,7 @@
 import React, { useState, useContext, useRef, useEffect } from 'react'
 import { BackHandler, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
+import PropTypes from "prop-types";
 
 import { AuthContext } from '../../../api/firebase'
 
@@ -39,12 +40,14 @@ const Providers = ({ navigation }) => {
   const [error, setError] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
   const [errorEmail, setErrorEmail] = useState('');
+  // eslint-disable-next-line no-unused-vars
   const [errorPassword, setErrorPassword] = useState('');
 
   const errorColor = "#FFAAAA50"
 
 
   const emailValidate = (text) => {
+    // eslint-disable-next-line no-useless-escape
     const reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
     setEmailValid(reg.test(text));
     setEmail(text)
@@ -197,6 +200,10 @@ const Providers = ({ navigation }) => {
       </Container>
     </TouchableWithoutFeedback>
   );
+};
+
+Providers.propTypes = {
+  navigation: PropTypes.func.isRequired
 };
 
 export default Providers;

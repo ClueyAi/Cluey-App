@@ -1,6 +1,5 @@
-import React, { useState, useContext } from "react";
-import { Alert } from "react-native";
-import * as ImagePicker from "expo-image-picker";
+import React, { useContext } from "react";
+import PropTypes from "prop-types";
 
 import { AuthContext } from "../../../api/firebase";
 
@@ -16,69 +15,12 @@ import {
 } from "../../../components/styles";
 
 const Blank = ({ navigation }) => {
-  const { user, emailVerify, signOut } = useContext(AuthContext);
-  const [error, setError] = useState("");
-  const [image, setImage] = useState(null);
+  const { emailVerify } = useContext(AuthContext);
 
-  const handleLogout = async () => {
-    return Alert.alert(
-      "Are your sure?",
-      "Are you sure you want to log out of your account?",
-      [
-        {
-          text: "Yes",
-          onPress: async () => {
-            try {
-              await signOut();
-              navigation.navigate("Loading");
-            } catch (error) {
-              setError(error.message);
-            }
-            if (error) {
-              Alert.alert(error);
-            }
-          },
-        },
-        {
-          text: "No",
-        },
-      ]
-    );
-  };
-  const handleEditPhoto = async () => {
-    const permissionResult =
-      await ImagePicker.requestMediaLibraryPermissionsAsync();
-
-    if (permissionResult.granted === false) {
-      alert("You've refused to allow this appp to access your photos!");
-      return;
-    }
-
-    let result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.All,
-      allowsEditing: true,
-      aspect: [4, 3],
-      quality: 1,
-    });
-
-    if (!result.canceled) {
-      setImage(result.assets[0].uri);
-    }
-  };
   const handleEmailVerify = async () => {
     emailVerify();
+    navigation.navigate("Loading");
   };
-  const handleEditName = async () => {};
-  const handleChangeEmail = async () => {};
-  const handleChangePassword = async () => {};
-  const handleCoutry = async () => {};
-  const handlePreferences = async () => {};
-  const handleAbout = async () => {
-    navigation.navigate("About");
-  };
-
-  const name = user?.email.split("@")[0];
-  const displayName = user?.displayName ? user?.displayName : name;
 
   return (
     <Container>
@@ -100,6 +42,10 @@ const Blank = ({ navigation }) => {
       </ButtonPrimary>
     </Container>
   );
+};
+
+Blank.propTypes = {
+  navigation: PropTypes.object.isRequired
 };
 
 export default Blank;

@@ -1,5 +1,6 @@
 import React, { useState, useContext } from 'react'
 import Ionicons from '@expo/vector-icons/Ionicons';
+import PropTypes from "prop-types";
 
 import { AuthContext } from '../../../api/firebase'
 
@@ -35,6 +36,7 @@ const Forgot = ({ navigation }) => {
 
 
   const emailValidate = (text) => {
+    // eslint-disable-next-line no-useless-escape
     const reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
     setEmailValid(reg.test(text));
     setEmail(text)
@@ -130,6 +132,10 @@ const Forgot = ({ navigation }) => {
       </Container>
     )
   }
+};
+
+Forgot.propTypes = {
+  navigation: PropTypes.object.isRequired
 };
 
 export default Forgot;

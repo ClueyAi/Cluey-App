@@ -1,9 +1,10 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext } from 'react'
 import { Linking } from 'react-native';
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import AntDesign from '@expo/vector-icons/AntDesign';
 import UserAvatar from 'react-native-user-avatar';
+import PropTypes from "prop-types";
 
 import { LocaleContext} from '../../../components/locale';
 import { 
@@ -22,10 +23,9 @@ import {
   Team, Mentor,
   Partners,
   AbsoluteButton,
-  ButtonPrimary
 } from '../../../components/styles';
 
-const About = ({ navigation, route }) => {
+const About = ({ navigation }) => {
   const {locale} = useContext(LocaleContext);
 
   const handleDesigner = async () => {Linking.openURL(locale.global.team.designer.site_url)};
@@ -155,6 +155,10 @@ const About = ({ navigation, route }) => {
       </Body>
     </Container>
   );
+};
+
+About.propTypes = {
+  navigation: PropTypes.func.isRequired
 };
 
 export default About;
