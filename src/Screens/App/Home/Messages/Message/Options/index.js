@@ -6,6 +6,9 @@ import {
   MenuOption,
   MenuTrigger
 } from 'react-native-popup-menu';
+
+import PropTypes from "prop-types";
+
 import { Ionicons, Entypo } from '@expo/vector-icons';
 
 const Options = ({ children , data }) => {
@@ -104,5 +107,26 @@ const Pin = ({ data }) => (
     right: -10,
   }
 });
+
+Options.propTypes = {
+  children: PropTypes.node.isRequired,
+  data: PropTypes.object.isRequired
+};
+
+Pin.propTypes = {
+  data: PropTypes.object.isRequired
+};
+
+Copy.propTypes = {
+  data: PropTypes.object.isRequired
+};
+
+Share.propTypes = {
+  data: PropTypes.object.isRequired
+};
+
+Delete.propTypes = {
+  data: PropTypes.object.isRequired
+};
 
 export default Options;

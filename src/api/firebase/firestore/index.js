@@ -1,6 +1,7 @@
 import React, { createContext, useState, useEffect, useContext } from 'react';
-import { firestore } from '../config';
+import PropTypes from "prop-types";
 
+import { firestore } from '../config';
 import { UserContext } from '../user';
 export const FirestoreContext = createContext();
 
@@ -47,4 +48,8 @@ export const FirestoreProvider = ({ children }) => {
   };
 
   return <FirestoreContext.Provider value={value}>{children}</FirestoreContext.Provider>;
+};
+
+FirestoreProvider.propTypes = {
+  children: PropTypes.node.isRequired
 };

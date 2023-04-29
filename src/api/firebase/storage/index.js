@@ -1,4 +1,6 @@
 import React, { createContext } from 'react';
+import PropTypes from "prop-types";
+
 import { storage } from '../config';
 
 export const StorageContext = createContext();
@@ -16,4 +18,8 @@ export const StorageProvider = ({ children }) => {
   };
 
   return <StorageContext.Provider value={value}>{children}</StorageContext.Provider>;
+};
+
+StorageProvider.propTypes = {
+  children: PropTypes.node.isRequired
 };

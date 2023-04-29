@@ -1,4 +1,6 @@
 import React, { createContext, useState, useEffect, useContext } from 'react';
+import PropTypes from "prop-types";
+
 import { auth, storage, EmailAuthProvider } from '../config';
 import { LocaleContext } from '../../../components/locale';
 
@@ -71,4 +73,8 @@ export const UserProvider = ({ children }) => {
   };
 
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
+};
+
+UserProvider.propTypes = {
+  children: PropTypes.node.isRequired
 };
