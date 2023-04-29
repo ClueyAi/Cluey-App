@@ -50,7 +50,7 @@ const Welcome = ({ navigation }) => {
 };
 
 Welcome.propTypes = {
-  navigation: PropTypes.func.isRequired
+  navigation: PropTypes.object.isRequired
 };
 
 export default Welcome;

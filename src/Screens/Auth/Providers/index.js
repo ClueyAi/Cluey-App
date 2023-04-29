@@ -203,7 +203,7 @@ const Providers = ({ navigation }) => {
 };
 
 Providers.propTypes = {
-  navigation: PropTypes.func.isRequired
+  navigation: PropTypes.object.isRequired
 };
 
 export default Providers;

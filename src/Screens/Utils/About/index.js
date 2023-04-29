@@ -158,7 +158,7 @@ const About = ({ navigation }) => {
 };
 
 About.propTypes = {
-  navigation: PropTypes.func.isRequired
+  navigation: PropTypes.object.isRequired
 };
 
 export default About;
