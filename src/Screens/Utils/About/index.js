@@ -25,7 +25,7 @@ import {
   ButtonPrimary
 } from '../../../components/styles';
 
-export default function About({ navigation, route })  {
+const About = ({ navigation, route }) => {
   const {locale} = useContext(LocaleContext);
 
   const handleDesigner = async () => {Linking.openURL(locale.global.team.designer.site_url)};
@@ -156,3 +156,5 @@ export default function About({ navigation, route })  {
     </Container>
   );
 };
+
+export default About;

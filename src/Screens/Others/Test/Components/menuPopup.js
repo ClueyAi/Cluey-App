@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text } from 'react-native';
 import Menu, { MenuItem, MenuDivider } from 'react-native-popup-menu';
 
-export default function CustomMenu({ onPressDelete, onPressEdit }) {
+const CustomMenu = ({ onPressDelete, onPressEdit }) => {
   let _menu = null;
 
   const hideMenu = () => _menu.hide();
@@ -32,4 +32,6 @@ export default function CustomMenu({ onPressDelete, onPressEdit }) {
       </Menu>
     </View>
   );
-}
+};
+
+export default CustomMenu;

@@ -18,7 +18,7 @@ import {
   ActivityIndicator
 } from '../../../components/styles';
 
-export default function Verify({ navigation })  {
+const Verify = ({ navigation }) => {
   const {locale} = useContext(LocaleContext);
   const {user, emailVerify, signOut} = useContext(AuthContext);
   const [error, setError] = useState('');
@@ -137,5 +137,7 @@ export default function Verify({ navigation })  {
           null
         }
       </Container>
-  )
-}
+  );
+};
+
+export default Verify;

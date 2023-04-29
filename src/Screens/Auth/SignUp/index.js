@@ -21,7 +21,7 @@ import {
   TextAlert
 } from '../../../components/styles';
 
-export default function SignUp({ navigation }) {
+const SignUp = ({ navigation }) => {
   const {locale} = useContext(LocaleContext);
   const {signUp} = useContext(AuthContext)
   const emailRef = useRef(null);
@@ -269,4 +269,6 @@ export default function SignUp({ navigation }) {
       </Form>
     </Container>
   );
-}
+};
+
+export default SignUp;

@@ -7,10 +7,7 @@ import * as ImagePicker from 'expo-image-picker';
 import { AuthContext } from '../../../../api/firebase';
 
 import { LocaleContext } from '../../../../components/locale'
-import { 
-  BgMark,
-  LogoBg,
-  LogoName,
+import {
   Avoiding,
   Header,
   Body,
@@ -21,12 +18,8 @@ import {
   Input,
   TextInput,
   H1, H2, H3, P,
-  TxtButton,
-  StatusOnline,
-  Button,
   ButtonEmpyte,
   WideButton,
-  AbsoluteButton,
   Profile,
   Picture,
   ProfilePicture,
@@ -35,7 +28,7 @@ import {
   Footer
 } from '../../../../components/styles';
 
-export default function Preferences({ navigation })  {
+const Preferences = ({ navigation }) => {
   const {locale} = useContext(LocaleContext);
   const {user, updateUserPhoto, updateUserName, signOut} = useContext(AuthContext);
   const [error, setError] = useState('');
@@ -145,10 +138,6 @@ export default function Preferences({ navigation })  {
     }
     setEditingName(false)
   }
-  const handleChangeEmail = async () => {}
-  const handleChangePassword = async () => {}
-  const handleCoutry = async () => {}
-  const handlePreferences = async () => {}
   const handleAbout = async () => {navigation.navigate("About")}
   
   useEffect(() => {
@@ -292,5 +281,7 @@ export default function Preferences({ navigation })  {
         </Body>
       </Avoiding>
     </TouchableWithoutFeedback>
-  )
-}
+  );
+};
+
+export default Preferences;
