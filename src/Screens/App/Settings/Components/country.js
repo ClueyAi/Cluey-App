@@ -35,7 +35,7 @@ import {
   Footer
 } from '../../../../components/styles';
 
-export default function Country({ navigation })  {
+const Country = ({ navigation }) => {
   const locale = useContext(LocaleContext);
   const {user, updateUserPhoto, updateUserName, signOut} = useContext(AuthContext);
   const [error, setError] = useState('');
@@ -292,5 +292,7 @@ export default function Country({ navigation })  {
         </Body>
       </Avoiding>
     </TouchableWithoutFeedback>
-  )
-}
+  );
+};
+
+export default Country;

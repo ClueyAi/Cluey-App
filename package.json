@@ -12,6 +12,7 @@
     "buildAndroid": "eas build -p android --profile preview"
   },
   "dependencies": {
+    "@eslint/create-config": "0.4.3",
     "@expo/config-plugins": "^6.0.1",
     "@react-native-async-storage/async-storage": "1.17.11",
     "@react-navigation/compat": "^5.3.20",
@@ -21,7 +22,6 @@
     "bulma": "^0.9.4",
     "child_process": "^1.0.2",
     "dotenv": "^16.0.3",
-    "eslint": "^8.39.0",
     "expo": "^48.0.13",
     "expo-camera": "^13.2.1",
     "expo-constants": "^14.2.1",
@@ -49,13 +49,16 @@
     "react-navigation": "^4.4.4",
     "react-router-dom": "^6.10.0",
     "react-router-native": "^6.10.0",
-    "readline-sync": "^1.4.10",
     "redux": "^4.2.1",
     "styled-components": "^5.3.9",
     "uuid": "^9.0.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.20.0"
+    "@babel/core": "^7.20.0",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^8.39.0",
+    "eslint-plugin-react": "^7.32.2",
+    "readline-sync": "^1.4.10"
   },
   "private": true,
   "main": "index.js",

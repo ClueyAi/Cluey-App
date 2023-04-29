@@ -19,7 +19,7 @@ import {
   TextError,
 } from '../../../../components/styles';
 
-export default function ChangePassword({ navigation }) {
+const ChangePassword = ({ navigation }) => {
   const {locale} = useContext(LocaleContext);
   const {forgot} = useContext(AuthContext)
   const [email, setEmail] = useState('');
@@ -134,5 +134,7 @@ export default function ChangePassword({ navigation }) {
         </ButtonPrimary>
       </Container>
     )
-  }
-}
+  };
+};
+
+export default ChangePassword;

@@ -27,7 +27,7 @@ import {
   FooterSmall
 } from '../../../../components/styles';
 
-export default function ChangeEmail({ navigation })  {
+const ChangeEmail = ({ navigation }) => {
   const {locale} = useContext(LocaleContext);
   const {user, updateUserEmail} = useContext(UserContext);
   const emailRef = useRef(null);
@@ -190,5 +190,7 @@ export default function ChangeEmail({ navigation })  {
         </Body>
       </Container>
     </TouchableWithoutFeedback>
-  )
-}
+  );
+};
+
+export default ChangeEmail;
