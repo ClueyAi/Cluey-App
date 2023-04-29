@@ -162,7 +162,7 @@ export default function Settings({ navigation })  {
                       style={{height: 50}}
                       value={userName}
                       selectionColor="#FFBF00"
-                      textContentType="name"
+                      autoComplete="name"
                       autoCapitalize="words"
                       returnKeyType="done"
                       enterKeyHint="done"

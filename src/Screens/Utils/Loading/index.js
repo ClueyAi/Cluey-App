@@ -54,7 +54,7 @@ const Load = ({ navigation }) => {
         <H1Mini style={{width: '95%'}}>{loadingMsg}</H1Mini>
         <ImageBackground
           style={{width: 165, height: 278}}
-          source={require('../../../assets/images/cluey-blank.png')}
+          source={require('../../../../assets/images/cluey-blank.png')}
         >
           <ActivityIndicator
             style={{marginTop: 105, transform: [{ scaleX: 2 }, { scaleY: 2 }]}}
@@ -70,7 +70,7 @@ const Load = ({ navigation }) => {
         <H1Mini style={{width: '95%'}}>{loadedMsg}</H1Mini>
         <ImageBackground
           style={{width: 165, height: 278}}
-          source={require('../../../assets/images/cluey.png')}
+          source={require('../../../../assets/images/cluey.png')}
         >
           </ImageBackground>
       </Body>

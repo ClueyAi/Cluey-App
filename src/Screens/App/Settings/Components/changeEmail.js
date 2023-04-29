@@ -135,7 +135,7 @@ export default function ChangeEmail({ navigation })  {
                   placeholderTextColor="#A4A4A4"
                   selectionColor="#FFBF00"
                   autoCapitalize="none"
-                  textContentType="emailAddress"
+                  autoComplete="email"
                   returnKeyType="next"
                   h
                   onChangeText={emailValidate}
@@ -170,7 +170,7 @@ export default function ChangeEmail({ navigation })  {
                   placeholderTextColor="#A4A4A4"
                   selectionColor="#FFBF00"
                   autoCapitalize="none"
-                  textContentType="password"
+                  autoComplete="current-password"
                   secureTextEntry={true}
                   returnKeyType="next"
                   onChangeText={passwordValidate}
