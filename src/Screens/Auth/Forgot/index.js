@@ -19,7 +19,7 @@ import {
   TextError,
 } from '../../../components/styles';
 
-export default function Forgot({ navigation }) {
+const Forgot = ({ navigation }) => {
   const {locale} = useContext(LocaleContext);
   const {forgot} = useContext(AuthContext)
   const [email, setEmail] = useState('');
@@ -130,4 +130,6 @@ export default function Forgot({ navigation }) {
       </Container>
     )
   }
-}
+};
+
+export default Forgot;

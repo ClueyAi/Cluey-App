@@ -18,7 +18,7 @@ import {
   AbsoluteButton,
 } from "../../../components/styles";
 
-export default function PolicyTerms({ navigation }) {
+const Rules = ({ navigation }) => {
   const { locale } = useContext(LocaleContext);
   const [isPolicy, setIsPolicy] = useState(true);
   const [policyColor, setPolicyColor] = useState(FocusColor);
@@ -154,4 +154,6 @@ export default function PolicyTerms({ navigation }) {
       </FooterSmall>
     </Container>
   );
-}
+};
+
+export default Rules;

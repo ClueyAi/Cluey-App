@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text } from 'react-native';
 import CustomMenu from './Components/menuPopup';
 
-export default function MyComponent() {
+const MyComponent = () => {
 
   const handlePressDelete = () => {
     console.log('Delete Pressed');
@@ -18,4 +18,6 @@ export default function MyComponent() {
         <CustomMenu onPressDelete={handlePressDelete} onPressEdit={handlePressEdit} />
       </View>
   );
-}
+};
+
+export default MyComponent;

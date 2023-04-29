@@ -25,7 +25,7 @@ import {
 } from '../../../components/styles';
 
 
-export default function SignIn({ navigation }) {
+const SignIn = ({ navigation }) => {
   const {locale} = useContext(LocaleContext);
   const {signIn} = useContext(AuthContext)
   const emailRef = useRef(null);
@@ -197,4 +197,6 @@ export default function SignIn({ navigation }) {
       </Container>
     </TouchableWithoutFeedback>
   );
-}
+};
+
+export default SignIn;
