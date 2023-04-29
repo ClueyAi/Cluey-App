@@ -163,6 +163,11 @@ export const TxtButton = styled.Text`
   font-size: 19px;
   color: ${props => props.theme.textButton};
 `;
+export const Link = styled.Text`
+  font-family: 'Nunito-Bold';
+  font-size: 14px;
+  color: ${props => props.theme.link};
+`;
 export const StatusOnline = styled.Text`
   font-family: 'Nunito';
   text-align: left;

@@ -16,7 +16,7 @@ import {
 
 const Chat = () => {
   const {locale} = useContext(LocaleContext);
-  const {createMessage} = useContext(FirestoreContext);
+  const {createAiMessage} = useContext(FirestoreContext);
   const {processeMessage} = useContext(BotContext);
   const {user} = useContext(UserContext);
   const [name, setName] = useState('');
@@ -36,7 +36,7 @@ const Chat = () => {
     setTextValue('');
     if (message.text !== "" && message.userId !== null) {
       try {
-        await createMessage(message)
+        await createAiMessage(message)
         processeMessage(message)
       } catch (error) {
         setTextValue(error.code);
@@ -52,7 +52,7 @@ const Chat = () => {
     }
   }, [user]);
   return (
-    <Avoiding  behavior={Platform.OS === "ios" ? "padding" : null} keyboardVerticalOffset={90}>
+    <Avoiding behavior={Platform.OS === "ios" ? "padding" : null} keyboardVerticalOffset={90}>
       <ChatBox>
         <ChatInput style={{...styles.shadowInput, flex: 1}}>
           <ChatTextInput
@@ -77,13 +77,6 @@ const Chat = () => {
 };
 
 const styles = StyleSheet.create({
-  shadowView: {
-    shadowColor: "#000",
-    shadowOffset: {width: -1, height: -1},
-    shadowOpacity: 0.15,
-    shadowRadius: 2.80, 
-    elevation: 6,
-  },
   shadowInput: {
     shadowColor: "#000000",
     shadowOffset: {width: 0, height: 3},

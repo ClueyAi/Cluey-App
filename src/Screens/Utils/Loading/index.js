@@ -21,8 +21,12 @@ const Load = ({ navigation }) => {
       const msg = user?locale.loading.welcome_user+currentUser:locale.loading.welcome_back;
       setLoadedMsg(msg);
       AsyncStorage.setItem('isNewUser', 'false');
+      console.log('user', user?.emailVerified)
       setScreen('AppStackNavigator');
-      user?.emailVerified?null:setRoute('Verify');
+      if (!user?.emailVerified) {
+        setScreen('AuthStackNavigator');
+        setRoute('Verify');
+      }
     } else {
       AsyncStorage.getItem('isNewUser').then((value) => {
         if (value === 'false') {

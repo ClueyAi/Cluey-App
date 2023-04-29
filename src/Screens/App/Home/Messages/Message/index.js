@@ -20,15 +20,15 @@ const Message = ({ data }) => {
   };
 
   return (
-    <ChatMessages>
+    <ChatMessages styles={styles.shadow}>
       <ResponseMessages>
         {data?.userId !== user?.uid ? (
-          <Response style={styles.shadow} data={data}/>
+          <Response data={data}/>
         ) : null}
       </ResponseMessages>
       <RequestMessages>
         {data?.userId === user?.uid ? (
-          <Request style={styles.shadow} data={data}/>
+          <Request data={data}/>
         ) : null}
       </RequestMessages>
     </ChatMessages>
@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
     shadowOffset: {width: 0, height: 3},
     shadowOpacity:  0.17,
     shadowRadius: 3.05,
-    elevation: 4
+    elevation: 6
   }
 });
 

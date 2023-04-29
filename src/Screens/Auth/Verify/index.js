@@ -15,7 +15,8 @@ import {
   ButtonPrimary,
   ButtonSecondary,
   ButtonEmpyte,
-  ActivityIndicator
+  ActivityIndicator,
+  Link
 } from '../../../components/styles';
 
 export default function Verify({ navigation })  {
@@ -105,17 +106,17 @@ export default function Verify({ navigation })  {
           >
           </ButtonEmpyte>
         {/*Dev */}
-        <LogoutButton onPress={handleLogout} accessibilityLabel={locale.logout.msg}>
-          <Ionicons name="log-out-outline" size={28} color="#000000" />
-        </LogoutButton>
-        <Heading style={{marginTop: '50%', marginBottom: 15}}>
+        <Heading style={{marginTop: '10%', marginBottom: 15}}>
           <H1 style={{marginBottom: 10, fontSize: 25}}>{locale.custom.verify.title}</H1>
           <P>{locale.forgot.success.description}</P>
           <H3 style={{marginTop: 30 ,marginBottom: 5}}>{locale.forgot.success.alert_tittle}</H3>
           <PMini>{locale.forgot.success.alert_msg}</PMini>
         </Heading>
-        <ButtonSecondary style={{marginTop: 10}} onPress={handleSendEmailVerify} accessibilityLabel={locale.custom.verify.verify_button.msg}>
-          <TxtButton>{locale.custom.verify.verify_button.text}</TxtButton> 
+        <ButtonEmpyte style={{marginTop: 10}} onPress={handleSendEmailVerify} accessibilityLabel={locale.custom.verify.verify_button.msg}>
+          <Link>{locale.custom.verify.verify_button.text}</Link> 
+        </ButtonEmpyte>
+        <ButtonSecondary style={{marginTop: 10}} onPress={handleSendEmailVerify} accessibilityLabel={locale.custom.verify.refresh_button.msg}>
+          <TxtButton>{locale.custom.verify.refresh_button.text}</TxtButton> 
         </ButtonSecondary>
         {verify ?
           <View style={{marginTop: '25%'}}>

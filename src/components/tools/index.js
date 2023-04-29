@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { View, Text, TouchableOpacity, Alert, StyleSheet } from 'react-native';
 import { Menu, MenuOption, MenuOptions, MenuTrigger } from 'react-native-popup-menu';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -9,6 +9,7 @@ import { us, pt, es, fr, LocaleContext } from '../locale';
 import { AuthContext } from '../../api/firebase';
 
 export const LogoutButton = ({ navigation }) => {
+  const {locale} = useContext(LocaleContext);
   const {signOut} = useContext(AuthContext);
 
   const confirmation = () => {
