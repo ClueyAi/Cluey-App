@@ -152,8 +152,8 @@
         "msg": "refresh page"
       },
       "continue_button": {
-        "text": "Continue",
-        "msg": "continue to Cluey"
+        "text": "Continue to Sign In",
+        "msg": "continue to sign in"
       }
     }
   },

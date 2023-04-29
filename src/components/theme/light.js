@@ -9,7 +9,7 @@ export default {
   textGray: '#757575',
   textDark: '#454545',
   textButton: '#FFF',
-  link: '#3366BB',
+  link: '#6495ED',
   border: '#ECECECAA',
   error: '#FF0000',
   valid: '#2ECC71',

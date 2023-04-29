@@ -82,6 +82,7 @@ export default function Forgot({ navigation }) {
               autoComplete="email"
               returnKeyType="next"
               onChangeText={emailValidate}
+              onSubmitEditing={handleForgot}
             /> 
             {emailValid == false ?
               <Ionicons 

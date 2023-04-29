@@ -1,4 +1,4 @@
-import React, {useState, useContext, useEffect} from 'react'
+import React, {useState, useContext, useEffect, useRef} from 'react'
 import Ionicons from '@expo/vector-icons/Ionicons';
 
 import { AuthContext } from '../../../api/firebase'
@@ -24,6 +24,9 @@ import {
 export default function SignUp({ navigation }) {
   const {locale} = useContext(LocaleContext);
   const {signUp} = useContext(AuthContext)
+  const emailRef = useRef(null);
+  const passwordRef = useRef(null);
+  const rePasswordRef = useRef(null);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [rePassword, setRePassword] = useState('');
@@ -135,14 +138,16 @@ export default function SignUp({ navigation }) {
       <Form>
         <Input style={{marginBottom: 10, backgroundColor: `${error === errorEmail && emailValid == false ? errorColor : '#E0E0E0'}`}}>
           <TextInput
+            ref={emailRef}
+            value={email}
             placeholder={locale.signup.text_input.email}
             placeholderTextColor="#A4A4A4"
             selectionColor="#FFBF00"
             autoCapitalize="none"
             autoComplete="email"
             returnKeyType="next"
-            h
             onChangeText={emailValidate}
+            onSubmitEditing={() => passwordRef.current.focus()}
           />
           {emailValid == false && email !== '' ?
             <Ionicons 
@@ -169,6 +174,7 @@ export default function SignUp({ navigation }) {
         </Input>
         <Input style={{marginBottom: 10, backgroundColor: `${error === errorPassword && passwordValid == false ? errorColor : '#E0E0E0'}`}}>
           <TextInput
+            ref={passwordRef}
             placeholder={locale.signup.text_input.password}
             placeholderTextColor="#A4A4A4"
             selectionColor="#FFBF00"
@@ -177,6 +183,7 @@ export default function SignUp({ navigation }) {
             secureTextEntry={true}
             returnKeyType="next"
             onChangeText={passwordValidate}
+            onSubmitEditing={() => rePasswordRef.current.focus()}
           />
           {passwordStrong == false && passwordValid == true ?
             <Ionicons 
@@ -219,6 +226,7 @@ export default function SignUp({ navigation }) {
         }
         <Input style={{marginBottom: 10, backgroundColor: `${error === errorPassword && rePasswordValid == false ? errorColor : '#E0E0E0'}`}}>
           <TextInput
+            ref={rePasswordRef}
             placeholder={locale.signup.text_input.confirm_password}
             placeholderTextColor="#A4A4A4"
             selectionColor="#FFBF00"
@@ -227,6 +235,7 @@ export default function SignUp({ navigation }) {
             secureTextEntry={true}
             returnKeyType="done"
             onChangeText={rePasswordValidate}
+            onSubmitEditing={handleSignUp}
           />
           {rePasswordValid == false && rePassword !== '' ?
             <Ionicons 

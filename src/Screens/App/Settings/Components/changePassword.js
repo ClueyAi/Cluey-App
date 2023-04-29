@@ -87,6 +87,7 @@ export default function ChangePassword({ navigation }) {
               autoComplete="email"
               returnKeyType="next"
               onChangeText={emailValidate}
+              onSubmitEditing={handleForgot}
             /> 
             {emailValid == false ?
               <Ionicons 
