@@ -29,7 +29,7 @@ import {
   Image
 } from '../../../components/styles';
 
-export default function Settings({ navigation })  {
+const Settings = ({ navigation }) => {
   const {locale} = useContext(LocaleContext);
   const {user, updateUserPhoto, updateUserName} = useContext(UserContext);
   const [error, setError] = useState('');
@@ -235,3 +235,5 @@ const pickImage = async (sourceType) => {
     </TouchableWithoutFeedback>
   );
 };
+
+export default Settings;
