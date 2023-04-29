@@ -3,40 +3,42 @@
     "language": {
       "iso": "PT",
       "name": "Português"
-      },
+    },
     "app": {
-      "name":"Cluey",
-      "resume_title": "O que é o Cluey?",
-      "resume": "O Cluey é uma aplicação móvel que ajuda a encontrar os melhores locais para comer, beber e divertir-se. É uma rede social que permite partilhar as suas experiências com amigos e outros utilizadores. É também uma plataforma que permite descobrir novos lugares e experiências.",
+      "name": "Cluey",
+      "resume_title": "What is Cluey?",
+      "resume": "Cluey is a mobile app that helps you to find the best places to eat, drink, and have fun. It is a social network that allows you to share your experiences with your friends and other users. It is also a platform that allows you to discover new places and new experiences.",
       "policy_terms": {
-        "title": "Política de Privacidade e Termos de Uso",
-        "short_title": "Política e Termos",
+        "title": "Privacy Policy & Terms of Use",
+        "accessibility": "go to privacy policy & terms of use",
+        "shot_title": "Policy & Terms",
         "policy": {
-          "title": "Política de Privacidade",
-          "p1": "A sua privacidade é importante para nós. É política do Cluey respeitar a sua privacidade em relação a qualquer informação sua que possamos coletar no site do Cluey, e outros sites que possuímos e operamos.",
-          "p2": "Só pedimos informações pessoais quando realmente precisamos delas para lhe fornecer um serviço. Coletamos por meios justos e legais, com o seu conhecimento e consentimento. Também informamos por que estamos coletando e como será usado.",
-          "p3": "Retemos as informações coletadas apenas pelo tempo necessário para fornecer o serviço solicitado. O que armazenamos, protegemos por meios comercialmente aceitáveis para evitar perda e roubo, bem como acesso, divulgação, cópia, uso ou modificação não autorizados.",
-          "p4": "Não compartilhamos informações pessoais identificáveis publicamente ou com terceiros, exceto quando exigido por lei. Nosso site pode ter links para outros sites externos que não são operados por nós. Esteja ciente de que não temos controle sobre o conteúdo e práticas desses sites e não podemos aceitar responsabilidade ou obrigação pelas respectivas políticas de privacidade.",
-          "p5": "Você tem o direito de recusar a nossa solicitação de informações pessoais, entendendo que podemos ser incapazes de fornecer alguns dos serviços desejados.",
-          "p6": "O seu uso continuado do nosso site será considerado como aceitação das nossas práticas em torno da privacidade e informações pessoais. Se tiver alguma dúvida sobre como lidamos com dados de usuário e informações pessoais, sinta-se à vontade para entrar em contato conosco.",
-          "p7": "Esta política é efetiva a partir de 1 de janeiro de 2023."
+          "title": "Privacy Policy",
+          "p1": "Your privacy is important to us. It is cluey's policy to respect your privacy regarding any information we may collect from you on the cluey website, and other websites that we own and operate.",
+          "p2": "We only ask for personal information when we truly need it to provide a service to you. We collect it by fair and lawful means, with your knowledge and consent. We also let you know why we’re collecting it and how it will be used.",
+          "p3": "We only retain collected information for as long as necessary to provide you with your requested service. What data we store, we’ll protect within commercially acceptable means to prevent loss and theft, as well as unauthorised access, disclosure, copying, use or modification.",
+          "p4": "We do not share personally identifiable information publicly or with third parties, except as required by law. Our website may have links to external websites that are not operated by us. Please be aware that we have no control over the content and",
+          "p5": "practices of these sites, and cannot accept responsibility or liability for their respective privacy policies.",
+          "p6": "You are free to refuse our request for your personal information, with the understanding that we may be unable to provide you with some of your desired services.",
+          "p7": "Your continued use of our website will be regarded as acceptance of our practices around privacy and personal information. If you have any questions about how we handle user data and personal information, feel free to contact us.",
+          "p8": "This policy is effective as of 1 January 2023."
         },
         "terms": {
-          "title": "Termos de Uso",
-          "t1": "1. Termos",
-          "p1": "Ao aceder ao site cluey, concorda em ficar vinculado por estes termos de serviço, todas as leis e regulamentos aplicáveis e concorda que é responsável pelo cumprimento de todas as leis locais aplicáveis. Se não concorda com qualquer um destes termos, é proibido utilizar ou aceder a este site. Os materiais contidos neste site são protegidos pelas leis aplicáveis de direitos autorais e marcas comerciais.",
-          "t2": "2. Licença de uso",
-          "p2": "É concedida permissão para descarregar temporariamente uma cópia dos materiais (informação ou software) no site da cluey para visualização pessoal, transitória e não comercial apenas. Esta é uma concessão de uma licença, não uma transferência de título, e, sob esta licença, não pode:",
-          "p2.1": "modificar ou copiar os materiais;",
-          "p2.2": "utilizar os materiais para qualquer fim comercial, ou para qualquer exibição pública (comercial ou não comercial);",
-          "p2.3": "tentar descompilar ou engenharia reversa de qualquer software contido no site da cluey;",
-          "p2.4": "remover quaisquer notas de direitos autorais ou outras notas proprietárias dos materiais; ou",
-          "p2.5": "transferir os materiais para outra pessoa ou 'espelhar' os materiais em qualquer outro servidor.",
-          "p2.6": "Esta licença será automaticamente rescindida se violar alguma destas restrições e poderá ser rescindida pela cluey a qualquer momento. Ao terminar a visualização desses materiais ou ao término desta licença, deve destruir todos os materiais descarregados em sua posse, seja em formato eletrónico ou impresso.",
-          "t3": "3. Isenção de responsabilidade",
-          "p3": "Os materiais no site da cluey são fornecidos 'tal como estão'. A cluey não dá garantias, expressas ou implícitas, e por este meio nega e anula todas as outras garantias, incluindo, sem limitação, garantias implícitas ou condições de comercialização, adequação a um fim específico ou não violação de propriedade intelectual ou outra violação de direitos.",
-          "p3.1": "Além disso, a cluey não garante nem faz quaisquer representações sobre a precisão, resultados prováveis ​​ou confiabilidade do uso dos materiais em seu site ou de outra forma relacionados a esses materiais ou em qualquer site ligado a este site.",
-          "t4": "4. Limitações",
+          "title": "Terms of Use",
+          "t1": "1. Terms",
+          "p1": "By accessing the cluey website, you agree to be bound by these terms of service, all applicable laws and regulations, and agree that you are responsible for compliance with all applicable local laws. If you do not agree to any of these terms, you are prohibited from using or accessing this website. The materials contained on this site are protected by applicable copyright and trademark laws.",
+          "t2": "2. Use License",
+          "p2": "Permission is granted to temporarily download one copy of the materials (information or software) on cluey's website for personal, non-commercial transitory viewing only. This is the grant of a license, not a transfer of title, and under this license you may not:",
+          "p2.1": "modify or copy the materials;",
+          "p2.2": "use the materials for any commercial purpose, or for any public display (commercial or non-commercial);",
+          "p2.3": "attempt to decompile or reverse engineer any software contained on cluey's website;",
+          "p2.4": "remove any copyright or other proprietary notations from the materials; or",
+          "p2.5": "transfer the materials to another person or 'mirror' the materials on any other server.",
+          "p2.6": "This license shall automatically terminate if you violate any of these restrictions and may be terminated by cluey at any time. Upon terminating your viewing of these materials or upon the termination of this license, you must destroy any downloaded materials in your possession whether in electronic or printed format.",
+          "t3": "3. Disclaimer",
+          "p3": "The materials on cluey's website are provided on an 'as is' basis. cluey makes no warranties, expressed or implied, and hereby disclaims and negates all other warranties including, without limitation, implied warranties or conditions of merchantability, fitness for a particular purpose, or non-infringement of intellectual property or other violation of rights.",
+          "p3.1": "Further, cluey does not warrant or make any representations concerning the accuracy, likely results, or reliability of the use of the materials on its website or otherwise relating to such materials or on any sites linked to this site.",
+          "t4": "4. Limitations",
           "p4": "In no event shall cluey or its suppliers be liable for any damages (including, without limitation, damages for loss of data or profit, or due to business interruption) arising out of the use or inability to use the materials on cluey's website, even if cluey or a cluey authorized representative has been notified orally or in writing of the possibility of such damage. Because some jurisdictions do not allow limitations on implied warranties, or limitations of liability for consequential or incidental damages, these limitations may not apply to you.",
           "t5": "5. Accuracy of materials",
           "p5": "The materials appearing on cluey's website could include technical, typographical, or photographic errors. cluey does not warrant that any of the materials on its website are accurate, complete or current. cluey may make changes to the materials contained on its website at any time without notice. However cluey does not make any commitment to update the materials.",
@@ -104,33 +106,49 @@
     }
   },
   "welcome": {
-    "title": "Sua IA de assistente pessoal",
-    "description": "Aumente sua produtividade com a ajuda da inteligência artificial em seu smartphone.",
-    "footer": "Ao continuar você concorda com nossos",
+    "title": "Your personal AI assistant",
+    "description": "Boost your productivity with the help of artificial intelligence on your smartphone.",
+    "footer": "By continuing you agree to our",
     "button": {
-      "text": "Continuar",
-      "msg": "ir para autenticação"
+      "text": "Continue",
+      "accessibility": "go to authentication"
+    }
+  },
+  "providers": {
+    "button_google": {
+      "text": "Continue with Google Account",
+      "accessibility": "sign in with google account and get started to Cluey"
+    },
+    "button_facebook": {
+      "text": "Continue with Facebook Account",
+      "accessibility": "sign in with facebook account and get started to Cluey"
+    },
+    "button_github": {
+      "text": "Continue with Github Account",
+      "accessibility": "sign in with github account and get started to Cluey"
     }
   },
   "signin": {
     "title": "Sign In",
     "description": "Enter your account to Cluey help you.",
-    "button": {
-      "text": "Lets Go",
-      "msg": "enter and get started to Cluey",
-      "signup": "create a new account now"
-    },
     "text_input": {
       "email": "email",
       "password": "password"
+    },
+    "button": {
+      "text": "Lets Go",
+      "accessibility": "sign in and get started to Cluey"
+    },
+    "button_signup": {
+      "text": "Create a new Account",
+      "accessibility": "create a new account now"
     }
   },
   "signup": {
     "title": "Sign Up",
     "description": "Create a new account to Cluey help you.",
     "button": {
-      "text": "Continue",
-      "msg": "create and get started to Cluey"
+      "accessibility": "sign up and get started to Cluey"
     },
     "text_input": {
       "email": "email",
@@ -138,30 +156,27 @@
       "confirm_password": "confirm password"
     }
   },
-  "custom": {
-    "verify": {
-      "title": "Verify",
-      "description": "Please check your email from the link sent to you in order to proceed to Cluey.",
-      "verify_button": {
-        "text": "Didn't you receive verification email? Resend",
-        "msg": "send verification email"
-      },
-      "refresh_button": {
-        "text": "Refresh",
-        "msg": "refresh page"
-      },
-      "continue_button": {
-        "text": "Continue to Sign In",
-        "msg": "continue to sign in"
-      }
+  "verify": {
+    "title": "Verify",
+    "description": "Please check your email from the link sent to you in order to proceed to Cluey.",
+    "verify_button": {
+      "text": "Didn't you receive verification email? Resend",
+      "accessibility": "send verification email"
+    },
+    "continue_button": {
+      "text": "Continue to Sign In",
+      "accessibility": "continue to sign in"
     }
+  },
+  "custom": {
+    
   },
   "forgot": {
     "title": "Forgot Password?",
-    "description": "Create a new account to Cluey help you.",
+    "description": "Recovery your account to Cluey help you.",
     "button": {
-      "text": "Recovery",
-      "msg": "create and get started to Cluey"
+      "text": "Recovery Now",
+      "accessibility": "send email verification to recovery your Cluey account"
     },
     "text_input": {
       "email": "email"
@@ -172,21 +187,21 @@
       "alert_tittle": "Important!",
       "alert_msg": "Remember to also check your 'spam' folder.",
       "Button": {
-        "text": "Continue",
-        "msg": "continue to Sign In screen"
+        "text": "Continue to Sign In",
+        "accessibility": "continue to Sign In screen"
       }
     }
   },
   "logout": {
     "text": "Logout",
-    "msg": "logout at your account"
+    "accessibility": "logout at your Cluey account"
   },
   "home": {
     "title": "Home",
     "description": "Welcome to Cluey, your personal AI assistant.",
     "settings_button": {
       "text": "Settings",
-      "msg": "go to settings"
+      "accessibility": "go to settings"
     },
     "chat_box": {
       "placeholder1": "Hi ",
@@ -194,28 +209,28 @@
     },
     "send_button": {
       "text": "Sender",
-      "msg": "sender message"
+      "accessibility": "sender message"
     }
   },
   "settings": {
     "title": "Settings",
     "button_logout": {
-      "msg": "desconnect from Cluey and go back to authentication",
+      "accessibility": "desconnect from Cluey and go back to authentication",
       "alert": {
         "title": "Are your sure?",
         "description": "Are you sure you want to logout?",
-        "msg": "are you sure you want to logout?"
+        "accessibility": "are you sure you want to logout?"
       }
     },
     "photo_button": {
       "text": "Change your photo",
-      "msg": "change your photo",
+      "accessibility": "change your photo",
       "library_permission": "You've refused to allow this appp to access your photos!",
       "camera_permission": "You've refused to allow this appp to access your camera!"
     },
     "name_button": {
       "text": "Change your name",
-      "msg": "change your name"
+      "accessibility": "change your name"
     },
     "config": {
       "email_config": {
@@ -225,7 +240,7 @@
         "password": "password",
         "change_button": {
           "text": "Change",
-          "msg": "change your email"
+          "accessibility": "change your email"
         }
       },
       "password_config": {
@@ -260,10 +275,10 @@
     }
   },
   "loading": {
-    "loading": "A carregar...",
-    "welcome": "Bem-Vindo!",
-    "welcome_back": "Bem-Vindo de volta!",
-    "welcome_user": "Bem-Vindo de volta, "
+    "loading": "Loading...",
+    "welcome": "Welcome!",
+    "welcome_back": "Welcome back!",
+    "welcome_user": "Welcome back, "
   },
   "error": {
     "auth_connect_error": "Error to connect your account",

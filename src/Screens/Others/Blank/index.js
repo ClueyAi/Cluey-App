@@ -32,11 +32,11 @@ const Blank = ({ navigation }) => {
         <H2 style={{ marginTop: 30, marginBottom: 15 }}>
           {locale.forgot.success.alert_tittle}
         </H2>
-        <P>{locale.forgot.success.alert_msg}</P>
+        <P>{locale.forgot.success.alert_accessibility}</P>
       </Heading>
       <ButtonPrimary
         onPress={handleEmailVerify}
-        accessibilityLabel={locale.forgot.success.Button.msg}
+        accessibilityLabel={locale.forgot.success.Button.accessibility}
       >
         <TxtButton>{locale.forgot.success.Button.text}</TxtButton>
       </ButtonPrimary>

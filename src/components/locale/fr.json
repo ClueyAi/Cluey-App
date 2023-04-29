@@ -2,7 +2,7 @@
   "global": {
     "language": {
       "iso": "FR",
-      "name": "Frances"
+      "name": "Français"
     },
     "app": {
       "name": "Cluey",
@@ -10,6 +10,7 @@
       "resume": "Cluey is a mobile app that helps you to find the best places to eat, drink, and have fun. It is a social network that allows you to share your experiences with your friends and other users. It is also a platform that allows you to discover new places and new experiences.",
       "policy_terms": {
         "title": "Privacy Policy & Terms of Use",
+        "accessibility": "go to privacy policy & terms of use",
         "shot_title": "Policy & Terms",
         "policy": {
           "title": "Privacy Policy",
@@ -105,33 +106,49 @@
     }
   },
   "welcome": {
-    "title": "Tu asistente personal de IA",
-    "description": "Aumente su productividad con la ayuda de la inteligencia artificial en su teléfono inteligente.",
-    "footer": "Al continuar aceptas nuestras",
+    "title": "Your personal AI assistant",
+    "description": "Boost your productivity with the help of artificial intelligence on your smartphone.",
+    "footer": "By continuing you agree to our",
     "button": {
-      "text": "Continuar",
-      "msg": "ir a autenticación"
+      "text": "Continue",
+      "accessibility": "go to authentication"
+    }
+  },
+  "providers": {
+    "button_google": {
+      "text": "Continue with Google Account",
+      "accessibility": "sign in with google account and get started to Cluey"
+    },
+    "button_facebook": {
+      "text": "Continue with Facebook Account",
+      "accessibility": "sign in with facebook account and get started to Cluey"
+    },
+    "button_github": {
+      "text": "Continue with Github Account",
+      "accessibility": "sign in with github account and get started to Cluey"
     }
   },
   "signin": {
     "title": "Sign In",
     "description": "Enter your account to Cluey help you.",
-    "button": {
-      "text": "Lets Go",
-      "msg": "enter and get started to Cluey",
-      "signup": "create a new account now"
-    },
     "text_input": {
       "email": "email",
       "password": "password"
+    },
+    "button": {
+      "text": "Lets Go",
+      "accessibility": "sign in and get started to Cluey"
+    },
+    "button_signup": {
+      "text": "Create a new Account",
+      "accessibility": "create a new account now"
     }
   },
   "signup": {
     "title": "Sign Up",
     "description": "Create a new account to Cluey help you.",
     "button": {
-      "text": "Continue",
-      "msg": "create and get started to Cluey"
+      "accessibility": "sign up and get started to Cluey"
     },
     "text_input": {
       "email": "email",
@@ -139,30 +156,27 @@
       "confirm_password": "confirm password"
     }
   },
-  "custom": {
-    "verify": {
-      "title": "Verify",
-      "description": "Please check your email from the link sent to you in order to proceed to Cluey.",
-      "verify_button": {
-        "text": "Didn't you receive verification email? Resend",
-        "msg": "send verification email"
-      },
-      "refresh_button": {
-        "text": "Refresh",
-        "msg": "refresh page"
-      },
-      "continue_button": {
-        "text": "Continue to Sign In",
-        "msg": "continue to dign in"
-      }
+  "verify": {
+    "title": "Verify",
+    "description": "Please check your email from the link sent to you in order to proceed to Cluey.",
+    "verify_button": {
+      "text": "Didn't you receive verification email? Resend",
+      "accessibility": "send verification email"
+    },
+    "continue_button": {
+      "text": "Continue to Sign In",
+      "accessibility": "continue to sign in"
     }
+  },
+  "custom": {
+    
   },
   "forgot": {
     "title": "Forgot Password?",
-    "description": "Create a new account to Cluey help you.",
+    "description": "Recovery your account to Cluey help you.",
     "button": {
-      "text": "Recovery",
-      "msg": "create and get started to Cluey"
+      "text": "Recovery Now",
+      "accessibility": "send email verification to recovery your Cluey account"
     },
     "text_input": {
       "email": "email"
@@ -173,21 +187,21 @@
       "alert_tittle": "Important!",
       "alert_msg": "Remember to also check your 'spam' folder.",
       "Button": {
-        "text": "Continue",
-        "msg": "continue to Sign In screen"
+        "text": "Continue to Sign In",
+        "accessibility": "continue to Sign In screen"
       }
     }
   },
   "logout": {
     "text": "Logout",
-    "msg": "logout at your account"
+    "accessibility": "logout at your Cluey account"
   },
   "home": {
     "title": "Home",
     "description": "Welcome to Cluey, your personal AI assistant.",
     "settings_button": {
       "text": "Settings",
-      "msg": "go to settings"
+      "accessibility": "go to settings"
     },
     "chat_box": {
       "placeholder1": "Hi ",
@@ -195,28 +209,28 @@
     },
     "send_button": {
       "text": "Sender",
-      "msg": "sender message"
+      "accessibility": "sender message"
     }
   },
   "settings": {
     "title": "Settings",
     "button_logout": {
-      "msg": "desconnect from Cluey and go back to authentication",
+      "accessibility": "desconnect from Cluey and go back to authentication",
       "alert": {
         "title": "Are your sure?",
         "description": "Are you sure you want to logout?",
-        "msg": "are you sure you want to logout?"
+        "accessibility": "are you sure you want to logout?"
       }
     },
     "photo_button": {
       "text": "Change your photo",
-      "msg": "change your photo",
+      "accessibility": "change your photo",
       "library_permission": "You've refused to allow this appp to access your photos!",
       "camera_permission": "You've refused to allow this appp to access your camera!"
     },
     "name_button": {
       "text": "Change your name",
-      "msg": "change your name"
+      "accessibility": "change your name"
     },
     "config": {
       "email_config": {
@@ -226,7 +240,7 @@
         "password": "password",
         "change_button": {
           "text": "Change",
-          "msg": "change your email"
+          "accessibility": "change your email"
         }
       },
       "password_config": {
@@ -261,10 +275,10 @@
     }
   },
   "loading": {
-    "loading": "Cargando...",
-    "welcome": "Bienvenia(o)!",
-    "welcome_back": "Bienvenido de nuevo!",
-    "welcome_user": "Bienvenido de nuevo, "
+    "loading": "Loading...",
+    "welcome": "Welcome!",
+    "welcome_back": "Welcome back!",
+    "welcome_user": "Welcome back, "
   },
   "error": {
     "auth_connect_error": "Error to connect your account",

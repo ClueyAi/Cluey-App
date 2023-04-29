@@ -176,11 +176,11 @@ const ChangeEmail = ({ navigation }) => {
                   onSubmitEditing={handleChange}
                 />
               </Input>
-              <ButtonEmpyte onPress={() => {handleForgot}} accessibilityLabel={locale.forgot.button.msg}>
+              <ButtonEmpyte onPress={() => {handleForgot}} accessibilityLabel={locale.forgot.button.accessibility}>
                 <TxtLink>{locale.forgot.title}</TxtLink>
               </ButtonEmpyte>
-              {error ? <TextError>{errorMsg}</TextError> : <TextError> </TextError> }
-              <ButtonPrimary onPress={handleChange} accessibilityLabel={locale.settings.config.email_config.change_button.msg}>
+              {error ? <TextError>{erroraccessibility}</TextError> : <TextError> </TextError> }
+              <ButtonPrimary onPress={handleChange} accessibilityLabel={locale.settings.config.email_config.change_button.accessibility}>
                 <TxtButton>{locale.settings.config.email_config.change_button.text}</TxtButton> 
               </ButtonPrimary>
             </Div>

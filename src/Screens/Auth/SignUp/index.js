@@ -262,9 +262,9 @@ const SignUp = ({ navigation }) => {
             />
           : null }
         </Input>
-        {error ? <TextError>{errorMsg}</TextError>
+        {error ? <TextError>{erroraccessibility}</TextError>
         : <TextError></TextError>}
-        <ButtonPrimary onPress={handleSignUp} accessibilityLabel={locale.signup.button.msg}>
+        <ButtonPrimary onPress={handleSignUp} accessibilityLabel={locale.signup.button.accessibility}>
           <TxtButton>{locale.signup.button.text}</TxtButton> 
         </ButtonPrimary>
       </Form>

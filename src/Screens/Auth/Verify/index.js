@@ -88,19 +88,19 @@ const Verify = ({ navigation }) => {
         <H3 style={{ marginTop: 30, marginBottom: 5 }}>
           {locale.forgot.success.alert_tittle}
         </H3>
-        <PMini>{locale.forgot.success.alert_msg}</PMini>
+        <PMini>{locale.forgot.success.alert_accessibility}</PMini>
       </Heading>
       <ButtonEmpyte
         style={{ marginTop: 10 }}
         onPress={handleSendEmailVerify}
-        accessibilityLabel={locale.custom.verify.verify_button.msg}
+        accessibilityLabel={locale.custom.verify.verify_button.accessibility}
       >
         <Link>{locale.custom.verify.verify_button.text}</Link>
       </ButtonEmpyte>
       <ButtonPrimary
         style={{ marginTop: 15 }}
         onPress={handleContinue}
-        accessibilityLabel={locale.custom.verify.continue_button.msg}
+        accessibilityLabel={locale.custom.verify.continue_button.accessibility}
       >
         <TxtButton>{locale.custom.verify.continue_button.text}</TxtButton>
       </ButtonPrimary>

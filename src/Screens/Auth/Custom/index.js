@@ -106,16 +106,16 @@ const Custom = ({ navigation }) => {
           >
           </ButtonEmpyte>
         {/*Dev */}
-        <LogoutButton onPress={handleLogout} accessibilityLabel={locale.logout.msg}>
+        <LogoutButton onPress={handleLogout} accessibilityLabel={locale.logout.accessibility}>
           <Ionicons name="log-out-outline" size={28} color="#000000" />
         </LogoutButton>
         <Heading style={{marginTop: '50%', marginBottom: 15}}>
           <H1 style={{marginBottom: 10, fontSize: 25}}>{locale.custom.verify.title}</H1>
           <P>{locale.forgot.success.description}</P>
           <H3 style={{marginTop: 30 ,marginBottom: 5}}>{locale.forgot.success.alert_tittle}</H3>
-          <PMini>{locale.forgot.success.alert_msg}</PMini>
+          <PMini>{locale.forgot.success.alert_accessibility}</PMini>
         </Heading>
-        <ButtonSecondary style={{marginTop: 10}} onPress={handleSendEmailVerify} accessibilityLabel={locale.custom.verify.verify_button.msg}>
+        <ButtonSecondary style={{marginTop: 10}} onPress={handleSendEmailVerify} accessibilityLabel={locale.custom.verify.verify_button.accessibility}>
           <TxtButton>{locale.custom.verify.verify_button.text}</TxtButton> 
         </ButtonSecondary>
         {verify ?
@@ -130,7 +130,7 @@ const Custom = ({ navigation }) => {
           </View>
         }
         {verify ?
-          <ButtonPrimary style={{marginTop: "25%"}} onPress={handleContinue} accessibilityLabel={locale.custom.verify.continue_button.msg}>
+          <ButtonPrimary style={{marginTop: "25%"}} onPress={handleContinue} accessibilityLabel={locale.custom.verify.continue_button.accessibility}>
             <TxtButton>{locale.custom.verify.continue_button.text}</TxtButton> 
           </ButtonPrimary>
         

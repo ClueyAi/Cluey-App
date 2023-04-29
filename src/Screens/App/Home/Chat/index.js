@@ -67,7 +67,7 @@ const Chat = () => {
             onSubmitEditing={handleSend}
             onChangeText={requestValidation}
           />
-          <Button style={{paddingRight: 15}} onPress={handleSend} accessibilityLabel={locale.home.send_button.msg}>
+          <Button style={{paddingRight: 15}} onPress={handleSend} accessibilityLabel={locale.home.send_button.accessibility}>
             <Ionicons name="send" size={24} color="#FFBF00" />
           </Button>
         </ChatInput>
