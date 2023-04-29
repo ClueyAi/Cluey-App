@@ -4,7 +4,6 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { LanguageSelector, LogoutButton } from '../../components/tools';
 
 import Welcome from './Welcome';
-import Providers from './Providers';
 import SignIn from './SignIn';
 import SignUp from './SignUp';
 import Forgot from './Forgot';
@@ -26,7 +25,6 @@ const Auth = () => {
           headerTitle: '',
         })}
       />
-      <AuthStack.Screen name="Providers" component={Providers}/>
       <AuthStack.Screen name="SignIn" component={SignIn}/>
       <AuthStack.Screen name="SignUp" component={SignUp}/>
       <AuthStack.Screen name="Forgot" component={Forgot}/>
