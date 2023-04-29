@@ -3,14 +3,12 @@ import { Alert, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import UserAvatar from 'react-native-user-avatar';
 import * as ImagePicker from 'expo-image-picker';
+import PropTypes from "prop-types";
 
 import { AuthContext } from '../../../../api/firebase';
 
 import { LocaleContext } from '../../../../components/locale'
 import { 
-  BgMark,
-  LogoBg,
-  LogoName,
   Avoiding,
   Header,
   Body,
@@ -21,12 +19,8 @@ import {
   Input,
   TextInput,
   H1, H2, H3, P,
-  TxtButton,
-  StatusOnline,
-  Button,
   ButtonEmpyte,
   WideButton,
-  AbsoluteButton,
   Profile,
   Picture,
   ProfilePicture,
@@ -145,10 +139,7 @@ const Country = ({ navigation }) => {
     }
     setEditingName(false)
   }
-  const handleChangeEmail = async () => {}
-  const handleChangePassword = async () => {}
-  const handleCoutry = async () => {}
-  const handlePreferences = async () => {}
+
   const handleAbout = async () => {navigation.navigate("About")}
   
   useEffect(() => {
@@ -293,6 +284,10 @@ const Country = ({ navigation }) => {
       </Avoiding>
     </TouchableWithoutFeedback>
   );
+};
+
+Country.propTypes = {
+  navigation: PropTypes.func.isRequired
 };
 
 export default Country;

@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { ImageBackground } from 'react-native';
-import { ActivityIndicator, Container, Body, Main, Heading, Image, H1Mini } from '../../../components/styles';
+import PropTypes from "prop-types";
+
+import { ActivityIndicator, Container, Body, H1Mini } from '../../../components/styles';
 import { UserContext, AuthContext } from '../../../api/firebase';
 import { LocaleContext } from '../../../components/locale';
 
@@ -23,7 +25,7 @@ const Load = ({ navigation }) => {
       if (!user?.emailVerified) {
         setScreen('AuthStackNavigator');
         setRoute('Verify');
-      };
+      }
       setScreen('AppStackNavigator');
     } else {
         if (!isNew) {
@@ -31,9 +33,9 @@ const Load = ({ navigation }) => {
           setRoute('SignIn');
         } else {
           setLoadedMsg(locale.loading.welcome);
-        };
+        }
       setScreen('AuthStackNavigator');
-    };
+    }
   };
 
   useEffect(() => {
@@ -42,7 +44,7 @@ const Load = ({ navigation }) => {
     const timer = setTimeout(() => {
       if (!isLoading) {
         navigation.navigate(screen, { screen: route });
-      };
+      }
     }, 1500);
     return () => clearTimeout(timer);
   }, [ screen, selectScreen, navigation ]);
@@ -76,6 +78,10 @@ const Load = ({ navigation }) => {
       </Body>
     </Container>
   );
+};
+
+Load.propTypes = {
+  navigation: PropTypes.object.isRequired
 };
 
 export default Load;

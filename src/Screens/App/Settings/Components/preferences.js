@@ -3,6 +3,7 @@ import { Alert, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import UserAvatar from 'react-native-user-avatar';
 import * as ImagePicker from 'expo-image-picker';
+import PropTypes from "prop-types";
 
 import { AuthContext } from '../../../../api/firebase';
 
@@ -282,6 +283,10 @@ const Preferences = ({ navigation }) => {
       </Avoiding>
     </TouchableWithoutFeedback>
   );
+};
+
+Preferences.propTypes = {
+  navigation: PropTypes.func.isRequired
 };
 
 export default Preferences;

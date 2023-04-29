@@ -36,6 +36,7 @@
     "firebase": "^9.19.1",
     "lottie-react-native": "5.1.4",
     "native-base": "^3.4.28",
+    "prop-types": "^15.8.1",
     "react": "18.2.0",
     "react-native": "^0.71.7",
     "react-native-flags": "^1.0.0",

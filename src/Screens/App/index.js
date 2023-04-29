@@ -2,7 +2,7 @@ import React from 'react';
 import { createStackNavigator } from "@react-navigation/stack";
 import Ionicons from '@expo/vector-icons/Ionicons';
 
-import { LogoutButton , SettingsButton, LanguageSelector } from '../../components/tools';
+import { LogoutButton , SettingsButton } from '../../components/tools';
 
 import Home from './Home';
 // Settings

@@ -1,13 +1,13 @@
 import React, { useContext} from 'react'
 import Ionicons from '@expo/vector-icons/Ionicons';
 import Lottie from "lottie-react-native";
+import PropTypes from "prop-types";
 
 import { LocaleContext } from '../../../components/locale'
 import { 
   Container,
   Heading,
   View,
-  Image,
   H1, P, PMini,
   TxtButton,
   ButtonEmpyte,
@@ -47,6 +47,10 @@ const Welcome = ({ navigation }) => {
       </View>
     </Container>
   );
+};
+
+Welcome.propTypes = {
+  navigation: PropTypes.func.isRequired
 };
 
 export default Welcome;

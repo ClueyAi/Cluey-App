@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect, useCallback } from 'react'
 import { Alert } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
+import PropTypes from "prop-types";
 
 import { AuthContext } from '../../../api/firebase'
 
@@ -18,7 +19,7 @@ import {
   ActivityIndicator
 } from '../../../components/styles';
 
-const Verify = ({ navigation }) => {
+const Custom = ({ navigation }) => {
   const {locale} = useContext(LocaleContext);
   const {user, emailVerify, signOut} = useContext(AuthContext);
   const [error, setError] = useState('');
@@ -140,4 +141,8 @@ const Verify = ({ navigation }) => {
   );
 };
 
-export default Verify;
+Custom.propTypes = {
+  navigation: PropTypes.object.isRequired
+};
+
+export default Custom;

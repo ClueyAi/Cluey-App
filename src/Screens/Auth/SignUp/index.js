@@ -1,5 +1,6 @@
 import React, {useState, useContext, useEffect, useRef} from 'react'
 import Ionicons from '@expo/vector-icons/Ionicons';
+import PropTypes from "prop-types";
 
 import { AuthContext } from '../../../api/firebase'
 
@@ -40,13 +41,13 @@ const SignUp = ({ navigation }) => {
   const [errorMsg, setErrorMsg] = useState('');
   const [errorEmail, setErrorEmail] = useState('errorEmail');
   const [errorPassword, setErrorPassword] = useState('errorPassword');
-  const [errorRePassword, setErrorRePassword] = useState('errorRePassword');
 
   const errorColor = "#FFAAAA50"
 
 
   const emailValidate = (text) => {
     if (text !== '') {
+      // eslint-disable-next-line no-useless-escape
       const reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
       setEmailValid(reg.test(text));
       setEmail(text ? text : '');
@@ -269,6 +270,10 @@ const SignUp = ({ navigation }) => {
       </Form>
     </Container>
   );
+};
+
+SignUp.propTypes = {
+  navigation: PropTypes.object.isRequired
 };
 
 export default SignUp;

@@ -2,6 +2,8 @@ import React, { useState, useContext, useEffect, useRef } from 'react'
 import { TouchableWithoutFeedback, Keyboard } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import UserAvatar from 'react-native-user-avatar';
+import PropTypes from "prop-types";
+
 
 import { UserContext } from '../../../../api/firebase';
 
@@ -50,6 +52,7 @@ const ChangeEmail = ({ navigation }) => {
 
 
   const emailValidate = (text) => {
+    // eslint-disable-next-line no-useless-escape
     const reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
     setEmailValid(reg.test(text));
     setNewEmail(text)
@@ -92,8 +95,8 @@ const ChangeEmail = ({ navigation }) => {
         setErrorMsg(locale.error.auth_connect_user)
         setEmailValid(emailValid == true? true: false)
         setPasswordValid(passwordValid == true? true: false)
-      };
-    };
+      }
+    }
   };
 
   const handleForgot = () => {
@@ -191,6 +194,10 @@ const ChangeEmail = ({ navigation }) => {
       </Container>
     </TouchableWithoutFeedback>
   );
+};
+
+ChangeEmail.propTypes = {
+  navigation: PropTypes.object.isRequired,
 };
 
 export default ChangeEmail;

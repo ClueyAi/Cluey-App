@@ -4,6 +4,7 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import UserAvatar from 'react-native-user-avatar';
 import * as ImagePicker from 'expo-image-picker';
 import { useFocusEffect } from '@react-navigation/native';
+import PropTypes from "prop-types";
 
 import { UserContext } from '../../../api/firebase';
 
@@ -26,12 +27,12 @@ import {
   Infor,
   Provider,
   Footer,
-  Image
 } from '../../../components/styles';
 
 const Settings = ({ navigation }) => {
   const {locale} = useContext(LocaleContext);
   const {user, updateUserPhoto, updateUserName} = useContext(UserContext);
+  // eslint-disable-next-line no-unused-vars
   const [error, setError] = useState('');
   const [editingName, setEditingName] = useState(false);
   const [photo, setPhoto] = useState('');
@@ -234,6 +235,10 @@ const pickImage = async (sourceType) => {
       </Container>
     </TouchableWithoutFeedback>
   );
+};
+
+Settings.propTypes = {
+  navigation: PropTypes.object.isRequired,
 };
 
 export default Settings;

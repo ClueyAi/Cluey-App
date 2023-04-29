@@ -4,6 +4,7 @@ import { Menu, MenuOption, MenuOptions, MenuTrigger } from 'react-native-popup-m
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Flag from 'react-native-flags';
 import Ionicons from '@expo/vector-icons/Ionicons';
+import PropTypes from "prop-types";
 
 import { us, pt, es, fr, LocaleContext } from '../locale';
 import { AuthContext } from '../../api/firebase';
@@ -43,7 +44,10 @@ export const LogoutButton = ({ navigation }) => {
       <Ionicons name="log-out-outline" size={24} color="#FFBF00" />
     </TouchableOpacity>
   )
-}
+};
+LogoutButton.propTypes = {
+  navigation: PropTypes.object.isRequired,
+};
 
 export const SettingsButton = ({ navigation }) => {
   return(
@@ -52,6 +56,9 @@ export const SettingsButton = ({ navigation }) => {
     </TouchableOpacity>
   )
 }
+SettingsButton.propTypes = {
+  navigation: PropTypes.object.isRequired,
+};
 
 export const LanguageSelector = () => {
   const {locale, changeLocale} = useContext(LocaleContext);

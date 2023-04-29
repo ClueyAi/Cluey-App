@@ -1,5 +1,6 @@
 import React, { useState, useContext } from 'react'
 import Ionicons from '@expo/vector-icons/Ionicons';
+import PropTypes from "prop-types";
 
 import { AuthContext } from '../../../../api/firebase'
 
@@ -35,6 +36,7 @@ const ChangePassword = ({ navigation }) => {
 
 
   const emailValidate = (text) => {
+    // eslint-disable-next-line no-useless-escape
     const reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
     setEmailValid(reg.test(text));
     setEmail(text)
@@ -134,7 +136,11 @@ const ChangePassword = ({ navigation }) => {
         </ButtonPrimary>
       </Container>
     )
-  };
+  }
+};
+
+ChangePassword.propTypes = {
+  navigation: PropTypes.object.isRequired,
 };
 
 export default ChangePassword;
