@@ -139,7 +139,7 @@ export default function SignUp({ navigation }) {
             placeholderTextColor="#A4A4A4"
             selectionColor="#FFBF00"
             autoCapitalize="none"
-            textContentType="emailAddress"
+            autoComplete="email"
             returnKeyType="next"
             h
             onChangeText={emailValidate}
@@ -173,7 +173,7 @@ export default function SignUp({ navigation }) {
             placeholderTextColor="#A4A4A4"
             selectionColor="#FFBF00"
             autoCapitalize="none"
-            textContentType="password"
+            autoComplete="new-password"
             secureTextEntry={true}
             returnKeyType="next"
             onChangeText={passwordValidate}
@@ -223,7 +223,7 @@ export default function SignUp({ navigation }) {
             placeholderTextColor="#A4A4A4"
             selectionColor="#FFBF00"
             autoCapitalize="none"
-            textContentType="newPassword"
+            autoComplete="new-password"
             secureTextEntry={true}
             returnKeyType="done"
             onChangeText={rePasswordValidate}

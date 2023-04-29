@@ -205,7 +205,7 @@ export default function Preferences({ navigation })  {
                         style={{height: 50}}
                         value={userName}
                         selectionColor="#FFBF00"
-                        textContentType="name"
+                        autoComplete="name"
                         returnKeyType="done"
                         enterKeyHint="done"
                         autoFocus

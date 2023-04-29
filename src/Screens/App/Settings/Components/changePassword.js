@@ -84,7 +84,7 @@ export default function ChangePassword({ navigation }) {
               placeholderTextColor="#A4A4A4"
               selectionColor="#FFBF00"
               autoCapitalize="none"
-              textContentType="emailAddress"
+              autoComplete="email"
               returnKeyType="next"
               onChangeText={emailValidate}
             /> 
