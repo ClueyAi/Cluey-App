@@ -77,9 +77,8 @@ export default function ChangeEmail({ navigation })  {
   };
 
   const handleChange = async () => {
-    const currentEmail = user?.email
     try {
-      await updateUserEmail(currentEmail, password, newEmail)
+      await updateUserEmail(password, newEmail)
       console.log("Email updated")
     } catch (error) {
       console.log(error)

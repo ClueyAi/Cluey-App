@@ -31,18 +31,18 @@ const Cluey = () => {
   const AppTheme = theme.light;
 
   return (
-    <Firebase>
-            <BotProvider>
-      <StatusBar style='dark'/>
-      <ThemeProvider theme={AppTheme}>
-        <LocaleProvider>
-          <MenuProvider>
+    <LocaleProvider>
+      <Firebase>
+        <BotProvider>
+          <StatusBar style='dark'/>
+          <ThemeProvider theme={AppTheme}>
+            <MenuProvider>
               <Screens />
-          </MenuProvider>
-        </LocaleProvider>
-      </ThemeProvider>
-            </BotProvider>
-    </Firebase>
+            </MenuProvider>
+          </ThemeProvider>
+        </BotProvider>
+      </Firebase>
+    </LocaleProvider>
   );
 };
 

@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { ImageBackground } from 'react-native';
-import { ActivityIndicator, Container, Body, Main, Heading, Image, H1Mini } from '../../components/styles';
+import { ActivityIndicator, Container, Body, Main, Heading, Image, H1Mini } from '../../../components/styles';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { UserContext } from '../../api/firebase';
-import { LocaleContext } from '../../components/locale';
+import { UserContext } from '../../../api/firebase';
+import { LocaleContext } from '../../../components/locale';
 
 const Load = ({ navigation }) => {
   const {locale} = useContext(LocaleContext);
