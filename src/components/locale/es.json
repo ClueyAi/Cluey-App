@@ -3,9 +3,9 @@
     "language": {
       "iso": "ES",
       "name": "Español"
-      },
+    },
     "app": {
-      "name":"Cluey",
+      "name": "Cluey",
       "resume_title": "What is Cluey?",
       "resume": "Cluey is a mobile app that helps you to find the best places to eat, drink, and have fun. It is a social network that allows you to share your experiences with your friends and other users. It is also a platform that allows you to discover new places and new experiences.",
       "policy_terms": {
@@ -107,9 +107,9 @@
   "welcome": {
     "title": "Tu asistente personal de IA",
     "description": "Aumente su productividad con la ayuda de la inteligencia artificial en su teléfono inteligente.",
-    "footer":"Al continuar aceptas nuestras",
+    "footer": "Al continuar aceptas nuestras",
     "button": {
-      "text":"Continuar",
+      "text": "Continuar",
       "msg": "ir a autenticación"
     }
   },
@@ -117,7 +117,7 @@
     "title": "Sign In",
     "description": "Enter your account to Cluey help you.",
     "button": {
-      "text":"Lets Go",
+      "text": "Lets Go",
       "msg": "enter and get started to Cluey",
       "signup": "create a new account now"
     },
@@ -130,7 +130,7 @@
     "title": "Sign Up",
     "description": "Create a new account to Cluey help you.",
     "button": {
-      "text":"Continue",
+      "text": "Continue",
       "msg": "create and get started to Cluey"
     },
     "text_input": {
@@ -144,11 +144,11 @@
       "title": "Verify",
       "description": "Please check your email from the link sent to you in order to proceed to Cluey.",
       "verify_button": {
-        "text":"Send Email Verify",
+        "text": "Send Email Verify",
         "msg": "send verification email"
       },
       "continue_button": {
-        "text":"Continue",
+        "text": "Continue",
         "msg": "continue to Cluey"
       }
     }
@@ -157,7 +157,7 @@
     "title": "Forgot Password?",
     "description": "Create a new account to Cluey help you.",
     "button": {
-      "text":"Recovery",
+      "text": "Recovery",
       "msg": "create and get started to Cluey"
     },
     "text_input": {
@@ -182,16 +182,15 @@
     "title": "Home",
     "description": "Welcome to Cluey, your personal AI assistant.",
     "settings_button": {
-      "text":"Settings",
+      "text": "Settings",
       "msg": "go to settings"
     },
     "chat_box": {
       "placeholder1": "Hi ",
       "placeholder2": ", how can I help you?"
-      
     },
     "send_button": {
-      "text":"Sender",
+      "text": "Sender",
       "msg": "sender message"
     }
   },

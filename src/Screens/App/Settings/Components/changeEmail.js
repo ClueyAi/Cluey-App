@@ -43,10 +43,10 @@ import {
 
 export default function ChangeEmail({ navigation })  {
   const {locale} = useContext(LocaleContext);
-  const {user, signIn, updateUserEmail} = useContext(UserContext);
+  const {user, updateUserEmail} = useContext(UserContext);
   const [photo, setPhoto] = useState('');
   const [userName, setUserName] = useState('');
-  const [email, setEmail] = useState('');
+  const [newEmail, setNewEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const [emailValid, setEmailValid] = useState(null);
@@ -55,18 +55,16 @@ export default function ChangeEmail({ navigation })  {
   const [error, setError] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
   const [errorEmail, setErrorEmail] = useState('');
-  const [errorPassword, setErrorPassword] = useState('');
 
   const errorColor = "#FFAAAA50"
 
   const name = user?.email.split("@")[0]
 
-  const handleBack = async () => {navigation.goBack()}
 
   const emailValidate = (text) => {
     const reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
     setEmailValid(reg.test(text));
-    setEmail(text)
+    setNewEmail(text)
   };
 
   const passwordValidate = (text) => {
@@ -81,19 +79,15 @@ export default function ChangeEmail({ navigation })  {
   const handleChange = async () => {
     const currentEmail = user?.email
     try {
-      if (currentEmail) {
-        await signIn(currentEmail, password)
-        await updateUserEmail(email)
-        navigation.navigate("Loading")
-      }
+      await updateUserEmail(currentEmail, password, newEmail)
+      console.log("Email updated")
     } catch (error) {
+      console.log(error)
       setError(error.code)
       if (error.code === "auth/missing-password") {
-        setErrorPassword(error.code)
         setErrorMsg(locale.error.auth_missing_password)
         setPasswordValid(false)
       } else if (error.code === "auth/wrong-password") {
-        setErrorPassword(error.code)
         setErrorMsg(locale.error.auth_wrong_password)
         setPasswordValid(false)
       } else if (error.code === "auth/user-not-found") {
@@ -105,7 +99,6 @@ export default function ChangeEmail({ navigation })  {
         setErrorMsg(locale.error.auth_invalid_email)
         setEmailValid(false)
       } else {
-        setErrorPassword(error.code)
         setErrorEmail(error.code)
         setErrorMsg(locale.error.auth_connect_user)
         setEmailValid(emailValid == true? true: false)
@@ -123,21 +116,6 @@ export default function ChangeEmail({ navigation })  {
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
       <Container behavior="height">
         <Body>
-          <Header style={{marginTop: "8%"}}>
-            <Div style={{marginLeft: 20, alignItems: 'flex-start'}}>
-              <ButtonEmpyte onPress={handleBack} accessibilityLabel={locale.global.back_button.msg}>
-                <Ionicons name="arrow-back-outline" size={28} color="#000000" />
-              </ButtonEmpyte>
-            </Div>
-            <Div style={{minWidth: 60}}>
-              <H1>{locale.settings.config.email_config.title}</H1>
-            </Div>
-            <Div style={{marginRight: 20, alignItems: 'flex-end'}}>
-              <ButtonEmpyte>
-                <Ionicons name="log-out-outline" size={28} color="#00000000" />
-              </ButtonEmpyte>
-            </Div>
-          </Header>
           <Main style={{marginTop: "15%"}}>
             <Profile style={{flexDirection: 'row', justifyContent: "flex-start", marginLeft: "6%"}}>
               <Picture>
@@ -153,6 +131,7 @@ export default function ChangeEmail({ navigation })  {
             <Div style={{marginTop: 40, justifyContent: 'flex-start', alignItems: 'center'}}>
               <Input style={{width: "90%", marginBottom: 10, backgroundColor: `${error === errorEmail && emailValid == false ? errorColor : '#E0E0E0'}`}}>
                 <TextInput
+                  value={newEmail}
                   placeholder={locale.settings.config.email_config.email}
                   placeholderTextColor="#A4A4A4"
                   selectionColor="#FFBF00"
@@ -162,7 +141,7 @@ export default function ChangeEmail({ navigation })  {
                   h
                   onChangeText={emailValidate}
                 />
-                {emailValid == false && email !== '' ?
+                {emailValid == false && newEmail !== '' ?
                   <Ionicons 
                     style={{padding: 10, marginRight: 10}}
                     name="alert-circle-outline" 
@@ -177,7 +156,7 @@ export default function ChangeEmail({ navigation })  {
                     color="#00000000" 
                   /> 
                 }
-                {emailValid == true && email !== '' ?
+                {emailValid == true && newEmail !== '' ?
                   <Ionicons 
                     style={{padding: 10, marginRight: 10}}
                     name="checkmark-circle-outline" 

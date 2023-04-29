@@ -1,5 +1,5 @@
-import React, { createContext, useState, useEffect } from 'react';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import React, { createContext, useState, useEffect } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 /*
 import { Platform, NativeModules } from 'react-native'
@@ -20,54 +20,56 @@ Platform.OS === 'ios'
     : us
 */
 
-import us from './us.json';
-import pt from './pt.json';
-import es from './es.json';
-import fr from './fr.json';
+import us from "./us.json";
+import pt from "./pt.json";
+import es from "./es.json";
+import fr from "./fr.json";
 
 export const LocaleContext = createContext();
 
 export const LocaleProvider = ({ children }) => {
   const [locale, setLocale] = useState(us);
-  
+
   useEffect(() => {
     let language = us;
-    const unsubscribe = AsyncStorage.getItem('iso').then((value) => {
-      if (value === 'PT') {
+    const unsubscribe = AsyncStorage.getItem("iso").then((value) => {
+      if (value === "PT") {
         language = pt;
-      } else if (value === 'ES') {
+      } else if (value === "ES") {
         language = es;
-      } else if (value === 'FR') {
+      } else if (value === "FR") {
         language = fr;
       } else {
         language = us;
-      };
+      }
       setLocale(language);
     });
-    
-    return () =>  unsubscribe
+
+    return () => unsubscribe;
   }, []);
 
   const changeLocale = (iso) => {
     let language = us;
-    if (iso === 'PT') {
+    if (iso === "PT") {
       language = pt;
-    } else if (iso === 'ES') {
+    } else if (iso === "ES") {
       language = es;
-    } else if (iso === 'FR') {
+    } else if (iso === "FR") {
       language = fr;
     } else {
       language = us;
     }
     setLocale(language);
   };
-  
+
   const value = {
     locale,
-    changeLocale
+    changeLocale,
   };
 
-  return <LocaleContext.Provider value={value}>{children}</LocaleContext.Provider>;
+  return (
+    <LocaleContext.Provider value={value}>{children}</LocaleContext.Provider>
+  );
 };
 
 export { us, pt, es, fr };

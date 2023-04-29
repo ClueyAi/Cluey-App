@@ -2,7 +2,7 @@ import React from 'react';
 import { createStackNavigator } from "@react-navigation/stack";
 import Ionicons from '@expo/vector-icons/Ionicons';
 
-import { LogoutButton , SettingsButton } from '../../components/tools';
+import { LogoutButton , SettingsButton, LanguageSelector } from '../../components/tools';
 
 import Home from './Home';
 // Settings
@@ -56,14 +56,10 @@ const App = () => {
           },
         })}
       />
-      <AppStack.Screen name="ChangeEmail" component={ChangeEmail}
-      options={{headerTitle: 'Change Email', presentation: 'modal'}}/>
-      <AppStack.Screen name="ChangePassword" component={ChangePassword}
-      options={{headerTitle: 'Change Password', presentation: 'modal'}}/>
-      <AppStack.Screen name="Country" component={Country}
-      options={{presentation: 'modal'}}/>
-      <AppStack.Screen name="Preferences" component={Preferences}
-      options={{presentation: 'modal'}}/>
+      <AppStack.Screen name="ChangeEmail" component={ChangeEmail} options={{headerTitle: 'Change Email', presentation: 'modal'}}/>
+      <AppStack.Screen name="ChangePassword" component={ChangePassword} options={{headerTitle: 'Change Password', presentation: 'modal'}}/>
+      <AppStack.Screen name="Country" component={Country} options={{presentation: 'modal'}}/>
+      <AppStack.Screen name="Preferences" component={Preferences} options={{presentation: 'modal'}}/>
     </AppStack.Navigator>
   );
 };

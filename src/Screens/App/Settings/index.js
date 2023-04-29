@@ -7,14 +7,11 @@ import { useFocusEffect } from '@react-navigation/native';
 
 import { UserContext } from '../../../api/firebase';
 
-import { LocaleContext } from '../../../components/locale'
+import { LocaleContext } from '../../../components/locale';
 import { 
   Container,
-  Avoiding,
-  Header,
   Body,
   Main,
-  Div,
   View,
   ScrollView,
   Input,
@@ -59,7 +56,7 @@ export default function Settings({ navigation })  {
       ],
       { cancelable: true }
     );
-  }
+  };
   const libraryPicker = async () => {
     const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
     if (permissionResult.granted === false) {
@@ -83,7 +80,7 @@ export default function Settings({ navigation })  {
       }
     }
     setPhoto(user?.photoURL? user?.photoURL : result.assets[0].uri)
-  }
+  };
   const cameraPicker = async () => {
     const permissionResult = await ImagePicker.requestCameraPermissionsAsync();
     if (permissionResult.granted === false) {
@@ -103,18 +100,18 @@ export default function Settings({ navigation })  {
       }
     }
     setPhoto(user?.photoURL? user?.photoURL : result.assets[0].uri)
-  }
+  };
 
   const handleEditNameOn = async () => {
     setEditingName(true)
-  }
+  };
   const handleEditNameOf = async () => {
     setEditingName(false)
     Keyboard.dismiss()
-  }
+  };
   const nameValidation = async (text) => {
     setUserName(text)
-  }
+  };
   const handleEditName = async () => {
     const displayName = userName
     try {
@@ -123,26 +120,24 @@ export default function Settings({ navigation })  {
       setError(error.code)
     }
     setEditingName(false)
-  }
-  const handleChangeEmail = async () => {navigation.navigate("ChangeEmail")}
-  const handleChangePassword = async () => {navigation.navigate("ChangePassword")}
-  const handleCountry = async () => {navigation.navigate("Country")}
-  const handlePreferences = async () => {navigation.navigate("Preferences")}
-  const handleAbout = async () => {navigation.navigate("About")}
-  
+  };
+  const handleChangeEmail = async () => {navigation.navigate('ChangeEmail')};
+  const handleChangePassword = async () => {navigation.navigate('ChangePassword')};
+  const handleCountry = async () => {navigation.navigate('Country')};
+  const handlePreferences = async () => {navigation.navigate('Preferences')};
+  const handleAbout = async () => {navigation.navigate('About')};
+    
   useEffect(() => {
     const name = user?.email.split("@")[0]
     setPhoto(user?.photoURL);
     setUserName(user?.displayName? user?.displayName : name);
-  }, [user, setUserName, setPhoto]);
+  }, [user]);
 
   useFocusEffect(
     useCallback(() => {
       setEditingName(false);
     }, [])
   );
-
-  console.log(photo)
   
   return(
     <TouchableWithoutFeedback onPress={handleEditNameOf} accessible={false}>
