@@ -3,7 +3,9 @@ import { createStackNavigator, TransitionPresets } from "@react-navigation/stack
 import { isAndroid } from '@freakycoder/react-native-helpers';
 import Ionicons from '@expo/vector-icons/Ionicons';
 
-import { LogoutButton , SettingsButton, CloseModal } from '../../components/tools';
+import { LocaleContext } from '../../components/locale';
+
+import { LogoutButton, LanguageSelector, SettingsButton, CloseModal } from '../../components/tools';
 
 import Home from './Home';
 // Settings
@@ -19,6 +21,8 @@ import Rules from '../Utils/Rules';
 const AppStack = createStackNavigator();
 
 const App = () => {
+  const {locale} = React.useContext(LocaleContext);
+
   return (
     <AppStack.Navigator screenOptions={{
       gestureEnabled: true,
@@ -52,13 +56,31 @@ const App = () => {
       <AppStack.Screen 
         name="Settings" 
         component={Settings}
+        options={{
+          headerTitle: locale.settings.title_name,
+          headerRight: () => <LanguageSelector/>,
+          headerRightContainerStyle: {
+            marginTop: 5,
+          },
+          headerTintColor: '#FFBF00',
+          headerTitleStyle: {
+          fontFamily: 'Nunito-Bold',
+          fontSize: 24,
+          },
+        }}
+      />
+      <AppStack.Screen
+        name="Preferences"
+        component={Preferences}
         options={({navigation}) => ({
+          headerTitle: locale.preferences_config.title_name,
           headerRight: () => <LogoutButton navigation={navigation}/>,
           headerTintColor: '#FFBF00',
           headerTitleStyle: {
           fontFamily: 'Nunito-Bold',
           fontSize: 24,
           },
+          headerBackTitleVisible: false,
         })}
       />
       <AppStack.Group screenOptions={{
@@ -79,7 +101,6 @@ const App = () => {
         <AppStack.Screen name="ChangeEmail" component={ChangeEmail}/>
         <AppStack.Screen name="ChangePassword" component={ChangePassword}/>
         <AppStack.Screen name="Country" component={Country}/>
-        <AppStack.Screen name="Preferences" component={Preferences}/>
         <AppStack.Screen name="About" component={About}/>
         <AppStack.Screen name="Rules" component={Rules}/>
       </AppStack.Group>

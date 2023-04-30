@@ -112,9 +112,6 @@ const Settings = ({ navigation }) => {
     }
     setEditingName(false)
   };
-  const handleChangeEmail = async () => {navigation.navigate('ChangeEmail')};
-  const handleChangePassword = async () => {navigation.navigate('ChangePassword')};
-  const handleCountry = async () => {navigation.navigate('Country')};
   const handlePreferences = async () => {navigation.navigate('Preferences')};
   const handleAbout = async () => {navigation.navigate('About')};
     
@@ -176,30 +173,10 @@ const Settings = ({ navigation }) => {
               }    
             </Profile>
             <ScrollView style={{marginTop: 30}}>
-              <WideButton onPress={handleChangeEmail}>
-                <View style={{alignItems: 'flex-start'}}>
-                  <H3>{locale.settings.config.email_config.title}</H3>
-                  <P>{user?.email}</P>
-                </View>
-                <Ionicons name="chevron-forward" size={30} color="#757575" />
-              </WideButton>
-              <WideButton onPress={handleChangePassword}>
-                <View style={{alignItems: 'flex-start'}}>
-                  <H3>{locale.settings.config.password_config.title}</H3>
-                </View>
-                <Ionicons name="chevron-forward" size={30} color="#757575" />
-              </WideButton>
-              <WideButton onPress={handleCountry}>
-                <View style={{alignItems: 'flex-start'}}>
-                  <H3>{locale.settings.config.anddress_config.title}</H3>
-                  <P>{locale.settings.config.anddress_config.description}</P>
-                </View>
-                <Ionicons name="chevron-forward" size={30} color="#757575" />
-              </WideButton>
               <WideButton onPress={handlePreferences}>
                 <View style={{alignItems: 'flex-start'}}>
-                  <H3>{locale.settings.config.preferences_config.title}</H3>
-                  <P>{locale.settings.config.preferences_config.description}</P>
+                  <H3>{locale.preferences_config.title}</H3>
+                  <P>{locale.preferences_config.description}</P>
                 </View>
                 <Ionicons name="chevron-forward" size={30} color="#757575" />
               </WideButton>
