@@ -112,8 +112,8 @@ const ChangeEmail = ({ navigation }) => {
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
       <Container behavior="height">
         <Heading style={{marginTop: 40, marginBottom: 10}}>
-          <H0 style={{marginBottom: 5}}>{locale.settings.config.email_config.title}</H0>
-          <P>{locale.settings.config.email_config.subtitle}</P>
+          <H0 style={{marginBottom: 5}}>{locale.email_config.title}</H0>
+          <P>{locale.email_config.subtitle}</P>
         </Heading>
         <Body>
           <Main>
@@ -133,7 +133,7 @@ const ChangeEmail = ({ navigation }) => {
                 <TextInput
                   ref={emailRef}
                   value={newEmail}
-                  placeholder={locale.settings.config.email_config.email}
+                  placeholder={locale.email_config.email}
                   placeholderTextColor="#A4A4A4"
                   selectionColor="#FFBF00"
                   autoCapitalize="none"
@@ -169,7 +169,7 @@ const ChangeEmail = ({ navigation }) => {
               <Input style={{width: "90%", marginBottom: 10, backgroundColor: `${passwordValid == false ? errorColor : '#E0E0E0'}`}}>
                 <TextInput
                   ref={passwordRef}
-                  placeholder={locale.settings.config.email_config.password}
+                  placeholder={locale.email_config.password}
                   placeholderTextColor="#A4A4A4"
                   selectionColor="#FFBF00"
                   autoCapitalize="none"
@@ -184,8 +184,8 @@ const ChangeEmail = ({ navigation }) => {
                 <TxtLink>{locale.forgot.title}</TxtLink>
               </ButtonEmpyte>
               {error ? <TextError>{errorMsg}</TextError> : <TextError> </TextError> }
-              <ButtonPrimary onPress={handleChange} accessibilityLabel={locale.settings.config.email_config.change_button.accessibility}>
-                <TxtButton>{locale.settings.config.email_config.change_button.text}</TxtButton> 
+              <ButtonPrimary onPress={handleChange} accessibilityLabel={locale.email_config.change_button.accessibility}>
+                <TxtButton>{locale.email_config.change_button.text}</TxtButton> 
               </ButtonPrimary>
             </Div>
           </Main>

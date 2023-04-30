@@ -141,21 +141,27 @@
       "accessibility": "sign in and get started to Cluey"
     },
     "button_signup": {
-      "text": "Create a new Account",
-      "accessibility": "create a new account now"
+      "text": "Sign Up",
+      "msg": "Don't have an account?",
+      "accessibility": "sign up if you don't have Cluey account"
     }
   },
   "signup": {
     "title": "Sign Up",
     "description": "Create a new account to Cluey help you.",
-    "button": {
-      "text": "Sign In",
-      "accessibility": "sign up and get started to Cluey"
-    },
     "text_input": {
       "email": "email",
       "password": "password",
       "confirm_password": "confirm password"
+    },
+    "button": {
+      "text": "Sign In",
+      "accessibility": "sign up and get started to Cluey"
+    },
+    "button_signin": {
+      "text": "Sign In",
+      "msg": "Already have an account?",
+      "accessibility": "sign in if you has Cluey account"
     }
   },
   "verify": {
@@ -216,6 +222,7 @@
   },
   "settings": {
     "title": "Settings",
+    "title_name": "My Account",
     "button_logout": {
       "accessibility": "desconnect from Cluey and go back to authentication",
       "alert": {
@@ -233,30 +240,39 @@
     "name_button": {
       "text": "Change your name",
       "accessibility": "change your name"
-    },
-    "config": {
-      "email_config": {
-        "title": "Change email",
-        "description": "your account email",
-        "email": "new email",
-        "password": "password",
-        "change_button": {
-          "text": "Change",
-          "accessibility": "change your email"
-        }
-      },
-      "password_config": {
-        "title": "Change password"
-      },
-      "anddress_config": {
-        "title": "Country",
-        "description": "Choose your location."
-      },
-      "preferences_config": {
-        "title": "Preferences",
-        "description": "Customize to your experience"
-      }
     }
+  },
+  "email_config": {
+    "title": "Change email",
+    "subtitle": "Change your Cluey account email",
+    "description": "your account email",
+    "email": "new email",
+    "password": "password",
+    "change_button": {
+      "text": "Change Email",
+      "accessibility": "change your email"
+    }
+  },
+  "password_config": {
+    "title": "Change password",
+    "subtitle": "Change your Cluey account password",
+    "description": "your account password",
+    "current_password": "current password",
+    "password": "new password",
+    "re_password": "re-password",
+    "change_button": {
+      "text": "Change Password",
+      "accessibility": "change your password"
+    }
+  },
+  "anddress_config": {
+    "title": "Country",
+    "description": "Choose your location"
+  },
+  "preferences_config": {
+    "title": "Preferences",
+    "title_name": "Preferences",
+    "description": "Setting your preferences"
   },
   "about": {
     "title": "About"

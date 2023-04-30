@@ -222,6 +222,7 @@
   },
   "settings": {
     "title": "Settings",
+    "title_name": "My Account",
     "button_logout": {
       "accessibility": "desconnect from Cluey and go back to authentication",
       "alert": {
@@ -239,40 +240,39 @@
     "name_button": {
       "text": "Change your name",
       "accessibility": "change your name"
-    },
-    "config": {
-      "email_config": {
-        "title": "Change email",
-        "subtitle": "Change your Cluey account email.",
-        "description": "your account email",
-        "email": "new email",
-        "password": "password",
-        "change_button": {
-          "text": "Change Email",
-          "accessibility": "change your email"
-        }
-      },
-      "password_config": {
-        "title": "Change password",
-        "subtitle": "Change your Cluey account password.",
-        "description": "your account password",
-        "current_password": "current password",
-        "password": "new password",
-        "re_password": "re-password",
-        "change_button": {
-          "text": "Change Password",
-          "accessibility": "change your password"
-        }
-      },
-      "anddress_config": {
-        "title": "Country",
-        "description": "Choose your location."
-      },
-      "preferences_config": {
-        "title": "Preferences",
-        "description": "Customize to your experience"
-      }
     }
+  },
+  "email_config": {
+    "title": "Change email",
+    "subtitle": "Change your Cluey account email",
+    "description": "your account email",
+    "email": "new email",
+    "password": "password",
+    "change_button": {
+      "text": "Change Email",
+      "accessibility": "change your email"
+    }
+  },
+  "password_config": {
+    "title": "Change password",
+    "subtitle": "Change your Cluey account password",
+    "description": "your account password",
+    "current_password": "current password",
+    "password": "new password",
+    "re_password": "re-password",
+    "change_button": {
+      "text": "Change Password",
+      "accessibility": "change your password"
+    }
+  },
+  "anddress_config": {
+    "title": "Country",
+    "description": "Choose your location"
+  },
+  "preferences_config": {
+    "title": "Preferences",
+    "title_name": "Preferences",
+    "description": "Setting your preferences"
   },
   "about": {
     "title": "About"

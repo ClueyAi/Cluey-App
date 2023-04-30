@@ -6,9 +6,6 @@ import { AuthContext } from '../../../../api/firebase'
 
 import { LocaleContext } from '../../../../components/locale'
 import { 
-  BgMark,
-  LogoBg,
-  LogoName,
   Container,
   Heading,
   Form,
@@ -71,10 +68,6 @@ const ChangePassword = ({ navigation }) => {
   if (sendRecovery == false) { 
     return (
       <Container>
-        <BgMark>
-          <LogoBg source={require('../../../../../assets/images/cluey-happy.png')} />
-          <LogoName>{locale.global.app.name}</LogoName>
-        </BgMark>
         <Heading style={{marginTop: '65%', marginBottom: 15}}>
           <H1 style={{marginBottom: 10}}>{locale.forgot.title}</H1>
           <P>{locale.forgot.description}</P>
