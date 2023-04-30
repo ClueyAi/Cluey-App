@@ -288,7 +288,9 @@ export const ChatBox = styled.View`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding: 2% 5% 5% 5%;
+  padding-top: 2%;
+  padding-left: 5%;
+  padding-right: 5%;
 `;
 export const ChatInput = styled.View`
   width: 100%;
