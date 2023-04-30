@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { StyleSheet } from 'react-native';
+import PropTypes from 'prop-types';
 
 import { UserContext } from '../../../../../api/firebase';
 
@@ -17,10 +17,10 @@ const Message = ({ data }) => {
 
   if (!data ) {
     return null;
-  };
+  }
 
   return (
-    <ChatMessages styles={styles.shadow}>
+    <ChatMessages>
       <ResponseMessages>
         {data?.userId !== user?.uid ? (
           <Response data={data}/>
@@ -35,14 +35,8 @@ const Message = ({ data }) => {
   );
 };
 
-const styles = StyleSheet.create({
-  shadow: {
-    shadowColor: "#000000",
-    shadowOffset: {width: 0, height: 3},
-    shadowOpacity:  0.17,
-    shadowRadius: 3.05,
-    elevation: 6
-  }
-});
+Message.propTypes = {
+  data: PropTypes.object.isRequired
+};
 
 export default Message;

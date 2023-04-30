@@ -53,7 +53,7 @@ const Chat = () => {
   }, [user]);
   return (
     <Avoiding behavior={Platform.OS === "ios" ? "padding" : null} keyboardVerticalOffset={90}>
-      <ChatBox>
+      <ChatBox style={Platform.OS === "ios" ? {paddingBottom: '8%'} : {paddingBottom: '5%'}}>
         <ChatInput style={{...styles.shadow, flex: 1}}>
           <ChatTextInput
             style={{fontSize: 15}}
