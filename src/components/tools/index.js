@@ -6,6 +6,8 @@ import Flag from 'react-native-flags';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import PropTypes from "prop-types";
 
+import { ModalButton } from '../styles';
+
 import { us, pt, es, fr, LocaleContext } from '../locale';
 import { AuthContext } from '../../api/firebase';
 
@@ -38,7 +40,7 @@ export const LogoutButton = ({ navigation }) => {
   };
 
   return (
-    <TouchableOpacity style={styles.button} onPress={() =>{
+    <TouchableOpacity style={styles.buttonRight} onPress={() =>{
       confirmation()
     }}>
       <Ionicons name="log-out-outline" size={24} color="#FFBF00" />
@@ -51,12 +53,23 @@ LogoutButton.propTypes = {
 
 export const SettingsButton = ({ navigation }) => {
   return(
-    <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Settings')}>
+    <TouchableOpacity style={styles.buttonRight} onPress={() => navigation.navigate('Settings')}>
       <Ionicons name="settings" size={24} color="#FFBF00" />
     </TouchableOpacity>
   )
 }
 SettingsButton.propTypes = {
+  navigation: PropTypes.object.isRequired,
+};
+
+export const AboutButton = ({ navigation }) => {
+  return(
+    <TouchableOpacity style={styles.buttonLeft} onPress={() => navigation.navigate('About')}>
+      <Ionicons name="information-circle-outline" size={28} color="#FFBF00" />
+    </TouchableOpacity>
+  )
+}
+AboutButton.propTypes = {
   navigation: PropTypes.object.isRequired,
 };
 
@@ -131,8 +144,11 @@ export const LanguageSelector = () => {
 };
 
 const styles = StyleSheet.create({
-  button: {
+  buttonRight: {
     marginRight: 15
+  },
+  buttonLeft: {
+    marginLeft: 15
   },
   languageBtn: {
     marginRight: 30,
@@ -189,3 +205,4 @@ const styles = StyleSheet.create({
   }
 });
 
+export const CloseModal = () => <ModalButton />;

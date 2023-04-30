@@ -30,7 +30,7 @@ const Load = ({ navigation }) => {
     } else {
         if (!isNew) {
           setLoadedMsg(locale.loading.welcome_back);
-          setRoute('SignIn');
+          setRoute('Current');
         } else {
           setLoadedMsg(locale.loading.welcome);
         }

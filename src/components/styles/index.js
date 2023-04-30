@@ -16,6 +16,10 @@ export const Container = styled.View`
   align-items: center;
   background-color: ${light.background};
 `;
+export const Content = styled.ScrollView`
+  flex: 1;
+  flex-direction: column;
+`;
 export const Header = styled.View`
   flex: 1;
   width: 100%;
@@ -49,14 +53,15 @@ export const Div = styled.View`
   justify-content: center;
 `;
 export const View = styled.View``;
+export const ModalButton = styled.View`
+  width: 100px;
+  padding: 3px;
+  border-radius: 30px;
+  background-color: ${light.primary};
+`;
 export const ScrollView = styled.ScrollView`
   width: 100%;
   flex-direction: column;
-`;
-export const Form = styled.View`
-  width: 80%;
-  align-items: center;
-  z-index: 1;
 `;
 export const Divider = styled.View`
   width: 40%;
@@ -64,14 +69,22 @@ export const Divider = styled.View`
   border-bottom-color: ${light.border};
   border-bottom-width: 1px;
 `;
+export const Providers = styled.View`
+  width: 88%;
+  align-items: center;
+`;
+export const Form = styled.View`
+  width: 88%;
+  align-items: center;
+`;
 export const Input = styled.View`
   width: 100%;
+  height: 45px;
   flex-direction: row;
   justify-content: space-between;
-  background-color: ${light.input};
-  border-radius: 30px;
-  height: 45px;
   align-items: center;
+  border-radius: 30px;
+  background-color: ${light.background};
 `;
 export const TextInput = styled.TextInput`
   flex: 1;
@@ -181,7 +194,7 @@ export const TxtLink = styled.Text`
 export const TxtButton = styled.Text`
   font-family: 'Nunito-Bold';
   font-size: 19px;
-  color: ${light.textButton};
+  color: ${light.background};
 `;
 export const TxtProvider = styled.Text`
   font-family: 'Nunito-Bold';
@@ -198,7 +211,7 @@ export const StatusOnline = styled.Text`
   text-align: left;
   margin-left: 5px;
   font-size: 13px;
-  color: ${light.valid};
+  color: ${light.secondary};
 `;
 
 // Images
@@ -227,7 +240,7 @@ export const ButtonSecondary = styled.TouchableOpacity`
   align-items: center;
 `;
 export const ButtonProvider = styled.TouchableOpacity`
-  width: 333px;
+  width: 100%;
   height: 48px;
   flex-direction: row;
   justify-content: space-between;
@@ -482,12 +495,12 @@ export const TextValid = styled.Text`
   text-align: center;
   font-size: 14px;
   margin-bottom: 10px;
-  color: ${light.valid};
+  color: ${light.secondary};
 `;
 export const TextAlert= styled.Text`
   font-family: 'Nunito';
   text-align: center;
   font-size: 14px;
   margin-bottom: 10px;
-  color: ${light.alert};
+  color: ${light.primary};
 `;

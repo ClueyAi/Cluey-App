@@ -4,19 +4,19 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import UserAvatar from 'react-native-user-avatar';
 import PropTypes from "prop-types";
 
-
 import { UserContext } from '../../../../api/firebase';
 
 import { LocaleContext } from '../../../../components/locale'
 import { 
   Container,
+  Heading,
   Body,
   Main,
   Div,
   View,
   Input,
   TextInput,
-  H1, H3, H3Bold,
+  H0, H1, H3, H3Bold, P,
   TxtButton,
   ButtonEmpyte,
   Profile,
@@ -26,7 +26,7 @@ import {
   TxtLink,
   TextError,
   ButtonPrimary,
-  FooterSmall
+  FooterSmall,
 } from '../../../../components/styles';
 
 const ChangeEmail = ({ navigation }) => {
@@ -111,8 +111,12 @@ const ChangeEmail = ({ navigation }) => {
   return(
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
       <Container behavior="height">
+        <Heading style={{marginTop: 40, marginBottom: 10}}>
+          <H0 style={{marginBottom: 5}}>{locale.settings.config.email_config.title}</H0>
+          <P>{locale.settings.config.email_config.subtitle}</P>
+        </Heading>
         <Body>
-          <Main style={{marginTop: "15%"}}>
+          <Main>
             <Profile style={{flexDirection: 'row', justifyContent: "flex-start", marginLeft: "6%"}}>
               <Picture>
                 <ProfilePicture style={{width: 80, height: 80}}>
@@ -179,7 +183,7 @@ const ChangeEmail = ({ navigation }) => {
               <ButtonEmpyte onPress={() => {handleForgot}} accessibilityLabel={locale.forgot.button.accessibility}>
                 <TxtLink>{locale.forgot.title}</TxtLink>
               </ButtonEmpyte>
-              {error ? <TextError>{erroraccessibility}</TextError> : <TextError> </TextError> }
+              {error ? <TextError>{errorMsg}</TextError> : <TextError> </TextError> }
               <ButtonPrimary onPress={handleChange} accessibilityLabel={locale.settings.config.email_config.change_button.accessibility}>
                 <TxtButton>{locale.settings.config.email_config.change_button.text}</TxtButton> 
               </ButtonPrimary>

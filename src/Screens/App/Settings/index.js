@@ -25,7 +25,6 @@ import {
   ProfilePicture,
   PictureEdit,
   Infor,
-  Provider,
   Footer,
 } from '../../../components/styles';
 
@@ -39,60 +38,60 @@ const Settings = ({ navigation }) => {
   const [userName, setUserName] = useState('');
 
   const handleEditPhoto = async () => {
-  Alert.alert(
-    locale.alert.photo_change.title,
-    locale.alert.photo_change.message,
-    [
-      {
-        text: "cancel",
-        style: 'cancel',
-      },
-      {
-        text: locale.alert.photo_change.camera,
-        onPress: () => { pickImage("camera")},
-      },
-      {
-        text: locale.alert.photo_change.library,
-        onPress: () => { pickImage("library")},
-      },
-    ],
-    { cancelable: true }
-  );
-};
+    Alert.alert(
+      locale.alert.photo_change.title,
+      locale.alert.photo_change.message,
+      [
+        {
+          text: "cancel",
+          style: 'cancel',
+        },
+        {
+          text: locale.alert.photo_change.camera,
+          onPress: () => { pickImage("camera")},
+        },
+        {
+          text: locale.alert.photo_change.library,
+          onPress: () => { pickImage("library")},
+        },
+      ],
+      { cancelable: true }
+    );
+  };
 
-const pickImage = async (sourceType) => {
-  let result;
-  if (sourceType === "camera") {
-    const permissionResult = await ImagePicker.requestCameraPermissionsAsync();
-    if (permissionResult.granted === false) {
-      alert(locale.settings.photo_button.camera_permission);
-      return;
+  const pickImage = async (sourceType) => {
+    let result;
+    if (sourceType === "camera") {
+      const permissionResult = await ImagePicker.requestCameraPermissionsAsync();
+      if (permissionResult.granted === false) {
+        alert(locale.settings.photo_button.camera_permission);
+        return;
+      }
+      result = await ImagePicker.launchCameraAsync({});
+    } else if (sourceType === "library") {
+      const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
+      if (permissionResult.granted === false) {
+        alert(locale.settings.photo_button.library_permission);
+        return;
+      }
+      result = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ImagePicker.MediaTypeOptions.Images,
+        allowsMultipleSelection: false,
+        allowsEditing: true,
+        aspect: [4, 4],
+        quality: 1,
+      });
     }
-    result = await ImagePicker.launchCameraAsync({});
-  } else if (sourceType === "library") {
-    const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
-    if (permissionResult.granted === false) {
-      alert(locale.settings.photo_button.library_permission);
-      return;
+    if (!result.canceled) {
+      const uri = result.assets[0].uri;
+      try {
+        await updateUserPhoto(uri);
+      } catch (error) {
+        setError(error.code);
+      }
     }
-    result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.Images,
-      allowsMultipleSelection: false,
-      allowsEditing: true,
-      aspect: [4, 4],
-      quality: 1,
-    });
-  }
-  if (!result.canceled) {
-    const uri = result.assets[0].uri;
-    try {
-      await updateUserPhoto(uri);
-    } catch (error) {
-      setError(error.code);
-    }
-  }
-  setPhoto(user?.photoURL ? user?.photoURL : result.assets[0].uri);
-};
+    setPhoto(user?.photoURL ? user?.photoURL : result.assets[0].uri);
+  };
 
   const handleEditNameOn = async () => {
     setEditingName(true)
@@ -205,6 +204,7 @@ const pickImage = async (sourceType) => {
                 <Ionicons name="chevron-forward" size={30} color="#757575" />
               </WideButton>
             </ScrollView>
+            {/*
             <Provider>
               <WideButton style={{marginVertical: 2}}>
                 <View style={{flexDirection: 'row', alignItems: 'center'}}>
@@ -221,6 +221,7 @@ const pickImage = async (sourceType) => {
                 <H3 style={{marginRight: 10}}>Link</H3>
               </WideButton>
             </Provider>
+            */}
           </Main>
           <Footer>
             <ButtonEmpyte 

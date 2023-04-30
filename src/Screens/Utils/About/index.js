@@ -1,8 +1,6 @@
 import React, { useContext } from 'react'
 import { Linking } from 'react-native';
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
-import Ionicons from '@expo/vector-icons/Ionicons';
-import AntDesign from '@expo/vector-icons/AntDesign';
 import UserAvatar from 'react-native-user-avatar';
 import PropTypes from "prop-types";
 
@@ -22,7 +20,6 @@ import {
   Footer,
   Team, Mentor,
   Partners,
-  AbsoluteButton,
 } from '../../../components/styles';
 
 const About = ({ navigation }) => {
@@ -42,15 +39,10 @@ const About = ({ navigation }) => {
   const handleGithub = async () => {Linking.openURL(locale.global.app.contact_us.github)};
   const handleFacebook = async () => {Linking.openURL(locale.global.app.contact_us.facebook)};
   
-  const handleGoBack = () => {navigation.goBack()};
 
   return (
     <Container>
-      <AbsoluteButton style={{top: 45, left: 10, flexDirection: 'row'}} onPress={handleGoBack}>
-        <Ionicons name="chevron-back" size={28} color="#FFBF00" />
-        <AntDesign name="home" size={16} color="#FFBF00" />
-      </AbsoluteButton>
-      <Body style={{marginTop: '20%'}}>
+      <Body>
         <Main>
           <ScrollView style={{paddingTop: 20}}>
             <H3>{locale.global.team.title}</H3>
