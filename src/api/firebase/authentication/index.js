@@ -22,14 +22,37 @@ export const AuthProvider = ({ children }) => {
     return () =>  unsubscribe
   }, []);
 
+  const signGoogle = async () => {
+    const provider = new auth.GoogleAuthProvider();
+    return await auth.signInWithRedirect(provider).then(() => {
+      notNew();
+    });
+  };
+
+  const signFacebook = async () => {
+    const provider = new auth.FacebookAuthProvider();
+    return await auth.signInWithRedirect(provider).then(() => {
+      notNew();
+    });
+  };
+
+  const signGithub = async () => {
+    const provider = new auth.GithubAuthProvider();
+    return await auth.signInWithRedirect(provider).then(() => {
+      notNew();
+    });
+  };
+
   const signIn = async (email, password) => {
-    notNew();
-    return await auth.signInWithEmailAndPassword(email, password);
+    return await auth.signInWithEmailAndPassword(email, password).then(() => {
+      notNew();
+    });
   };
 
   const signUp = async (email, password) => {
-    notNew();
-    return await auth.createUserWithEmailAndPassword(email, password);
+    return await auth.createUserWithEmailAndPassword(email, password).then(() => {
+      notNew();
+    });
   };
 
   const emailVerify = async () => {
@@ -46,6 +69,9 @@ export const AuthProvider = ({ children }) => {
 
   const value = {
     isNew,
+    signGoogle,
+    signFacebook,
+    signGithub,
     signIn,
     signUp,
     emailVerify,

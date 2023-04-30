@@ -54,7 +54,7 @@ const Chat = () => {
   return (
     <Avoiding behavior={Platform.OS === "ios" ? "padding" : null} keyboardVerticalOffset={90}>
       <ChatBox>
-        <ChatInput style={{...styles.shadowInput, flex: 1}}>
+        <ChatInput style={{...styles.shadow, flex: 1}}>
           <ChatTextInput
             style={{fontSize: 15}}
             placeholder={locale.home.chat_box.placeholder1+name+locale.home.chat_box.placeholder2}
@@ -77,7 +77,7 @@ const Chat = () => {
 };
 
 const styles = StyleSheet.create({
-  shadowInput: {
+  shadow: {
     shadowColor: "#000000",
     shadowOffset: {width: 0, height: 3},
     shadowOpacity:  0.17,

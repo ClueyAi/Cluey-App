@@ -1,34 +1,35 @@
-import React, { useState, useContext, useRef, useEffect } from 'react'
-import { BackHandler, TouchableWithoutFeedback, Keyboard } from 'react-native';
+import React, { useState, useContext, useRef } from 'react'
+import { TouchableWithoutFeedback, Keyboard, StyleSheet } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
+import FontAwesome from '@expo/vector-icons/FontAwesome';
 import PropTypes from "prop-types";
 
-import { AuthContext } from '../../../../api/firebase'
-
-import { LocaleContext } from '../../../../components/locale'
-import { 
-  BgMark,
-  LogoBg,
-  LogoName,
+import { AuthContext } from '../../../api/firebase'
+import {ThemeContext} from '../../../components/theme';
+import { LocaleContext } from '../../../components/locale'
+import {
   Container,
   Heading,
   View,
   Form,
+  Divider,
   Input,
   TextInput,
-  H1, P, PMini,
+  H0, H2Mini, P, PMini, Link,
   TxtLink,
   ButtonPrimary,
-  ButtonSecondary,
   ButtonEmpyte,
+  ButtonProvider,
+  TxtProvider,
   TxtButton,
   TextError,
-} from '../../../../components/styles';
+} from '../../../components/styles';
 
 
 const SignIn = ({ navigation }) => {
   const {locale} = useContext(LocaleContext);
-  const {signIn} = useContext(AuthContext)
+  const {signIn, signGoogle, signFacebook, signGithub} = useContext(AuthContext);
+  const {theme} = useContext(ThemeContext);
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
   const [email, setEmail] = useState('');
@@ -92,43 +93,64 @@ const SignIn = ({ navigation }) => {
         setPasswordValid(passwordValid == true? true: false)
       }
     }
-  }
+  };
 
-  const handleToSignUp = () => {
-    navigation.navigate("SignUp")
-  }
+  const handleGoogle = async () => {
+    try {
+      await signGoogle();
+      navigation.navigate("Loading");
+    } catch (error) {
+      alert(error.code)
+    }
+  };
+  const handleFacebook = async () => {
+    try {
+      await signFacebook();
+      navigation.navigate("Loading");
+    } catch (error) {
+      alert(error.code)
+    }
+  };
+  const handleGithub = async () => {
+    try {
+      await signGithub();
+      navigation.navigate("Loading");
+    } catch (error) {
+      alert(error.code)
+    }
+  };
 
+  const handleForgot = () => {navigation.navigate('Forgot')}
+  const handleSignUp = () => {navigation.navigate('SignUp')}
   const handlePolicy = () => {navigation.navigate('Rules')} 
-
-  const navigatorRef = useRef();
-
-  useEffect(() => {
-    const backHandler = BackHandler.addEventListener(
-      'hardwareBackPress',
-      () => {
-        if (navigatorRef.current && navigatorRef.current.getCurrentRoute().name === 'SignIn') {
-          return true;
-        }
-        return true;
-      }
-    );
-    return () => {
-      backHandler.remove();
-    };
-  }, []);
   
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
       <Container>
-        <BgMark>
-          <LogoBg source={require('../../../../assets/images/cluey-happy.png')}/>
-          <LogoName>{locale.global.app.name}</LogoName>
-        </BgMark>
-        <Heading style={{marginTop: '45%', marginBottom: 15}}>
-          <H1 style={{marginBottom: 10}}>{locale.signin.title}</H1>
+        <Heading style={{marginBottom: 15}}>
+          <H0 style={{marginBottom: 10}}>{locale.global.app.name}</H0>
           <P>{locale.signin.description}</P>
         </Heading>
-        <Form>
+        <View >
+          <ButtonProvider style={styles.shadow} onPress={handleGoogle} accessibilityLabel={locale.providers.button_google.accessibility}>
+            <TxtProvider style={{left: 15}}>{locale.providers.button_google.text}</TxtProvider>
+            <FontAwesome style={{right: 15}} name="google" size={22} color={theme.text}/>
+          </ButtonProvider>
+          <ButtonProvider style={{...styles.shadow, marginTop: 15}} onPress={handleFacebook} accessibilityLabel={locale.providers.button_facebook.accessibility}>
+            <TxtProvider style={{left: 15}}>{locale.providers.button_facebook.text}</TxtProvider>
+            <FontAwesome style={{right: 20}} name="facebook" size={22} color={theme.text}/>
+          </ButtonProvider>
+          <ButtonProvider style={{...styles.shadow, marginTop: 15}} onPress={handleGithub} accessibilityLabel={locale.providers.button_facebook.accessibility}>
+            <TxtProvider style={{left: 15}}>{locale.providers.button_facebook.text}</TxtProvider>
+            <FontAwesome style={{right: 15}} name="github" size={24} color={theme.text} />
+          </ButtonProvider>
+        </View>
+        <View style={{width: '90%', flexDirection: 'row', justifiContents: 'center', alignItems: 'center', marginTop: 10}}>
+          <Divider />
+          <H2Mini>{locale.providers.or}</H2Mini>
+          <Divider />
+        </View>
+        <Form style={{marginTop: 10}}>
           <Input style={{marginBottom: 10, backgroundColor: `${error === errorEmail && emailValid == false ? errorColor : '#E0E0E0'}`}}>
             <TextInput
               ref={emailRef}
@@ -180,27 +202,40 @@ const SignIn = ({ navigation }) => {
               onSubmitEditing={handleSignIn}
             />
           </Input>
-          <ButtonEmpyte onPress={() => navigation.navigate("Forgot")}>
+          <ButtonEmpyte onPress={handleForgot}>
             <TxtLink>{locale.forgot.title}</TxtLink>
           </ButtonEmpyte>
           {error ? <TextError>{errorMsg}</TextError> : <TextError> </TextError> }
           <ButtonPrimary onPress={handleSignIn} accessibilityLabel={locale.signin.button.accessibility}>
             <TxtButton>{locale.signin.button.text}</TxtButton> 
           </ButtonPrimary>
+          <View style={{marginTop: 10, flexDirection: 'row'}}>
+            <PMini>{locale.signin.button_signup.msg}</PMini>
+            <ButtonEmpyte style={{color: '#fff', marginLeft: 5}} onPress={handleSignUp} ccessibilityLabel={locale.signin.button_signup.accessibility}>
+              <Link>{locale.signin.button_signup.text}</Link>
+            </ButtonEmpyte>
+          </View>
         </Form>
-        <ButtonSecondary style={{marginTop: "60%"}} onPress={handleToSignUp} accessibilityLabel={locale.signin.button.signup}>
-          <TxtButton>{locale.signup.title}</TxtButton>
-        </ButtonSecondary>
-        <View style={{marginTop: 15}}>
+        <View style={{marginTop: 90}}>
           <PMini>{locale.welcome.footer}</PMini>
-          <ButtonEmpyte style={{color: '#fff'}} onPress={handlePolicy}>
-            <PMini>{locale.global.app.policy_terms.title}</PMini>
+          <ButtonEmpyte style={{color: '#fff'}} onPress={handlePolicy} ccessibilityLabel={locale.global.app.policy_terms.accessibility}>
+            <Link>{locale.global.app.policy_terms.title}</Link>
           </ButtonEmpyte>
         </View>
       </Container>
     </TouchableWithoutFeedback>
   );
 };
+
+const styles = StyleSheet.create({
+  shadow: {
+    shadowColor: "#000000",
+    shadowOffset: {width: 0, height: 3},
+    shadowOpacity:  0.17,
+    shadowRadius: 3.05,
+    elevation: 4
+  }
+});
 
 SignIn.propTypes = {
   navigation: PropTypes.object.isRequired
