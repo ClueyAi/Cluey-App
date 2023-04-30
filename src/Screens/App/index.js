@@ -1,8 +1,9 @@
 import React from 'react';
-import { createStackNavigator } from "@react-navigation/stack";
+import { createStackNavigator, TransitionPresets } from "@react-navigation/stack";
+import { isAndroid } from '@freakycoder/react-native-helpers';
 import Ionicons from '@expo/vector-icons/Ionicons';
 
-import { LogoutButton , SettingsButton } from '../../components/tools';
+import { LogoutButton , SettingsButton, CloseModal } from '../../components/tools';
 
 import Home from './Home';
 // Settings
@@ -12,11 +13,15 @@ import ChangePassword from './Settings/Components/changePassword';
 import Country from './Settings/Components/country';
 import Preferences from './Settings/Components/preferences';
 
+import About from '../Utils/About';
+import Rules from '../Utils/Rules';
+
 const AppStack = createStackNavigator();
 
 const App = () => {
   return (
     <AppStack.Navigator screenOptions={{
+      gestureEnabled: true,
       headerStyle: {
         shadowColor: "#000",
         shadowOffset: {width: 0, height: 1},
@@ -56,10 +61,28 @@ const App = () => {
           },
         })}
       />
-      <AppStack.Screen name="ChangeEmail" component={ChangeEmail} options={{headerTitle: 'Change Email', presentation: 'modal'}}/>
-      <AppStack.Screen name="ChangePassword" component={ChangePassword} options={{headerTitle: 'Change Password', presentation: 'modal'}}/>
-      <AppStack.Screen name="Country" component={Country} options={{presentation: 'modal'}}/>
-      <AppStack.Screen name="Preferences" component={Preferences} options={{presentation: 'modal'}}/>
+      <AppStack.Group screenOptions={{
+        headerLeft: null,
+        headerTitle: () => <CloseModal/>,
+        headerStyle: {
+          height: 40,
+          shadowColor: "#000",
+          shadowOffset: {width: 0, height: 1},
+          shadowOpacity:  0.10,
+          shadowRadius: 1.51,
+          elevation: 4
+        },
+        headerTitleAlign: 'center',
+        presentation: 'modal',
+        ...( isAndroid && TransitionPresets.ModalPresentationIOS )
+      }}>
+        <AppStack.Screen name="ChangeEmail" component={ChangeEmail}/>
+        <AppStack.Screen name="ChangePassword" component={ChangePassword}/>
+        <AppStack.Screen name="Country" component={Country}/>
+        <AppStack.Screen name="Preferences" component={Preferences}/>
+        <AppStack.Screen name="About" component={About}/>
+        <AppStack.Screen name="Rules" component={Rules}/>
+      </AppStack.Group>
     </AppStack.Navigator>
   );
 };

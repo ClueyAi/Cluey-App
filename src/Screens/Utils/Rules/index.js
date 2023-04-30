@@ -1,6 +1,4 @@
 import React, { useState, useEffect, useContext } from "react";
-import Ionicons from "@expo/vector-icons/Ionicons";
-import AntDesign from "@expo/vector-icons/AntDesign";
 import PropTypes from "prop-types";
 
 import { LocaleContext } from "../../../components/locale";
@@ -16,10 +14,9 @@ import {
   TextList,
   ButtonEmpyte,
   FooterSmall,
-  AbsoluteButton,
 } from "../../../components/styles";
 
-const Rules = ({ navigation }) => {
+const Rules = () => {
   const { locale } = useContext(LocaleContext);
   const [isPolicy, setIsPolicy] = useState(true);
   const [policyColor, setPolicyColor] = useState(FocusColor);
@@ -35,10 +32,6 @@ const Rules = ({ navigation }) => {
     setIsPolicy(false);
   };
 
-  const handleGoBack = () => {
-    navigation.goBack();
-  };
-
   useEffect(() => {
     if (isPolicy) {
       setPolicyColor(FocusColor);
@@ -51,11 +44,7 @@ const Rules = ({ navigation }) => {
 
   return (
     <Container>
-      <AbsoluteButton style={{ top: 45, left: 10, flexDirection: "row" }}onPress={handleGoBack}>
-        <Ionicons name="chevron-back" size={28} color="#FFBF00" />
-        <AntDesign name="home" size={16} color="#FFBF00" />
-      </AbsoluteButton>
-      <Body style={{ marginTop: "20%" }}>
+      <Body>
         <View
           style={{
             flexDirection: "row",

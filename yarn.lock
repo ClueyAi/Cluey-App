@@ -1962,6 +1962,11 @@
   dependencies:
     tslib "^2.4.0"
 
+"@freakycoder/react-native-helpers@^2.0.2":
+  version "2.0.2"
+  resolved "https://registry.npmjs.org/@freakycoder/react-native-helpers/-/react-native-helpers-2.0.2.tgz#7aeb296f6bc5948533776ca46735d71c7868149a"
+  integrity sha512-wlwRuXE/tejPCqUYRD1rGxjjQqWM9vv4CrlRdt9e140rqNOx+gQcB6v5zu8M5vfgbFO9E7vS/46DCX6Q0ZQ7Nw==
+
 "@gar/promisify@^1.0.1":
   version "1.1.3"
   resolved "https://registry.npmjs.org/@gar/promisify/-/promisify-1.1.3.tgz#555193ab2e3bb3b6adc3d551c9c030d9e860daf6"

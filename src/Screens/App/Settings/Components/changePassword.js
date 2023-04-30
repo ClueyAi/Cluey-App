@@ -87,7 +87,7 @@ const ChangePassword = ({ navigation }) => {
               selectionColor="#FFBF00"
               autoCapitalize="none"
               autoComplete="email"
-              returnKeyType="next"
+              returnKeyType="done"
               onChangeText={emailValidate}
               onSubmitEditing={handleForgot}
             /> 
@@ -115,7 +115,7 @@ const ChangePassword = ({ navigation }) => {
               />
             : null }
           </Input>
-          {error ? <TextError>{erroraccessibility}</TextError> : <TextError></TextError> }
+          {error ? <TextError>{errorMsg}</TextError> : <TextError></TextError> }
           <ButtonPrimary onPress={handleForgot} accessibilityLabel={locale.forgot.button.accessibility}>
             <TxtButton >{locale.forgot.button.text}</TxtButton> 
           </ButtonPrimary>

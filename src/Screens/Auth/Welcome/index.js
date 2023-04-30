@@ -16,7 +16,7 @@ import {
 
 const Welcome = ({ navigation }) => {
   const {locale} = useContext(LocaleContext);
-  const handleStart = () => {navigation.navigate("SignUp")}
+  const handleStart = () => {navigation.navigate('New')}
   const handlePolicy = () => {navigation.navigate('Rules')}
   
   return (

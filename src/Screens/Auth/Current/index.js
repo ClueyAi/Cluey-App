@@ -33,7 +33,7 @@ import {
   TextError,
 } from "../../../components/styles";
 
-const SignIn = ({ navigation }) => {
+const Current = ({ navigation }) => {
   const { locale } = useContext(LocaleContext);
   const { signIn, signGoogle, signFacebook, signGithub } =
     useContext(AuthContext);
@@ -127,6 +127,9 @@ const SignIn = ({ navigation }) => {
 
   const handleForgot = () => {
     navigation.navigate("Forgot");
+  };
+  const handleSignUp = () => {
+    navigation.navigate("SignUp");
   };
   const handlePolicy = () => {
     navigation.navigate("Rules");
@@ -297,9 +300,19 @@ const SignIn = ({ navigation }) => {
               >
                 <TxtButton>{locale.signin.button.text}</TxtButton>
               </ButtonPrimary>
+              <View style={{ marginTop: 20, flexDirection: "row" }}>
+                <PMini>{locale.signin.button_signup.msg}</PMini>
+                <ButtonEmpyte
+                  style={{ marginLeft: 5 }}
+                  onPress={handleSignUp}
+                  ccessibilityLabel={locale.signin.button_signup.accessibility}
+                >
+                  <Link>{locale.signin.button_signup.text}</Link>
+                </ButtonEmpyte>
+              </View>
             </Form>
           </Body>
-          <View style={{ marginTop: "25%", alignItems: "center" }}>
+          <View style={{ marginTop: "15%", alignItems: "center" }}>
             <PMini>{locale.welcome.footer}</PMini>
             <ButtonEmpyte
               onPress={handlePolicy}
@@ -324,8 +337,8 @@ const styles = StyleSheet.create({
   },
 });
 
-SignIn.propTypes = {
+Current.propTypes = {
   navigation: PropTypes.object.isRequired,
 };
 
-export default SignIn;
+export default Current;

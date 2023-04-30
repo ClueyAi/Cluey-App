@@ -1,5 +1,13 @@
-import React, { useState, useContext, useRef } from "react";
-import { StyleSheet, Platform } from "react-native";
+import React, {
+  useState,
+  useContext,
+  useEffect,
+  useRef,
+  useLayoutEffect,
+  useCallback,
+} from "react";
+import { BackHandler, StyleSheet, Platform } from "react-native";
+import { useFocusEffect } from "@react-navigation/native";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import PropTypes from "prop-types";
@@ -11,11 +19,11 @@ import {
   Avoiding,
   Container,
   Content,
-  Heading,
   Body,
-  Providers,
+  Heading,
   View,
   Form,
+  Providers,
   Divider,
   Input,
   TextInput,
@@ -24,78 +32,110 @@ import {
   P,
   PMini,
   Link,
-  TxtLink,
   ButtonPrimary,
+  TxtButton,
+  TxtProvider,
+  TextError,
+  TextValid,
+  TextAlert,
   ButtonEmpyte,
   ButtonProvider,
-  TxtProvider,
-  TxtButton,
-  TextError,
 } from "../../../components/styles";
 
-const SignIn = ({ navigation }) => {
+const New = ({ navigation }) => {
   const { locale } = useContext(LocaleContext);
-  const { signIn, signGoogle, signFacebook, signGithub } =
-    useContext(AuthContext);
+  const { signUp, signGoogle, signFacebook, signGithub } = useContext(AuthContext);
   const { theme } = useContext(ThemeContext);
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
+  const rePasswordRef = useRef(null);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [rePassword, setRePassword] = useState("");
 
   const [emailValid, setEmailValid] = useState(null);
   const [passwordValid, setPasswordValid] = useState(null);
+  const [passwordStrong, setPasswordStrong] = useState(null);
+  const [rePasswordValid, setRePasswordValid] = useState(null);
 
   const [error, setError] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
-  const [errorEmail, setErrorEmail] = useState("");
-  // eslint-disable-next-line no-unused-vars
-  const [errorPassword, setErrorPassword] = useState("");
+  const [errorEmail, setErrorEmail] = useState("errorEmail");
+  const [errorPassword, setErrorPassword] = useState("errorPassword");
 
   const emailValidate = (text) => {
-    // eslint-disable-next-line no-useless-escape
-    const reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
-    setEmailValid(reg.test(text));
-    setEmail(text);
-  };
-
-  const passwordValidate = (text) => {
-    if (emailValid == true) {
-      setPasswordValid(true);
-      setPassword(text);
-    } else {
-      setPasswordValid(false);
+    if (text !== "") {
+      // eslint-disable-next-line no-useless-escape
+      const reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
+      setEmailValid(reg.test(text));
+      setEmail(text ? text : "");
     }
   };
 
-  const handleSignIn = async () => {
+  const passwordValidate = (text) => {
+    if (text !== "") {
+      const regV = /^(?=.*[a-z])(?=.*[0-9]).{6,22}$/;
+      setPasswordValid(regV.test(text));
+      const regS = /^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[@$!%*#?&]).{6,22}$/;
+      setPasswordStrong(regS.test(text));
+      setPassword(text ? text : "");
+    }
+  };
+  const rePasswordValidate = (text) => {
+    if (passwordValid == true && text !== "") {
+      const reg = text === password ? text : rePassword;
+      setRePasswordValid(text === password ? true : false);
+      setRePassword(reg);
+    }
+  };
+
+  const loadData = () => {
+    emailValidate();
+    passwordValidate();
+    rePasswordValidate();
+  };
+
+  const handleSignUp = async () => {
     try {
-      await signIn(email, password);
+      await signUp(email, rePassword);
       navigation.navigate("Loading");
     } catch (error) {
       setError(error.code);
       if (error.code === "auth/missing-password") {
         setErrorPassword(error.code);
         setErrorMsg(locale.error.auth_missing_password);
+        setEmailValid(true);
         setPasswordValid(false);
       } else if (error.code === "auth/wrong-password") {
         setErrorPassword(error.code);
         setErrorMsg(locale.error.auth_wrong_password);
+        setEmailValid(true);
         setPasswordValid(false);
       } else if (error.code === "auth/user-not-found") {
         setErrorEmail(error.code);
         setErrorMsg(locale.error.auth_user_not_found);
         setEmailValid(false);
+        setPasswordValid(true);
       } else if (error.code === "auth/invalid-email") {
         setErrorEmail(error.code);
         setErrorMsg(locale.error.auth_invalid_email);
         setEmailValid(false);
+      } else if (error.code === "auth/missing-email") {
+        setErrorEmail(error.code);
+        setErrorMsg(locale.error.auth_missing_email);
+        setEmailValid(false);
+      } else if (error.code === "auth/email-already-in-use") {
+        setErrorEmail(error.code);
+        setErrorMsg(locale.error.auth_email_already_in_use);
+        setEmailValid(false);
+        setPasswordValid(true);
       } else {
         setErrorPassword(error.code);
         setErrorEmail(error.code);
-        setErrorMsg(locale.error.auth_connect_user);
+        setErrorMsg(locale.error.auth_create_user);
         setEmailValid(emailValid == true ? true : false);
         setPasswordValid(passwordValid == true ? true : false);
+        setPasswordStrong(passwordStrong == true ? true : false);
       }
     }
   };
@@ -125,12 +165,39 @@ const SignIn = ({ navigation }) => {
     }
   };
 
-  const handleForgot = () => {
-    navigation.navigate("Forgot");
+  const handleSignIn = () => {
+    navigation.navigate("SignIn");
   };
   const handlePolicy = () => {
     navigation.navigate("Rules");
   };
+
+  useFocusEffect(
+    useCallback(() => {
+      const onBackPress = () => {
+        return true;
+      };
+
+      navigation.addListener("beforeRemove", (e) => {
+        e.preventDefault();
+      });
+
+      BackHandler.addEventListener("hardwareBackPress", onBackPress);
+
+      return () =>
+        BackHandler.removeEventListener("hardwareBackPress", onBackPress);
+    }, [navigation])
+  );
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerLeft: () => <View />,
+    });
+  }, [navigation]);
+
+  useEffect(() => {
+    loadData();
+  }, []);
 
   return (
     <Container>
@@ -140,9 +207,9 @@ const SignIn = ({ navigation }) => {
       >
         <Content>
           <Body>
-            <Heading style={{ marginBottom: 15, marginTop: 10 }}>
+            <Heading style={{ marginBottom: 15 }}>
               <H0 style={{ marginBottom: 10 }}>{locale.global.app.name}</H0>
-              <P>{locale.signin.description}</P>
+              <P>{locale.signup.description}</P>
             </Heading>
             <Providers>
               <ButtonProvider
@@ -203,14 +270,14 @@ const SignIn = ({ navigation }) => {
                 flexDirection: "row",
                 justifiContents: "center",
                 alignItems: "center",
-                marginTop: 20,
+                marginTop: 10,
               }}
             >
               <Divider />
               <H2Mini>{locale.providers.or}</H2Mini>
               <Divider />
             </View>
-            <Form style={{ marginTop: 20 }}>
+            <Form style={{ marginTop: 10 }}>
               <Input
                 style={{
                   ...styles.shadow,
@@ -226,7 +293,7 @@ const SignIn = ({ navigation }) => {
                 <TextInput
                   ref={emailRef}
                   value={email}
-                  placeholder={locale.signin.text_input.email}
+                  placeholder={locale.signup.text_input.email}
                   placeholderTextColor={theme.placeholder}
                   selectionColor={theme.primary}
                   autoCapitalize="none"
@@ -242,15 +309,14 @@ const SignIn = ({ navigation }) => {
                     size={20}
                     color={theme.error}
                   />
-                ) : (
+                ) : emailValid == null && email !== "" ? (
                   <Ionicons
                     style={{ padding: 10, marginRight: 10 }}
                     name="alert-circle-outline"
                     size={20}
                     color={theme.transparent}
                   />
-                )}
-                {emailValid == true && email !== "" ? (
+                ) : emailValid == true && email !== "" ? (
                   <Ionicons
                     style={{ padding: 10, marginRight: 10 }}
                     name="checkmark-circle-outline"
@@ -265,41 +331,136 @@ const SignIn = ({ navigation }) => {
                   borderWidth: 0.1,
                   marginBottom: 10,
                   backgroundColor: `${
-                    passwordValid == false ? theme.inputError : theme.backgroundSecondary
+                    error === errorPassword && passwordValid == false
+                      ? theme.inputError
+                      : theme.backgroundSecondary
                   }`,
                 }}
               >
                 <TextInput
                   ref={passwordRef}
-                  placeholder={locale.signin.text_input.password}
+                  placeholder={locale.signup.text_input.password}
                   placeholderTextColor={theme.placeholder}
                   selectionColor={theme.primary}
                   autoCapitalize="none"
-                  autoComplete="current-password"
+                  autoComplete="new-password"
+                  secureTextEntry={true}
+                  returnKeyType="next"
+                  onChangeText={passwordValidate}
+                  onSubmitEditing={() => rePasswordRef.current.focus()}
+                />
+                {passwordStrong == false && passwordValid == true ? (
+                  <Ionicons
+                    style={{ padding: 10, marginRight: 10 }}
+                    name="alert-circle-outline"
+                    size={20}
+                    color={theme.primary}
+                  />
+                ) : passwordValid == false && password !== "" ? (
+                  <Ionicons
+                    style={{ padding: 10, marginRight: 10 }}
+                    name="alert-circle-outline"
+                    size={20}
+                    color={theme.error}
+                  />
+                ) : passwordStrong == true && password !== "" ? (
+                  <Ionicons
+                    style={{ padding: 10, marginRight: 10 }}
+                    name="checkmark-circle-outline"
+                    size={20}
+                    color={theme.secondary}
+                  />
+                ) : (
+                  <Ionicons
+                    style={{ padding: 10, marginRight: 10 }}
+                    name="alert-circle-outline"
+                    size={20}
+                    color={theme.transparent}
+                  />
+                )}
+              </Input>
+              {passwordStrong == false && passwordValid == true ? (
+                <TextAlert>Password medium</TextAlert>
+              ) : passwordValid == false && password !== "" ? (
+                <TextError>Password weak</TextError>
+              ) : passwordStrong == true && password !== "" ? (
+                <TextValid>Password strong</TextValid>
+              ) : (
+                <TextError></TextError>
+              )}
+              <Input
+                style={{
+                  ...styles.shadow,
+                  borderWidth: 0.1,
+                  marginBottom: 10,
+                  backgroundColor: `${
+                    error === errorPassword && rePasswordValid == false
+                      ? theme.inputError
+                      : theme.backgroundSecondary
+                  }`,
+                }}
+              >
+                <TextInput
+                  ref={rePasswordRef}
+                  placeholder={locale.signup.text_input.confirm_password}
+                  placeholderTextColor={theme.placeholder}
+                  selectionColor={theme.primary}
+                  autoCapitalize="none"
+                  autoComplete="new-password"
                   secureTextEntry={true}
                   returnKeyType="done"
-                  onChangeText={passwordValidate}
-                  onSubmitEditing={handleSignIn}
+                  onChangeText={rePasswordValidate}
+                  onSubmitEditing={handleSignUp}
                 />
+                {rePasswordValid == false && rePassword !== "" ? (
+                  <Ionicons
+                    style={{ padding: 10, marginRight: 10 }}
+                    name="alert-circle-outline"
+                    size={20}
+                    color={theme.error}
+                  />
+                ) : (
+                  <Ionicons
+                    style={{ padding: 10, marginRight: 10 }}
+                    name="alert-circle-outline"
+                    size={20}
+                    color={theme.transparent}
+                  />
+                )}
+                {rePasswordValid == true && rePassword !== "" ? (
+                  <Ionicons
+                    style={{ padding: 10, marginRight: 10 }}
+                    name="checkmark-circle-outline"
+                    size={20}
+                    color={theme.secondary}
+                  />
+                ) : null}
               </Input>
-              <ButtonEmpyte onPress={handleForgot}>
-                <TxtLink>{locale.forgot.title}</TxtLink>
-              </ButtonEmpyte>
               {error ? (
                 <TextError>{errorMsg}</TextError>
               ) : (
-                <TextError> </TextError>
+                <TextError></TextError>
               )}
               <ButtonPrimary
                 style={styles.shadow}
-                onPress={handleSignIn}
-                accessibilityLabel={locale.signin.button.accessibility}
+                onPress={handleSignUp}
+                accessibilityLabel={locale.signup.button.accessibility}
               >
-                <TxtButton>{locale.signin.button.text}</TxtButton>
+                <TxtButton>{locale.signup.title}</TxtButton>
               </ButtonPrimary>
+              <View style={{ marginTop: 20, flexDirection: "row" }}>
+                <PMini>{locale.signup.button_signin.msg}</PMini>
+                <ButtonEmpyte
+                  style={{ marginLeft: 5 }}
+                  onPress={handleSignIn}
+                  ccessibilityLabel={locale.signup.button_signin.accessibility}
+                >
+                  <Link>{locale.signup.button_signin.text}</Link>
+                </ButtonEmpyte>
+              </View>
             </Form>
           </Body>
-          <View style={{ marginTop: "25%", alignItems: "center" }}>
+          <View style={{ marginTop: "10%", alignItems: "center" }}>
             <PMini>{locale.welcome.footer}</PMini>
             <ButtonEmpyte
               onPress={handlePolicy}
@@ -324,8 +485,8 @@ const styles = StyleSheet.create({
   },
 });
 
-SignIn.propTypes = {
+New.propTypes = {
   navigation: PropTypes.object.isRequired,
 };
 
-export default SignIn;
+export default New;
