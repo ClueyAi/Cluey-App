@@ -8,7 +8,7 @@ import {
   Container,
   Heading,
   View,
-  H1, P, PMini,
+  H1, P, PMini, Link,
   TxtButton,
   ButtonEmpyte,
   ButtonMulti
@@ -16,7 +16,7 @@ import {
 
 const Welcome = ({ navigation }) => {
   const {locale} = useContext(LocaleContext);
-  const handleStart = () => {navigation.navigate("SignIn")}
+  const handleStart = () => {navigation.navigate("SignUp")}
   const handlePolicy = () => {navigation.navigate('Rules')}
   
   return (
@@ -38,10 +38,10 @@ const Welcome = ({ navigation }) => {
           <TxtButton>{locale.welcome.button.text}</TxtButton>
           <Ionicons name="arrow-forward-outline" size={22} color="#FFFFFF" />
         </ButtonMulti>
-        <View style={{marginTop: 15}}>
+        <View style={{marginTop: 15, alignItems: 'center'}}>
           <PMini>{locale.welcome.footer}</PMini>
           <ButtonEmpyte style={{color: '#fff'}} onPress={handlePolicy} ccessibilityLabel={locale.global.app.policy_terms.accessibility}>
-            <PMini>{locale.global.app.policy_terms.title}</PMini>
+            <Link>{locale.global.app.policy_terms.title}</Link>
           </ButtonEmpyte>
         </View>
       </View>

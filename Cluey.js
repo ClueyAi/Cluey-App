@@ -1,14 +1,11 @@
-import React, { useEffect } from 'react';
-import { StatusBar } from 'expo-status-bar';
+import React from 'react';
 import { useFonts } from 'expo-font';
-import { Appearance, Platform, AppRegistry } from 'react-native';
-import { ThemeProvider } from 'styled-components';
 import { MenuProvider } from 'react-native-popup-menu';
 
-import Firebase from './src/api/firebase';
-import { BotProvider } from './src/api/chatbot';
-import { LocaleProvider } from './src/components/locale';
-import theme from './src/components/theme';
+import {ThemeProvider} from './src/components/theme';
+import {Firebase} from './src/api/firebase';
+import {BotProvider} from './src/api/chatbot';
+import {LocaleProvider} from './src/components/locale';
 import Screens from './src/Screens';
 
 const Cluey = () => {
@@ -22,20 +19,13 @@ const Cluey = () => {
 
   if (!loaded) {
     return null;
-  };
-
-  const deviceOS = Platform.OS;
-
-  const deviceTheme = Appearance.getColorScheme();
-  //const AppTheme = theme[deviceTheme] || theme.light;
-  const AppTheme = theme.light;
+  }
 
   return (
     <LocaleProvider>
       <Firebase>
         <BotProvider>
-          <StatusBar style='dark'/>
-          <ThemeProvider theme={AppTheme}>
+          <ThemeProvider>
             <MenuProvider>
               <Screens />
             </MenuProvider>

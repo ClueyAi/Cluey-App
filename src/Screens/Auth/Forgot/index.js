@@ -6,9 +6,6 @@ import { AuthContext } from '../../../api/firebase'
 
 import { LocaleContext } from '../../../components/locale'
 import { 
-  BgMark,
-  LogoBg,
-  LogoName,
   Container,
   Heading,
   Form,
@@ -18,6 +15,7 @@ import {
   ButtonPrimary,
   TxtButton,
   TextError,
+  FooterSmall
 } from '../../../components/styles';
 
 const Forgot = ({ navigation }) => {
@@ -65,12 +63,7 @@ const Forgot = ({ navigation }) => {
   if (sendRecovery == false) { 
     return (
       <Container>
-        <BgMark>
-          <LogoBg source={require('../../../../assets/images/cluey-happy.png')} />
-          <LogoName>{locale.global.app.name}</LogoName>
-        </BgMark>
-
-        <Heading style={{marginTop: '65%', marginBottom: 15}}>
+        <Heading style={{marginTop: '45%', marginBottom: 15}}>
           <H1 style={{marginBottom: 10}}>{locale.forgot.title}</H1>
           <P>{locale.forgot.description}</P>
         </Heading>
@@ -110,7 +103,7 @@ const Forgot = ({ navigation }) => {
               />
             : null }
           </Input>
-          {error ? <TextError>{erroraccessibility}</TextError> : <TextError></TextError> }
+          {error ? <TextError>{errorMsg}</TextError> : <TextError></TextError> }
           <ButtonPrimary onPress={handleForgot} accessibilityLabel={locale.forgot.button.accessibility}>
             <TxtButton >{locale.forgot.button.text}</TxtButton> 
           </ButtonPrimary>
@@ -120,15 +113,18 @@ const Forgot = ({ navigation }) => {
   } else {
     return (
       <Container>
-        <Heading style={{marginTop: '50%', marginBottom: 15}}>
+        <Heading style={{marginTop: '45%', marginBottom: 15}}>
           <H1 style={{marginBottom: 10, fontSize: 25}}>{locale.forgot.success.title}</H1>
           <P>{locale.forgot.success.description}</P>
           <H3 style={{marginTop: 30 ,marginBottom: 5}}>{locale.forgot.success.alert_tittle}</H3>
           <PMini>{locale.forgot.success.alert_accessibility}</PMini>
         </Heading>
-        <ButtonPrimary style={{marginTop: 10}} onPress={handleContinue} accessibilityLabel={locale.forgot.success.Button.accessibility}>
+        <ButtonPrimary style={{marginTop: 10, marginBottom: '40%'}} onPress={handleContinue} accessibilityLabel={locale.forgot.success.Button.accessibility}>
           <TxtButton>{locale.forgot.success.Button.text}</TxtButton> 
         </ButtonPrimary>
+        <FooterSmall>
+          <H1 style={{ marginTop: 10 }}>{locale.global.app.name}</H1>
+        </FooterSmall>
       </Container>
     )
   }

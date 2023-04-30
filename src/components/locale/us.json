@@ -116,15 +116,15 @@
   },
   "providers": {
     "button_google": {
-      "text": "Continue with Google Account",
+      "text": "Continue with Google",
       "accessibility": "sign in with google account and get started to Cluey"
     },
     "button_facebook": {
-      "text": "Continue with Facebook Account",
+      "text": "Continue with Facebook",
       "accessibility": "sign in with facebook account and get started to Cluey"
     },
     "button_github": {
-      "text": "Continue with Github Account",
+      "text": "Continue with Github",
       "accessibility": "sign in with github account and get started to Cluey"
     },
     "or": "or"
@@ -141,20 +141,27 @@
       "accessibility": "sign in and get started to Cluey"
     },
     "button_signup": {
-      "text": "Create a new Account",
-      "accessibility": "create a new account now"
+      "text": "Sign Up",
+      "msg": "Don't have an account?",
+      "accessibility": "sign up if you don't have Cluey account"
     }
   },
   "signup": {
     "title": "Sign Up",
     "description": "Create a new account to Cluey help you.",
-    "button": {
-      "accessibility": "sign up and get started to Cluey"
-    },
     "text_input": {
       "email": "email",
       "password": "password",
       "confirm_password": "confirm password"
+    },
+    "button": {
+      "text": "Sign In",
+      "accessibility": "sign up and get started to Cluey"
+    },
+    "button_signin": {
+      "text": "Sign In",
+      "msg": "Already have an account?",
+      "accessibility": "sign in if you has Cluey account"
     }
   },
   "verify": {

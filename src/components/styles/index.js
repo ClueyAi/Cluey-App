@@ -1,5 +1,7 @@
 import styled from 'styled-components/native';
 
+import { light } from '../theme';
+
 const generateColor = () => {
   const randomColor = Math.floor(Math.random() * 16777215)
     .toString(16)
@@ -12,7 +14,7 @@ export const Container = styled.View`
   flex: 1;
   width: 100%;
   align-items: center;
-  background-color: ${props => props.theme.background};
+  background-color: ${light.background};
 `;
 export const Header = styled.View`
   flex: 1;
@@ -22,7 +24,7 @@ export const Header = styled.View`
   justify-content: space-between;
   padding-top: 15px;
   border-bottom-width: 2px;
-  border-color: ${props => props.theme.border};
+  border-color: ${light.border};
 `;
 export const Heading = styled.View`
   width: 285px;
@@ -56,11 +58,17 @@ export const Form = styled.View`
   align-items: center;
   z-index: 1;
 `;
+export const Divider = styled.View`
+  width: 40%;
+  margin: 5px 10px 0 10px;
+  border-bottom-color: ${light.border};
+  border-bottom-width: 1px;
+`;
 export const Input = styled.View`
   width: 100%;
   flex-direction: row;
   justify-content: space-between;
-  background-color: ${props => props.theme.input};
+  background-color: ${light.input};
   border-radius: 30px;
   height: 45px;
   align-items: center;
@@ -72,77 +80,89 @@ export const TextInput = styled.TextInput`
   height: 100%;
   padding: 10px;
   margin-left: 10px;
-  color: ${props => props.theme.text};
+  color: ${light.text};
 `;
 
 // Texts
+export const H0 = styled.Text`
+  font-family: 'Nunito-Bold';
+  text-align: center;
+  font-size: 28px;
+  color: ${light.primary};
+`;
 export const H1 = styled.Text`
   font-family: 'Nunito-Bold';
   text-align: center;
   font-size: 24px;
-  color: ${props => props.theme.primary};
+  color: ${light.primary};
 `;
 export const H1Mini = styled.Text`
   font-family: 'Nunito-Bold';
   text-align: center;
   font-size: 22px;
-  color: ${props => props.theme.text};
+  color: ${light.text};
 `;
 export const H2 = styled.Text`
   font-family: 'Nunito-Bold';
   text-align: center;
   font-size: 19px;
-  color: ${props => props.theme.textDark};
+  color: ${light.textDark};
+`;
+export const H2Mini = styled.Text`
+  font-family: 'Nunito-Bold';
+  text-align: center;
+  font-size: 16px;
+  color: ${light.textDark};
 `;
 export const H3 = styled.Text`
   font-family: 'Nunito-SemiBold';
   text-align: center;
   font-size: 16px;
-  color: ${props => props.theme.textDark};
+  color: ${light.textDark};
 `;
 export const H3Bold = styled.Text`
   font-family: 'Nunito-Bold';
   text-align: center;
   font-size: 16px;
-  color: ${props => props.theme.textDark};
+  color: ${light.textDark};
 `;
 export const H4 = styled.Text`
   font-family: 'Nunito-SemiBold';
   text-align: center;
   font-size: 14px;
-  color: ${props => props.theme.textDark};
+  color: ${light.textDark};
 `;
 export const H5 = styled.Text`
   font-family: 'Nunito-Bold';
   text-align: center;
   font-size: 12px;
-  color: ${props => props.theme.textDark};
+  color: ${light.textDark};
 `;
 export const P = styled.Text`
   font-family: 'Nunito';
   text-align: center;
   font-size: 15px;
-  color: ${props => props.theme.textGray};
+  color: ${light.textGray};
 `;
 export const PMini = styled.Text`
   font-family: 'Nunito';
   text-align: center;
   font-size: 13px;
-  color: ${props => props.theme.textGray};
+  color: ${light.textGray};
 `;
 export const Tittle = styled.Text`
   font-family: 'Nunito-SemiBold';
   text-align: left;
   font-size: 16px;
   margin-bottom: 10px;
-  color: ${props => props.theme.textDark};
+  color: ${light.textDark};
 `;
 export const Text = styled.Text`
   font-family: 'Nunito';
   text-align: justify;
   font-size: 15px;
   margin-bottom: 10px;
-  color: ${props => props.theme.textGray};
+  color: ${light.textGray};
 `;
 export const TextList = styled.Text`
   font-family: 'Nunito';
@@ -150,30 +170,35 @@ export const TextList = styled.Text`
   font-size: 15px;
   margin-bottom: 10px;
   margin-left: 10px;
-  color: ${props => props.theme.textGray};
+  color: ${light.textGray};
 `;
 export const TxtLink = styled.Text`
   font-family: 'Nunito-SemiBold';
   text-align: center;
   font-size: 16px;
-  color: ${props => props.theme.textDark};
+  color: ${light.link};
 `;
 export const TxtButton = styled.Text`
   font-family: 'Nunito-Bold';
   font-size: 19px;
-  color: ${props => props.theme.textButton};
+  color: ${light.textButton};
+`;
+export const TxtProvider = styled.Text`
+  font-family: 'Nunito-Bold';
+  font-size: 16px;
+  color: ${light.textDark};
 `;
 export const Link = styled.Text`
   font-family: 'Nunito-Bold';
   font-size: 14px;
-  color: ${props => props.theme.link};
+  color: ${light.link};
 `;
 export const StatusOnline = styled.Text`
   font-family: 'Nunito';
   text-align: left;
   margin-left: 5px;
   font-size: 13px;
-  color: ${props => props.theme.valid};
+  color: ${light.valid};
 `;
 
 // Images
@@ -189,7 +214,7 @@ export const ButtonPrimary = styled.TouchableOpacity`
   width: 333px;
   height: 56px;
   border-radius: 30px;
-  background-color: ${props => props.theme.primary};
+  background-color: ${light.primary};
   justify-content: center;
   align-items: center;
 `;
@@ -197,15 +222,26 @@ export const ButtonSecondary = styled.TouchableOpacity`
   width: 333px;
   height: 56px;
   border-radius: 30px;
-  background-color: ${props => props.theme.secondary};
+  background-color: ${light.secondary};
   justify-content: center;
   align-items: center;
+`;
+export const ButtonProvider = styled.TouchableOpacity`
+  width: 333px;
+  height: 48px;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 30px;
+  border-width: 0.2px;
+  border-color: ${light.text};
+  background-color: ${light.background};
 `;
 export const ButtonMulti = styled.TouchableOpacity`
   width: 333px;
   height: 56px;
   border-radius: 30px;
-  background-color: ${props => props.theme.primary};
+  background-color: ${light.primary};
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
@@ -248,7 +284,7 @@ export const ChatInput = styled.View`
   justify-content: space-between;
   align-items: center;
   border-radius: 30px;
-  background-color: ${props => props.theme.background};
+  background-color: ${light.background};
 `;
 export const ChatTextInput = styled.TextInput`
   flex: 1;
@@ -257,7 +293,7 @@ export const ChatTextInput = styled.TextInput`
   height: 100%;
   padding: 10px;
   margin-left: 10px;
-  color: ${props => props.theme.text};
+  color: ${light.text};
 `;
 export const ChatMessages = styled.View`
   flex-direction: column;
@@ -277,7 +313,7 @@ export const MessageRight = styled.View`
   padding: 10px;
   border-radius: 10px;
   margin-left: 10px;
-  background-color: ${props => props.theme.secondarySoft};
+  background-color: ${light.secondarySoft};
 `;
 export const MessageLeft = styled.View`
   max-width: 95%;
@@ -285,7 +321,7 @@ export const MessageLeft = styled.View`
   padding: 10px;
   border-radius: 10px;
   margin-right: 10px;
-  background-color: ${props => props.theme.primarySoft};
+  background-color: ${light.primarySoft};
 `;
 export const NameText = styled.Text`
   font-family: 'Nunito-ExtraBold';
@@ -299,13 +335,13 @@ export const MessageText = styled.Text`
   text-align: left;
   font-size: 17px;
   margin-top: 3px;
-  color: ${props => props.theme.text};
+  color: ${light.text};
 `;
 export const DateText = styled.Text`
   font-family: 'Nunito';
   text-align: right;
   font-size: 13px;
-  color: ${props => props.theme.textDark};
+  color: ${light.textDark};
 `;
 
 // Loading
@@ -328,7 +364,7 @@ export const ProfilePicture = styled.View`
   width: 110px;
   height: 110px;
   border-radius: 100px;
-  border: 4px solid ${props => props.theme.primary};
+  border: 4px solid ${light.primary};
   justify-content: center;
   align-items: center;
 `;
@@ -340,7 +376,7 @@ export const PictureEdit = styled.View`
   border-radius: 40px;
   justify-content: center;
   align-items: center;
-  background-color: ${props => props.theme.primary};
+  background-color: ${light.primary};
 `;
 export const Infor = styled.View`
   width: 100%;
@@ -355,7 +391,7 @@ export const Provider = styled.View`
   flex-direction: column;
   padding: 15px 0;
   border-top-width: 2px;
-  border-color: ${props => props.theme.border};
+  border-color: ${light.border};
 `;
 export const Footer = styled.View`
   width: 100%;
@@ -363,15 +399,13 @@ export const Footer = styled.View`
   padding-top: 20px;
   flex-direction: column;
   border-top-width: 2px;
-  border-color: ${props => props.theme.border};
+  border-color: ${light.border};
 `;
 export const FooterSmall = styled.View`
   width: 100%;
   height: 110px;
   padding-top: 20px;
   flex-direction: column;
-  border-top-width: 2px;
-  border-color: ${props => props.theme.border};
 `;
 
 // About
@@ -395,7 +429,7 @@ export const ProfileTeam = styled.View`
   width: 70px;
   height: 70px;
   border-radius: 100px;
-  border: 3px solid ${props => props.theme.primary};
+  border: 3px solid ${light.primary};
   justify-content: center;
   align-items: center;
 `;
@@ -411,7 +445,7 @@ export const ProfilePartners = styled.View`
   width: 70px;
   height: 70px;
   border-radius: 100px;
-  border: 3px solid ${props => props.theme.primary};
+  border: 3px solid ${light.primary};
   justify-content: center;
   align-items: center;
 `;
@@ -431,7 +465,7 @@ export const LogoName = styled.Text`
   text-align: center;
   font-size: 20px;
   margin-top: 30px;
-  color: ${props => props.theme.primary};
+  color: ${light.primary};
   opacity: 0.3;
 `;
 
@@ -441,19 +475,19 @@ export const TextError = styled.Text`
   text-align: center;
   font-size: 14px;
   margin-bottom: 10px;
-  color: ${props => props.theme.error};
+  color: ${light.error};
 `;
 export const TextValid = styled.Text`
   font-family: 'Nunito';
   text-align: center;
   font-size: 14px;
   margin-bottom: 10px;
-  color: ${props => props.theme.valid};
+  color: ${light.valid};
 `;
 export const TextAlert= styled.Text`
   font-family: 'Nunito';
   text-align: center;
   font-size: 14px;
   margin-bottom: 10px;
-  color: ${props => props.theme.alert};
+  color: ${light.alert};
 `;

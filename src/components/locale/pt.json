@@ -116,15 +116,15 @@
   },
   "providers": {
     "button_google": {
-      "text": "Continue with Google Account",
+      "text": "Continue with Google",
       "accessibility": "sign in with google account and get started to Cluey"
     },
     "button_facebook": {
-      "text": "Continue with Facebook Account",
+      "text": "Continue with Facebook",
       "accessibility": "sign in with facebook account and get started to Cluey"
     },
     "button_github": {
-      "text": "Continue with Github Account",
+      "text": "Continue with Github",
       "accessibility": "sign in with github account and get started to Cluey"
     },
     "or": "or"
@@ -149,6 +149,7 @@
     "title": "Sign Up",
     "description": "Create a new account to Cluey help you.",
     "button": {
+      "text": "Sign In",
       "accessibility": "sign up and get started to Cluey"
     },
     "text_input": {
