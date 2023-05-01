@@ -20,16 +20,6 @@ export const Content = styled.ScrollView`
   flex: 1;
   flex-direction: column;
 `;
-export const Header = styled.View`
-  flex: 1;
-  width: 100%;
-  max-height: 70px;
-  flex-direction: row;
-  justify-content: space-between;
-  padding-top: 15px;
-  border-bottom-width: 2px;
-  border-color: ${light.border};
-`;
 export const Heading = styled.View`
   width: 285px;
 `;
@@ -413,8 +403,6 @@ export const Footer = styled.View`
   height: 130px;
   padding-top: 20px;
   flex-direction: column;
-  border-top-width: 2px;
-  border-color: ${light.border};
 `;
 export const FooterSmall = styled.View`
   width: 100%;

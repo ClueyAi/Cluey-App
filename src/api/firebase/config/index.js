@@ -4,7 +4,7 @@ import 'firebase/compat/storage';
 import 'firebase/compat/firestore';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {initializeAuth, EmailAuthProvider} from 'firebase/auth';
+import {initializeAuth} from 'firebase/auth';
 import {getReactNativePersistence} from 'firebase/auth/react-native';
 //import Constants from 'expo-constants';
 
@@ -40,4 +40,7 @@ initializeAuth(fireApp, {
 export const auth = firebase.auth();
 export const firestore = firebase.firestore();
 export const storage = firebase.storage();
-export {EmailAuthProvider};
+export const emailProvider = new firebase.auth.EmailAuthProvider();
+export const googleProvider = new firebase.auth.GoogleAuthProvider();
+export const facebookProvider = new firebase.auth.FacebookAuthProvider();
+export const githubProvider = new firebase.auth.GithubAuthProvider();

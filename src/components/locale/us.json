@@ -221,8 +221,7 @@
     }
   },
   "settings": {
-    "title": "Settings",
-    "title_name": "My Account",
+    "title": "My Account",
     "button_logout": {
       "accessibility": "desconnect from Cluey and go back to authentication",
       "alert": {
@@ -243,23 +242,25 @@
     }
   },
   "email_config": {
-    "title": "Change email",
+    "title": "Change Email",
     "subtitle": "Change your Cluey account email",
     "description": "your account email",
     "email": "new email",
     "password": "password",
+    "success": "Email changed successfully!",
     "change_button": {
       "text": "Change Email",
       "accessibility": "change your email"
     }
   },
   "password_config": {
-    "title": "Change password",
+    "title": "Change Password",
     "subtitle": "Change your Cluey account password",
     "description": "your account password",
     "current_password": "current password",
     "password": "new password",
-    "re_password": "re-password",
+    "confirm_password": "confirm password",
+    "success": "Password changed successfully!",
     "change_button": {
       "text": "Change Password",
       "accessibility": "change your password"
@@ -281,6 +282,17 @@
     "title": "Alert",
     "yes": "Yes",
     "no": "No",
+    "ok": "Ok",
+    "cancel": "Cancel",
+    "close": "Close",
+    "password_change": {
+      "title": "Password changed successfully!",
+      "message": "Your password has been changed successfully. You will be redirected to the login screen."
+    },
+    "email_change": {
+      "title": "Email changed successfully!",
+      "message": "Your email has been changed successfully. You will be redirected to the login screen."
+    },
     "logout": {
       "title": "Are your sure?",
       "message": "Are you sure you want to log out of your account?"

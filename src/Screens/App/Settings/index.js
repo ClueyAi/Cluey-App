@@ -1,15 +1,15 @@
-import React, { useState, useContext, useEffect, useCallback } from 'react'
-import { Alert, TouchableWithoutFeedback, Keyboard } from 'react-native';
-import Ionicons from '@expo/vector-icons/Ionicons';
-import UserAvatar from 'react-native-user-avatar';
-import * as ImagePicker from 'expo-image-picker';
-import { useFocusEffect } from '@react-navigation/native';
+import React, { useState, useContext, useEffect, useCallback } from "react";
+import { Alert, TouchableWithoutFeedback, Keyboard } from "react-native";
+import Ionicons from "@expo/vector-icons/Ionicons";
+import UserAvatar from "react-native-user-avatar";
+import * as ImagePicker from "expo-image-picker";
+import { useFocusEffect } from "@react-navigation/native";
 import PropTypes from "prop-types";
 
-import { UserContext } from '../../../api/firebase';
+import { UserContext } from "../../../api/firebase";
 
-import { LocaleContext } from '../../../components/locale';
-import { 
+import { LocaleContext } from "../../../components/locale";
+import {
   Container,
   Body,
   Main,
@@ -17,7 +17,9 @@ import {
   ScrollView,
   Input,
   TextInput,
-  H1, H3, P,
+  H1,
+  H3,
+  P,
   ButtonEmpyte,
   WideButton,
   Profile,
@@ -26,16 +28,16 @@ import {
   PictureEdit,
   Infor,
   Footer,
-} from '../../../components/styles';
+} from "../../../components/styles";
 
 const Settings = ({ navigation }) => {
-  const {locale} = useContext(LocaleContext);
-  const {user, updateUserPhoto, updateUserName} = useContext(UserContext);
+  const { locale } = useContext(LocaleContext);
+  const { user, updateUserPhoto, updateUserName } = useContext(UserContext);
   // eslint-disable-next-line no-unused-vars
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
   const [editingName, setEditingName] = useState(false);
-  const [photo, setPhoto] = useState('');
-  const [userName, setUserName] = useState('');
+  const [photo, setPhoto] = useState("");
+  const [userName, setUserName] = useState("");
 
   const handleEditPhoto = async () => {
     Alert.alert(
@@ -44,15 +46,19 @@ const Settings = ({ navigation }) => {
       [
         {
           text: "cancel",
-          style: 'cancel',
+          style: "cancel",
         },
         {
           text: locale.alert.photo_change.camera,
-          onPress: () => { pickImage("camera")},
+          onPress: () => {
+            pickImage("camera");
+          },
         },
         {
           text: locale.alert.photo_change.library,
-          onPress: () => { pickImage("library")},
+          onPress: () => {
+            pickImage("library");
+          },
         },
       ],
       { cancelable: true }
@@ -62,14 +68,16 @@ const Settings = ({ navigation }) => {
   const pickImage = async (sourceType) => {
     let result;
     if (sourceType === "camera") {
-      const permissionResult = await ImagePicker.requestCameraPermissionsAsync();
+      const permissionResult =
+        await ImagePicker.requestCameraPermissionsAsync();
       if (permissionResult.granted === false) {
         alert(locale.settings.photo_button.camera_permission);
         return;
       }
       result = await ImagePicker.launchCameraAsync({});
     } else if (sourceType === "library") {
-      const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
+      const permissionResult =
+        await ImagePicker.requestMediaLibraryPermissionsAsync();
       if (permissionResult.granted === false) {
         alert(locale.settings.photo_button.library_permission);
         return;
@@ -86,39 +94,47 @@ const Settings = ({ navigation }) => {
       const uri = result.assets[0].uri;
       try {
         await updateUserPhoto(uri);
+        setPhoto(user?.photoURL ? user?.photoURL : result.assets[0].uri);
       } catch (error) {
         setError(error.code);
       }
     }
-    setPhoto(user?.photoURL ? user?.photoURL : result.assets[0].uri);
   };
 
   const handleEditNameOn = async () => {
-    setEditingName(true)
+    setEditingName(true);
   };
   const handleEditNameOf = async () => {
-    setEditingName(false)
-    Keyboard.dismiss()
+    setEditingName(false);
+    Keyboard.dismiss();
   };
   const nameValidation = async (text) => {
-    setUserName(text)
+    setUserName(text);
   };
   const handleEditName = async () => {
-    const displayName = userName
+    const displayName = userName;
     try {
-      await updateUserName(displayName)
+      await updateUserName(displayName);
     } catch (error) {
-      setError(error.code)
+      setError(error.code);
     }
-    setEditingName(false)
+    setEditingName(false);
   };
-  const handlePreferences = async () => {navigation.navigate('Preferences')};
-  const handleAbout = async () => {navigation.navigate('About')};
-    
+  const handlePreferences = async () => {
+    navigation.navigate("Preferences");
+  };
+  const handleAbout = async () => {
+    navigation.navigate("About");
+  };
+
   useEffect(() => {
-    const name = user?.email.split("@")[0]
-    setPhoto(user?.photoURL);
-    setUserName(user?.displayName? user?.displayName : name);
+    const unsubscribe = navigation.addListener("focus", () => {
+      const name = user?.email.split("@")[0];
+      setPhoto(user?.photoURL);
+      setUserName(user?.displayName ? user?.displayName : name);
+    });
+
+    return unsubscribe;
   }, [user]);
 
   useFocusEffect(
@@ -126,28 +142,38 @@ const Settings = ({ navigation }) => {
       setEditingName(false);
     }, [])
   );
-  
-  return(
+
+  return (
     <TouchableWithoutFeedback onPress={handleEditNameOf} accessible={false}>
       <Container>
         <Body>
           <Main>
             <Profile>
               <Picture>
-                <ButtonEmpyte onPress={handleEditPhoto} accessibilityLabel={locale.settings.photo_button.accessibility}>
+                <ButtonEmpyte
+                  onPress={handleEditPhoto}
+                  accessibilityLabel={
+                    locale.settings.photo_button.accessibility
+                  }
+                >
                   <ProfilePicture>
-                    <UserAvatar size={102} style={{width: 102, height: 102, borderRadius: 100}} name={userName} src={photo}/>
+                    <UserAvatar
+                      size={102}
+                      style={{ width: 102, height: 102, borderRadius: 100 }}
+                      name={userName}
+                      src={photo}
+                    />
                   </ProfilePicture>
                 </ButtonEmpyte>
                 <PictureEdit>
                   <Ionicons name="camera" size={14} color="#000" />
                 </PictureEdit>
               </Picture>
-              {editingName ?
+              {editingName ? (
                 <Infor>
-                  <Input style={{width: '50%', height: 30}}>
+                  <Input style={{ width: "50%", height: 30 }}>
                     <TextInput
-                      style={{height: 50}}
+                      style={{ height: 50 }}
                       value={userName}
                       selectionColor="#FFBF00"
                       autoComplete="name"
@@ -157,24 +183,40 @@ const Settings = ({ navigation }) => {
                       autoFocus
                       onChangeText={nameValidation}
                       onSubmitEditing={handleEditName}
-                      />
-                    <ButtonEmpyte style={{marginLeft: 5, marginRight: 10}} onPress={handleEditNameOf} accessibilityLabel={locale.settings.name_button.accessibility}>
+                    />
+                    <ButtonEmpyte
+                      style={{ marginLeft: 5, marginRight: 10 }}
+                      onPress={handleEditNameOf}
+                      accessibilityLabel={
+                        locale.settings.name_button.accessibility
+                      }
+                    >
                       <Ionicons name="close" size={19} color="#FF0000A0" />
-                    </ButtonEmpyte> 
+                    </ButtonEmpyte>
                   </Input>
                 </Infor>
-              :
+              ) : (
                 <Infor>
-                  <ButtonEmpyte style={{marginLeft: 30,flexDirection: 'row', alignItems: 'center'}} onPress={handleEditNameOn} accessibilityLabel={locale.settings.name_button.accessibility}>
-                    <H3 style={{marginRight: 10}}>{userName}</H3>
+                  <ButtonEmpyte
+                    style={{
+                      marginLeft: 30,
+                      flexDirection: "row",
+                      alignItems: "center",
+                    }}
+                    onPress={handleEditNameOn}
+                    accessibilityLabel={
+                      locale.settings.name_button.accessibility
+                    }
+                  >
+                    <H3 style={{ marginRight: 10 }}>{userName}</H3>
                     <Ionicons name="create-outline" size={19} color="#757575" />
-                  </ButtonEmpyte> 
+                  </ButtonEmpyte>
                 </Infor>
-              }    
+              )}
             </Profile>
-            <ScrollView style={{marginTop: 30}}>
+            <ScrollView style={{ marginTop: 30 }}>
               <WideButton onPress={handlePreferences}>
-                <View style={{alignItems: 'flex-start'}}>
+                <View style={{ alignItems: "flex-start" }}>
                   <H3>{locale.preferences_config.title}</H3>
                   <P>{locale.preferences_config.description}</P>
                 </View>
@@ -201,11 +243,11 @@ const Settings = ({ navigation }) => {
             */}
           </Main>
           <Footer>
-            <ButtonEmpyte 
-              style={{color: '#fff', marginTop: 15}}
+            <ButtonEmpyte
+              style={{ color: "#fff", marginTop: 15 }}
               onPress={handleAbout}
             >
-              <P>About</P>
+              <P>{locale.about.title}</P>
               <H1>{locale.global.app.name}</H1>
             </ButtonEmpyte>
           </Footer>

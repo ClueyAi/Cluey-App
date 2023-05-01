@@ -10,10 +10,9 @@ import { LogoutButton, LanguageSelector, SettingsButton, CloseModal } from '../.
 import Home from './Home';
 // Settings
 import Settings from './Settings';
+import Preferences from './Settings/Preferences';
 import ChangeEmail from './Settings/Components/changeEmail';
 import ChangePassword from './Settings/Components/changePassword';
-import Country from './Settings/Components/country';
-import Preferences from './Settings/Components/preferences';
 
 import About from '../Utils/About';
 import Rules from '../Utils/Rules';
@@ -57,7 +56,7 @@ const App = () => {
         name="Settings" 
         component={Settings}
         options={{
-          headerTitle: locale.settings.title_name,
+          headerTitle: locale.settings.title,
           headerRight: () => <LanguageSelector/>,
           headerRightContainerStyle: {
             marginTop: 5,
@@ -73,7 +72,7 @@ const App = () => {
         name="Preferences"
         component={Preferences}
         options={({navigation}) => ({
-          headerTitle: locale.preferences_config.title_name,
+          headerTitle: locale.preferences_config.title,
           headerRight: () => <LogoutButton navigation={navigation}/>,
           headerTintColor: '#FFBF00',
           headerTitleStyle: {
@@ -100,7 +99,6 @@ const App = () => {
       }}>
         <AppStack.Screen name="ChangeEmail" component={ChangeEmail}/>
         <AppStack.Screen name="ChangePassword" component={ChangePassword}/>
-        <AppStack.Screen name="Country" component={Country}/>
         <AppStack.Screen name="About" component={About}/>
         <AppStack.Screen name="Rules" component={Rules}/>
       </AppStack.Group>

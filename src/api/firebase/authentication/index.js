@@ -2,7 +2,7 @@ import React, { createContext, useState, useEffect } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import PropTypes from "prop-types";
 
-import { auth } from '../config';
+import { auth, googleProvider, facebookProvider, githubProvider } from '../config';
 
 export const AuthContext = createContext();
 
@@ -23,22 +23,19 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   const signGoogle = async () => {
-    const provider = new auth.GoogleAuthProvider();
-    return await auth.signInWithRedirect(provider).then(() => {
+    return await auth.signInWithPopup(googleProvider).then(() => {
       notNew();
     });
   };
 
   const signFacebook = async () => {
-    const provider = new auth.FacebookAuthProvider();
-    return await auth.signInWithRedirect(provider).then(() => {
+    return await auth.signInWithPopup(facebookProvider).then(() => {
       notNew();
     });
   };
 
   const signGithub = async () => {
-    const provider = new auth.GithubAuthProvider();
-    return await auth.signInWithRedirect(provider).then(() => {
+    return await auth.signInWithPopup(githubProvider).then(() => {
       notNew();
     });
   };
