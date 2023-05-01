@@ -35,8 +35,7 @@ import {
 
 const Current = ({ navigation }) => {
   const { locale } = useContext(LocaleContext);
-  const { signIn, signGoogle, signFacebook, signGithub } =
-    useContext(AuthContext);
+  const { signIn, signGoogle, signFacebook, signGithub } = useContext(AuthContext);
   const { theme } = useContext(ThemeContext);
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
@@ -105,7 +104,7 @@ const Current = ({ navigation }) => {
       await signGoogle();
       navigation.navigate("Loading");
     } catch (error) {
-      alert(error.code);
+      console.log(error);
     }
   };
   const handleFacebook = async () => {
@@ -113,7 +112,7 @@ const Current = ({ navigation }) => {
       await signFacebook();
       navigation.navigate("Loading");
     } catch (error) {
-      alert(error.code);
+      console.log(error.code);
     }
   };
   const handleGithub = async () => {
@@ -121,7 +120,7 @@ const Current = ({ navigation }) => {
       await signGithub();
       navigation.navigate("Loading");
     } catch (error) {
-      alert(error.code);
+      console.log(error.code);
     }
   };
 

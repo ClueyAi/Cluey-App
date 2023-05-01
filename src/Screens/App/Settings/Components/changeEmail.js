@@ -1,22 +1,26 @@
-import React, { useState, useContext, useEffect, useRef } from 'react'
-import { TouchableWithoutFeedback, Keyboard } from 'react-native';
-import Ionicons from '@expo/vector-icons/Ionicons';
-import UserAvatar from 'react-native-user-avatar';
+import React, { useState, useContext, useEffect, useRef } from "react";
+import { TouchableWithoutFeedback, Keyboard, StyleSheet, Alert } from "react-native";
+import Ionicons from "@expo/vector-icons/Ionicons";
+import UserAvatar from "react-native-user-avatar";
 import PropTypes from "prop-types";
 
-import { UserContext } from '../../../../api/firebase';
-
-import { LocaleContext } from '../../../../components/locale'
-import { 
+import { UserContext } from "../../../../api/firebase";
+import { ThemeContext } from "../../../../components/theme";
+import { LocaleContext } from "../../../../components/locale";
+import {
   Container,
   Heading,
   Body,
   Main,
-  Div,
+  Form,
   View,
   Input,
   TextInput,
-  H0, H1, H3, H3Bold, P,
+  H0,
+  H1,
+  H3,
+  H3Bold,
+  P,
   TxtButton,
   ButtonEmpyte,
   Profile,
@@ -27,151 +31,211 @@ import {
   TextError,
   ButtonPrimary,
   FooterSmall,
-} from '../../../../components/styles';
+} from "../../../../components/styles";
 
 const ChangeEmail = ({ navigation }) => {
-  const {locale} = useContext(LocaleContext);
-  const {user, updateUserEmail} = useContext(UserContext);
+  const { locale } = useContext(LocaleContext);
+  const { user, updateUserEmail } = useContext(UserContext);
+  const { theme } = useContext(ThemeContext);
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
-  const [photo, setPhoto] = useState('');
-  const [userName, setUserName] = useState('');
-  const [newEmail, setNewEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [photo, setPhoto] = useState("");
+  const [userName, setUserName] = useState("");
+  const [newEmail, setNewEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const [emailValid, setEmailValid] = useState(null);
   const [passwordValid, setPasswordValid] = useState(null);
 
-  const [error, setError] = useState('');
-  const [errorMsg, setErrorMsg] = useState('');
-  const [errorEmail, setErrorEmail] = useState('');
-
-  const errorColor = "#FFAAAA50"
-
-  const name = user?.email.split("@")[0]
-
+  const [error, setError] = useState("");
+  const [errorMsg, setErrorMsg] = useState("");
+  const [errorEmail, setErrorEmail] = useState("");
 
   const emailValidate = (text) => {
     // eslint-disable-next-line no-useless-escape
     const reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
     setEmailValid(reg.test(text));
-    setNewEmail(text)
+    setNewEmail(text);
   };
 
   const passwordValidate = (text) => {
     if (emailValid == true) {
-      setPasswordValid(true)
-      setPassword(text)
+      setPasswordValid(true);
+      setPassword(text);
     } else {
-      setPasswordValid(false)
+      setPasswordValid(false);
     }
+  };
+
+  const confirmation = () => {
+    return Alert.alert(
+      locale.alert.email_change.title,
+      locale.alert.email_change.message,
+      [
+        {
+          text: locale.alert.ok,
+          onPress: async () => {
+            try {
+              navigation.navigate('Loading');
+            } catch (error) {
+              Alert.alert(error.message)
+            }
+          },
+        },
+      ],
+      { cancelable: false }
+    );
   };
 
   const handleChange = async () => {
     try {
-      await updateUserEmail(password, newEmail)
-      navigation.navigate('Loading')
+      await updateUserEmail(password, newEmail);
+      confirmation();
     } catch (error) {
-      setError(error.code)
+      setError(error.code);
       if (error.code === "auth/missing-password") {
-        setErrorMsg(locale.error.auth_missing_password)
-        setPasswordValid(false)
+        setErrorMsg(locale.error.auth_missing_password);
+        setPasswordValid(false);
       } else if (error.code === "auth/wrong-password") {
-        setErrorMsg(locale.error.auth_wrong_password)
-        setPasswordValid(false)
+        setErrorMsg(locale.error.auth_wrong_password);
+        setPasswordValid(false);
       } else if (error.code === "auth/user-not-found") {
-        setErrorEmail(error.code)
-        setErrorMsg(locale.error.auth_user_not_found)
-        setEmailValid(false)
-      }  else if (error.code === "auth/missing-email") {
-        setErrorMsg(locale.error.auth_missing_email)
-        setPasswordValid(false)
+        setErrorEmail(error.code);
+        setErrorMsg(locale.error.auth_user_not_found);
+        setEmailValid(false);
+      } else if (error.code === "auth/missing-email") {
+        setErrorMsg(locale.error.auth_missing_email);
+        setPasswordValid(false);
       } else if (error.code === "auth/invalid-email") {
-        setErrorEmail(error.code)
-        setErrorMsg(locale.error.auth_invalid_email)
-        setEmailValid(false)
+        setErrorEmail(error.code);
+        setErrorMsg(locale.error.auth_invalid_email);
+        setEmailValid(false);
       } else {
-        setErrorEmail(error.code)
-        setErrorMsg(locale.error.auth_connect_user)
-        setEmailValid(emailValid == true? true: false)
-        setPasswordValid(passwordValid == true? true: false)
+        setErrorEmail(error.code);
+        setErrorMsg(locale.error.auth_connect_user);
+        setEmailValid(emailValid == true ? true : false);
+        setPasswordValid(passwordValid == true ? true : false);
       }
     }
   };
 
   const handleForgot = () => {
-    navigation.navigate("AuthStackNavigator", {screen: 'Forgot'})
+    navigation.navigate("AuthStackNavigator", { screen: "Forgot" });
   };
 
   useEffect(() => {
-    setPhoto(user?.photoURL)
-    setUserName(user?.displayName? user?.displayName : name)
-  }, [user, setUserName, setPhoto])
-  
-  return(
+    const unsubscribe = navigation.addListener("focus", () => {
+      const name = user?.email.split("@")[0];
+      setPhoto(user?.photoURL);
+      setUserName(user?.displayName ? user?.displayName : name);
+    });
+
+    return unsubscribe;
+  }, [user]);
+
+  return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
       <Container behavior="height">
-        <Heading style={{marginTop: 40, marginBottom: 10}}>
-          <H0 style={{marginBottom: 5}}>{locale.email_config.title}</H0>
+        <Heading style={{ marginTop: 40, marginBottom: 10 }}>
+          <H0 style={{ marginBottom: 5 }}>{locale.email_config.title}</H0>
           <P>{locale.email_config.subtitle}</P>
         </Heading>
         <Body>
           <Main>
-            <Profile style={{flexDirection: 'row', justifyContent: "flex-start", marginLeft: "6%"}}>
+            <Profile
+              style={{
+                flexDirection: "row",
+                justifyContent: "flex-start",
+                marginLeft: "6%",
+              }}
+            >
               <Picture>
-                <ProfilePicture style={{width: 80, height: 80}}>
-                  <UserAvatar size={72} style={{width: 72, height: 72, borderRadius: 100}} name={userName} src={photo}/>
+                <ProfilePicture style={{ width: 80, height: 80 }}>
+                  <UserAvatar
+                    size={72}
+                    style={{ width: 72, height: 72, borderRadius: 100 }}
+                    name={userName}
+                    src={photo}
+                  />
                 </ProfilePicture>
               </Picture>
-              <Infor style={{width: "auto", flexDirection: 'column', alignItems: 'flex-start', marginLeft: 15, marginBottom: 15}}>
+              <Infor
+                style={{
+                  width: "auto",
+                  flexDirection: "column",
+                  alignItems: "flex-start",
+                  marginLeft: 15,
+                  marginBottom: 15,
+                }}
+              >
                 <H3Bold>{userName}</H3Bold>
                 <H3>{user?.email}</H3>
-              </Infor>  
+              </Infor>
             </Profile>
-            <Div style={{marginTop: 40, justifyContent: 'flex-start', alignItems: 'center'}}>
-              <Input style={{width: "90%", marginBottom: 10, backgroundColor: `${error === errorEmail && emailValid == false ? errorColor : '#E0E0E0'}`}}>
+            <Form style={{flex: 1, marginTop: 40, alignSelf: 'center'}}>
+              <Input
+                style={{
+                  ...styles.shadow,
+                  borderWidth: 0.1,
+                  marginBottom: 15,
+                  backgroundColor: `${
+                    error === errorEmail && emailValid == false
+                      ? theme.inputError
+                      : theme.backgroundSecondary
+                  }`,
+                }}
+              >
                 <TextInput
                   ref={emailRef}
                   value={newEmail}
                   placeholder={locale.email_config.email}
-                  placeholderTextColor="#A4A4A4"
-                  selectionColor="#FFBF00"
+                  placeholderTextColor={theme.placeholder}
+                  selectionColor={theme.primary}
                   autoCapitalize="none"
                   autoComplete="email"
                   returnKeyType="next"
                   onChangeText={emailValidate}
                   onSubmitEditing={() => passwordRef.current.focus()}
                 />
-                {emailValid == false && newEmail !== '' ?
-                  <Ionicons 
-                    style={{padding: 10, marginRight: 10}}
-                    name="alert-circle-outline" 
-                    size={20} 
-                    color="#FF0000" 
+                {emailValid == false && newEmail !== "" ? (
+                  <Ionicons
+                    style={{ padding: 10, marginRight: 10 }}
+                    name="alert-circle-outline"
+                    size={20}
+                    color={theme.error}
                   />
-                :
-                  <Ionicons 
-                    style={{padding: 10, marginRight: 10}}
-                    name="alert-circle-outline" 
-                    size={20} 
-                    color="#00000000" 
-                  /> 
-                }
-                {emailValid == true && newEmail !== '' ?
-                  <Ionicons 
-                    style={{padding: 10, marginRight: 10}}
-                    name="checkmark-circle-outline" 
-                    size={20} 
-                    color="#00DF00" 
+                ) : (
+                  <Ionicons
+                    style={{ padding: 10, marginRight: 10 }}
+                    name="alert-circle-outline"
+                    size={20}
+                    color={theme.transparent}
                   />
-                : null }
-              </Input> 
-              <Input style={{width: "90%", marginBottom: 10, backgroundColor: `${passwordValid == false ? errorColor : '#E0E0E0'}`}}>
+                )}
+                {emailValid == true && newEmail !== "" ? (
+                  <Ionicons
+                    style={{ padding: 10, marginRight: 10 }}
+                    name="checkmark-circle-outline"
+                    size={20}
+                    color={theme.secondary}
+                  />
+                ) : null}
+              </Input>
+              <Input
+                style={{
+                  ...styles.shadow,
+                  borderWidth: 0.1,
+                  marginBottom: 10,
+                  backgroundColor: `${
+                    passwordValid == false ? theme.inputError : theme.backgroundSecondary
+                  }`,
+                }}
+              >
                 <TextInput
                   ref={passwordRef}
                   placeholder={locale.email_config.password}
-                  placeholderTextColor="#A4A4A4"
-                  selectionColor="#FFBF00"
+                  placeholderTextColor={theme.placeholder}
+                  selectionColor={theme.primary}
                   autoCapitalize="none"
                   autoComplete="current-password"
                   secureTextEntry={true}
@@ -180,17 +244,25 @@ const ChangeEmail = ({ navigation }) => {
                   onSubmitEditing={handleChange}
                 />
               </Input>
-              <ButtonEmpyte onPress={() => {handleForgot}} accessibilityLabel={locale.forgot.button.accessibility}>
+              <ButtonEmpyte onPress={handleForgot}>
                 <TxtLink>{locale.forgot.title}</TxtLink>
               </ButtonEmpyte>
-              {error ? <TextError>{errorMsg}</TextError> : <TextError> </TextError> }
-              <ButtonPrimary onPress={handleChange} accessibilityLabel={locale.email_config.change_button.accessibility}>
-                <TxtButton>{locale.email_config.change_button.text}</TxtButton> 
+              {error ? (
+                <TextError>{errorMsg}</TextError>
+              ) : (
+                <TextError> </TextError>
+              )}
+              <ButtonPrimary
+                style={styles.shadow}
+                onPress={handleChange}
+                accessibilityLabel={locale.email_config.change_button.accessible}
+              >
+                <TxtButton>{locale.email_config.change_button.text}</TxtButton>
               </ButtonPrimary>
-            </Div>
+            </Form>
           </Main>
           <FooterSmall>
-            <View style={{marginTop: 10}}>
+            <View style={{ marginTop: 10 }}>
               <H1>{locale.global.app.name}</H1>
             </View>
           </FooterSmall>
@@ -199,6 +271,16 @@ const ChangeEmail = ({ navigation }) => {
     </TouchableWithoutFeedback>
   );
 };
+
+const styles = StyleSheet.create({
+  shadow: {
+    shadowColor: "#000000",
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.17,
+    shadowRadius: 3.05,
+    elevation: 4,
+  },
+});
 
 ChangeEmail.propTypes = {
   navigation: PropTypes.object.isRequired,

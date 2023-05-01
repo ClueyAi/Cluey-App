@@ -221,8 +221,7 @@
     }
   },
   "settings": {
-    "title": "Settings",
-    "title_name": "My Account",
+    "title": "Minha Conta",
     "button_logout": {
       "accessibility": "desconnect from Cluey and go back to authentication",
       "alert": {
@@ -270,12 +269,11 @@
     "description": "Choose your location"
   },
   "preferences_config": {
-    "title": "Preferences",
-    "title_name": "Preferences",
-    "description": "Setting your preferences"
+    "title": "Preferencias",
+    "description": "Configure suas preferencias"
   },
   "about": {
-    "title": "About"
+    "title": "Sobre"
   },
   "alert": {
     "title": "Alert",
@@ -293,10 +291,10 @@
     }
   },
   "loading": {
-    "loading": "Loading...",
-    "welcome": "Welcome!",
-    "welcome_back": "Welcome back!",
-    "welcome_user": "Welcome back, "
+    "loading": "A Carregar...",
+    "welcome": "Bem-Vindo!",
+    "welcome_back": "Bem-Vindo de volta!",
+    "welcome_user": "Bem-Vindo de volta, "
   },
   "error": {
     "auth_connect_error": "Error to connect your account",

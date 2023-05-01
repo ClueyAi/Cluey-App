@@ -1,7 +1,7 @@
 import React, { createContext, useState, useEffect, useContext } from 'react';
 import PropTypes from "prop-types";
 
-import { auth, storage, EmailAuthProvider } from '../config';
+import { auth, storage, emailProvider } from '../config';
 import { LocaleContext } from '../../../components/locale';
 
 export const UserContext = createContext();
@@ -20,18 +20,6 @@ export const UserProvider = ({ children }) => {
 
     return () =>  unsubscribe
   }, []);
-
-  const updateUser = async (email, phoneNumber, emailVerified, password, displayName, photoURL, disabled) => {
-    return await auth.currentUser.updateProfile({
-      email: email,
-      phoneNumber: phoneNumber,
-      emailVerified: emailVerified,
-      password: password,
-      displayName: displayName,
-      photoURL: photoURL,
-      disabled: disabled,
-    });
-  };
 
   const updateUserPhoto = async (uri) => {
     const response = await fetch(uri);
@@ -54,7 +42,7 @@ export const UserProvider = ({ children }) => {
   };
 
   const updateUserEmail = async (password, newEmail) => {
-    const credential = EmailAuthProvider.credential(
+    const credential = emailProvider.credential(
       user.email,
       password
     );
@@ -62,14 +50,23 @@ export const UserProvider = ({ children }) => {
     await auth.currentUser.updateEmail(newEmail);
     await auth.currentUser.sendEmailVerification();
   };
+
+  const updateUserPassword = async (currentPassword, newPassword) => {
+    const credential = emailProvider.credential(
+      user.email,
+      currentPassword
+    );
+    await user.reauthenticateWithCredential(credential);
+    await user.updatePassword(newPassword);
+  };
   
   const value = {
     user,
     isAuth,
-    updateUser,
     updateUserPhoto,
     updateUserName,
-    updateUserEmail
+    updateUserEmail,
+    updateUserPassword
   };
 
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
