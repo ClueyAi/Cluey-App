@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "336677386791",
+    "project_id": "cluey-33308",
+    "storage_bucket": "cluey-33308.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:336677386791:android:eeaefb8cae91610e8fec02",
+        "android_client_info": {
+          "package_name": "com.cluey.clueyapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "336677386791-caj1cov3n1vb5la53jnc0mvaqu4j2ft8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCA_rZ0INFpbXbZ-6xQV_k0v8_Fr5AiFkE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "336677386791-caj1cov3n1vb5la53jnc0mvaqu4j2ft8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -3,6 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createSwitchNavigator } from '@react-navigation/compat';
 
 import Loading from './Utils/Loading';
+import Test from './Others/Test';
 import AuthStackNavigator from './Auth';
 import AppStackNavigator from './App';
 import OthersStackNavigator from './Others';

@@ -4,9 +4,10 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import PropTypes from "prop-types";
 
-import { AuthContext } from "../../../api/firebase";
-import { ThemeContext } from "../../../components/theme";
 import { LocaleContext } from "../../../components/locale";
+import { AuthContext } from "../../../api/firebase";
+import { ProvidersContext } from "../../../api/providers";
+import { ThemeContext } from "../../../components/theme";
 import {
   Avoiding,
   Container,
@@ -35,7 +36,8 @@ import {
 
 const Current = ({ navigation }) => {
   const { locale } = useContext(LocaleContext);
-  const { signIn, signGoogle, signFacebook, signGithub } = useContext(AuthContext);
+  const { signIn } = useContext(AuthContext);
+  const { signInWithGoogle } = useContext(ProvidersContext);
   const { theme } = useContext(ThemeContext);
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
@@ -101,27 +103,16 @@ const Current = ({ navigation }) => {
 
   const handleGoogle = async () => {
     try {
-      await signGoogle();
-      navigation.navigate("Loading");
+      await signInWithGoogle();
     } catch (error) {
       console.log(error);
     }
   };
   const handleFacebook = async () => {
-    try {
-      await signFacebook();
-      navigation.navigate("Loading");
-    } catch (error) {
-      console.log(error.code);
-    }
+    alert("Facebook");
   };
   const handleGithub = async () => {
-    try {
-      await signGithub();
-      navigation.navigate("Loading");
-    } catch (error) {
-      console.log(error.code);
-    }
+    alert("Github");
   };
 
   const handleForgot = () => {
@@ -233,6 +224,7 @@ const Current = ({ navigation }) => {
                   selectionColor={theme.primary}
                   autoCapitalize="none"
                   autoComplete="email"
+                  autoCompleteType="email"
                   returnKeyType="next"
                   onChangeText={emailValidate}
                   onSubmitEditing={() => passwordRef.current.focus()}
@@ -278,6 +270,7 @@ const Current = ({ navigation }) => {
                   selectionColor={theme.primary}
                   autoCapitalize="none"
                   autoComplete="current-password"
+                  autoCompleteType="password"
                   secureTextEntry={true}
                   returnKeyType="done"
                   onChangeText={passwordValidate}

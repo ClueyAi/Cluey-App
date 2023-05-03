@@ -284,7 +284,6 @@ export const ChatBox = styled.View`
 `;
 export const ChatInput = styled.View`
   width: 100%;
-  height: 56px;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
