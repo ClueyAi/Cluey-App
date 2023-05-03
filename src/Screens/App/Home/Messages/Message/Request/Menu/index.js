@@ -11,11 +11,11 @@ import PropTypes from "prop-types";
 
 import { Ionicons, Entypo } from '@expo/vector-icons';
 
-const Options = ({ children , data }) => {
+const RequestMenu = ({ children , data }) => {
   const menuRef = useRef(null);
 
   const openMenu = () => {
-   // menuRef.current.open();
+    //menuRef.current.open();
   };
 
   return (
@@ -73,8 +73,8 @@ const Pin = ({ data }) => (
  const styles = StyleSheet.create({
   menu: {
     position: 'absolute',
+    alignSelf: 'center',
     bottom: 0,
-    left: 0,
   },
   option: {
     padding: 10,
@@ -87,28 +87,20 @@ const Pin = ({ data }) => (
     elevation: 4
   },
   pin: {
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
+    
   },
   copy: {
-    position: 'absolute',
-    bottom: 20,
-    left: 60,
+    
   },
   share: {
-    position: 'absolute',
-    bottom: -5,
-    right: 28,
+    
   },
   delete: {
-    position: 'absolute',
-    top: 5,
-    right: -10,
+    
   }
 });
 
-Options.propTypes = {
+RequestMenu.propTypes = {
   children: PropTypes.node.isRequired,
   data: PropTypes.object.isRequired
 };
@@ -129,4 +121,4 @@ Delete.propTypes = {
   data: PropTypes.object.isRequired
 };
 
-export default Options;
+export default RequestMenu;

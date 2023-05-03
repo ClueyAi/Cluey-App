@@ -2,10 +2,11 @@ import React from 'react';
 import { useFonts } from 'expo-font';
 import { MenuProvider } from 'react-native-popup-menu';
 
-import {ThemeProvider} from './src/components/theme';
-import {Firebase} from './src/api/firebase';
-import {BotProvider} from './src/api/chatbot';
 import {LocaleProvider} from './src/components/locale';
+import {Firebase} from './src/api/firebase';
+import {ProvidersProvider} from './src/api/providers';
+import {ThemeProvider} from './src/components/theme';
+import {BotProvider} from './src/api/chatbot';
 import Screens from './src/Screens';
 
 const Cluey = () => {
@@ -24,13 +25,15 @@ const Cluey = () => {
   return (
     <LocaleProvider>
       <Firebase>
-        <BotProvider>
-          <ThemeProvider>
-            <MenuProvider>
-              <Screens />
-            </MenuProvider>
-          </ThemeProvider>
-        </BotProvider>
+        <ProvidersProvider>
+          <BotProvider>
+            <ThemeProvider>
+              <MenuProvider>
+                <Screens />
+              </MenuProvider>
+            </ThemeProvider>
+          </BotProvider>
+        </ProvidersProvider>
       </Firebase>
     </LocaleProvider>
   );

@@ -44,6 +44,9 @@ const Chat = () => {
     }
   };
 
+  const handleSpeech = async () => {
+    alert("Fale!");
+  };
   useEffect(() => {
     if (user) {
       const email = user?.email.split("@")[0];
@@ -59,17 +62,22 @@ const Chat = () => {
             style={{fontSize: 15}}
             placeholder={locale.home.chat_box.placeholder1+name+locale.home.chat_box.placeholder2}
             value={textValue}
+            multiline={true}
+            minHeight={50}
             placeholderTextColor="#FFBF0090"
             selectionColor="#FFBF00"
-            returnKeyType="send"
-            enterKeyHint="send"
             blurOnSubmit={false}
-            onSubmitEditing={handleSend}
             onChangeText={requestValidation}
           />
-          <Button style={{paddingRight: 15}} onPress={handleSend} accessibilityLabel={locale.home.send_button.accessibility}>
-            <Ionicons name="send" size={24} color="#FFBF00" />
-          </Button>
+          {textValue === "" ?
+            <Button style={{paddingRight: 15}} onPress={handleSpeech} accessibilityLabel={locale.home.send_button.accessibility}>
+              <Ionicons name="mic" size={28} color="#FFBF00" />
+            </Button>
+          :
+            <Button style={{paddingRight: 15}} onPress={handleSend} accessibilityLabel={locale.home.send_button.accessibility}>
+              <Ionicons name="send" size={24} color="#FFBF00" />
+            </Button>
+          }
         </ChatInput>
       </ChatBox>
     </Avoiding>

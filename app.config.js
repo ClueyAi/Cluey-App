@@ -4,6 +4,7 @@ export default {
   expo: {
     name: "Cluey",
     slug: "cluey",
+    scheme: "cluey",
     version: "0.0.1",
     main: "index.js",
     orientation: "portrait",
@@ -19,16 +20,17 @@ export default {
     ],
     ios: {
       supportsTablet: true,
-      bundleIdentifier: "com.gustavofalcao1.cluey",
-      buildNumber: "0.0.1"
+      bundleIdentifier: "com.cluey.clueyapp",
+      buildNumber: "0.0.1",
     },
     android: {
       adaptiveIcon: {
         foregroundImage: "./assets/images/adaptive-icon.png",
         backgroundColor: "#FFBF00"
       },
-      package: "com.gustavofalcao1.cluey",
-      versionCode: 1
+      package: "com.cluey.clueyapp",
+      versionCode: 1,
+      googleServicesFile: "./google-services.json",
     },
     web: {
       favicon: "./assets/images/favicon.png"
@@ -40,11 +42,11 @@ export default {
           "photosPermission": "Allow Cluey to access your photos",
           "cameraPermission": "Allow Cluey to access your camera"
         }
-      ]
+      ],
     ],
     extra: {
       eas: {
-        projectId: "b6e3ae4c-c16e-493e-a186-1b1a40a5ebb5"
+        projectId: process.env.PROJECT_ID,
       },
       firebase: {
         apiKey: process.env.API_KEY,
@@ -54,6 +56,11 @@ export default {
         messagingSenderId: process.env.MESSAGING_SENDER_ID,
         appId: process.env.APP_ID,
         measurementId: process.env.MEASUREMENT_ID
+      },
+      google: {
+        webClientId: process.env.WEB_CLIENT_ID,
+        webClientSecret: process.env.WEB_CLIENT_SECRET,
+        redirectUri: process.env.REDIRECT_URI,
       },
       gpt: {
         apiKey: process.env.GPT_API_KEY

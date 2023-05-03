@@ -19,7 +19,7 @@ export const UserProvider = ({ children }) => {
     });
 
     return () =>  unsubscribe
-  }, []);
+  }, [auth, locale]);
 
   const updateUserPhoto = async (uri) => {
     const response = await fetch(uri);
