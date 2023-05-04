@@ -4,7 +4,7 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 
 import { BotContext } from '../../../../api/chatbot';
 import { UserContext, FirestoreContext } from '../../../../api/firebase';
-
+import { ThemeContext } from '../../../../components/theme';
 import { LocaleContext } from '../../../../components/locale';
 import { 
   Avoiding,
@@ -16,6 +16,7 @@ import {
 
 const Chat = () => {
   const {locale} = useContext(LocaleContext);
+  const {theme} = useContext(ThemeContext);
   const {createAiMessage} = useContext(FirestoreContext);
   const {processeMessage} = useContext(BotContext);
   const {user} = useContext(UserContext);
@@ -64,18 +65,18 @@ const Chat = () => {
             value={textValue}
             multiline={true}
             minHeight={50}
-            placeholderTextColor="#FFBF0090"
-            selectionColor="#FFBF00"
+            placeholderTextColor={theme.primary}
+            selectionColor={theme.primary}
             blurOnSubmit={false}
             onChangeText={requestValidation}
           />
           {textValue === "" ?
             <Button style={{paddingRight: 15}} onPress={handleSpeech} accessibilityLabel={locale.home.send_button.accessibility}>
-              <Ionicons name="mic" size={28} color="#FFBF00" />
+              <Ionicons name="mic" size={28} color={theme.primary} />
             </Button>
           :
             <Button style={{paddingRight: 15}} onPress={handleSend} accessibilityLabel={locale.home.send_button.accessibility}>
-              <Ionicons name="send" size={24} color="#FFBF00" />
+              <Ionicons name="send" size={24} color={theme.primary} />
             </Button>
           }
         </ChatInput>

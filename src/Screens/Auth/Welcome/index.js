@@ -4,6 +4,7 @@ import Lottie from "lottie-react-native";
 import PropTypes from "prop-types";
 
 import { LocaleContext } from '../../../components/locale'
+import { ThemeContext } from '../../../components/theme'
 import { 
   Container,
   Heading,
@@ -16,6 +17,7 @@ import {
 
 const Welcome = ({ navigation }) => {
   const {locale} = useContext(LocaleContext);
+  const {theme} = useContext(ThemeContext);
   const handleStart = () => {navigation.navigate('New')}
   const handlePolicy = () => {navigation.navigate('Rules')}
   
@@ -34,13 +36,13 @@ const Welcome = ({ navigation }) => {
       */}
       <View style={{top: "60%"}}>
         <ButtonMulti onPress={handleStart} accessibilityLabel={locale.welcome.button.accessibility}>
-          <Ionicons name="arrow-forward-outline" size={22} color="#FFFFFF00" />
+          <Ionicons name="arrow-forward-outline" size={22} color={theme.transparant} />
           <TxtButton>{locale.welcome.button.text}</TxtButton>
-          <Ionicons name="arrow-forward-outline" size={22} color="#FFFFFF" />
+          <Ionicons name="arrow-forward-outline" size={22} color={theme.background} />
         </ButtonMulti>
         <View style={{marginTop: 15, alignItems: 'center'}}>
           <PMini>{locale.welcome.footer}</PMini>
-          <ButtonEmpyte style={{color: '#fff'}} onPress={handlePolicy} ccessibilityLabel={locale.global.app.policy_terms.accessibility}>
+          <ButtonEmpyte style={{color: theme.background}} onPress={handlePolicy} ccessibilityLabel={locale.global.app.policy_terms.accessibility}>
             <Link>{locale.global.app.policy_terms.title}</Link>
           </ButtonEmpyte>
         </View>

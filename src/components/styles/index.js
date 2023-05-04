@@ -153,7 +153,7 @@ export const PMini = styled.Text`
   font-size: 13px;
   color: ${light.textGray};
 `;
-export const Tittle = styled.Text`
+export const Title = styled.Text`
   font-family: 'Nunito-SemiBold';
   text-align: left;
   font-size: 16px;
@@ -195,13 +195,6 @@ export const Link = styled.Text`
   font-family: 'Nunito-Bold';
   font-size: 14px;
   color: ${light.link};
-`;
-export const StatusOnline = styled.Text`
-  font-family: 'Nunito';
-  text-align: left;
-  margin-left: 5px;
-  font-size: 13px;
-  color: ${light.secondary};
 `;
 
 // Images
@@ -273,6 +266,18 @@ export const AbsoluteButton = styled.TouchableOpacity`
 export const ButtonEmpyte = styled.TouchableOpacity``;
 
 // Home
+export const ChatTitle = styled.Text`
+  font-family: 'Nunito-Bold';
+  text-align: center;
+  font-size: 20px;
+  color: ${light.primary};
+`;
+export const Status = styled.Text`
+  font-family: 'Nunito-Bold';
+  text-align: center;
+  font-size: 13px;
+  color: ${light.secondary};
+`;
 export const ChatBox = styled.View`
   width: 100%;
   flex-direction: row;
@@ -313,6 +318,7 @@ export const ResponseMessages = styled.View`
 `;
 export const MessageRight = styled.View`
   max-width: 95%;
+  min-width: 100px;
   align-self: flex-end;
   padding: 10px;
   border-radius: 10px;
@@ -321,6 +327,7 @@ export const MessageRight = styled.View`
 `;
 export const MessageLeft = styled.View`
   max-width: 95%;
+  min-width: 100px;
   align-self: flex-start;
   padding: 10px;
   border-radius: 10px;
