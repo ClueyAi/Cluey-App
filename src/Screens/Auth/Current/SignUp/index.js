@@ -182,6 +182,7 @@ const SignUp = ({ navigation }) => {
               <H0 style={{ marginBottom: 10 }}>{locale.global.app.name}</H0>
               <P>{locale.signup.description}</P>
             </Heading>
+            {/*
             <Providers>
               <ButtonProvider
                 style={styles.shadow}
@@ -241,13 +242,14 @@ const SignUp = ({ navigation }) => {
                 flexDirection: "row",
                 justifiContents: "center",
                 alignItems: "center",
-                marginTop: 10,
+                marginTop: 20,
               }}
             >
               <Divider />
               <H2Mini>{locale.providers.or}</H2Mini>
               <Divider />
             </View>
+            */}
             <Form style={{ marginTop: 10 }}>
               <Input
                 style={{

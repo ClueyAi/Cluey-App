@@ -23,12 +23,15 @@ export const OpenAIProvider = ({ children }) => {
           model: "text-davinci-003",
           prompt: message.text,
           max_tokens: 120,
+          temperature: 0.7,
+          frequency_penalty: 0.5,
+          presence_penalty: 0.5
         })
       };
 
       const response = await fetch('https://api.openai.com/v1/completions', requestOptions);
       const data = await response.json();
-      responseMessage = data.choices[0].text;
+      responseMessage = await data.choices[0].text.trim();
       const openAIMessage = {
         userId: 'openAI',
         requestId: message.userId,
