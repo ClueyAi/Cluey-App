@@ -300,8 +300,8 @@ export const ChatTextInput = styled.TextInput`
   font-family: 'Nunito-Bold';
   width: 100%;
   height: 100%;
-  padding: 10px;
-  margin-left: 10px;
+  padding: 20px;
+
   color: ${light.text};
 `;
 export const ChatMessages = styled.View`

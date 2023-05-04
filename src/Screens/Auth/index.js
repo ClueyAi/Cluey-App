@@ -5,11 +5,11 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 
 import { LanguageSelector, LogoutButton, AboutButton, CloseModal } from '../../components/tools';
 
-import Welcome from './Welcome';
 import New from './New';
+import Welcome from './New/Welcome';
+import SignIn from './New/SignIn';
 import Current from './Current';
-import SignIn from './SignIn';
-import SignUp from './SignUp';
+import SignUp from './Current/SignUp';
 import Forgot from './Forgot';
 import Verify from './Verify';
 import Custom from './Custom';

@@ -2,6 +2,7 @@ import React, { useState, useContext, useEffect } from 'react';
 import { Platform, StyleSheet } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
 
+import { OpenAIContext } from '../../../../api/openai/chat';
 import { BotContext } from '../../../../api/chatbot';
 import { UserContext, FirestoreContext } from '../../../../api/firebase';
 import { ThemeContext } from '../../../../components/theme';
@@ -17,8 +18,8 @@ import {
 const Chat = () => {
   const {locale} = useContext(LocaleContext);
   const {theme} = useContext(ThemeContext);
-  const {createAiMessage} = useContext(FirestoreContext);
-  const {processeMessage} = useContext(BotContext);
+  const {createUserMessage} = useContext(FirestoreContext);
+  const {sendMessageToOpenAI} = useContext(OpenAIContext);
   const {user} = useContext(UserContext);
   const [name, setName] = useState('');
   const [textValue, setTextValue] = useState(null);
@@ -37,8 +38,8 @@ const Chat = () => {
     setTextValue('');
     if (message.text !== "" && message.userId !== null) {
       try {
-        await createAiMessage(message)
-        processeMessage(message)
+        await createUserMessage(message)
+        await sendMessageToOpenAI(message)
       } catch (error) {
         setTextValue(error.code);
       }
@@ -70,7 +71,7 @@ const Chat = () => {
             blurOnSubmit={false}
             onChangeText={requestValidation}
           />
-          {textValue === "" ?
+          {textValue === "" || textValue == null ?
             <Button style={{paddingRight: 15}} onPress={handleSpeech} accessibilityLabel={locale.home.send_button.accessibility}>
               <Ionicons name="mic" size={28} color={theme.primary} />
             </Button>

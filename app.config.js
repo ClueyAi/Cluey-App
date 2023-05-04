@@ -62,8 +62,8 @@ export default {
         webClientSecret: process.env.WEB_CLIENT_SECRET,
         redirectUri: process.env.REDIRECT_URI,
       },
-      gpt: {
-        apiKey: process.env.GPT_API_KEY
+      openai: {
+        apiKey: process.env.OPENAI_API_KEY
       }
     }
   }

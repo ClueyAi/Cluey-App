@@ -4,9 +4,9 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import PropTypes from "prop-types";
 
-import { AuthContext } from "../../../api/firebase";
-import { ThemeContext } from "../../../components/theme";
-import { LocaleContext } from "../../../components/locale";
+import { AuthContext } from "../../../../api/firebase";
+import { ThemeContext } from "../../../../components/theme";
+import { LocaleContext } from "../../../../components/locale";
 import {
   Avoiding,
   Container,
@@ -31,7 +31,7 @@ import {
   TxtProvider,
   TxtButton,
   TextError,
-} from "../../../components/styles";
+} from "../../../../components/styles";
 
 const SignIn = ({ navigation }) => {
   const { locale } = useContext(LocaleContext);
@@ -231,6 +231,7 @@ const SignIn = ({ navigation }) => {
                   selectionColor={theme.primary}
                   autoCapitalize="none"
                   autoComplete="email"
+                  autoCompleteType="email"
                   returnKeyType="next"
                   onChangeText={emailValidate}
                   onSubmitEditing={() => passwordRef.current.focus()}
@@ -276,6 +277,7 @@ const SignIn = ({ navigation }) => {
                   selectionColor={theme.primary}
                   autoCapitalize="none"
                   autoComplete="current-password"
+                  autoCompleteType="password"
                   secureTextEntry={true}
                   returnKeyType="done"
                   onChangeText={passwordValidate}

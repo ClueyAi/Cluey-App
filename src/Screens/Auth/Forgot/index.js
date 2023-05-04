@@ -107,6 +107,7 @@ const Forgot = ({ navigation }) => {
                     selectionColor={theme.primary}
                     autoCapitalize="none"
                     autoComplete="email"
+                    autoCompleteType="email"
                     returnKeyType="done"
                     onChangeText={emailValidate}
                     onSubmitEditing={handleForgot}
