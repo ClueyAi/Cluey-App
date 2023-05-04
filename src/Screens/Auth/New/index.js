@@ -211,6 +211,7 @@ const New = ({ navigation }) => {
               <H0 style={{ marginBottom: 10 }}>{locale.global.app.name}</H0>
               <P>{locale.signup.description}</P>
             </Heading>
+            {/*
             <Providers>
               <ButtonProvider
                 style={styles.shadow}
@@ -270,13 +271,14 @@ const New = ({ navigation }) => {
                 flexDirection: "row",
                 justifiContents: "center",
                 alignItems: "center",
-                marginTop: 10,
+                marginTop: 20,
               }}
             >
               <Divider />
               <H2Mini>{locale.providers.or}</H2Mini>
               <Divider />
             </View>
+            */}
             <Form style={{ marginTop: 10 }}>
               <Input
                 style={{
@@ -298,6 +300,7 @@ const New = ({ navigation }) => {
                   selectionColor={theme.primary}
                   autoCapitalize="none"
                   autoComplete="email"
+                  autoCompleteType="email"
                   returnKeyType="next"
                   onChangeText={emailValidate}
                   onSubmitEditing={() => passwordRef.current.focus()}
@@ -344,6 +347,7 @@ const New = ({ navigation }) => {
                   selectionColor={theme.primary}
                   autoCapitalize="none"
                   autoComplete="new-password"
+                  autoCompleteType="new-password"
                   secureTextEntry={true}
                   returnKeyType="next"
                   onChangeText={passwordValidate}
@@ -407,6 +411,7 @@ const New = ({ navigation }) => {
                   selectionColor={theme.primary}
                   autoCapitalize="none"
                   autoComplete="new-password"
+                  autoCompleteType="new-password"
                   secureTextEntry={true}
                   returnKeyType="done"
                   onChangeText={rePasswordValidate}

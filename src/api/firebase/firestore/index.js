@@ -45,6 +45,10 @@ export const FirestoreProvider = ({ children }) => {
     }
   }, [isAuth]);
 
+  const createUserMessage = async (message) => {
+    return await firestore.collection('chat-'+currentUser).add(message);
+  };
+
   const createAiMessage = async (message) => {
     return await firestore.collection('chat-'+currentUser).add(message);
   };
@@ -68,6 +72,7 @@ export const FirestoreProvider = ({ children }) => {
     profile,
     hasMessages,
     hasProfile,
+    createUserMessage,
     createAiMessage,
     createBotMessage,
     updateProfile

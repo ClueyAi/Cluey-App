@@ -25,9 +25,9 @@ const Request = ({ data }) => {
 const styles = StyleSheet.create({
   shadow: {
     shadowColor: "#000000",
-    shadowOffset: {width: 0, height: 3},
+    shadowOffset: {width: 1, height: 2},
     shadowOpacity:  0.17,
-    shadowRadius: 3.05,
+    shadowRadius: 2.05,
     elevation: 4
   }
 });

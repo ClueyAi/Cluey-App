@@ -6,6 +6,7 @@ import {LocaleProvider} from './src/components/locale';
 import {Firebase} from './src/api/firebase';
 import {ProvidersProvider} from './src/api/providers';
 import {ThemeProvider} from './src/components/theme';
+import {OpenAIProvider} from './src/api/openai/chat';
 import {BotProvider} from './src/api/chatbot';
 import Screens from './src/Screens';
 
@@ -26,13 +27,15 @@ const Cluey = () => {
     <LocaleProvider>
       <Firebase>
         <ProvidersProvider>
-          <BotProvider>
-            <ThemeProvider>
-              <MenuProvider>
-                <Screens />
-              </MenuProvider>
-            </ThemeProvider>
-          </BotProvider>
+          <OpenAIProvider>
+            <BotProvider>
+              <ThemeProvider>
+                <MenuProvider>
+                  <Screens />
+                </MenuProvider>
+              </ThemeProvider>
+            </BotProvider>
+          </OpenAIProvider>
         </ProvidersProvider>
       </Firebase>
     </LocaleProvider>
