@@ -344,7 +344,7 @@ export const NameText = styled.Text`
 export const MessageText = styled.Text`
   font-family: 'Nunito-Medium';
   text-align: left;
-  font-size: 17px;
+  font-size: 16px;
   margin-top: 3px;
   color: ${light.text};
 `;

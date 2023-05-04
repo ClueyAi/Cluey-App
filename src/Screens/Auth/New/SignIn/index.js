@@ -144,6 +144,7 @@ const SignIn = ({ navigation }) => {
               <H0 style={{ marginBottom: 10 }}>{locale.global.app.name}</H0>
               <P>{locale.signin.description}</P>
             </Heading>
+            {/*
             <Providers>
               <ButtonProvider
                 style={styles.shadow}
@@ -210,6 +211,7 @@ const SignIn = ({ navigation }) => {
               <H2Mini>{locale.providers.or}</H2Mini>
               <Divider />
             </View>
+            */}
             <Form style={{ marginTop: 20 }}>
               <Input
                 style={{

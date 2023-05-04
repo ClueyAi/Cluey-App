@@ -13,7 +13,7 @@ const Load = ({ navigation }) => {
   const {user, isAuth} = useContext(UserContext);
   const {isNew} = useContext(AuthContext);
   const [loadingMsg] = useState(locale.loading.loading);
-  const [loadedMsg, setLoadedMsg] = useState(locale.loading.loading);
+  const [loadedMsg, setLoadedMsg] = useState('');
   const [isLoading, setIsLoading] = useState(true);
   const [screen, setScreen] = useState(null);
   const [route, setRoute] = useState(null);
@@ -23,8 +23,8 @@ const Load = ({ navigation }) => {
       const emailName = user?.email?.split('@')[0];
       const currentUser = user?.displayName?user?.displayName:emailName;
       const msg = user?locale.loading.welcome_user+currentUser:locale.loading.welcome_back;
+      setLoadedMsg(msg);
       if (!user?.emailVerified) {
-        setLoadedMsg(msg);
         setScreen('AuthStackNavigator');
         setRoute('Verify');
       }
