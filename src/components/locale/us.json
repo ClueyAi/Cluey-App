@@ -1,11 +1,13 @@
 {
+  "language": {
+    "iso": "US",
+    "locale": "en-US",
+    "name": "English"
+  },
   "global": {
-    "language": {
-      "iso": "US",
-      "name": "English"
-    },
     "app": {
       "name": "Cluey",
+      "status": "Online",
       "resume_title": "What is Cluey?",
       "resume": "Cluey is a mobile app that helps you to find the best places to eat, drink, and have fun. It is a social network that allows you to share your experiences with your friends and other users. It is also a platform that allows you to discover new places and new experiences.",
       "policy_terms": {

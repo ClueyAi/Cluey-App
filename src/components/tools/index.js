@@ -6,7 +6,8 @@ import Flag from 'react-native-flags';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import PropTypes from "prop-types";
 
-import { ModalButton } from '../styles';
+import { ModalButton, ChatTitle, Status } from '../styles';
+import { ThemeContext } from '../theme';
 
 import { us, pt, es, fr, LocaleContext } from '../locale';
 import { AuthContext } from '../../api/firebase';
@@ -14,6 +15,7 @@ import { AuthContext } from '../../api/firebase';
 export const LogoutButton = ({ navigation }) => {
   const {locale} = useContext(LocaleContext);
   const {signOut} = useContext(AuthContext);
+  const {theme} = useContext(ThemeContext);
 
   const confirmation = () => {
     return Alert.alert(
@@ -43,7 +45,7 @@ export const LogoutButton = ({ navigation }) => {
     <TouchableOpacity style={styles.buttonRight} onPress={() =>{
       confirmation()
     }}>
-      <Ionicons name="log-out-outline" size={24} color="#FFBF00" />
+      <Ionicons name="log-out-outline" size={24} color={theme.primary} />
     </TouchableOpacity>
   )
 };
@@ -51,10 +53,40 @@ LogoutButton.propTypes = {
   navigation: PropTypes.object.isRequired,
 };
 
+export const BurguerMenuButton = ({ navigation }) => {
+  const {theme} = useContext(ThemeContext);
+  return(
+    <TouchableOpacity style={{...styles.buttonLeft, alignItems: 'center'}} onPress={() => navigation.navigate('Menu')}>
+      <View style={{height: 3, width: 20, marginBottom: 3, borderRadius: 10, backgroundColor: theme.primary}} />
+      <View style={{height: 3, width: 25, borderRadius: 10, backgroundColor: theme.primary}} />
+      <View style={{height: 3, width: 20, marginTop: 3, borderRadius: 10, backgroundColor: theme.primary}} />
+    </TouchableOpacity>
+  )
+}
+
+BurguerMenuButton.propTypes = {
+  navigation: PropTypes.object.isRequired,
+};
+
+export const CloseMenuButton = ({ navigation }) => {
+  const {theme} = useContext(ThemeContext);
+  return(
+    <TouchableOpacity style={{...styles.buttonRight, alignItems: 'center', justifyContent: 'center'}} onPress={() => navigation.goBack()}>
+      <View style={{transform: [{rotate: '45deg'}], height: 3, width: 20, marginBottom: 10, marginRight: 10, borderRadius: 10, backgroundColor: theme.primary}} />
+      <View style={{transform: [{rotate: '-45deg'}], height: 3, width: 20, marginTop: -13, marginLeft: -10, borderRadius: 10, backgroundColor: theme.primary}} />
+    </TouchableOpacity>
+  )
+}
+
+CloseMenuButton.propTypes = {
+  navigation: PropTypes.object.isRequired,
+};
+
 export const SettingsButton = ({ navigation }) => {
+  const {theme} = useContext(ThemeContext);
   return(
     <TouchableOpacity style={styles.buttonRight} onPress={() => navigation.navigate('Settings')}>
-      <Ionicons name="settings-sharp" size={24} color="#FFBF00" />
+      <Ionicons name="settings-sharp" size={24} color={theme.primary} />
     </TouchableOpacity>
   )
 }
@@ -63,9 +95,10 @@ SettingsButton.propTypes = {
 };
 
 export const AboutButton = ({ navigation }) => {
+  const {theme} = useContext(ThemeContext);
   return(
     <TouchableOpacity style={styles.buttonLeft} onPress={() => navigation.navigate('About')}>
-      <Ionicons name="information-circle-outline" size={28} color="#FFBF00" />
+      <Ionicons name="information-circle-outline" size={28} color={theme.primary}/>
     </TouchableOpacity>
   )
 }
@@ -76,7 +109,7 @@ AboutButton.propTypes = {
 export const LanguageSelector = () => {
   const {locale, changeLocale} = useContext(LocaleContext);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [iso, setIso] = useState(locale.global.language.iso);
+  const [iso, setIso] = useState(locale.language.iso);
 
   const handleLanguageChange = (iso) => {
     AsyncStorage.setItem('iso', iso);
@@ -89,10 +122,10 @@ export const LanguageSelector = () => {
 
   
   const options = [
-    { iso: us.global.language.iso, name: us.global.language.name },
-    { iso: pt.global.language.iso, name: pt.global.language.name},
-    { iso: es.global.language.iso, name: es.global.language.name},
-    { iso: fr.global.language.iso, name: fr.global.language.name},
+    { iso: us.language.iso, name: us.language.name },
+    { iso: pt.language.iso, name: pt.language.name},
+    { iso: es.language.iso, name: es.language.name},
+    { iso: fr.language.iso, name: fr.language.name},
   ];
 
   const optionsLeft = options.slice(0, 2);
@@ -143,9 +176,38 @@ export const LanguageSelector = () => {
   );
 };
 
+export const CloseModal = () => <ModalButton />;
+
+export const MainTitle = () =>{
+  const {locale} = useContext(LocaleContext);
+  const {theme} = useContext(ThemeContext);
+
+  return(
+   <View style={styles.mainMenu}>
+      <ChatTitle>{locale.global.app.name}</ChatTitle>
+      <View style={styles.statusContainer}>
+        <Status>{locale.global.app.status}</Status>
+        <Ionicons style={{marginLeft: 2, marginTop: 3}} name="radio" size={13} color={theme.secondary} />
+      </View>
+   </View>
+  );
+}
+
 const styles = StyleSheet.create({
+  mainMenu: {
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 5,
+  },
+  statusContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: -3,
+  },
   buttonRight: {
-    marginRight: 15
+    marginRight: 18
   },
   buttonLeft: {
     marginLeft: 15
@@ -204,5 +266,3 @@ const styles = StyleSheet.create({
     elevation: 6
   }
 });
-
-export const CloseModal = () => <ModalButton />;

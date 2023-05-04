@@ -15,7 +15,6 @@ export const UserProvider = ({ children }) => {
     const unsubscribe = auth.onAuthStateChanged(user => {
       setUser(user);
       user?setIsAuth(true):setIsAuth(false);
-      auth.languageCode = locale.global.language.iso;
     });
 
     return () =>  unsubscribe
@@ -48,7 +47,9 @@ export const UserProvider = ({ children }) => {
     );
     await auth.currentUser.reauthenticateWithCredential(credential);
     await auth.currentUser.updateEmail(newEmail);
-    await auth.currentUser.sendEmailVerification();
+    await auth.currentUser.sendEmailVerification({
+      locale: locale.language.locale
+    });
   };
 
   const updateUserPassword = async (currentPassword, newPassword) => {

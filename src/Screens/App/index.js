@@ -4,10 +4,12 @@ import { isAndroid } from '@freakycoder/react-native-helpers';
 import Ionicons from '@expo/vector-icons/Ionicons';
 
 import { LocaleContext } from '../../components/locale';
-
-import { LogoutButton, LanguageSelector, SettingsButton, CloseModal } from '../../components/tools';
+import { ThemeContext } from '../../components/theme';
+import { MainTitle, BurguerMenuButton, CloseMenuButton, LogoutButton, LanguageSelector, SettingsButton, CloseModal } from '../../components/tools';
 
 import Home from './Home';
+// Menu
+import Menu from './Menu';
 // Settings
 import Settings from './Settings';
 import Preferences from './Settings/Preferences';
@@ -21,6 +23,7 @@ const AppStack = createStackNavigator();
 
 const App = () => {
   const {locale} = React.useContext(LocaleContext);
+  const {theme} = React.useContext(ThemeContext);
 
   return (
     <AppStack.Navigator screenOptions={{
@@ -34,21 +37,26 @@ const App = () => {
       },
       headerBackTitleVisible: true,
       headerTitleAlign: 'center',
-      headerBackImage: () => <Ionicons name="chevron-back" size={28} color="#FFBF00"/>,
-      headerTintColor: '#FFBF00',
+      headerBackImage: () => <Ionicons name="chevron-back" size={28} color={theme.primary}/>,
+      headerTintColor: theme.primary,
     }}>
       <AppStack.Screen
         name="Home"
         component={Home}
         options={({ navigation }) => ({
+          headerLeft: () => <BurguerMenuButton navigation={navigation} />,
+          headerTitle: () => <MainTitle />,
           headerRight: () => <SettingsButton navigation={navigation} />,
-          headerTitle: 'Cluey',
-          headerTitleAlign: 'left',
-          headerTintColor: '#FFBF00',
-          headerTitleStyle: {
-          fontFamily: 'Nunito-Bold',
-          fontSize: 24,
-          },
+        })}
+      />
+      {/* Menu */}
+      <AppStack.Screen
+        name="Menu"
+        component={Menu}
+        options={({ navigation }) => ({
+          headerLeft: () => <BurguerMenuButton navigation={navigation} />,
+          headerTitle: () => <MainTitle />,
+          headerRight: () => <CloseMenuButton navigation={navigation} />,
         })}
       />
       {/* Settings */}
@@ -61,7 +69,7 @@ const App = () => {
           headerRightContainerStyle: {
             marginTop: 5,
           },
-          headerTintColor: '#FFBF00',
+          headerTintColor: theme.primary,
           headerTitleStyle: {
           fontFamily: 'Nunito-Bold',
           fontSize: 24,
@@ -74,7 +82,7 @@ const App = () => {
         options={({navigation}) => ({
           headerTitle: locale.preferences_config.title,
           headerRight: () => <LogoutButton navigation={navigation}/>,
-          headerTintColor: '#FFBF00',
+          headerTintColor: theme.primary,
           headerTitleStyle: {
           fontFamily: 'Nunito-Bold',
           fontSize: 24,

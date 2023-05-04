@@ -5,9 +5,11 @@ import PropTypes from "prop-types";
 import { ActivityIndicator, Container, Body, H1Mini } from '../../../components/styles';
 import { UserContext, AuthContext } from '../../../api/firebase';
 import { LocaleContext } from '../../../components/locale';
+import { ThemeContext } from '../../../components/theme';
 
 const Load = ({ navigation }) => {
   const {locale} = useContext(LocaleContext);
+  const {theme} = useContext(ThemeContext);
   const {user, isAuth} = useContext(UserContext);
   const {isNew} = useContext(AuthContext);
   const [loadingMsg] = useState(locale.loading.loading);
@@ -52,7 +54,7 @@ const Load = ({ navigation }) => {
   return (
     isLoading ? 
     <Container>
-      <Body style={{backgroundColor: '#FFBF00'}}>
+      <Body style={{backgroundColor: theme.primary}}>
         <H1Mini style={{width: '95%'}}>{loadingMsg}</H1Mini>
         <ImageBackground
           style={{width: 165, height: 278}}
@@ -61,14 +63,14 @@ const Load = ({ navigation }) => {
           <ActivityIndicator
             style={{marginTop: 105, transform: [{ scaleX: 2 }, { scaleY: 2 }]}}
             size="large"
-            color="#FFBF00"
+            color={theme.primary}
           />
         </ImageBackground>
       </Body>
     </Container>
   : 
   <Container>
-      <Body style={{backgroundColor: '#FFBF00'}}>
+      <Body style={{backgroundColor: theme.primary}}>
         <H1Mini style={{width: '95%'}}>{loadedMsg}</H1Mini>
         <ImageBackground
           style={{width: 165, height: 278}}

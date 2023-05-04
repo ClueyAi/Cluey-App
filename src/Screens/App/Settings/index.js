@@ -7,7 +7,7 @@ import { useFocusEffect } from "@react-navigation/native";
 import PropTypes from "prop-types";
 
 import { UserContext } from "../../../api/firebase";
-
+import { ThemeContext } from "../../../components/theme";
 import { LocaleContext } from "../../../components/locale";
 import {
   Container,
@@ -32,6 +32,7 @@ import {
 
 const Settings = ({ navigation }) => {
   const { locale } = useContext(LocaleContext);
+  const { theme } = useContext(ThemeContext);
   const { user, updateUserPhoto, updateUserName } = useContext(UserContext);
   // eslint-disable-next-line no-unused-vars
   const [error, setError] = useState("");
@@ -175,7 +176,7 @@ const Settings = ({ navigation }) => {
                     <TextInput
                       style={{ height: 50 }}
                       value={userName}
-                      selectionColor="#FFBF00"
+                      selectionColor={theme.primary}
                       autoComplete="name"
                       autoCapitalize="words"
                       returnKeyType="done"
@@ -191,7 +192,7 @@ const Settings = ({ navigation }) => {
                         locale.settings.name_button.accessibility
                       }
                     >
-                      <Ionicons name="close" size={19} color="#FF0000A0" />
+                      <Ionicons name="close" size={19} color={theme.error} />
                     </ButtonEmpyte>
                   </Input>
                 </Infor>
