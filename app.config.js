@@ -20,7 +20,7 @@ export default {
     ],
     ios: {
       supportsTablet: true,
-      bundleIdentifier: "com.cluey.clueyapp",
+      bundleIdentifier: "com.gustavofalcao1.cluey",
       buildNumber: "0.0.1",
     },
     android: {
@@ -28,9 +28,8 @@ export default {
         foregroundImage: "./assets/images/adaptive-icon.png",
         backgroundColor: "#FFBF00"
       },
-      package: "com.cluey.clueyapp",
+      package: "com.gustavofalcao1.cluey",
       versionCode: 1,
-      googleServicesFile: "./google-services.json",
     },
     web: {
       favicon: "./assets/images/favicon.png"
@@ -46,7 +45,7 @@ export default {
     ],
     extra: {
       eas: {
-        projectId: process.env.PROJECT_ID,
+        projectId: process.env.EXPO_PROJECT_ID,
       },
       firebase: {
         apiKey: process.env.API_KEY,
