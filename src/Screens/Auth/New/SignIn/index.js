@@ -227,7 +227,6 @@ const SignIn = ({ navigation }) => {
               >
                 <TextInput
                   ref={emailRef}
-                  value={email}
                   placeholder={locale.signin.text_input.email}
                   placeholderTextColor={theme.placeholder}
                   selectionColor={theme.primary}

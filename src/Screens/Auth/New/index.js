@@ -294,7 +294,6 @@ const New = ({ navigation }) => {
               >
                 <TextInput
                   ref={emailRef}
-                  value={email}
                   placeholder={locale.signup.text_input.email}
                   placeholderTextColor={theme.placeholder}
                   selectionColor={theme.primary}

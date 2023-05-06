@@ -10,11 +10,12 @@ import { ThemeContext } from '../../../components/theme';
 const Load = ({ navigation }) => {
   const {locale} = useContext(LocaleContext);
   const {theme} = useContext(ThemeContext);
-  const {user, isAuth} = useContext(UserContext);
+  const {user, isAuth, isVerify} = useContext(UserContext);
   const {isNew} = useContext(AuthContext);
   const [loadingMsg] = useState(locale.loading.loading);
   const [loadedMsg, setLoadedMsg] = useState('');
   const [isLoading, setIsLoading] = useState(true);
+  const [isDone, setIsDone] = useState(false);
   const [screen, setScreen] = useState(null);
   const [route, setRoute] = useState(null);
   
@@ -22,13 +23,14 @@ const Load = ({ navigation }) => {
     if (isAuth) {
       const emailName = user?.email?.split('@')[0];
       const currentUser = user?.displayName?user?.displayName:emailName;
-      const msg = user?locale.loading.welcome_user+currentUser:locale.loading.welcome_back;
+      const msg = await user?locale.loading.welcome_user+currentUser:locale.loading.welcome_back;
       setLoadedMsg(msg);
-      if (!user?.emailVerified) {
+      if (!isVerify) {
         setScreen('AuthStackNavigator');
         setRoute('Verify');
+      } else {
+        setScreen('AppStackNavigator');
       }
-      setScreen('AppStackNavigator');
     } else {
         if (!isNew) {
           setLoadedMsg(locale.loading.welcome_back);
@@ -42,10 +44,16 @@ const Load = ({ navigation }) => {
 
   useEffect(() => {
     selectScreen();
-    setIsLoading(false);
+    setIsDone(true);
     const timer = setTimeout(() => {
-      if (!isLoading) {
-        navigation.navigate(screen, { screen: route });
+      if (isDone) {
+        setIsLoading(false);
+        const timer = setTimeout(() => {
+          if (!isLoading) {
+            navigation.navigate(screen, { screen: route });
+          }
+        }, 1500);
+        return () => clearTimeout(timer);
       }
     }, 1500);
     return () => clearTimeout(timer);
@@ -55,7 +63,7 @@ const Load = ({ navigation }) => {
     isLoading ? 
     <Container>
       <Body style={{backgroundColor: theme.primary}}>
-        <H1Mini style={{width: '95%'}}>{loadingMsg} 👀</H1Mini>
+        <H1Mini style={{width: '95%'}}>{loadingMsg}</H1Mini>
         <ImageBackground
           style={{width: 165, height: 278}}
           source={require('../../../../assets/images/cluey-blank.png')}

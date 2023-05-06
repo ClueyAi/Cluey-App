@@ -198,7 +198,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 5,
+    marginTop: 2,
   },
   statusContainer: {
     flexDirection: 'row',

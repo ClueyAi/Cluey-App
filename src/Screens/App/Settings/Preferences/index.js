@@ -70,6 +70,17 @@ const Preferences = ({ navigation }) => {
                 <P>{profile?.code?<Flag code={profile?.code} size={16}/>:null} {profile?.country?profile?.country:locale.anddress_config.description}</P>
               </View>
               <Ionicons name="chevron-forward" size={30} color="#757575" />
+              {countryModalVisible?
+                <CountryPicker
+                  visible={countryModalVisible}
+                  onSelect={handleCountrySelect}
+                  withFilter={true}
+                  withFlag={true}
+                  withCountryNameButton={true}
+                  onClose={handleCloseModal}
+                  onModalClose={handleCloseModal}
+                />
+              :null}
             </WideButton>
           </ScrollView>
           {/*
@@ -97,15 +108,7 @@ const Preferences = ({ navigation }) => {
           </View>
         </FooterSmall>
       </Body>
-      <CountryPicker
-        visible={countryModalVisible}
-        onSelect={handleCountrySelect}
-        withFilter={true}
-        withFlag={true}
-        withCountryNameButton={true}
-        onClose={handleCloseModal}
-        onModalClose={handleCloseModal}
-      />
+      
     </Container>
   );
 };
