@@ -25,6 +25,13 @@ const Verify = ({ navigation }) => {
   const { locale } = useContext(LocaleContext);
   const [dev, setDev] = useState(false);
   const [devSure, setDevSure] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const handleRefresh = async () => {
+    setLoading(true);
+    await user?.reload();
+    setLoading(false);
+  };
 
   const handleSendEmailVerify = async () => {
     if (!user?.emailVerified) {
@@ -32,6 +39,12 @@ const Verify = ({ navigation }) => {
     }
   };
   const handleContinue = async () => {
+    handleRefresh();
+    if (loading) {
+      console.log("loading");
+    } else {
+      console.log("not loading");
+    }
     navigation.navigate("Loading");
   };
 
@@ -59,7 +72,7 @@ const Verify = ({ navigation }) => {
       <ButtonEmpyte
         style={{
           position: "absolute",
-          top: 100,
+          top: 0,
           left: 100,
           zIndex: 9999,
           padding: 20,
@@ -82,7 +95,7 @@ const Verify = ({ navigation }) => {
       {/*Dev */}
       <Heading style={{ marginTop: "10%", marginBottom: 15 }}>
         <H1 style={{ marginBottom: 10, fontSize: 25 }}>
-          {locale.custom.verify.title}
+          {locale.verify.title}
         </H1>
         <P>{locale.forgot.success.description}</P>
         <H3 style={{ marginTop: 30, marginBottom: 5 }}>
@@ -93,16 +106,16 @@ const Verify = ({ navigation }) => {
       <ButtonEmpyte
         style={{ marginTop: 10 }}
         onPress={handleSendEmailVerify}
-        accessibilityLabel={locale.custom.verify.verify_button.accessibility}
+        accessibilityLabel={locale.verify.verify_button.accessibility}
       >
-        <Link>{locale.custom.verify.verify_button.text}</Link>
+        <Link>{locale.verify.verify_button.text}</Link>
       </ButtonEmpyte>
       <ButtonPrimary
         style={{ marginTop: 15 }}
         onPress={handleContinue}
-        accessibilityLabel={locale.custom.verify.continue_button.accessibility}
+        accessibilityLabel={locale.verify.continue_button.accessibility}
       >
-        <TxtButton>{locale.custom.verify.continue_button.text}</TxtButton>
+        <TxtButton>{locale.verify.continue_button.text}</TxtButton>
       </ButtonPrimary>
       {user?.emailVerified ? (
         <View style={{ marginTop: "25%" }}>

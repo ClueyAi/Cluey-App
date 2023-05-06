@@ -10,11 +10,13 @@ export const UserProvider = ({ children }) => {
   const {locale} = useContext(LocaleContext);
   const [user, setUser] = useState(null);
   const [isAuth, setIsAuth] = useState(false);
+  const [isVerify, setIsVerify] = useState(false);
   
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(user => {
       setUser(user);
       user?setIsAuth(true):setIsAuth(false);
+      user?.emailVerified?setIsVerify(true):setIsVerify(false);
     });
 
     return () =>  unsubscribe
@@ -64,6 +66,7 @@ export const UserProvider = ({ children }) => {
   const value = {
     user,
     isAuth,
+    isVerify,
     updateUserPhoto,
     updateUserName,
     updateUserEmail,
