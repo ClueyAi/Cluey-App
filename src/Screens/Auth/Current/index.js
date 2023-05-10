@@ -46,6 +46,8 @@ const Current = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const [secureTextEntry, setSecureTextEntry] = useState(true);
+
   const [emailValid, setEmailValid] = useState(null);
   const [passwordValid, setPasswordValid] = useState(null);
 
@@ -75,7 +77,7 @@ const Current = ({ navigation }) => {
     try {
       await signIn(email, password);
       await putUser();
-      navigation.navigate("Loading");
+      await navigation.navigate("Loading");
     } catch (error) {
       setError(error.code);
       if (error.code === "auth/missing-password") {
@@ -116,6 +118,10 @@ const Current = ({ navigation }) => {
   };
   const handleGithub = async () => {
     alert("Github");
+  };
+
+  const handleShowPassword = () => {
+    setSecureTextEntry(!secureTextEntry);
   };
 
   const handleForgot = () => {
@@ -213,6 +219,7 @@ const Current = ({ navigation }) => {
                 style={{
                   ...styles.shadow,
                   borderWidth: 0.1,
+                  borderColor: theme.text,
                   marginBottom: 15,
                   backgroundColor: `${
                     error === errorEmail && emailValid == false
@@ -227,22 +234,24 @@ const Current = ({ navigation }) => {
                   placeholderTextColor={theme.placeholder}
                   selectionColor={theme.primary}
                   autoCapitalize="none"
+                  autoCorrect={false}
+                  inputMode="email"
                   autoComplete="email"
-                  autoCompleteType="email"
+                  maxLength={100}
                   returnKeyType="next"
                   onChangeText={emailValidate}
                   onSubmitEditing={() => passwordRef.current.focus()}
                 />
                 {emailValid == false && email !== "" ? (
                   <Ionicons
-                    style={{ padding: 10, marginRight: 10 }}
+                    style={{ padding: 10, marginRight: 5 }}
                     name="alert-circle-outline"
                     size={20}
                     color={theme.error}
                   />
                 ) : (
                   <Ionicons
-                    style={{ padding: 10, marginRight: 10 }}
+                    style={{ padding: 10, marginRight: 5 }}
                     name="alert-circle-outline"
                     size={20}
                     color={theme.transparent}
@@ -250,7 +259,7 @@ const Current = ({ navigation }) => {
                 )}
                 {emailValid == true && email !== "" ? (
                   <Ionicons
-                    style={{ padding: 10, marginRight: 10 }}
+                    style={{ padding: 10, marginRight: 5 }}
                     name="checkmark-circle-outline"
                     size={20}
                     color={theme.secondary}
@@ -261,6 +270,7 @@ const Current = ({ navigation }) => {
                 style={{
                   ...styles.shadow,
                   borderWidth: 0.1,
+                  borderColor: theme.text,
                   marginBottom: 10,
                   backgroundColor: `${
                     passwordValid == false ? theme.inputError : theme.backgroundSecondary
@@ -274,12 +284,15 @@ const Current = ({ navigation }) => {
                   selectionColor={theme.primary}
                   autoCapitalize="none"
                   autoComplete="current-password"
-                  autoCompleteType="password"
-                  secureTextEntry={true}
+                  maxLength={22}
+                  secureTextEntry={secureTextEntry}
                   returnKeyType="done"
                   onChangeText={passwordValidate}
                   onSubmitEditing={handleSignIn}
                 />
+                <ButtonEmpyte style={{marginRight: 15}} onPress={handleShowPassword}>
+                  <Ionicons name={secureTextEntry? 'eye-outline': 'eye-off-outline'} size={20} color={theme.text} />
+                </ButtonEmpyte>
               </Input>
               <ButtonEmpyte onPress={handleForgot}>
                 <TxtLink>{locale.forgot.title}</TxtLink>

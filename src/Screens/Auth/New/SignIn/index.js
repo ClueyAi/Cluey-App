@@ -44,6 +44,8 @@ const SignIn = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const [secureTextEntry, setSecureTextEntry] = useState(true);
+
   const [emailValid, setEmailValid] = useState(null);
   const [passwordValid, setPasswordValid] = useState(null);
 
@@ -125,6 +127,10 @@ const SignIn = ({ navigation }) => {
     } catch (error) {
       alert(error.code);
     }
+  };
+
+  const handleShowPassword = () => {
+    setSecureTextEntry(!secureTextEntry);
   };
 
   const handleForgot = () => {
@@ -219,6 +225,7 @@ const SignIn = ({ navigation }) => {
                 style={{
                   ...styles.shadow,
                   borderWidth: 0.1,
+                  borderColor: theme.text,
                   marginBottom: 15,
                   backgroundColor: `${
                     error === errorEmail && emailValid == false
@@ -233,8 +240,10 @@ const SignIn = ({ navigation }) => {
                   placeholderTextColor={theme.placeholder}
                   selectionColor={theme.primary}
                   autoCapitalize="none"
+                  autoCorrect={false}
+                  inputMode="email"
                   autoComplete="email"
-                  autoCompleteType="email"
+                  maxLength={100}
                   returnKeyType="next"
                   onChangeText={emailValidate}
                   onSubmitEditing={() => passwordRef.current.focus()}
@@ -267,6 +276,7 @@ const SignIn = ({ navigation }) => {
                 style={{
                   ...styles.shadow,
                   borderWidth: 0.1,
+                  borderColor: theme.text,
                   marginBottom: 10,
                   backgroundColor: `${
                     passwordValid == false ? theme.inputError : theme.backgroundSecondary
@@ -280,12 +290,15 @@ const SignIn = ({ navigation }) => {
                   selectionColor={theme.primary}
                   autoCapitalize="none"
                   autoComplete="current-password"
-                  autoCompleteType="password"
-                  secureTextEntry={true}
+                  maxLength={22}
+                  secureTextEntry={secureTextEntry}
                   returnKeyType="done"
                   onChangeText={passwordValidate}
                   onSubmitEditing={handleSignIn}
                 />
+                <ButtonEmpyte style={{marginRight: 15}} onPress={handleShowPassword}>
+                  <Ionicons name={secureTextEntry? 'eye-outline': 'eye-off-outline'} size={20} color={theme.text} />
+                </ButtonEmpyte>
               </Input>
               <ButtonEmpyte onPress={handleForgot}>
                 <TxtLink>{locale.forgot.title}</TxtLink>

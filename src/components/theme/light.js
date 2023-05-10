@@ -12,6 +12,6 @@ export default {
   link: '#FFBF0090',
   border: '#ECECECAA',
   error: '#FF0000',
-  inputError: '#FFAAAA50',
+  inputError: '#EEBBBB',
   placeholder: '#A4A4A4',
 }

@@ -148,7 +148,7 @@ const Settings = ({ navigation }) => {
     <TouchableWithoutFeedback onPress={handleEditNameOf} accessible={false}>
       <Container>
         <Body>
-          <Main>
+          <Main style={{marginTop: 20}}>
             <Profile>
               <Picture>
                 <ButtonEmpyte

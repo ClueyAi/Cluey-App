@@ -92,22 +92,25 @@ const Forgot = ({ navigation }) => {
               <Form>
                 <Input
                   style={{
-                    ...styles.shadow,
-                    borderWidth: 0.1,
-                  }}
-                  backgroundColor={
-                    error === errorEmail
+                  ...styles.shadow,
+                  borderWidth: 0.1,
+                  marginBottom: 10,
+                  backgroundColor: `${
+                    error === errorEmail && emailValid == false
                       ? theme.inputError
                       : theme.backgroundSecondary
-                  }
+                  }`,
+                }}
                 >
                   <TextInput
                     placeholder={locale.forgot.text_input.email}
                     placeholderTextColor={theme.placeholder}
                     selectionColor={theme.primary}
                     autoCapitalize="none"
+                    autoCorrect={false}
+                    inputMode="email"
                     autoComplete="email"
-                    autoCompleteType="email"
+                    maxLength={100}
                     returnKeyType="done"
                     onChangeText={emailValidate}
                     onSubmitEditing={handleForgot}
@@ -174,7 +177,7 @@ const Forgot = ({ navigation }) => {
           <H3 style={{ marginTop: 30, marginBottom: 5 }}>
             {locale.forgot.success.alert_tittle}
           </H3>
-          <PMini>{locale.forgot.success.alert_accessibility}</PMini>
+          <PMini>{locale.forgot.success.alert_msg}</PMini>
         </Heading>
         <ButtonPrimary
           style={{...styles.shadow, marginTop: 10, marginBottom: "40%" }}

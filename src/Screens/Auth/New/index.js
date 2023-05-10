@@ -55,6 +55,8 @@ const New = ({ navigation }) => {
   const [password, setPassword] = useState("");
   const [rePassword, setRePassword] = useState("");
 
+  const [secureTextEntry, setSecureTextEntry] = useState(true);
+
   const [emailValid, setEmailValid] = useState(null);
   const [passwordValid, setPasswordValid] = useState(null);
   const [passwordStrong, setPasswordStrong] = useState(null);
@@ -166,6 +168,10 @@ const New = ({ navigation }) => {
     } catch (error) {
       alert(error.code);
     }
+  };
+
+  const handleShowPassword = () => {
+    setSecureTextEntry(!secureTextEntry);
   };
 
   const handleSignIn = () => {
@@ -287,6 +293,7 @@ const New = ({ navigation }) => {
                 style={{
                   ...styles.shadow,
                   borderWidth: 0.1,
+                  borderColor: theme.text,
                   marginBottom: 15,
                   backgroundColor: `${
                     error === errorEmail && emailValid == false
@@ -301,29 +308,31 @@ const New = ({ navigation }) => {
                   placeholderTextColor={theme.placeholder}
                   selectionColor={theme.primary}
                   autoCapitalize="none"
+                  autoCorrect={false}
+                  inputMode="email"
                   autoComplete="email"
-                  autoCompleteType="email"
+                  maxLength={100}
                   returnKeyType="next"
                   onChangeText={emailValidate}
                   onSubmitEditing={() => passwordRef.current.focus()}
                 />
                 {emailValid == false && email !== "" ? (
                   <Ionicons
-                    style={{ padding: 10, marginRight: 10 }}
+                    style={{ padding: 10, marginRight: 5 }}
                     name="alert-circle-outline"
                     size={20}
                     color={theme.error}
                   />
                 ) : emailValid == null && email !== "" ? (
                   <Ionicons
-                    style={{ padding: 10, marginRight: 10 }}
+                    style={{ padding: 10, marginRight: 5 }}
                     name="alert-circle-outline"
                     size={20}
                     color={theme.transparent}
                   />
                 ) : emailValid == true && email !== "" ? (
                   <Ionicons
-                    style={{ padding: 10, marginRight: 10 }}
+                    style={{ padding: 10, marginRight: 5 }}
                     name="checkmark-circle-outline"
                     size={20}
                     color={theme.secondary}
@@ -334,6 +343,7 @@ const New = ({ navigation }) => {
                 style={{
                   ...styles.shadow,
                   borderWidth: 0.1,
+                  borderColor: theme.text,
                   marginBottom: 10,
                   backgroundColor: `${
                     error === errorPassword && passwordValid == false
@@ -349,41 +359,44 @@ const New = ({ navigation }) => {
                   selectionColor={theme.primary}
                   autoCapitalize="none"
                   autoComplete="new-password"
-                  autoCompleteType="new-password"
-                  secureTextEntry={true}
+                  maxLength={22}
+                  secureTextEntry={secureTextEntry}
                   returnKeyType="next"
                   onChangeText={passwordValidate}
                   onSubmitEditing={() => rePasswordRef.current.focus()}
                 />
-                {passwordStrong == false && passwordValid == true ? (
+                {passwordStrong == false && passwordValid ? (
                   <Ionicons
-                    style={{ padding: 10, marginRight: 10 }}
+                    style={{ padding: 10}}
                     name="alert-circle-outline"
                     size={20}
                     color={theme.primary}
                   />
                 ) : passwordValid == false && password !== "" ? (
                   <Ionicons
-                    style={{ padding: 10, marginRight: 10 }}
+                    style={{ padding: 10}}
                     name="alert-circle-outline"
                     size={20}
                     color={theme.error}
                   />
                 ) : passwordStrong == true && password !== "" ? (
                   <Ionicons
-                    style={{ padding: 10, marginRight: 10 }}
+                    style={{ padding: 10}}
                     name="checkmark-circle-outline"
                     size={20}
                     color={theme.secondary}
                   />
                 ) : (
                   <Ionicons
-                    style={{ padding: 10, marginRight: 10 }}
+                    style={{ padding: 10, marginRight: 5 }}
                     name="alert-circle-outline"
                     size={20}
                     color={theme.transparent}
                   />
                 )}
+                <ButtonEmpyte style={{marginRight: 15}} onPress={handleShowPassword}>
+                  <Ionicons name={secureTextEntry? 'eye-outline': 'eye-off-outline'} size={20} color={theme.text} />
+                </ButtonEmpyte>
               </Input>
               {passwordStrong == false && passwordValid == true ? (
                 <TextAlert>Password medium</TextAlert>
@@ -398,6 +411,7 @@ const New = ({ navigation }) => {
                 style={{
                   ...styles.shadow,
                   borderWidth: 0.1,
+                  borderColor: theme.text,
                   marginBottom: 10,
                   backgroundColor: `${
                     error === errorPassword && rePasswordValid == false
@@ -413,22 +427,22 @@ const New = ({ navigation }) => {
                   selectionColor={theme.primary}
                   autoCapitalize="none"
                   autoComplete="new-password"
-                  autoCompleteType="new-password"
-                  secureTextEntry={true}
+                  maxLength={22}
+                  secureTextEntry={secureTextEntry}
                   returnKeyType="done"
                   onChangeText={rePasswordValidate}
                   onSubmitEditing={handleSignUp}
                 />
                 {rePasswordValid == false && rePassword !== "" ? (
                   <Ionicons
-                    style={{ padding: 10, marginRight: 10 }}
+                    style={{ padding: 10}}
                     name="alert-circle-outline"
                     size={20}
                     color={theme.error}
                   />
                 ) : (
                   <Ionicons
-                    style={{ padding: 10, marginRight: 10 }}
+                    style={{ padding: 10}}
                     name="alert-circle-outline"
                     size={20}
                     color={theme.transparent}
@@ -436,12 +450,15 @@ const New = ({ navigation }) => {
                 )}
                 {rePasswordValid == true && rePassword !== "" ? (
                   <Ionicons
-                    style={{ padding: 10, marginRight: 10 }}
+                    style={{ padding: 10}}
                     name="checkmark-circle-outline"
                     size={20}
                     color={theme.secondary}
                   />
                 ) : null}
+                <ButtonEmpyte style={{marginRight: 15}} onPress={handleShowPassword}>
+                  <Ionicons name={secureTextEntry? 'eye-outline': 'eye-off-outline'} size={20} color={theme.text} />
+                </ButtonEmpyte>
               </Input>
               {error ? (
                 <TextError>{errorMsg}</TextError>
