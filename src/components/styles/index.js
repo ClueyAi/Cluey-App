@@ -364,7 +364,6 @@ export const Profile = styled.View`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-top: 20px;
 `;
 export const Picture = styled.View`
   justify-content: center;
@@ -395,7 +394,6 @@ export const Infor = styled.View`
   justify-content: center;
   align-items: center;
   text-align: center;
-  margin-top: 10px;
 `;
 export const Provider = styled.View`
   width: 100%;

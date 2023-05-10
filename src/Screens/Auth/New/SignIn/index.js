@@ -5,6 +5,7 @@ import FontAwesome from "@expo/vector-icons/FontAwesome";
 import PropTypes from "prop-types";
 
 import { AuthContext } from "../../../../api/firebase";
+import { FirestoreContext } from "../../../../api/firebase";
 import { ThemeContext } from "../../../../components/theme";
 import { LocaleContext } from "../../../../components/locale";
 import {
@@ -35,8 +36,8 @@ import {
 
 const SignIn = ({ navigation }) => {
   const { locale } = useContext(LocaleContext);
-  const { signIn, signGoogle, signFacebook, signGithub } =
-    useContext(AuthContext);
+  const { signIn, signGoogle, signFacebook, signGithub } = useContext(AuthContext);
+  const { putUser } = useContext(FirestoreContext);
   const { theme } = useContext(ThemeContext);
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
@@ -71,6 +72,7 @@ const SignIn = ({ navigation }) => {
   const handleSignIn = async () => {
     try {
       await signIn(email, password);
+      await putUser();
       navigation.navigate("Loading");
     } catch (error) {
       setError(error.code);

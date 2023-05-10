@@ -7,6 +7,7 @@ import PropTypes from "prop-types";
 import { LocaleContext } from "../../../components/locale";
 import { AuthContext } from "../../../api/firebase";
 import { ProvidersContext } from "../../../api/providers";
+import { FirestoreContext } from "../../../api/firebase";
 import { ThemeContext } from "../../../components/theme";
 import {
   Avoiding,
@@ -37,6 +38,7 @@ import {
 const Current = ({ navigation }) => {
   const { locale } = useContext(LocaleContext);
   const { signIn } = useContext(AuthContext);
+  const { putUser } = useContext(FirestoreContext);
   const { signInWithGoogle } = useContext(ProvidersContext);
   const { theme } = useContext(ThemeContext);
   const emailRef = useRef(null);
@@ -72,6 +74,7 @@ const Current = ({ navigation }) => {
   const handleSignIn = async () => {
     try {
       await signIn(email, password);
+      await putUser();
       navigation.navigate("Loading");
     } catch (error) {
       setError(error.code);

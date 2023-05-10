@@ -16,7 +16,7 @@ const Response = ({ data }) => {
   return (
     <Menu data={data}>
     <MessageLeft style={styles.shadow}>
-      <NameText>{data?.senderName}</NameText>
+      <NameText>{data?.name}</NameText>
       <MessageText>{data?.text}</MessageText>
       <DateText>{time}</DateText>
     </MessageLeft>

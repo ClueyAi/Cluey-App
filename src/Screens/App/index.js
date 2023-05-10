@@ -5,16 +5,17 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 
 import { LocaleContext } from '../../components/locale';
 import { ThemeContext } from '../../components/theme';
-import { MainTitle, BurguerMenuButton, CloseMenuButton, LogoutButton, LanguageSelector, SettingsButton, CloseModal } from '../../components/tools';
+import { MainTitle, ChatsMenuButton, ContactsMenuButton, HomeButton, CloseMenuButton, LogoutButton, LanguageSelector, SettingsButton, CloseModal } from '../../components/tools';
 
 import Home from './Home';
 // Menu
-import Menu from './Menu';
+import Chats from './Chats';
+import Contacts from './Contacts';
 // Settings
 import Settings from './Settings';
 import Preferences from './Settings/Preferences';
-import ChangeEmail from './Settings/Components/changeEmail';
-import ChangePassword from './Settings/Components/changePassword';
+import ChangeEmail from './Settings/Preferences/Components/changeEmail';
+import ChangePassword from './Settings/Preferences/Components/changePassword';
 
 import About from '../Utils/About';
 import Rules from '../Utils/Rules';
@@ -44,17 +45,27 @@ const App = () => {
         name="Home"
         component={Home}
         options={({ navigation }) => ({
-          headerLeft: () => <BurguerMenuButton navigation={navigation} />,
+          headerLeft: () => <ChatsMenuButton navigation={navigation} />,
           headerTitle: () => <MainTitle />,
           headerRight: () => <SettingsButton navigation={navigation} />,
         })}
       />
       {/* Menu */}
       <AppStack.Screen
-        name="Menu"
-        component={Menu}
+        name="Chats"
+        component={Chats}
         options={({ navigation }) => ({
-          headerLeft: () => <BurguerMenuButton navigation={navigation} />,
+          headerLeft: () => <ContactsMenuButton navigation={navigation} />,
+          headerTitle: () => <MainTitle />,
+          headerRight: () => <CloseMenuButton navigation={navigation} />,
+        })}
+      />
+      {/* Menu */}
+      <AppStack.Screen
+        name="Contacts"
+        component={Contacts}
+        options={({ navigation }) => ({
+          headerLeft: () => <HomeButton navigation={navigation} />,
           headerTitle: () => <MainTitle />,
           headerRight: () => <CloseMenuButton navigation={navigation} />,
         })}

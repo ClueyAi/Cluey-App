@@ -22,12 +22,12 @@ const Message = ({ data }) => {
   return (
     <ChatMessages>
       <ResponseMessages>
-        {data?.userId !== user?.uid ? (
+        {data?.idUser !== user?.uid ? (
           <Response data={data}/>
         ) : null}
       </ResponseMessages>
       <RequestMessages>
-        {data?.userId === user?.uid ? (
+        {data?.idUser === user?.uid ? (
           <Request data={data}/>
         ) : null}
       </RequestMessages>

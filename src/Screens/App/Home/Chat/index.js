@@ -2,8 +2,7 @@ import React, { useState, useContext, useEffect } from 'react';
 import { Platform, StyleSheet } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
 
-import { OpenAIContext } from '../../../../api/openai/chat';
-import { BotContext } from '../../../../api/chatbot';
+import { OpenAIContext } from '../../../../api/openai';
 import { UserContext, FirestoreContext } from '../../../../api/firebase';
 import { ThemeContext } from '../../../../components/theme';
 import { LocaleContext } from '../../../../components/locale';
@@ -30,8 +29,7 @@ const Chat = () => {
 
   const handleSend = async () => {
     const message = {
-      userId: user?.uid,
-      senderName: user?.displayName? user?.displayName : name,
+      contextName: "Default",
       text: textValue,
       createdAt: new Date().toISOString(),
     };

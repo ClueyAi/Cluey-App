@@ -23,13 +23,15 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   const signIn = async (email, password) => {
-    return await auth.signInWithEmailAndPassword(email, password).then(() => {
+    await auth.signInWithEmailAndPassword(email, password)
+    .then(() => {
       notNew();
     });
   };
 
   const signUp = async (email, password) => {
-    return await auth.createUserWithEmailAndPassword(email, password).then(() => {
+    return await auth.createUserWithEmailAndPassword(email, password)
+    .then(() => {
       notNew();
     });
   };
