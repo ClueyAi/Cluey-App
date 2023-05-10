@@ -1,4 +1,4 @@
-import React, { useContext} from 'react'
+import React, { useContext} from 'react';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import Lottie from "lottie-react-native";
 import PropTypes from "prop-types";

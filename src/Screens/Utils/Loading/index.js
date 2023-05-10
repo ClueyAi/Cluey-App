@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { ImageBackground } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import PropTypes from "prop-types";
 
 import { ActivityIndicator, Container, Body, H1Mini } from '../../../components/styles';
@@ -43,6 +44,7 @@ const Load = ({ navigation }) => {
   };
 
   useEffect(() => {
+    //AsyncStorage.clear();
     selectScreen();
     setIsDone(true);
     const timer = setTimeout(() => {
@@ -55,7 +57,7 @@ const Load = ({ navigation }) => {
         }, 500);
         return () => clearTimeout(timer);
       }
-    }, 1500);
+    }, 1000);
     return () => clearTimeout(timer);
   }, [ screen, selectScreen, navigation ]);
 
