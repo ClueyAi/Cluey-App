@@ -10,6 +10,7 @@ import FontAwesome from "@expo/vector-icons/FontAwesome";
 import PropTypes from "prop-types";
 
 import { AuthContext } from "../../../../api/firebase";
+import { FirestoreContext } from "../../../../api/firebase";
 import { ThemeContext } from "../../../../components/theme";
 import { LocaleContext } from "../../../../components/locale";
 import {
@@ -42,6 +43,7 @@ import {
 const SignUp = ({ navigation }) => {
   const { locale } = useContext(LocaleContext);
   const { signUp, signGoogle, signFacebook, signGithub } = useContext(AuthContext);
+  const { putUser } = useContext(FirestoreContext);
   const { theme } = useContext(ThemeContext);
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
@@ -95,6 +97,7 @@ const SignUp = ({ navigation }) => {
   const handleSignUp = async () => {
     try {
       await signUp(email, rePassword);
+      await putUser();
       navigation.navigate("Loading");
     } catch (error) {
       setError(error.code);

@@ -52,7 +52,7 @@ const Load = ({ navigation }) => {
           if (!isLoading) {
             navigation.navigate(screen, { screen: route });
           }
-        }, 1500);
+        }, 500);
         return () => clearTimeout(timer);
       }
     }, 1500);

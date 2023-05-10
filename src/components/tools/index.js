@@ -53,10 +53,10 @@ LogoutButton.propTypes = {
   navigation: PropTypes.object.isRequired,
 };
 
-export const BurguerMenuButton = ({ navigation }) => {
+export const ChatsMenuButton = ({ navigation }) => {
   const {theme} = useContext(ThemeContext);
   return(
-    <TouchableOpacity style={{...styles.buttonLeft, alignItems: 'center'}} onPress={() => navigation.navigate('Menu')}>
+    <TouchableOpacity style={{...styles.buttonLeft, alignItems: 'center'}} onPress={() => navigation.navigate('Chats')}>
       <View style={{height: 3, width: 20, marginBottom: 3, borderRadius: 10, backgroundColor: theme.primary}} />
       <View style={{height: 3, width: 25, borderRadius: 10, backgroundColor: theme.primary}} />
       <View style={{height: 3, width: 20, marginTop: 3, borderRadius: 10, backgroundColor: theme.primary}} />
@@ -64,7 +64,19 @@ export const BurguerMenuButton = ({ navigation }) => {
   )
 }
 
-BurguerMenuButton.propTypes = {
+ChatsMenuButton.propTypes = {
+  navigation: PropTypes.object.isRequired,
+};
+
+export const ContactsMenuButton = ({ navigation }) => {
+  const {theme} = useContext(ThemeContext);
+  return(
+    <TouchableOpacity style={styles.buttonLeft} onPress={() => navigation.navigate('Contacts')}>
+      <Ionicons name="people-outline" size={24} color={theme.primary} />
+    </TouchableOpacity>
+  )
+}
+ContactsMenuButton.propTypes = {
   navigation: PropTypes.object.isRequired,
 };
 
@@ -81,6 +93,19 @@ export const CloseMenuButton = ({ navigation }) => {
 CloseMenuButton.propTypes = {
   navigation: PropTypes.object.isRequired,
 };
+
+export const HomeButton = ({ navigation }) => {
+  const {theme} = useContext(ThemeContext);
+  return(
+    <TouchableOpacity style={styles.buttonLeft} onPress={() => navigation.navigate('Home')}>
+      <Ionicons name="home-outline" size={24} color={theme.primary} />
+    </TouchableOpacity>
+  )
+}
+HomeButton.propTypes = {
+  navigation: PropTypes.object.isRequired,
+};
+
 
 export const SettingsButton = ({ navigation }) => {
   const {theme} = useContext(ThemeContext);

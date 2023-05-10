@@ -9,7 +9,7 @@
     "android": "expo run:android",
     "ios": "expo run:ios",
     "web": "expo start --web",
-    "buildAndroid": "eas build -p android --profile preview"
+    "buildAndroid": "eas build --profile preview --platform android"
   },
   "dependencies": {
     "@eslint/create-config": "0.4.3",
@@ -22,7 +22,6 @@
     "archiver": "^5.3.1",
     "babel-plugin-inline-dotenv": "^1.7.0",
     "bulma": "^0.9.4",
-    "child_process": "^1.0.2",
     "dotenv": "^16.0.3",
     "expo": "^48.0.13",
     "expo-application": "^5.1.1",

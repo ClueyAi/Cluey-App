@@ -10,15 +10,15 @@ export { AuthContext, UserContext, FirestoreContext, StorageContext };
 
 export const Firebase = ({ children }) => {
   return (
-    <AuthProvider>
-      <UserProvider>
+    <UserProvider>
+      <AuthProvider>
         <FirestoreProvider>
           <StorageProvider>
             {children}
           </StorageProvider>
         </FirestoreProvider>
-      </UserProvider>
-    </AuthProvider>
+      </AuthProvider>
+    </UserProvider>
   );
 };
 

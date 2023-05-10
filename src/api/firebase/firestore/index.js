@@ -7,8 +7,14 @@ export const FirestoreContext = createContext();
 
 export const FirestoreProvider = ({ children }) => {
   const {user, isAuth} = useContext(UserContext);
+  const [allUsers, setAllUsers] = useState(null);
+  const [hasAllUsers, setHasAllUsers] = useState(false);
+  const [contacts, setContacts] = useState(null);
+  const [hasContacts, setHasContacts] = useState(false);
   const [messages, setMessages] = useState(null);
   const [hasMessages, setHasMessages] = useState(false);
+  const [chats, setChats] = useState(null);
+  const [hasChats, setHasChats] = useState(false);
   const [profile, setProfile] = useState(null);
   const [hasProfile, setHasProfile] = useState(false);
 
@@ -16,8 +22,38 @@ export const FirestoreProvider = ({ children }) => {
 
   useEffect(() => {
     if (isAuth) {
-      const getMessage = firestore.collection('chat-'+currentUser)
-        .orderBy('createdAt', 'desc')
+      const getAllUsers = firestore.collection('users')
+      .onSnapshot((querySnapshot) => {
+        const data = querySnapshot.docs.map(doc => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        setAllUsers(data);
+        data.length === 0?setHasAllUsers(false):setHasAllUsers(true);
+      });
+
+      const getContacts = firestore.collection('users').doc(currentUser).collection('contacts')
+        .onSnapshot((querySnapshot) => {
+          const data = querySnapshot.docs.map(doc => ({
+            id: doc.id,
+            ...doc.data(),
+          }));
+          setContacts(data);
+          data.length === 0?setHasContacts(false):setHasContacts(true);
+      });
+
+      const getChats = firestore.collection('users').doc(currentUser).collection('cluey')
+      .orderBy('createdAt', 'asc').onSnapshot((querySnapshot) => {
+          const data = querySnapshot.docs.map(doc => ({
+            id: doc.id,
+            ...doc.data(),
+          }));
+          setChats(data);
+          data.length === 0?setHasChats(false):setHasChats(true)
+      });
+
+      const getClueyMessages = firestore.collection('users').doc(currentUser)
+      .collection('cluey').doc('default').collection('messages').orderBy('createdAt', 'desc')
         .onSnapshot((querySnapshot) => {
           const data = querySnapshot.docs.map(doc => ({
             id: doc.id,
@@ -27,7 +63,7 @@ export const FirestoreProvider = ({ children }) => {
           data.length === 0?setHasMessages(false):setHasMessages(true)
       });
 
-      const getProfile = firestore.collection('profile').doc(currentUser)
+      const getProfile = firestore.collection('users').doc(currentUser)
       .onSnapshot((doc) => {
         if (doc.exists) {
           const data = doc.data();
@@ -39,26 +75,46 @@ export const FirestoreProvider = ({ children }) => {
       });
 
       return () => {
-        getMessage();
+        getAllUsers();
+        getContacts();
+        getClueyMessages();
+        getChats();
         getProfile();
       }
     }
-  }, [isAuth]);
+  }, [currentUser, isAuth]);
 
-  const createUserMessage = async (message) => {
-    return await firestore.collection('chat-'+currentUser).add(message);
+  const putUser = async () => {
+    const timestamp = Date().toLocaleString();
+    const authUser = {
+      uid: user.uid,
+      email: user.email,
+      displayName: user.displayName,
+      photoURL: user.photoURL,
+      emailVerified: user.emailVerified,
+      createdAt: timestamp,
+      updatedAt: timestamp,
+    };
+    const docRef = firestore.collection('users').doc(currentUser);
+    const doc = await docRef.get();
+     
+    if (doc.exists) {
+      return await docRef.update(authUser);
+    } else {
+      return await docRef.set(authUser);
+    }
   };
 
-  const createAiMessage = async (message) => {
-    return await firestore.collection('chat-'+currentUser).add(message);
-  };
-
-  const createBotMessage = async (message) => {
-    return await firestore.collection('chat-'+currentUser).add(message);
+  const putContact = async (contact) => {
+    const docRef = firestore.collection('users').doc(currentUser).collection('contacts').doc(contact);
+    const doc = await docRef.get();
+    if (!doc.exists) {
+      await docRef.set({id: contact});
+    }
   };
 
   const updateProfile = async (profile) => {
-    const docRef = firestore.collection('profile').doc(currentUser);
+    const docRef = firestore.collection('users').doc(currentUser);
     const doc = await docRef.get();
     if (doc.exists) {
       return await docRef.update(profile);
@@ -67,15 +123,87 @@ export const FirestoreProvider = ({ children }) => {
     }
   };
 
+  const createChat = async (chat) => {
+    await firestore.collection('users').doc(currentUser).collection('cluey').add(chat);
+  };
+
+  const createUserMessage = async (message) => {
+    const context = {
+      name: message.contextName,
+      createdAt: message.createdAt,
+      text: message.text,
+    };
+    const docRef = firestore.collection('users').doc(currentUser).collection('cluey').doc('default');
+    const doc = await docRef.get();
+    if (!doc.exists) {
+      await docRef.set(context);
+    }
+    const userMessage = {
+      idUser: currentUser,
+      createdAt: message.createdAt,
+      text: message.text,
+    };
+    const messageCollection = firestore.collection('users').doc(currentUser).collection('cluey').doc('default').collection('messages');
+    return await messageCollection.add(userMessage);
+  };
+
+  const createAiMessage = async (message) => {
+    const context = {
+      name: message.contextName,
+      createdAt: message.createdAt,
+      text: message.text,
+    };
+    const docRef = firestore.collection('users').doc(currentUser).collection('cluey').doc('default');
+    const doc = await docRef.get();
+    if (!doc.exists) {
+      await docRef.set(context);
+    } 
+    const aiMessage = {
+      name: message.responseName,
+      createdAt: message.createdAt,
+      text: message.text,
+    };
+    const messageCollection = firestore.collection('users').doc(currentUser).collection('cluey').doc('default').collection('messages');
+    return await messageCollection.add(aiMessage);
+  };
+
+  const editChat = async (chatId, newName) => {
+    const docRef = firestore.collection('users').doc(currentUser).collection('cluey').doc(chatId);
+    if (chatId === 'default') {
+      return;
+    } else {
+      return await docRef.update({name: newName});
+    }
+  };
+
+  const deleteChat = async (chatId) => {
+    const docRef = firestore.collection('users').doc(currentUser).collection('cluey').doc(chatId);
+    if (chatId === 'default') {
+      return;
+    } else {
+      return await docRef.delete();
+    }
+  };
+
   const value = {
+    allUsers,
+    hasAllUsers,
+    contacts,
+    hasContacts,
     messages,
-    profile,
     hasMessages,
+    chats,
+    hasChats,
+    profile,
     hasProfile,
+    putUser,
+    putContact,
+    updateProfile,
+    createChat,
     createUserMessage,
     createAiMessage,
-    createBotMessage,
-    updateProfile
+    editChat,
+    deleteChat
   };
 
   return <FirestoreContext.Provider value={value}>{children}</FirestoreContext.Provider>;

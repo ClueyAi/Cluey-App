@@ -4,9 +4,9 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import UserAvatar from "react-native-user-avatar";
 import PropTypes from "prop-types";
 
-import { UserContext } from "../../../../api/firebase";
-import { ThemeContext } from "../../../../components/theme";
-import { LocaleContext } from "../../../../components/locale";
+import { UserContext } from "../../../../../api/firebase";
+import { ThemeContext } from "../../../../../components/theme";
+import { LocaleContext } from "../../../../../components/locale";
 import {
   Container,
   Heading,
@@ -31,7 +31,7 @@ import {
   TextError,
   ButtonPrimary,
   FooterSmall,
-} from "../../../../components/styles";
+} from "../../../../../components/styles";
 
 const ChangeEmail = ({ navigation }) => {
   const { locale } = useContext(LocaleContext);
