@@ -9,6 +9,8 @@ export const FirestoreProvider = ({ children }) => {
   const {user, isAuth} = useContext(UserContext);
   const [allUsers, setAllUsers] = useState(null);
   const [hasAllUsers, setHasAllUsers] = useState(false);
+  const [thisUser, setThisUser] = useState(null);
+  const [hasThisUser, setHasThisUser] = useState(false);
   const [contacts, setContacts] = useState(null);
   const [hasContacts, setHasContacts] = useState(false);
   const [messages, setMessages] = useState(null);
@@ -30,6 +32,17 @@ export const FirestoreProvider = ({ children }) => {
         }));
         setAllUsers(data);
         data.length === 0?setHasAllUsers(false):setHasAllUsers(true);
+      });
+
+      const getThisUsers = firestore.collection('users').doc(currentUser)
+      .onSnapshot((doc) => {
+        if (doc.exists) {
+          const data = doc.data();
+          setThisUser(data);
+          setHasThisUser(true);
+        } else {
+          setHasThisUser(false);
+        }
       });
 
       const getContacts = firestore.collection('users').doc(currentUser).collection('contacts')
@@ -76,6 +89,7 @@ export const FirestoreProvider = ({ children }) => {
 
       return () => {
         getAllUsers();
+        getThisUsers();
         getContacts();
         getClueyMessages();
         getChats();
@@ -86,11 +100,12 @@ export const FirestoreProvider = ({ children }) => {
 
   const putUser = async () => {
     const timestamp = Date().toLocaleString();
+    const name = user?.email.split("@")[0];
     const authUser = {
       uid: user.uid,
       email: user.email,
-      displayName: user.displayName,
-      photoURL: user.photoURL,
+      displayName: user.displayName?user.displayName: name,
+      photoURL: user.photoURL? user.photoURL: '',
       emailVerified: user.emailVerified,
       createdAt: timestamp,
       updatedAt: timestamp,
@@ -109,7 +124,7 @@ export const FirestoreProvider = ({ children }) => {
     const docRef = firestore.collection('users').doc(currentUser).collection('contacts').doc(contact);
     const doc = await docRef.get();
     if (!doc.exists) {
-      await docRef.set({id: contact});
+      await docRef.set({});
     }
   };
 
@@ -188,6 +203,8 @@ export const FirestoreProvider = ({ children }) => {
   const value = {
     allUsers,
     hasAllUsers,
+    thisUser,
+    hasThisUser,
     contacts,
     hasContacts,
     messages,

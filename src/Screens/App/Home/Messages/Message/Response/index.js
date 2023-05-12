@@ -6,7 +6,7 @@ import {
   MessageLeft,
   NameText,
   MessageText,
-  DateText
+  DateText,
 } from '../../../../../../components/styles';
 import Menu from './Menu';
 
@@ -15,11 +15,11 @@ const Response = ({ data }) => {
 
   return (
     <Menu data={data}>
-    <MessageLeft style={styles.shadow}>
-      <NameText>{data?.name}</NameText>
-      <MessageText>{data?.text}</MessageText>
-      <DateText>{time}</DateText>
-    </MessageLeft>
+      <MessageLeft style={styles.shadow}>
+        <NameText>{data?.name}</NameText>
+        <MessageText>{data?.text}</MessageText>
+        <DateText>{time}</DateText>
+      </MessageLeft>
     </Menu>
   );
 };

@@ -62,7 +62,8 @@ export default {
         redirectUri: process.env.REDIRECT_URI,
       },
       openai: {
-        apiKey: process.env.OPENAI_API_KEY
+        apiKey: process.env.OPENAI_API_KEY,
+        orgId: process.env.OPENAI_ORG_ID,
       }
     }
   }

@@ -14,15 +14,13 @@ const Contacts = () => {
   useEffect(() => {
     const filteredUsers = allUsers.filter(user => {
       try {
-        return contacts.some(contact => contact === user.email);
+        return contacts.some(contact => contact.id === user.email);
       } catch (error) {
         console.error(error);
       }
     });
     setFilteredUsers(filteredUsers);
   }, [allUsers, contacts]);
-
-  console.log('filteredUsers', filteredUsers);
 
   return (
     <Container>
