@@ -110,14 +110,14 @@ const New = ({ createChat }) => {
             placeholder="New chat"
             placeholderTextColor={theme.text}
             value={chatName}
-            autoCapitalize="none"
+            autoCapitalize="characters"
             autoFocus={true}
+            inputMode="text"
             maxLength={20}
             returnKeyType="send"
             onChangeText={handlerChatName}
             onSubmitEditing={handleAddNewChat}
           />
-    
           <ButtonEmpyte onPress={handleAddNewChat}>
             <MaterialIcons style={{marginRight: 25}} name="check" size={24} color={theme.secondary} />
           </ButtonEmpyte>

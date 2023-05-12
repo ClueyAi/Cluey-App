@@ -4,7 +4,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import PropTypes from "prop-types";
 
 import { ActivityIndicator, Container, Body, H1Mini } from '../../../components/styles';
-import { UserContext, AuthContext } from '../../../api/firebase';
+import { UserContext, AuthContext, FirestoreContext } from '../../../api/firebase';
 import { LocaleContext } from '../../../components/locale';
 import { ThemeContext } from '../../../components/theme';
 
@@ -12,6 +12,7 @@ const Load = ({ navigation }) => {
   const {locale} = useContext(LocaleContext);
   const {theme} = useContext(ThemeContext);
   const {user, isAuth, isVerify} = useContext(UserContext);
+  const {thisUser, hasThisUser} = useContext(FirestoreContext);
   const {isNew} = useContext(AuthContext);
   const [loadingMsg] = useState(locale.loading.loading);
   const [loadedMsg, setLoadedMsg] = useState('');
@@ -22,13 +23,16 @@ const Load = ({ navigation }) => {
   
   const selectScreen = async () => {
     if (isAuth) {
-      const emailName = user?.email?.split('@')[0];
-      const currentUser = user?.displayName?user?.displayName:emailName;
-      const msg = await user?locale.loading.welcome_user+currentUser:locale.loading.welcome_back;
+      const emailName = thisUser?.email?.split('@')[0];
+      const currentUser = thisUser?.displayName?thisUser?.displayName:emailName;
+      const msg = await thisUser?locale.loading.welcome_user+currentUser:locale.loading.welcome_back;
       setLoadedMsg(msg);
       if (!isVerify) {
         setScreen('AuthStackNavigator');
-        setRoute('Verify');
+        setRoute('Verify'); 
+      } else if (isVerify && thisUser?.preferences == undefined) {
+        setScreen('AuthStackNavigator');
+        setRoute('Custom');
       } else {
         setScreen('AppStackNavigator');
       }
@@ -57,7 +61,7 @@ const Load = ({ navigation }) => {
         }, 500);
         return () => clearTimeout(timer);
       }
-    }, 1000);
+    }, 800);
     return () => clearTimeout(timer);
   }, [ screen, selectScreen, navigation ]);
 
@@ -65,7 +69,7 @@ const Load = ({ navigation }) => {
     isLoading ? 
     <Container>
       <Body style={{backgroundColor: theme.primary}}>
-        <H1Mini style={{width: '95%'}}>{loadingMsg}</H1Mini>
+        <H1Mini style={{width: '95%', marginTop: 50}}>{loadingMsg}</H1Mini>
         <ImageBackground
           style={{width: 165, height: 278}}
           source={require('../../../../assets/images/cluey-blank.png')}
@@ -83,7 +87,7 @@ const Load = ({ navigation }) => {
       <Body style={{backgroundColor: theme.primary}}>
         <H1Mini style={{width: '95%'}}>{loadedMsg}</H1Mini>
         <ImageBackground
-          style={{width: 165, height: 278}}
+          style={{width: 151, height: 220, marginTop: 20}}
           source={require('../../../../assets/images/cluey.png')}
         >
           </ImageBackground>

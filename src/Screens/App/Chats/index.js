@@ -22,15 +22,14 @@ const Chats = () => {
   };
 
   useEffect(() => {
-    console.log('contacts', contacts);
-    const filteredUsers = allUsers.filter(user => {
+    const filtered = allUsers.filter(user => {
       try {
-        return contacts.some(contact => contact === user.email);
+        return contacts.some(contact => contact.id === user.email);
       } catch (error) {
         console.error(error);
       }
     });
-    setFilteredUsers(filteredUsers);
+    setFilteredUsers(filtered);
   }, [allUsers, contacts]);
 
   return (

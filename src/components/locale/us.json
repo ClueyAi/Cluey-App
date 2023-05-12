@@ -179,7 +179,16 @@
     }
   },
   "custom": {
-    
+    "title": "Verify",
+    "description": "Please check your email from the link sent to you in order to proceed to Cluey.",
+    "verify_button": {
+      "text": "Didn't you receive verification email? Resend",
+      "accessibility": "send verification email"
+    },
+    "continue_button": {
+      "text": "Continue to Sign In",
+      "accessibility": "continue to sign in"
+    }
   },
   "forgot": {
     "title": "Forgot Password?",

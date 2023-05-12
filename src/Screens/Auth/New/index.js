@@ -103,7 +103,7 @@ const New = ({ navigation }) => {
     try {
       await signUp(email, rePassword);
       await putUser();
-      navigation.navigate("Loading");
+      await navigation.navigate("Loading");
     } catch (error) {
       setError(error.code);
       if (error.code === "auth/missing-password") {

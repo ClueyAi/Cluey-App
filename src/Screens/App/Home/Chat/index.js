@@ -18,7 +18,7 @@ const Chat = () => {
   const {locale} = useContext(LocaleContext);
   const {theme} = useContext(ThemeContext);
   const {createUserMessage} = useContext(FirestoreContext);
-  const {sendMessageToOpenAI} = useContext(OpenAIContext);
+  const {checkOpenAIStatus, sendMessageToOpenAI} = useContext(OpenAIContext);
   const {user} = useContext(UserContext);
   const [name, setName] = useState('');
   const [textValue, setTextValue] = useState(null);
@@ -46,6 +46,7 @@ const Chat = () => {
 
   const handleSpeech = async () => {
     alert("Fale!");
+    checkOpenAIStatus();
   };
   useEffect(() => {
     if (user) {

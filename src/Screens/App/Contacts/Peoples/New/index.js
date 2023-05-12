@@ -105,15 +105,17 @@ const New = ({ putContact }) => {
             placeholderTextColor={theme.text}
             value={contactEmail}
             autoCapitalize="none"
+            autoCorrect={false}
             autoFocus={true}
-            maxLength={20}
+            inputMode="email"
+            autoComplete="email"
+            maxLength={100}
             returnKeyType="send"
             onChangeText={handlerChatName}
             onSubmitEditing={handleAddNewContact}
           />
-    
           <ButtonEmpyte onPress={handleAddNewContact}>
-            <MaterialIcons style={{marginRight: 25}} name="check" size={24} color={theme.secondary} />
+            <MaterialIcons style={{marginRight: 15}} name="check" size={24} color={theme.secondary} />
           </ButtonEmpyte>
         </Input>
       </View>

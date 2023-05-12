@@ -75,7 +75,7 @@ const SignIn = ({ navigation }) => {
     try {
       await signIn(email, password);
       await putUser();
-      navigation.navigate("Loading");
+      await navigation.navigate("Loading");
     } catch (error) {
       setError(error.code);
       if (error.code === "auth/missing-password") {

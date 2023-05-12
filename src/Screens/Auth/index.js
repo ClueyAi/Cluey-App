@@ -47,7 +47,16 @@ const Auth = () => {
           headerTitle: '',
         })}
       />
-      <AuthStack.Screen name="Custom" component={Custom}/>
+      <AuthStack.Screen
+        name="Custom"
+        component={Custom}
+        options={({navigation}) => ({
+          headerRight: () => <LogoutButton navigation={navigation}/>,
+          headerShown: true,
+          headerShadowVisible: false,
+          headerTitle: '',
+        })}
+      />
       <AuthStack.Group screenOptions={{
         headerLeft: null,
         headerRight: null,

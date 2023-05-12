@@ -265,6 +265,11 @@ export const AbsoluteButton = styled.TouchableOpacity`
 `;
 export const ButtonEmpyte = styled.TouchableOpacity``;
 
+// cunstoms
+export const InterestsBtn = styled.View`
+  flex-wrap: wrap;
+`;
+
 // Home
 export const ChatTitle = styled.Text`
   font-family: 'Nunito-Bold';
@@ -293,15 +298,18 @@ export const ChatInput = styled.View`
   justify-content: space-between;
   align-items: center;
   border-radius: 30px;
+  border-width: 0.1px;
+  border-color: ${light.text};
   background-color: ${light.background};
 `;
 export const ChatTextInput = styled.TextInput`
   flex: 1;
+  align-self: center;
   font-family: 'Nunito-Bold';
   width: 100%;
   height: 100%;
-  padding: 20px;
-
+  padding: 15px;
+  margin-left: 10px;
   color: ${light.text};
 `;
 export const ChatMessages = styled.View`
