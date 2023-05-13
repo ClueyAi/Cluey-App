@@ -11,6 +11,8 @@ export const FirestoreProvider = ({ children }) => {
   const [hasAllUsers, setHasAllUsers] = useState(false);
   const [thisUser, setThisUser] = useState(null);
   const [hasThisUser, setHasThisUser] = useState(false);
+  const [preferences, setPreferences] = useState(null);
+  const [hasPreferences, setHasPreferences] = useState(false);
   const [contacts, setContacts] = useState(null);
   const [hasContacts, setHasContacts] = useState(false);
   const [messages, setMessages] = useState(null);
@@ -43,6 +45,16 @@ export const FirestoreProvider = ({ children }) => {
         } else {
           setHasThisUser(false);
         }
+      });
+
+      const getPreferences = firestore.collection('users').doc(currentUser).collection('preferences')
+        .onSnapshot((querySnapshot) => {
+          const data = querySnapshot.docs.map(doc => ({
+            id: doc.id,
+            ...doc.data(),
+          }));
+          setPreferences(data);
+          data.length === 0?setHasPreferences(false):setHasPreferences(true);
       });
 
       const getContacts = firestore.collection('users').doc(currentUser).collection('contacts')
@@ -90,6 +102,7 @@ export const FirestoreProvider = ({ children }) => {
       return () => {
         getAllUsers();
         getThisUsers();
+        getPreferences();
         getContacts();
         getClueyMessages();
         getChats();
@@ -126,6 +139,29 @@ export const FirestoreProvider = ({ children }) => {
     if (!doc.exists) {
       await docRef.set({});
     }
+  };
+
+  const putPreferences = async (preferences) => {
+    const docRef = firestore.collection('users').doc(currentUser);
+    const doc = await docRef.get();
+    console.log(firestore.collection('users').doc(currentUser).where('preferences', '==', preferences));
+    if (doc.exists) {
+      console.log('existe');
+      return await docRef.update({preferences});
+    } else {
+      console.log('no existe');
+      return await docRef.set({preferences});
+    }
+  };
+
+  const test = async (focusItens, interestsItens) => {
+    const docRef = firestore.collection('users').doc(currentUser);
+    return await docRef.set({
+      preferences: {
+        focus: focusItens,
+        interests: interestsItens,
+      }
+    }, { merge: true })
   };
 
   const updateProfile = async (profile) => {
@@ -205,6 +241,8 @@ export const FirestoreProvider = ({ children }) => {
     hasAllUsers,
     thisUser,
     hasThisUser,
+    preferences,
+    hasPreferences,
     contacts,
     hasContacts,
     messages,
@@ -215,6 +253,8 @@ export const FirestoreProvider = ({ children }) => {
     hasProfile,
     putUser,
     putContact,
+    test,
+    putPreferences,
     updateProfile,
     createChat,
     createUserMessage,

@@ -1,21 +1,22 @@
 import React, { useContext, useState } from 'react';
-import { Alert, StyleSheet, FlatList } from 'react-native';
+import { StyleSheet, FlatList } from 'react-native';
 import PropTypes from 'prop-types';
 
-import { View, ButtonPrimary, ButtonEmpyte, TxtButton } from '../../../../components/styles';
-import { ThemeContext } from '../../../../components/theme';
+import { View, Input, TextInput, ButtonEmpyte, TxtButton } from '../../../../components/styles';
 import { LocaleContext } from '../../../../components/locale';
-import { FirestoreContext } from '../../../../api/firebase';
+import { ThemeContext } from '../../../../components/theme';
 
 const Focus = ({ setFocusItens }) => {
   const { locale } = useContext(LocaleContext);
   const { theme } = useContext(ThemeContext);
   const [selectedButtons, setSelectedButtons] = useState({});
+  const [otherItens, setOtherItens] = useState({});
+  const [other, setOther] = useState(false);
   const buttons = [
-    { title: 'Programming', selected: false },
-    { title: 'Designer', selected: false },
-    { title: 'Development', selected: false },
-    { title: 'Debugging', selected: false },
+    { title: locale.custom.focus.itens.personal, selected: false },
+    { title: locale.custom.focus.itens.commercial, selected: false },
+    { title: locale.custom.focus.itens.academic, selected: false },
+    { title: locale.custom.focus.itens.other, selected: false },
   ];
 
   const handleSelect = (button) => {
@@ -26,8 +27,16 @@ const Focus = ({ setFocusItens }) => {
       newSelectedButtons[button] = true;
     }
     setSelectedButtons(newSelectedButtons);
+
     const selectedButtonNames = Object.keys(newSelectedButtons);
     setFocusItens(selectedButtonNames);
+
+    if (selectedButtonNames.includes("Other")) {
+      setOther(true);
+    } else {
+      setOther(false);
+    }
+  
   };
 
   const renderItem = ({ item }) => (
@@ -35,7 +44,8 @@ const Focus = ({ setFocusItens }) => {
       style={[
         styles.button,
         {
-          backgroundColor: selectedButtons[item.title] ? theme.secondary : theme.primary,
+          backgroundColor: theme.primary,
+          opacity: selectedButtons[item.title] ? 0.5 : 1,
         },
       ]}
       onPress={() => handleSelect(item.title)}
@@ -55,15 +65,35 @@ const Focus = ({ setFocusItens }) => {
       borderRadius: 30,
       backgroundColor: theme.primary,
     },
+    shadow: {
+      shadowColor: "#000000",
+      shadowOffset: {width: 0, height: 3},
+      shadowOpacity:  0.17,
+      shadowRadius: 3.05,
+      elevation: 4
+    }
   });
 
   return (
-    <FlatList
-      data={buttons}
-      renderItem={renderItem}
-      keyExtractor={(item) => item.title}
-      numColumns={2}
-    />
+    <View style={{flex: 1, flexDirection: 'column', alignItems: 'center'}}>
+      <FlatList
+        data={buttons}
+        renderItem={renderItem}
+        keyExtractor={(item) => item.title}
+        numColumns={2}
+      />
+      {other?
+        <View style={{flex: 1, width: '75%'}}>
+          <Input style={{...styles.shadow, marginTop: -110}}>
+            <TextInput 
+              placeholder={locale.custom.focus.other_input.placeholder}
+              placeholderTextColor={theme.primary}
+              onChangeText={(text) => setOtherItens(text)}
+            />
+          </Input>
+        </View>
+    :null}
+    </View>
   );
 };
 

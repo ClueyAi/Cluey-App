@@ -75,6 +75,8 @@ export const Input = styled.View`
   align-items: center;
   border-radius: 30px;
   background-color: ${light.background};
+  border-width: 0.1px;
+  border-color: ${light.text};
 `;
 export const TextInput = styled.TextInput`
   flex: 1;

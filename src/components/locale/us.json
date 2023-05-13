@@ -179,15 +179,45 @@
     }
   },
   "custom": {
-    "title": "Verify",
-    "description": "Please check your email from the link sent to you in order to proceed to Cluey.",
-    "verify_button": {
-      "text": "Didn't you receive verification email? Resend",
-      "accessibility": "send verification email"
+    "focus": {
+      "title": "Tell us a little about yourself",
+      "description": "I will use Cluey to use:",
+      "itens": {
+        "personal": "Personal",
+        "commercial": "Commercial",
+        "academic": "Academic",
+        "other": "Other"
+      },
+      "other_input": {
+        "description": "Tell us which types of use you intend, separated by a comma",
+        "placeholder": "outher"
+      }
+    },
+    "interests": {
+      "title": "Interests",
+      "description": "Select a few to get started. You can update them later.",
+      "itens": {
+        "html": "HTML",
+        "ia": "IA",
+        "graphic_design": "Graphic Design",
+        "musical_production": "Musical Production",
+        "c_sharp": "C#",
+        "r": "R",
+        "python": "Python",
+        "ui": "UI",
+        "ux": "UX",
+        "web_design": "Web Design",
+        "java": "Java",
+        "javascript": "JavaScript"
+      }
     },
     "continue_button": {
-      "text": "Continue to Sign In",
-      "accessibility": "continue to sign in"
+      "text": "Continue",
+      "accessibility": "continue cunstom your preferences"
+    },
+    "skip_button": {
+      "text": "Skip step",
+      "accessibility": "skip this step"
     }
   },
   "forgot": {
