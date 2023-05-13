@@ -1,30 +1,27 @@
 import React, { useContext, useState } from 'react';
-import { Alert, StyleSheet, FlatList } from 'react-native';
+import { StyleSheet, FlatList } from 'react-native';
 import PropTypes from 'prop-types';
 
-import { View, ButtonPrimary, ButtonEmpyte, TxtButton } from '../../../../components/styles';
-import { ThemeContext } from '../../../../components/theme';
+import { View, ButtonEmpyte, TxtButton } from '../../../../components/styles';
 import { LocaleContext } from '../../../../components/locale';
-import { FirestoreContext } from '../../../../api/firebase';
 
 const Interests = ({ setInterestsItens }) => {
   const { locale } = useContext(LocaleContext);
-  const { theme } = useContext(ThemeContext);
   const [selectedButtons, setSelectedButtons] = useState({});
   
   const buttons = [
-    { title: 'HTML', color: '#3ABF38', selected: false },
-    { title: 'IA', color: '#FFBF00', selected: false },
-    { title: 'Design Grafíco', color: '#56CCF2', selected: false },
-    { title: 'Produção Musical', color: '#F2994A', selected: false },
-    { title: 'UI', color: '#FFBF00', selected: false },
-    { title: 'UX', color: '#3ABF38', selected: false },
-    { title: 'Web Design', color: '#56CCF2', selected: false },
-    { title: 'Python', color: '#F2994A', selected: false },
-    { title: 'Node', color: '#BB6BD9', selected: false },
-    { title: 'PHP', color: '#1400FF' ,selected: false },
-    { title: 'Java', color: '#3ABF38', selected: false },
-    { title: 'C# ', color: '#FFBF00', selected: false },
+    { title: locale.custom.interests.itens.html, color: '#3ABF38', selected: false },
+    { title: locale.custom.interests.itens.ia, color: '#FFBF00', selected: false },
+    { title: locale.custom.interests.itens.graphic_design, color: '#56CCF2', selected: false },
+    { title: locale.custom.interests.itens.musical_production, color: '#F2994A', selected: false },
+    { title: locale.custom.interests.itens.c_sharp, color: '#1400FF', selected: false },
+    { title: locale.custom.interests.itens.r, color: '#BB6BD9', selected: false },
+    { title: locale.custom.interests.itens.web_design, color: '#56CCF2', selected: false },
+    { title: locale.custom.interests.itens.java, color: '#F2994A', selected: false },
+    { title: locale.custom.interests.itens.python, color: '#3ABF38', selected: false },
+    { title: locale.custom.interests.itens.javascript, color: '#1400FF' ,selected: false },
+    { title: locale.custom.interests.itens.ui, color: '#FFBF00', selected: false },
+    { title: locale.custom.interests.itens.ux, color: '#56CCF2', selected: false },
   ];
 
   const handleSelect = (button) => {

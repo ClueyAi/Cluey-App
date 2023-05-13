@@ -77,12 +77,9 @@ const New = ({ createChat }) => {
       marginBottom: 5,
       borderRadius: 20,
       backgroundColor: theme.backgroundSecondary, 
-      borderWidth: 0.1,
-      borderColor: theme.background,
     },
     chatBox: {
       width: '100%',
-
     },
     shadow: {
       shadowColor: "#000000",

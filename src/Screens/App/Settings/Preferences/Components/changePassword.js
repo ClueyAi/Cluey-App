@@ -172,7 +172,7 @@ const ChangePassword = ({ navigation }) => {
             <Input
                 style={{
                   ...styles.shadow,
-                  borderWidth: 0.1,
+    
                   marginBottom: 15,
                   backgroundColor: `${
                     currentPasswordValid == false ? theme.inputError : theme.backgroundSecondary
@@ -195,7 +195,6 @@ const ChangePassword = ({ navigation }) => {
               <Input
                 style={{
                   ...styles.shadow,
-                  borderWidth: 0.1,
                   marginBottom: 10,
                   backgroundColor: `${
                     error === errorPassword && passwordValid == false
@@ -258,7 +257,6 @@ const ChangePassword = ({ navigation }) => {
               <Input
                 style={{
                   ...styles.shadow,
-                  borderWidth: 0.1,
                   marginBottom: 10,
                   backgroundColor: `${
                     error === errorPassword && rePasswordValid == false

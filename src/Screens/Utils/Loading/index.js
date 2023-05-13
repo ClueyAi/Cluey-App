@@ -12,7 +12,7 @@ const Load = ({ navigation }) => {
   const {locale} = useContext(LocaleContext);
   const {theme} = useContext(ThemeContext);
   const {user, isAuth, isVerify} = useContext(UserContext);
-  const {thisUser, hasThisUser} = useContext(FirestoreContext);
+  const {thisUser, hasThisUser, preferences, hasPreferences} = useContext(FirestoreContext);
   const {isNew} = useContext(AuthContext);
   const [loadingMsg] = useState(locale.loading.loading);
   const [loadedMsg, setLoadedMsg] = useState('');
@@ -23,6 +23,8 @@ const Load = ({ navigation }) => {
   
   const selectScreen = async () => {
     if (isAuth) {
+      //console.log(preferences);
+      //console.log(hasPreferences);
       const emailName = thisUser?.email?.split('@')[0];
       const currentUser = thisUser?.displayName?thisUser?.displayName:emailName;
       const msg = await thisUser?locale.loading.welcome_user+currentUser:locale.loading.welcome_back;

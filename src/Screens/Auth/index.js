@@ -50,8 +50,8 @@ const Auth = () => {
       <AuthStack.Screen
         name="Custom"
         component={Custom}
-        options={({navigation}) => ({
-          headerRight: () => <LogoutButton navigation={navigation}/>,
+        options={() => ({
+          headerLeft: null,
           headerShown: true,
           headerShadowVisible: false,
           headerTitle: '',

@@ -218,7 +218,6 @@ const Current = ({ navigation }) => {
               <Input
                 style={{
                   ...styles.shadow,
-                  borderWidth: 0.1,
                   borderColor: theme.text,
                   marginBottom: 15,
                   backgroundColor: `${
@@ -269,7 +268,6 @@ const Current = ({ navigation }) => {
               <Input
                 style={{
                   ...styles.shadow,
-                  borderWidth: 0.1,
                   borderColor: theme.text,
                   marginBottom: 10,
                   backgroundColor: `${

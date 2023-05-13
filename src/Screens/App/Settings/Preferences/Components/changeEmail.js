@@ -176,7 +176,6 @@ const ChangeEmail = ({ navigation }) => {
               <Input
                 style={{
                   ...styles.shadow,
-                  borderWidth: 0.1,
                   marginBottom: 15,
                   backgroundColor: `${
                     error === errorEmail && emailValid == false
@@ -224,7 +223,6 @@ const ChangeEmail = ({ navigation }) => {
               <Input
                 style={{
                   ...styles.shadow,
-                  borderWidth: 0.1,
                   marginBottom: 10,
                   backgroundColor: `${
                     passwordValid == false ? theme.inputError : theme.backgroundSecondary
