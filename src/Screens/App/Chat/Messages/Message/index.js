@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 
-import { UserContext } from '../../../../../api/firebase';
+import { FirestoreContext } from '../../../../../api/firebase';
 
 import { 
   ChatMessages,
@@ -9,11 +9,11 @@ import {
   RequestMessages
 } from '../../../../../components/styles';
 
-import Response from './Response';
 import Request from './Request';
+import Response from './Response';
 
 const Message = ({ data }) => {
-  const {user} = useContext(UserContext);
+  const {user} = useContext(FirestoreContext);
 
   if (!data ) {
     return null;
@@ -21,16 +21,16 @@ const Message = ({ data }) => {
 
   return (
     <ChatMessages>
-      <ResponseMessages>
-        {data?.idUser !== user?.uid ? (
-          <Response data={data}/>
-        ) : null}
-      </ResponseMessages>
       <RequestMessages>
         {data?.idUser === user?.uid ? (
           <Request data={data}/>
         ) : null}
       </RequestMessages>
+      <ResponseMessages>
+        {data?.idUser !== user?.uid ? (
+          <Response data={data}/>
+        ) : null}
+      </ResponseMessages>
     </ChatMessages>
   );
 };

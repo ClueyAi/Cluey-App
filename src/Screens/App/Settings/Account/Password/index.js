@@ -4,7 +4,7 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import UserAvatar from "react-native-user-avatar";
 import PropTypes from "prop-types";
 
-import { UserContext } from "../../../../../api/firebase";
+import { UserContext, FirestoreContext } from "../../../../../api/firebase";
 import { ThemeContext } from "../../../../../components/theme";
 import { LocaleContext } from "../../../../../components/locale";
 import {
@@ -33,9 +33,10 @@ import {
   FooterSmall,
 } from "../../../../../components/styles";
 
-const ChangePassword = ({ navigation }) => {
+const Password = ({ navigation }) => {
   const { locale } = useContext(LocaleContext);
-  const { user, updateUserPassword } = useContext(UserContext);
+  const { updateUserPassword } = useContext(UserContext);
+  const { user } = useContext(FirestoreContext);
   const { theme } = useContext(ThemeContext);
   const currentPasswordRef = useRef(null);
   const passwordRef = useRef(null);
@@ -54,6 +55,8 @@ const ChangePassword = ({ navigation }) => {
   const [error, setError] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
   const [errorPassword, setErrorPassword] = useState("errorPassword");
+
+  const profile = user?.profile;
 
   const currentPasswordValidate = (text) => {
     setCurrentPassword(text);
@@ -121,13 +124,13 @@ const ChangePassword = ({ navigation }) => {
 
   useEffect(() => {
     const unsubscribe = navigation.addListener("focus", () => {
-      const name = user?.email.split("@")[0];
-      setPhoto(user?.photoURL);
-      setUserName(user?.displayName ? user?.displayName : name);
+      const name = profile?.email.split("@")[0];
+      setPhoto(profile?.photoURL);
+      setUserName(profile?.displayName ? profile?.displayName : name);
     });
 
     return unsubscribe;
-  }, [user]);
+  }, [profile]);
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
@@ -165,7 +168,7 @@ const ChangePassword = ({ navigation }) => {
                 }}
               >
                 <H3Bold>{userName}</H3Bold>
-                <H3>{user?.email}</H3>
+                <H3>{profile?.email}</H3>
               </Infor>
             </Profile>
             <Form style={{flex: 1, marginTop: 40, alignSelf: 'center'}}>
@@ -336,8 +339,8 @@ const styles = StyleSheet.create({
   },
 });
 
-ChangePassword.propTypes = {
+Password.propTypes = {
   navigation: PropTypes.object.isRequired,
 };
 
-export default ChangePassword;
+export default Password;

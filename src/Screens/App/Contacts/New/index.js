@@ -3,14 +3,14 @@ import { StyleSheet } from 'react-native';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import PropTypes from "prop-types";
 
-import { ThemeContext } from '../../../../../components/theme';
+import { ThemeContext } from '../../../../components/theme';
 import {
   View,
   ButtonEmpyte,
   Input,
   TextInput,
   H3Bold
-} from "../../../../../components/styles";
+} from "../../../../components/styles";
 
 const New = ({ putContact }) => {
   const { theme } = useContext(ThemeContext);
@@ -33,6 +33,7 @@ const New = ({ putContact }) => {
     try {
       handlerAddContact()
       await putContact(contactEmail);
+      setContactEmail('');
     } catch (error) {
       console.error(error);
     }

@@ -272,7 +272,7 @@
     "title": "Country",
     "description": "Choose your location"
   },
-  "preferences_config": {
+  "preferences": {
     "title": "Preferences",
     "title_name": "Preferences",
     "description": "Setting your preferences"

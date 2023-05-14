@@ -7,7 +7,10 @@
   "global": {
     "app": {
       "name": "Cluey",
-      "status": "Online",
+      "status": {
+        "true": "Online",
+        "false": "Offline"
+      },
       "resume_title": "What is Cluey?",
       "resume": "Cluey is a mobile app that helps you to find the best places to eat, drink, and have fun. It is a social network that allows you to share your experiences with your friends and other users. It is also a platform that allows you to discover new places and new experiences.",
       "policy_terms": {
@@ -178,7 +181,9 @@
       "accessibility": "continue to sign in"
     }
   },
-  "custom": {
+  "preferences": {
+    "title": "Preferences",
+    "description": "set your preferences",
     "focus": {
       "title": "Tell us a little about yourself",
       "description": "I will use Cluey to use:",
@@ -252,6 +257,22 @@
       "text": "Settings",
       "accessibility": "go to settings"
     },
+    "chats" : {
+      "title": "Chats",
+      "description": "Your chats",
+      "more_button": {
+        "text": "See More",
+        "accessibility": "see all cluey chats"
+      }
+    },
+    "teams": {
+      "title": "Teams",
+      "description": "Your teams",
+      "more_button": {
+        "text": "See More",
+        "accessibility": "see all teams cluey chats"
+      }
+    },
     "chat_box": {
       "placeholder1": "Hi ",
       "placeholder2": ", how can I help you?"
@@ -262,7 +283,7 @@
     }
   },
   "settings": {
-    "title": "My Account",
+    "title": "Settings",
     "button_logout": {
       "accessibility": "desconnect from Cluey and go back to authentication",
       "alert": {
@@ -307,14 +328,13 @@
       "accessibility": "change your password"
     }
   },
-  "anddress_config": {
+  "country_config": {
     "title": "Country",
-    "description": "Choose your location"
+    "description": "choose your location"
   },
-  "preferences_config": {
-    "title": "Preferences",
-    "title_name": "Preferences",
-    "description": "Setting your preferences"
+  "account": {
+    "title": "Account",
+    "description": "setting your account"
   },
   "about": {
     "title": "About"

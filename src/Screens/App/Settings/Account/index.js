@@ -4,9 +4,9 @@ import PropTypes from "prop-types";
 import CountryPicker from 'react-native-country-picker-modal';
 import Flag from 'react-native-flags';
 
-import { UserContext, FirestoreContext } from '../../../../api/firebase';
-
+import { FirestoreContext } from '../../../../api/firebase';
 import { LocaleContext } from '../../../../components/locale';
+import { ThemeContext } from '../../../../components/theme';
 import { 
   Container,
   Body,
@@ -18,27 +18,26 @@ import {
   FooterSmall,
 } from '../../../../components/styles';
 
-const Preferences = ({ navigation }) => {
+const Account = ({ navigation }) => {
   const {locale} = useContext(LocaleContext);
-  const {profile, updateProfile} = useContext(FirestoreContext);
-  const {user} = useContext(UserContext);
+  const {theme} = useContext(ThemeContext);
+  const {user, putCountry} = useContext(FirestoreContext);
   const [countryModalVisible, setCountryModalVisible] = useState(false);
+
+  const profile = user?.profile;
+  const country = user?.country;
 
   const handleCountrySelect = async (country) => {
     try {
       const {cca2, name} = country;
-      const profile = {
-        code: cca2,
-        country: name
-      };
-      await updateProfile(profile);
+      await putCountry(cca2, name);
     } catch (error) {
       console.log(error);
     }
   };
   
-  const handleChangeEmail = async () => {navigation.navigate('ChangeEmail')};
-  const handleChangePassword = async () => {navigation.navigate('ChangePassword')};
+  const handleChangeEmail = async () => {navigation.navigate('Email')};
+  const handleChangePassword = async () => {navigation.navigate('Password')};
   const handleCountry = async () => {
     setCountryModalVisible(true)
   };
@@ -54,22 +53,26 @@ const Preferences = ({ navigation }) => {
             <WideButton onPress={handleChangeEmail}>
               <View style={{alignItems: 'flex-start'}}>
                 <H3>{locale.email_config.title}</H3>
-                <P>{user?.email}</P>
+                <P>{profile?.email}</P>
               </View>
-              <Ionicons name="chevron-forward" size={30} color="#757575" />
+              <Ionicons name="chevron-forward" size={30} color={theme.textGray} />
             </WideButton>
             <WideButton onPress={handleChangePassword}>
               <View style={{alignItems: 'flex-start'}}>
                 <H3>{locale.password_config.title}</H3>
               </View>
-              <Ionicons name="chevron-forward" size={30} color="#757575" />
+              <Ionicons name="chevron-forward" size={30} color={theme.textGray} />
             </WideButton>
             <WideButton onPress={handleCountry}>
               <View style={{alignItems: 'flex-start'}}>
-                <H3>{locale.anddress_config.title}</H3>
-                <P>{profile?.code?<Flag code={profile?.code} size={16}/>:null} {profile?.country?profile?.country:locale.anddress_config.description}</P>
+                <H3>{locale.country_config.title}</H3>
+                {country?
+                  <P><Flag code={country?.iso} size={16}/> {country?.name}</P>
+                :
+                  <P>{locale.country_config.description}</P>
+                }
               </View>
-              <Ionicons name="chevron-forward" size={30} color="#757575" />
+              <Ionicons name="chevron-forward" size={30} color={theme.textGray} />
               {countryModalVisible?
                 <CountryPicker
                   visible={countryModalVisible}
@@ -87,14 +90,14 @@ const Preferences = ({ navigation }) => {
           <Provider>
             <WideButton style={{marginVertical: 2}}>
               <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                <Ionicons name="logo-google" size={26} color="#757575" />
+                <Ionicons name="logo-google" size={26} color={theme.textGray} />
                 <H3 style={{marginLeft: 30}}>Google</H3>
               </View>
               <H3 style={{marginRight: 10}}>Link</H3>
             </WideButton>
             <WideButton style={{marginVertical: 2}}>
               <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                <Ionicons name="logo-apple" size={28} color="#757575" />
+                <Ionicons name="logo-apple" size={28} color={theme.textGray} />
                 <H3 style={{marginLeft: 30}}>Apple</H3>
               </View>
               <H3 style={{marginRight: 10}}>Link</H3>
@@ -113,8 +116,8 @@ const Preferences = ({ navigation }) => {
   );
 };
 
-Preferences.propTypes = {
+Account.propTypes = {
   navigation: PropTypes.object.isRequired,
 };
 
-export default Preferences;
+export default Account;

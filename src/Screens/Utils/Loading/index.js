@@ -11,8 +11,8 @@ import { ThemeContext } from '../../../components/theme';
 const Load = ({ navigation }) => {
   const {locale} = useContext(LocaleContext);
   const {theme} = useContext(ThemeContext);
-  const {user, isAuth, isVerify} = useContext(UserContext);
-  const {thisUser, hasThisUser, preferences, hasPreferences} = useContext(FirestoreContext);
+  const {isAuth, isVerify} = useContext(UserContext);
+  const {user} = useContext(FirestoreContext);
   const {isNew} = useContext(AuthContext);
   const [loadingMsg] = useState(locale.loading.loading);
   const [loadedMsg, setLoadedMsg] = useState('');
@@ -20,23 +20,24 @@ const Load = ({ navigation }) => {
   const [isDone, setIsDone] = useState(false);
   const [screen, setScreen] = useState(null);
   const [route, setRoute] = useState(null);
+
+  const profile = user?.profile;
   
   const selectScreen = async () => {
     if (isAuth) {
-      //console.log(preferences);
-      //console.log(hasPreferences);
-      const emailName = thisUser?.email?.split('@')[0];
-      const currentUser = thisUser?.displayName?thisUser?.displayName:emailName;
-      const msg = await thisUser?locale.loading.welcome_user+currentUser:locale.loading.welcome_back;
+      const emailName = profile?.email.split('@')[0];
+      const currentName = profile?.displayName?profile?.displayName:emailName;
+      const msg = await profile?locale.loading.welcome_user+currentName:locale.loading.welcome_back;
       setLoadedMsg(msg);
       if (!isVerify) {
         setScreen('AuthStackNavigator');
         setRoute('Verify'); 
-      } else if (isVerify && thisUser?.preferences == undefined) {
+      } else if (isVerify && !user?.preferences) {
         setScreen('AuthStackNavigator');
-        setRoute('Custom');
+        setRoute('Preferences');
       } else {
         setScreen('AppStackNavigator');
+        setRoute('Home');
       }
     } else {
         if (!isNew) {

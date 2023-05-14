@@ -283,7 +283,6 @@ export const Status = styled.Text`
   font-family: 'Nunito-Bold';
   text-align: center;
   font-size: 13px;
-  color: ${light.secondary};
 `;
 export const ChatBox = styled.View`
   width: 100%;

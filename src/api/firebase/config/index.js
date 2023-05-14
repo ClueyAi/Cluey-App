@@ -26,6 +26,7 @@ initializeAuth(fireApp, {
 
 export const auth = firebase.auth();
 export const firestore = firebase.firestore();
+export const arrayUnion = firebase.firestore.FieldValue.arrayUnion;
 export const storage = firebase.storage();
 export const emailProvider = new firebase.auth.EmailAuthProvider();
 export const googleProvider = new firebase.auth.GoogleAuthProvider();
