@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import PropTypes from "prop-types";
 
-import { AuthContext } from "../../../api/firebase";
+import { AuthContext, FirestoreContext } from "../../../api/firebase";
 
 import { LocaleContext } from "../../../components/locale";
 import {
@@ -21,20 +21,23 @@ import {
 } from "../../../components/styles";
 
 const Verify = ({ navigation }) => {
-  const { user, emailVerify } = useContext(AuthContext);
+  const { emailVerify } = useContext(AuthContext);
+  const { user } = useContext(FirestoreContext);
   const { locale } = useContext(LocaleContext);
   const [dev, setDev] = useState(false);
   const [devSure, setDevSure] = useState(false);
   const [loading, setLoading] = useState(false);
 
+  const profile = user?.profile;
+
   const handleRefresh = async () => {
     setLoading(true);
-    await user?.reload();
+    await profile?.reload();
     setLoading(false);
   };
 
   const handleSendEmailVerify = async () => {
-    if (!user?.emailVerified) {
+    if (!profile?.emailVerified) {
       emailVerify();
     }
   };
@@ -58,13 +61,13 @@ const Verify = ({ navigation }) => {
     if (devSure) {
       navigation.navigate("AppStackNavigator");
     }
-    console.log("is verifild?", user?.emailVerified);
+    console.log("is verifild?", profile?.emailVerified);
     console.log("dev mod:", dev);
   };
 
   useEffect(() => {
     setDev(false);
-  }, [user]);
+  }, [profile]);
 
   return (
     <Container>
@@ -117,7 +120,7 @@ const Verify = ({ navigation }) => {
       >
         <TxtButton>{locale.verify.continue_button.text}</TxtButton>
       </ButtonPrimary>
-      {user?.emailVerified ? (
+      {profile?.emailVerified ? (
         <View style={{ marginTop: "25%" }}>
           <Ionicons name="checkmark" size={35} color="#2ECC71" />
         </View>

@@ -1,9 +1,8 @@
-import React, { useContext } from "react";
+import React from "react";
 import { StyleSheet } from "react-native";
 import UserAvatar from "react-native-user-avatar";
 import PropTypes from "prop-types";
 
-import { ThemeContext } from "../../../../components/theme";
 import {
   View,
   Profile,
@@ -15,36 +14,22 @@ import {
 } from "../../../../components/styles";
 
 const Peoples = ({ item }) => {
-  const { theme } = useContext(ThemeContext);
+  const contact = item?.profile;
 
 	const styles = StyleSheet.create({
     cards: {
       flex: 1,
       flexDirection: 'column',
-      alignSelf: 'center',
-      width: '95%',
-      marginTop: 5,
-      marginBottom: 5,
-      borderRadius: 20,
-      paddingHorizontal: 10,
-      backgroundColor: theme.background, 
     },
     data: {
       flex: 1,
       flexDirection: 'column',
       alignItems: 'center',
-    },
-    shadow: {
-      shadowColor: "#000000",
-      shadowOffset: {width: 0, height: 3},
-      shadowOpacity:  0.17,
-      shadowRadius: 3.05,
-      elevation: 4
     }
   });
 
   return (
-    <View style={{ ...styles.shadow, ...styles.cards }}>
+    <View style={{...styles.cards }}>
       <View style={styles.data}>
         <Profile
           style={{
@@ -60,8 +45,8 @@ const Peoples = ({ item }) => {
               <UserAvatar
                 size={38}
                 style={{ width: 38, height: 38, borderRadius: 100 }}
-                name={item.displayName}
-                src={item.photoURL}
+                name={contact?.displayName}
+                src={contact?.photoURL}
               />
             </ProfilePicture>
           </Picture>
@@ -73,8 +58,8 @@ const Peoples = ({ item }) => {
               marginLeft: 5,
             }}
           >
-            <H4>{item.displayName}</H4>
-            <H5>{item.email}</H5>
+            <H4>{contact?.displayName}</H4>
+            <H5>{contact?.email}</H5>
           </Infor>
         </Profile>
       </View>

@@ -18,9 +18,9 @@ import {
 import Focus from './Focus'
 import Interests from './Interests'
 
-const Custom = ({ navigation }) => {
+const Preferences = ({ navigation }) => {
   const {locale} = useContext(LocaleContext);
-  const {putPreferences, test} = useContext(FirestoreContext);
+  const {putPreferences} = useContext(FirestoreContext);
   const [focusItens, setFocusItens] = useState(null);
   const [interestsItens, setInterestsItens] = useState(null);
   const [focusDone, setFocusDone] = useState(false);
@@ -33,12 +33,11 @@ const Custom = ({ navigation }) => {
   };
 
   const handleContinueInterests = async () => {
-    //await putPreferences(preferences);
-    test(focusItens, interestsItens);
+    await putPreferences(focusItens, interestsItens);
     navigation.navigate('Loading')
   };
   const handleSkipInterests = async () => {
-    await putPreferences([]);
+    await putPreferences(focusItens, interestsItens);
     navigation.navigate('Loading')
   };
   
@@ -46,15 +45,15 @@ const Custom = ({ navigation }) => {
     return(
       <Container>
         <Heading style={{marginTop: '10%', marginBottom: 15}}>
-          <H1 style={{marginBottom: 50, fontSize: 25}}>{locale.custom.interests.title}</H1>
-          <P style={{marginBottom: 20}}>{locale.custom.interests.description}</P>
+          <H1 style={{marginBottom: 50, fontSize: 25}}>{locale.preferences.interests.title}</H1>
+          <P style={{marginBottom: 20}}>{locale.preferences.interests.description}</P>
         </Heading>
         <Interests setInterestsItens={setInterestsItens} />
         <ButtonPrimary style={{bottom: '5%'}} onPress={handleContinueInterests}>
-          <TxtButton>{locale.custom.continue_button.text}</TxtButton>
+          <TxtButton>{locale.preferences.continue_button.text}</TxtButton>
         </ButtonPrimary>
         <ButtonEmpyte onPress={handleSkipInterests}>
-          <TxtLink>{locale.custom.skip_button.text}</TxtLink>
+          <TxtLink>{locale.preferences.skip_button.text}</TxtLink>
         </ButtonEmpyte>
         <FooterSmall>
           <View style={{marginTop: 10}}>
@@ -68,15 +67,15 @@ const Custom = ({ navigation }) => {
     return(
       <Container>
         <Heading style={{marginTop: '10%', marginBottom: 15}}>
-          <H1 style={{marginBottom: 50, fontSize: 25}}>{locale.custom.focus.title}</H1>
-          <P style={{marginBottom: 20}}>{locale.custom.focus.description}</P>
+          <H1 style={{marginBottom: 50, fontSize: 25}}>{locale.preferences.focus.title}</H1>
+          <P style={{marginBottom: 20}}>{locale.preferences.focus.description}</P>
         </Heading>
         <Focus setFocusItens={setFocusItens} />
         <ButtonPrimary style={{bottom: '5%'}} onPress={handleContinueFocus}>
-          <TxtButton>{locale.custom.continue_button.text}</TxtButton>
+          <TxtButton>{locale.preferences.continue_button.text}</TxtButton>
         </ButtonPrimary>
         <ButtonEmpyte onPress={handleSkipFocus}>
-          <TxtLink>{locale.custom.skip_button.text}</TxtLink>
+          <TxtLink>{locale.preferences.skip_button.text}</TxtLink>
         </ButtonEmpyte>
         <FooterSmall>
           <View style={{marginTop: 10}}>
@@ -88,8 +87,8 @@ const Custom = ({ navigation }) => {
   }
 };
 
-Custom.propTypes = {
+Preferences.propTypes = {
   navigation: PropTypes.object.isRequired
 };
 
-export default Custom;
+export default Preferences;

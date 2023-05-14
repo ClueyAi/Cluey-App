@@ -5,18 +5,19 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 
 import { LocaleContext } from '../../components/locale';
 import { ThemeContext } from '../../components/theme';
-import { MainTitle, ChatsMenuButton, ContactsMenuButton, HomeButton, CloseMenuButton, LogoutButton, LanguageSelector, SettingsButton, CloseModal } from '../../components/tools';
+import { MainTitle, ContactsMenuButton, HomeButton, CloseMenuButton, LogoutButton, LanguageSelector, SettingsButton, CloseModal } from '../../components/tools';
 
 import Home from './Home';
-// Menu
-import Chats from './Chats';
 import Contacts from './Contacts';
-// Settings
-import Settings from './Settings';
-import Preferences from './Settings/Preferences';
-import ChangeEmail from './Settings/Preferences/Components/changeEmail';
-import ChangePassword from './Settings/Preferences/Components/changePassword';
 
+import Chat from './Chat';
+
+import Settings from './Settings';
+import Account from './Settings/Account';
+import Email from './Settings/Account/Email';
+import Password from './Settings/Account/Password';
+
+import Preferences from '../Utils/Preferences';
 import About from '../Utils/About';
 import Rules from '../Utils/Rules';
 
@@ -45,22 +46,11 @@ const App = () => {
         name="Home"
         component={Home}
         options={({ navigation }) => ({
-          headerLeft: () => <ChatsMenuButton navigation={navigation} />,
+          headerLeft: () => <ContactsMenuButton navigation={navigation} />,
           headerTitle: () => <MainTitle />,
           headerRight: () => <SettingsButton navigation={navigation} />,
         })}
       />
-      {/* Menu */}
-      <AppStack.Screen
-        name="Chats"
-        component={Chats}
-        options={({ navigation }) => ({
-          headerLeft: () => <ContactsMenuButton navigation={navigation} />,
-          headerTitle: () => <MainTitle />,
-          headerRight: () => <CloseMenuButton navigation={navigation} />,
-        })}
-      />
-      {/* Menu */}
       <AppStack.Screen
         name="Contacts"
         component={Contacts}
@@ -70,7 +60,15 @@ const App = () => {
           headerRight: () => <CloseMenuButton navigation={navigation} />,
         })}
       />
-      {/* Settings */}
+      <AppStack.Screen
+        name="Chat"
+        component={Chat}
+        options={({ navigation }) => ({
+
+          headerTitle: () => <MainTitle />,
+          headerRight: () => <SettingsButton navigation={navigation} />,
+        })}
+      />
       <AppStack.Screen 
         name="Settings" 
         component={Settings}
@@ -88,11 +86,24 @@ const App = () => {
         }}
       />
       <AppStack.Screen
+        name="Account"
+        component={Account}
+        options={({navigation}) => ({
+          headerTitle: locale.account.title,
+          headerRight: () => <LogoutButton navigation={navigation}/>,
+          headerTintColor: theme.primary,
+          headerTitleStyle: {
+          fontFamily: 'Nunito-Bold',
+          fontSize: 24,
+          },
+          headerBackTitleVisible: false,
+        })}
+      />
+      <AppStack.Screen
         name="Preferences"
         component={Preferences}
-        options={({navigation}) => ({
-          headerTitle: locale.preferences_config.title,
-          headerRight: () => <LogoutButton navigation={navigation}/>,
+        options={() => ({
+          headerTitle: locale.preferences.title,
           headerTintColor: theme.primary,
           headerTitleStyle: {
           fontFamily: 'Nunito-Bold',
@@ -116,8 +127,8 @@ const App = () => {
         presentation: 'modal',
         ...( isAndroid && TransitionPresets.ModalPresentationIOS )
       }}>
-        <AppStack.Screen name="ChangeEmail" component={ChangeEmail}/>
-        <AppStack.Screen name="ChangePassword" component={ChangePassword}/>
+        <AppStack.Screen name="Email" component={Email}/>
+        <AppStack.Screen name="Password" component={Password}/>
         <AppStack.Screen name="About" component={About}/>
         <AppStack.Screen name="Rules" component={Rules}/>
       </AppStack.Group>

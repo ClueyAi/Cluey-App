@@ -1,31 +1,33 @@
 import React, { createContext, useState, useEffect, useContext } from 'react';
 import PropTypes from "prop-types";
 
-import { firestore } from '../config';
+import { firestore, arrayUnion } from '../config';
+import { sendMessageToOpenAI } from '../../openai';
 import { UserContext } from '../user';
 export const FirestoreContext = createContext();
 
 export const FirestoreProvider = ({ children }) => {
-  const {user, isAuth} = useContext(UserContext);
+  const {authUser, isAuth} = useContext(UserContext);
+  const [app, setApp] = useState(null);
   const [allUsers, setAllUsers] = useState(null);
   const [hasAllUsers, setHasAllUsers] = useState(false);
-  const [thisUser, setThisUser] = useState(null);
-  const [hasThisUser, setHasThisUser] = useState(false);
-  const [preferences, setPreferences] = useState(null);
-  const [hasPreferences, setHasPreferences] = useState(false);
-  const [contacts, setContacts] = useState(null);
-  const [hasContacts, setHasContacts] = useState(false);
-  const [messages, setMessages] = useState(null);
-  const [hasMessages, setHasMessages] = useState(false);
+  const [user, setUser] = useState(null);
+  const [hasUser, setHasUser] = useState(false);
   const [chats, setChats] = useState(null);
   const [hasChats, setHasChats] = useState(false);
-  const [profile, setProfile] = useState(null);
-  const [hasProfile, setHasProfile] = useState(false);
-
-  const currentUser = user?.uid;
+  const [friendChats, setFriendChats] = useState(null);
+  const [hasFriendChats, setHasFriendChats] = useState(false);
 
   useEffect(() => {
     if (isAuth) {
+      const getApp = firestore.collection('app').doc('info')
+      .onSnapshot((doc) => {
+        if (doc.exists) {
+          const data = doc.data();
+          setApp(data);
+        }
+      });
+
       const getAllUsers = firestore.collection('users')
       .onSnapshot((querySnapshot) => {
         const data = querySnapshot.docs.map(doc => ({
@@ -36,39 +38,19 @@ export const FirestoreProvider = ({ children }) => {
         data.length === 0?setHasAllUsers(false):setHasAllUsers(true);
       });
 
-      const getThisUsers = firestore.collection('users').doc(currentUser)
+      const getUser = firestore.collection('users').doc(authUser?.uid)
       .onSnapshot((doc) => {
         if (doc.exists) {
           const data = doc.data();
-          setThisUser(data);
-          setHasThisUser(true);
+          setUser(data);
+          setHasUser(true);
         } else {
-          setHasThisUser(false);
+          setHasUser(false);
         }
       });
 
-      const getPreferences = firestore.collection('users').doc(currentUser).collection('preferences')
-        .onSnapshot((querySnapshot) => {
-          const data = querySnapshot.docs.map(doc => ({
-            id: doc.id,
-            ...doc.data(),
-          }));
-          setPreferences(data);
-          data.length === 0?setHasPreferences(false):setHasPreferences(true);
-      });
-
-      const getContacts = firestore.collection('users').doc(currentUser).collection('contacts')
-        .onSnapshot((querySnapshot) => {
-          const data = querySnapshot.docs.map(doc => ({
-            id: doc.id,
-            ...doc.data(),
-          }));
-          setContacts(data);
-          data.length === 0?setHasContacts(false):setHasContacts(true);
-      });
-
-      const getChats = firestore.collection('users').doc(currentUser).collection('cluey')
-      .orderBy('createdAt', 'asc').onSnapshot((querySnapshot) => {
+      const getChats = firestore.collection('users').doc(authUser?.uid).collection('cluey')
+      .orderBy('createdAt', 'desc').onSnapshot((querySnapshot) => {
           const data = querySnapshot.docs.map(doc => ({
             id: doc.id,
             ...doc.data(),
@@ -77,158 +59,160 @@ export const FirestoreProvider = ({ children }) => {
           data.length === 0?setHasChats(false):setHasChats(true)
       });
 
-      const getClueyMessages = firestore.collection('users').doc(currentUser)
-      .collection('cluey').doc('default').collection('messages').orderBy('createdAt', 'desc')
-        .onSnapshot((querySnapshot) => {
+      const getFriendChats = firestore.collection('users').doc(authUser?.uid).collection('friends')
+      .orderBy('createdAt', 'desc').onSnapshot((querySnapshot) => {
           const data = querySnapshot.docs.map(doc => ({
             id: doc.id,
             ...doc.data(),
           }));
-          setMessages(data);
-          data.length === 0?setHasMessages(false):setHasMessages(true)
+          setFriendChats(data);
+          data.length === 0?setHasFriendChats(false):setHasFriendChats(true)
       });
 
-      const getProfile = firestore.collection('users').doc(currentUser)
-      .onSnapshot((doc) => {
-        if (doc.exists) {
-          const data = doc.data();
-          setProfile(data);
-          setHasProfile(true);
-        } else {
-          setHasProfile(false);
-        }
-      });
+
 
       return () => {
+        getApp();
         getAllUsers();
-        getThisUsers();
-        getPreferences();
-        getContacts();
-        getClueyMessages();
+        getUser();
         getChats();
-        getProfile();
+        getFriendChats();
       }
     }
-  }, [currentUser, isAuth]);
+  }, [authUser, isAuth]);
 
   const putUser = async () => {
     const timestamp = Date().toLocaleString();
-    const name = user?.email.split("@")[0];
-    const authUser = {
-      uid: user.uid,
-      email: user.email,
-      displayName: user.displayName?user.displayName: name,
-      photoURL: user.photoURL? user.photoURL: '',
-      emailVerified: user.emailVerified,
+    const name = authUser?.email.split("@")[0];
+
+    const docRef = firestore.collection('users').doc(authUser?.uid);
+    return await docRef.set({
+      uid: authUser?.uid,
       createdAt: timestamp,
       updatedAt: timestamp,
-    };
-    const docRef = firestore.collection('users').doc(currentUser);
-    const doc = await docRef.get();
-     
-    if (doc.exists) {
-      return await docRef.update(authUser);
-    } else {
-      return await docRef.set(authUser);
-    }
+      profile: {
+        displayName: authUser.displayName?authUser.displayName: name,
+        email: authUser.email,
+        emailVerified: authUser.emailVerified,
+        photoURL: authUser.photoURL? authUser.photoURL: '',
+      },
+    }, { merge: true })
   };
 
-  const putContact = async (contact) => {
-    const docRef = firestore.collection('users').doc(currentUser).collection('contacts').doc(contact);
-    const doc = await docRef.get();
-    if (!doc.exists) {
-      await docRef.set({});
-    }
-  };
+  const putPreferences = async (focusItens, interestsItens) => {
+    const timestamp = Date().toLocaleString();
 
-  const putPreferences = async (preferences) => {
-    const docRef = firestore.collection('users').doc(currentUser);
-    const doc = await docRef.get();
-    console.log(firestore.collection('users').doc(currentUser).where('preferences', '==', preferences));
-    if (doc.exists) {
-      console.log('existe');
-      return await docRef.update({preferences});
-    } else {
-      console.log('no existe');
-      return await docRef.set({preferences});
-    }
-  };
-
-  const test = async (focusItens, interestsItens) => {
-    const docRef = firestore.collection('users').doc(currentUser);
+    const docRef = firestore.collection('users').doc(authUser?.uid);
     return await docRef.set({
       preferences: {
         focus: focusItens,
         interests: interestsItens,
-      }
+      },
+      updatedAt: timestamp,
     }, { merge: true })
   };
 
-  const updateProfile = async (profile) => {
-    const docRef = firestore.collection('users').doc(currentUser);
-    const doc = await docRef.get();
-    if (doc.exists) {
-      return await docRef.update(profile);
-    } else {
-      return await docRef.set(profile);
-    }
+  const getContacts = async (contacts) => {
+    const querySnapshot = await firestore.collection('users')
+      .where('profile.email', 'in', contacts)
+      .get();
+  
+    const contactsData = querySnapshot.docs.map((doc) => {
+      const data = doc.data();
+      return { ...data, id: doc.id };
+    });
+  
+    return contactsData;
   };
 
-  const createChat = async (chat) => {
-    await firestore.collection('users').doc(currentUser).collection('cluey').add(chat);
+  const putContact = async (contact) => {
+    const timestamp = Date().toLocaleString();
+
+    const docRef = firestore.collection('users').doc(authUser?.uid);
+    return await docRef.update({
+      contacts: arrayUnion(contact),
+      updatedAt: timestamp,
+    })
   };
 
-  const createUserMessage = async (message) => {
-    const context = {
-      name: message.contextName,
-      createdAt: message.createdAt,
-      text: message.text,
-    };
-    const docRef = firestore.collection('users').doc(currentUser).collection('cluey').doc('default');
-    const doc = await docRef.get();
-    if (!doc.exists) {
-      await docRef.set(context);
-    }
-    const userMessage = {
-      idUser: currentUser,
-      createdAt: message.createdAt,
-      text: message.text,
-    };
-    const messageCollection = firestore.collection('users').doc(currentUser).collection('cluey').doc('default').collection('messages');
-    return await messageCollection.add(userMessage);
+  const putCountry = async (iso, name) => {
+    const timestamp = Date().toLocaleString();
+
+    const docRef = firestore.collection('users').doc(authUser?.uid);
+    return await docRef.set({
+      country: {
+        iso: iso,
+        name: name,
+      },
+      updatedAt: timestamp,
+    }, { merge: true })
   };
 
-  const createAiMessage = async (message) => {
-    const context = {
-      name: message.contextName,
-      createdAt: message.createdAt,
-      text: message.text,
+  const createChat = async (text) => {
+    const timestamp = Date().toLocaleString();
+    const name = text.substring(0, 30);
+    const chat = {
+      name: name,
+      createdAt: timestamp,
+      updatedAt: timestamp,
+      messages: [],
     };
-    const docRef = firestore.collection('users').doc(currentUser).collection('cluey').doc('default');
-    const doc = await docRef.get();
-    if (!doc.exists) {
-      await docRef.set(context);
-    } 
-    const aiMessage = {
-      name: message.responseName,
-      createdAt: message.createdAt,
-      text: message.text,
+    return await firestore.collection('users').doc(authUser?.uid).collection('cluey').add(chat);
+  };
+
+  const createUserMessage = async (chatId, text) => {
+    const timestamp = Date().toLocaleString();
+    const chat = {
+      updatedAt: timestamp,
     };
-    const messageCollection = firestore.collection('users').doc(currentUser).collection('cluey').doc('default').collection('messages');
-    return await messageCollection.add(aiMessage);
+    const message = {
+      idUser: authUser?.uid,
+      createdAt: timestamp,
+      text: text,
+    };
+    await firestore.collection('users').doc(authUser?.uid).collection('cluey').doc(chatId).set(chat, { merge: true })
+      .then(() => {
+        firestore.collection('users').doc(authUser?.uid).collection('cluey').doc(chatId)
+        .update({
+          messages: arrayUnion(message),
+        });
+      }
+    );
+  };
+
+  const createAiMessage = async (chatId, text) => {
+    const response = await sendMessageToOpenAI(text);
+    const timestamp = Date().toLocaleString();
+    const chat = {
+      updatedAt: timestamp,
+    };
+    const message = {
+      name: 'Cluey',
+      createdAt: timestamp,
+      text: response,
+    };
+    await firestore.collection('users').doc(authUser?.uid).collection('cluey').doc(chatId).set(chat, { merge: true })
+      .then(() => {
+        firestore.collection('users').doc(authUser?.uid).collection('cluey').doc(chatId)
+        .update({
+          messages: arrayUnion(message),
+        });
+      }
+    );
   };
 
   const editChat = async (chatId, newName) => {
-    const docRef = firestore.collection('users').doc(currentUser).collection('cluey').doc(chatId);
+    const timestamp = Date().toLocaleString();
+    const docRef = firestore.collection('users').doc(authUser?.uid).collection('cluey').doc(chatId);
     if (chatId === 'default') {
       return;
     } else {
-      return await docRef.update({name: newName});
+      return await docRef.update({name: newName, updatedAt: timestamp});
     }
   };
 
   const deleteChat = async (chatId) => {
-    const docRef = firestore.collection('users').doc(currentUser).collection('cluey').doc(chatId);
+    const docRef = firestore.collection('users').doc(authUser?.uid).collection('cluey').doc(chatId);
     if (chatId === 'default') {
       return;
     } else {
@@ -236,31 +220,65 @@ export const FirestoreProvider = ({ children }) => {
     }
   };
 
+  const createFriendChat = async (email) => {
+    const timestamp = Date().toLocaleString();
+    const chat = {
+      email: email,
+      createdAt: timestamp,
+      updatedAt: timestamp,
+      messages: [],
+    };
+    const chatRef = firestore.collection('users').doc(authUser?.uid).collection('friends').doc(email);
+    const doc = await chatRef.get();
+    if (!doc.exists) {
+      return await chatRef.set(chat);
+    }
+  };
+
+  const createUserFriendMessage = async (email, text) => {
+    const timestamp = Date().toLocaleString();
+    const chat = {
+      updatedAt: timestamp,
+    };
+    const message = {
+      idUser: authUser?.uid,
+      createdAt: timestamp,
+      text: text,
+    };
+    await firestore.collection('users').doc(authUser?.uid).collection('friends').doc(email).set(chat, { merge: true })
+      .then(() => {
+        firestore.collection('users').doc(authUser?.uid).collection('friends').doc(email)
+        .update({
+          messages: arrayUnion(message),
+        });
+      }
+    );
+  };
+  
+
   const value = {
+    app,
     allUsers,
     hasAllUsers,
-    thisUser,
-    hasThisUser,
-    preferences,
-    hasPreferences,
-    contacts,
-    hasContacts,
-    messages,
-    hasMessages,
+    user,
+    hasUser,
     chats,
     hasChats,
-    profile,
-    hasProfile,
+    friendChats,
+    hasFriendChats,
     putUser,
-    putContact,
-    test,
     putPreferences,
-    updateProfile,
+    getContacts,
+    putContact,
+    putCountry,
     createChat,
     createUserMessage,
     createAiMessage,
     editChat,
-    deleteChat
+    deleteChat,
+    createFriendChat,
+    createUserFriendMessage,
+
   };
 
   return <FirestoreContext.Provider value={value}>{children}</FirestoreContext.Provider>;

@@ -13,10 +13,10 @@ const Focus = ({ setFocusItens }) => {
   const [otherItens, setOtherItens] = useState({});
   const [other, setOther] = useState(false);
   const buttons = [
-    { title: locale.custom.focus.itens.personal, selected: false },
-    { title: locale.custom.focus.itens.commercial, selected: false },
-    { title: locale.custom.focus.itens.academic, selected: false },
-    { title: locale.custom.focus.itens.other, selected: false },
+    { title: locale.preferences.focus.itens.personal, selected: false },
+    { title: locale.preferences.focus.itens.commercial, selected: false },
+    { title: locale.preferences.focus.itens.academic, selected: false },
+    { title: locale.preferences.focus.itens.other, selected: false },
   ];
 
   const handleSelect = (button) => {
@@ -86,7 +86,7 @@ const Focus = ({ setFocusItens }) => {
         <View style={{flex: 1, width: '75%'}}>
           <Input style={{...styles.shadow, marginTop: -110}}>
             <TextInput 
-              placeholder={locale.custom.focus.other_input.placeholder}
+              placeholder={locale.preferences.focus.other_input.placeholder}
               placeholderTextColor={theme.primary}
               onChangeText={(text) => setOtherItens(text)}
             />

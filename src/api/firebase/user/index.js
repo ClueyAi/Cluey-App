@@ -8,13 +8,13 @@ export const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
   const {locale} = useContext(LocaleContext);
-  const [user, setUser] = useState(null);
+  const [authUser, setAuthUser] = useState(null);
   const [isAuth, setIsAuth] = useState(false);
   const [isVerify, setIsVerify] = useState(false);
   
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(user => {
-      setUser(user);
+      setAuthUser(user);
       user?setIsAuth(true):setIsAuth(false);
       user?.emailVerified?setIsVerify(true):setIsVerify(false);
     });
@@ -26,7 +26,7 @@ export const UserProvider = ({ children }) => {
     const response = await fetch(uri);
     const blob = await response.blob();
 
-    const ref = storage.ref().child(`${user?.uid}/photoURL.jpg`);
+    const ref = storage.ref().child(`${authUser?.uid}/photoURL.jpg`);
     const snapshot = await ref.put(blob);
 
     const photoURL = await snapshot.ref.getDownloadURL();
@@ -44,7 +44,7 @@ export const UserProvider = ({ children }) => {
 
   const updateUserEmail = async (password, newEmail) => {
     const credential = emailProvider.credential(
-      user.email,
+      authUser.email,
       password
     );
     await auth.currentUser.reauthenticateWithCredential(credential);
@@ -56,15 +56,15 @@ export const UserProvider = ({ children }) => {
 
   const updateUserPassword = async (currentPassword, newPassword) => {
     const credential = emailProvider.credential(
-      user.email,
+      authUser.email,
       currentPassword
     );
-    await user.reauthenticateWithCredential(credential);
-    await user.updatePassword(newPassword);
+    await authUser.reauthenticateWithCredential(credential);
+    await authUser.updatePassword(newPassword);
   };
   
   const value = {
-    user,
+    authUser,
     isAuth,
     isVerify,
     updateUserPhoto,

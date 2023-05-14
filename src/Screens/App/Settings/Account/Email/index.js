@@ -4,7 +4,7 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import UserAvatar from "react-native-user-avatar";
 import PropTypes from "prop-types";
 
-import { UserContext } from "../../../../../api/firebase";
+import { UserContext, FirestoreContext } from "../../../../../api/firebase";
 import { ThemeContext } from "../../../../../components/theme";
 import { LocaleContext } from "../../../../../components/locale";
 import {
@@ -33,9 +33,10 @@ import {
   FooterSmall,
 } from "../../../../../components/styles";
 
-const ChangeEmail = ({ navigation }) => {
+const Email = ({ navigation }) => {
   const { locale } = useContext(LocaleContext);
-  const { user, updateUserEmail } = useContext(UserContext);
+  const { updateUserEmail } = useContext(UserContext);
+  const { user } = useContext(FirestoreContext);
   const { theme } = useContext(ThemeContext);
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
@@ -50,6 +51,8 @@ const ChangeEmail = ({ navigation }) => {
   const [error, setError] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
   const [errorEmail, setErrorEmail] = useState("");
+
+  const profile = user?.profile;
 
   const emailValidate = (text) => {
     // eslint-disable-next-line no-useless-escape
@@ -125,13 +128,13 @@ const ChangeEmail = ({ navigation }) => {
 
   useEffect(() => {
     const unsubscribe = navigation.addListener("focus", () => {
-      const name = user?.email.split("@")[0];
-      setPhoto(user?.photoURL);
-      setUserName(user?.displayName ? user?.displayName : name);
+      const name = profile?.email.split("@")[0];
+      setPhoto(profile?.photoURL);
+      setUserName(profile?.displayName ? profile?.displayName : name);
     });
 
     return unsubscribe;
-  }, [user]);
+  }, [profile]);
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
@@ -169,7 +172,7 @@ const ChangeEmail = ({ navigation }) => {
                 }}
               >
                 <H3Bold>{userName}</H3Bold>
-                <H3>{user?.email}</H3>
+                <H3>{profile?.email}</H3>
               </Infor>
             </Profile>
             <Form style={{flex: 1, marginTop: 40, alignSelf: 'center'}}>
@@ -280,8 +283,8 @@ const styles = StyleSheet.create({
   },
 });
 
-ChangeEmail.propTypes = {
+Email.propTypes = {
   navigation: PropTypes.object.isRequired,
 };
 
-export default ChangeEmail;
+export default Email;

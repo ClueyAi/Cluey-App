@@ -6,7 +6,7 @@ import * as ImagePicker from "expo-image-picker";
 import { useFocusEffect } from "@react-navigation/native";
 import PropTypes from "prop-types";
 
-import { UserContext } from "../../../api/firebase";
+import { UserContext, FirestoreContext } from "../../../api/firebase";
 import { ThemeContext } from "../../../components/theme";
 import { LocaleContext } from "../../../components/locale";
 import {
@@ -33,12 +33,13 @@ import {
 const Settings = ({ navigation }) => {
   const { locale } = useContext(LocaleContext);
   const { theme } = useContext(ThemeContext);
-  const { user, updateUserPhoto, updateUserName } = useContext(UserContext);
-  // eslint-disable-next-line no-unused-vars
-  const [error, setError] = useState("");
+  const { updateUserPhoto, updateUserName } = useContext(UserContext);
+  const { user } = useContext(FirestoreContext);
   const [editingName, setEditingName] = useState(false);
   const [photo, setPhoto] = useState("");
   const [userName, setUserName] = useState("");
+
+  const profile = user?.profile;
 
   const handleEditPhoto = async () => {
     Alert.alert(
@@ -95,21 +96,21 @@ const Settings = ({ navigation }) => {
       const uri = result.assets[0].uri;
       try {
         await updateUserPhoto(uri);
-        setPhoto(user?.photoURL ? user?.photoURL : result.assets[0].uri);
+        setPhoto(profile?.photoURL ? profile?.photoURL : result.assets[0].uri);
       } catch (error) {
-        setError(error.code);
+        console.log(error.code);
       }
     }
   };
 
-  const handleEditNameOn = async () => {
+  const handleEditNameOn = () => {
     setEditingName(true);
   };
-  const handleEditNameOf = async () => {
+  const handleEditNameOf = () => {
     setEditingName(false);
     Keyboard.dismiss();
   };
-  const nameValidation = async (text) => {
+  const nameValidation = (text) => {
     setUserName(text);
   };
   const handleEditName = async () => {
@@ -117,26 +118,29 @@ const Settings = ({ navigation }) => {
     try {
       await updateUserName(displayName);
     } catch (error) {
-      setError(error.code);
+      console.log(error.code);
     }
     setEditingName(false);
   };
-  const handlePreferences = async () => {
+  const handleAccount = () => {
+    navigation.navigate("Account");
+  };
+  const handlePreferences = () => {
     navigation.navigate("Preferences");
   };
-  const handleAbout = async () => {
+  const handleAbout = () => {
     navigation.navigate("About");
   };
 
   useEffect(() => {
     const unsubscribe = navigation.addListener("focus", () => {
-      const name = user?.email.split("@")[0];
-      setPhoto(user?.photoURL);
-      setUserName(user?.displayName ? user?.displayName : name);
+      const name = profile?.email.split("@")[0];
+      setPhoto(profile?.photoURL);
+      setUserName(profile?.displayName ? profile?.displayName : name);
     });
 
     return unsubscribe;
-  }, [user]);
+  }, [profile]);
 
   useFocusEffect(
     useCallback(() => {
@@ -167,7 +171,7 @@ const Settings = ({ navigation }) => {
                   </ProfilePicture>
                 </ButtonEmpyte>
                 <PictureEdit>
-                  <Ionicons name="camera" size={14} color="#000" />
+                  <Ionicons name="camera" size={14} color={theme.text} />
                 </PictureEdit>
               </Picture>
               {editingName ? (
@@ -210,32 +214,39 @@ const Settings = ({ navigation }) => {
                     }
                   >
                     <H3 style={{ marginRight: 10 }}>{userName}</H3>
-                    <Ionicons name="create-outline" size={19} color="#757575" />
+                    <Ionicons name="create-outline" size={19} color={theme.textGray} />
                   </ButtonEmpyte>
                 </Infor>
               )}
             </Profile>
             <ScrollView style={{ marginTop: 30 }}>
+              <WideButton onPress={handleAccount}>
+                <View style={{ alignItems: "flex-start" }}>
+                  <H3>{locale.account.title}</H3>
+                  <P>{locale.account.description}</P>
+                </View>
+                <Ionicons name="chevron-forward" size={30} color={theme.textGray} />
+              </WideButton>
               <WideButton onPress={handlePreferences}>
                 <View style={{ alignItems: "flex-start" }}>
-                  <H3>{locale.preferences_config.title}</H3>
-                  <P>{locale.preferences_config.description}</P>
+                  <H3>{locale.preferences.title}</H3>
+                  <P>{locale.preferences.description}</P>
                 </View>
-                <Ionicons name="chevron-forward" size={30} color="#757575" />
+                <Ionicons name="chevron-forward" size={30} color={theme.textGray} />
               </WideButton>
             </ScrollView>
             {/*
             <Provider>
               <WideButton style={{marginVertical: 2}}>
                 <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                  <Ionicons name="logo-google" size={26} color="#757575" />
+                  <Ionicons name="logo-google" size={26} color={theme.textGray} />
                   <H3 style={{marginLeft: 30}}>Google</H3>
                 </View>
                 <H3 style={{marginRight: 10}}>Link</H3>
               </WideButton>
               <WideButton style={{marginVertical: 2}}>
                 <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                  <Ionicons name="logo-apple" size={28} color="#757575" />
+                  <Ionicons name="logo-apple" size={28} color={theme.textGray} />
                   <H3 style={{marginLeft: 30}}>Apple</H3>
                 </View>
                 <H3 style={{marginRight: 10}}>Link</H3>
@@ -245,7 +256,7 @@ const Settings = ({ navigation }) => {
           </Main>
           <Footer>
             <ButtonEmpyte
-              style={{ color: "#fff", marginTop: 15 }}
+              style={{ color: theme.background, marginTop: 15 }}
               onPress={handleAbout}
             >
               <P>{locale.about.title}</P>

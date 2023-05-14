@@ -10,7 +10,7 @@ import { ModalButton, ChatTitle, Status } from '../styles';
 import { ThemeContext } from '../theme';
 
 import { us, pt, es, fr, LocaleContext } from '../locale';
-import { AuthContext } from '../../api/firebase';
+import { AuthContext, FirestoreContext } from '../../api/firebase';
 
 export const LogoutButton = ({ navigation }) => {
   const {locale} = useContext(LocaleContext);
@@ -140,7 +140,7 @@ export const LanguageSelector = () => {
     AsyncStorage.setItem('iso', iso);
     setIso(iso);
     setIsMenuOpen(false);
-    changeLocale(iso);
+    //changeLocale(iso);
   };
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
@@ -204,16 +204,26 @@ export const LanguageSelector = () => {
 export const CloseModal = () => <ModalButton />;
 
 export const MainTitle = () =>{
+  const {app} = useContext(FirestoreContext);
   const {locale} = useContext(LocaleContext);
   const {theme} = useContext(ThemeContext);
+
+  const status = app?.status;
 
   return(
    <View style={styles.mainMenu}>
       <ChatTitle>{locale.global.app.name}</ChatTitle>
-      <View style={styles.statusContainer}>
-        <Status>{locale.global.app.status}</Status>
-        <Ionicons style={{marginLeft: 2, marginTop: 3}} name="radio" size={13} color={theme.secondary} />
-      </View>
+      {status ?
+        <View style={styles.statusContainer}>
+          <Status style={{color: theme.secondary}}>{locale.global.app.status.true}</Status>
+          <Ionicons style={{marginLeft: 3, marginTop: 3}} name="radio" size={13} color={theme.secondary} />
+        </View>
+      :
+        <View style={styles.statusContainer}>
+          <Status style={{color: theme.error}}>{locale.global.app.status.false}</Status>
+          <Ionicons style={{marginLeft: 3, marginTop: 3}} name="radio" size={13} color={theme.error} />
+        </View>
+      }
    </View>
   );
 }

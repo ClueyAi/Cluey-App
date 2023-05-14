@@ -1,23 +1,24 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { FlatList } from 'react-native';
-import { FirestoreContext } from '../../../../api/firebase';
+import PropTypes from "prop-types";
+
 import { Main } from '../../../../components/styles';
 import Mark from '../../../../components/mark';
 
 import Message from './Message';
 
-const Messages = () => {
-  const {messages} = useContext(FirestoreContext);
+const Messages = ({chat}) => {
+  const messages = chat?.messages;
 
   return (
     <Main>
       <Mark/>
       {messages?
         <FlatList
+          data={messages.reverse()}
           inverted
           style={{scaleY: -1}}
-          data={messages}
-          keyExtractor={(item) => item.id}
+          keyExtractor={(item, index) => index.toString() + messages.length.toString()}
           renderItem={({ item }) => (
             <Message data={item}/>
           )}
@@ -25,6 +26,10 @@ const Messages = () => {
       :null}
     </Main>
   );
+};
+
+Messages.propTypes = {
+  chat: PropTypes.object,
 };
 
 export default Messages;

@@ -3,6 +3,7 @@ export default {
   backgroundSecondary: '#EEE',
   transparent: '#00000000',
   primary: '#FFBF00',
+  primary47: '#FFBF0078',
   primarySoft: '#FDF5C9',
   secondary: '#2ECC71',
   secondarySoft: '#C2F2D0',

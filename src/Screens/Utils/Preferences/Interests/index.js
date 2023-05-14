@@ -10,18 +10,18 @@ const Interests = ({ setInterestsItens }) => {
   const [selectedButtons, setSelectedButtons] = useState({});
   
   const buttons = [
-    { title: locale.custom.interests.itens.html, color: '#3ABF38', selected: false },
-    { title: locale.custom.interests.itens.ia, color: '#FFBF00', selected: false },
-    { title: locale.custom.interests.itens.graphic_design, color: '#56CCF2', selected: false },
-    { title: locale.custom.interests.itens.musical_production, color: '#F2994A', selected: false },
-    { title: locale.custom.interests.itens.c_sharp, color: '#1400FF', selected: false },
-    { title: locale.custom.interests.itens.r, color: '#BB6BD9', selected: false },
-    { title: locale.custom.interests.itens.web_design, color: '#56CCF2', selected: false },
-    { title: locale.custom.interests.itens.java, color: '#F2994A', selected: false },
-    { title: locale.custom.interests.itens.python, color: '#3ABF38', selected: false },
-    { title: locale.custom.interests.itens.javascript, color: '#1400FF' ,selected: false },
-    { title: locale.custom.interests.itens.ui, color: '#FFBF00', selected: false },
-    { title: locale.custom.interests.itens.ux, color: '#56CCF2', selected: false },
+    { title: locale.preferences.interests.itens.html, color: '#3ABF38', selected: false },
+    { title: locale.preferences.interests.itens.ia, color: '#FFBF00', selected: false },
+    { title: locale.preferences.interests.itens.graphic_design, color: '#56CCF2', selected: false },
+    { title: locale.preferences.interests.itens.musical_production, color: '#F2994A', selected: false },
+    { title: locale.preferences.interests.itens.c_sharp, color: '#1400FF', selected: false },
+    { title: locale.preferences.interests.itens.r, color: '#BB6BD9', selected: false },
+    { title: locale.preferences.interests.itens.web_design, color: '#56CCF2', selected: false },
+    { title: locale.preferences.interests.itens.java, color: '#F2994A', selected: false },
+    { title: locale.preferences.interests.itens.python, color: '#3ABF38', selected: false },
+    { title: locale.preferences.interests.itens.javascript, color: '#1400FF' ,selected: false },
+    { title: locale.preferences.interests.itens.ui, color: '#FFBF00', selected: false },
+    { title: locale.preferences.interests.itens.ux, color: '#56CCF2', selected: false },
   ];
 
   const handleSelect = (button) => {

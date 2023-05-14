@@ -12,8 +12,8 @@ import Current from './Current';
 import SignUp from './Current/SignUp';
 import Forgot from './Forgot';
 import Verify from './Verify';
-import Custom from './Custom';
 
+import Preferences from '../Utils/Preferences';
 import About from '../Utils/About';
 import Rules from '../Utils/Rules';
 
@@ -48,8 +48,8 @@ const Auth = () => {
         })}
       />
       <AuthStack.Screen
-        name="Custom"
-        component={Custom}
+        name="Preferences"
+        component={Preferences}
         options={() => ({
           headerLeft: null,
           headerShown: true,
