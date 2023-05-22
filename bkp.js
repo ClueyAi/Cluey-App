@@ -39,7 +39,7 @@ if (fs.existsSync(fullPath)) {
 const output = fs.createWriteStream(fullPath);
 const archive = archiver('zip', { zlib: { level: 9 } });
 
-const gitignorePath = path.join(__dirname, '.gitignore');
+const gitignorePath = path.join(__dirname, '.bkpignore');
 const gitignore = fs.readFileSync(gitignorePath, 'utf-8');
 const filesToIgnore = gitignore.split('\n').filter((line) => !line.startsWith('#') && line !== '');
 const archiveIgnores = filesToIgnore.map((fileToIgnore) => `**/${fileToIgnore}`);

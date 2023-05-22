@@ -64,7 +64,6 @@ const App = () => {
         name="Chat"
         component={Chat}
         options={({ navigation }) => ({
-
           headerTitle: () => <MainTitle />,
           headerRight: () => <SettingsButton navigation={navigation} />,
         })}

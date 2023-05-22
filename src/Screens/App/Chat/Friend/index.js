@@ -22,6 +22,7 @@ const Friend = ({chatId}) => {
   const [textValue, setTextValue] = useState(null);
 
   const profile = user?.profile;
+  const friendChatId = (chatId+'+'+profile.email);
 
   const requestValidation = async (text) => {
     setTextValue(text);
@@ -31,7 +32,8 @@ const Friend = ({chatId}) => {
     setTextValue('');
     if (textValue.text !== "") {
       try {
-        await createUserFriendMessage(chatId, textValue);
+        console.log(friendChatId);
+        await createUserFriendMessage(friendChatId, textValue);
       } catch (error) {
         console.error(error);
       }

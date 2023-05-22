@@ -13,8 +13,9 @@ import {
   H5,
 } from "../../../../components/styles";
 
-const Peoples = ({ item }) => {
-  const contact = item?.profile;
+const Talks = ({ item }) => {
+
+  const user = item?.user.profile;
 
 	const styles = StyleSheet.create({
     cards: {
@@ -45,8 +46,8 @@ const Peoples = ({ item }) => {
               <UserAvatar
                 size={38}
                 style={{ width: 38, height: 38, borderRadius: 100 }}
-                name={contact?.displayName}
-                src={contact?.photoURL}
+                name={user?.displayName}
+                src={user?.photoURL}
               />
             </ProfilePicture>
           </Picture>
@@ -58,8 +59,8 @@ const Peoples = ({ item }) => {
               marginLeft: 5,
             }}
           >
-            <H4>{contact?.displayName}</H4>
-            <H5>{contact?.email}</H5>
+            <H4>{user?.displayName}</H4>
+            <H5>{user?.email}</H5>
           </Infor>
         </Profile>
       </View>
@@ -67,8 +68,9 @@ const Peoples = ({ item }) => {
   );
 };
 
-Peoples.propTypes = {
+Talks.propTypes = {
 	item: PropTypes.object.isRequired,
+  contactList: PropTypes.object.isRequired,
 };
 
-export default Peoples;
+export default Talks;

@@ -299,9 +299,7 @@ export const ChatInput = styled.View`
   justify-content: space-between;
   align-items: center;
   border-radius: 30px;
-  border-width: 0.1px;
-  border-color: ${light.text};
-  background-color: ${light.background};
+  background-color: ${light.backgroundSecondary};
 `;
 export const ChatTextInput = styled.TextInput`
   flex: 1;
