@@ -12,8 +12,6 @@ const Home = ({navigation}) => {
 
   const status = app?.status;
 
-  
-
   if (!status) {
     return (
       <Container>

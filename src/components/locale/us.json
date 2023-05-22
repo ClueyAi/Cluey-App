@@ -257,21 +257,28 @@
       "text": "Settings",
       "accessibility": "go to settings"
     },
+    "more_button": {
+      "text": "See More",
+      "accessibility": "see all cluey chats"
+    },
     "chats" : {
       "title": "Chats",
-      "description": "Your chats",
-      "more_button": {
-        "text": "See More",
-        "accessibility": "see all cluey chats"
+      "description": "Your chats"
+    },
+    "suggestions": {
+      "title": "Suggestions",
+      "description": "Your suggestions",
+      "itens": {
+        "s1": {"id": 1, "name": "Intel i5-13600k or Intel i5-10400?", "prompt": "How is better Intel i5-13600k or Intel i5-10400F?"},
+        "s2": {"id": 2, "name": "'Hello World' in Python?", "prompt": "How is do 'Hello World' in Python?"},
+        "s3": {"id": 3, "name": "Nvidea or AMD, in AMD CPU?", "prompt": "Nvidea or AMD, in AMD CPU?"},
+        "s4": {"id": 4, "name": "What is the best GPU for gaming?", "prompt": "What is the best GPU for gaming?"},
+        "s5": {"id": 5, "name": "Difference between DDR4 and DDR5?", "prompt": "Whats difference between DDR4 and DDR5?"}
       }
     },
     "teams": {
       "title": "Teams",
-      "description": "Your teams",
-      "more_button": {
-        "text": "See More",
-        "accessibility": "see all teams cluey chats"
-      }
+      "description": "Your teams"
     },
     "chat_box": {
       "placeholder1": "Hi ",

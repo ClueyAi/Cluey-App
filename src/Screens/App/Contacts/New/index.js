@@ -71,6 +71,7 @@ const New = ({ putContact }) => {
       marginTop: 5,
       marginBottom: 5,
       borderRadius: 20,
+      borderWidth: 0,
       backgroundColor: theme.backgroundSecondary, 
     },
     chatBox: {

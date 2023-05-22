@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { StyleSheet } from "react-native";
-import Ionicons from "@expo/vector-icons/Ionicons";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import AntDesign from "@expo/vector-icons/AntDesign";
 import PropTypes from "prop-types";
 
 import { ThemeContext } from "../../../../../components/theme";
@@ -10,7 +10,7 @@ import {
   View,
   Profile,
   Infor,
-  H3,
+  H4,
   ButtonEmpyte,
   ChatTextInput
 } from "../../../../../components/styles";
@@ -62,11 +62,11 @@ const Cluey = ({ item, handlerEditChatName, handlerDeleteChat }) => {
             justifyContent: "flex-start",
             alignItems: "center",
             width: "100%",
-            height: 50,
+            height: 40,
             paddingLeft: 10,
           }}
         >
-          <Ionicons name="chatbubbles-outline" size={28} color={theme.text} />
+          <AntDesign name="bulb1" size={22} color={theme.text} />
           <Infor
             style={{
               width: "auto",
@@ -86,7 +86,7 @@ const Cluey = ({ item, handlerEditChatName, handlerDeleteChat }) => {
                 onSubimiyEditing={handlerConfirmNameEdit}
               />  
             :
-              <H3>{item.name}</H3>
+              <H4>{item.name}</H4>
             }
           </Infor>
         </Profile>
@@ -94,16 +94,16 @@ const Cluey = ({ item, handlerEditChatName, handlerDeleteChat }) => {
         {editing?
         <View style={styles.actions}>
           <ButtonEmpyte onPress={handlerConfirmNameEdit}>
-            <MaterialIcons style={{marginRight: 10}} name="check" size={24} color={theme.secondary} />
+            <MaterialIcons style={{marginRight: 10}} name="check" size={18} color={theme.secondary} />
           </ButtonEmpyte>
         </View>
         :
         <View style={styles.actions}>
           <ButtonEmpyte onPress={handlerEdit}>
-            <MaterialIcons style={{marginRight: 10}} name="edit" size={24} color={theme.text} />
+            <MaterialIcons style={{marginRight: 10}} name="edit" size={18} color={theme.text} />
           </ButtonEmpyte>
           <ButtonEmpyte onPress={() => handlerDeleteChat(item.id)}>
-            <MaterialIcons name="delete-outline" size={24} color={theme.text} />
+            <MaterialIcons name="delete-outline" size={18} color={theme.text} />
           </ButtonEmpyte>
         </View>
         }

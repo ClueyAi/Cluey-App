@@ -14,7 +14,8 @@ const Chat = ({navigation, route}) => {
   const {id} = route.params;
   const chat = chats?.find(chat => chat.id === id);
   const isFriend = user.contacts?.find(chat => chat === id);
-  const chatFriend = friendChats?.find(chat => chat.id === id);
+  const chatFriendID = (id+'+'+user?.profile.email);
+  const chatFriend = friendChats?.find(chat => chat.id === chatFriendID);
   const status = app?.status;
 
   if (isFriend) {
