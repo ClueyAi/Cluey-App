@@ -1,10 +1,10 @@
-import React, { useState, useContext, useEffect } from 'react';
-import { Platform, StyleSheet } from 'react-native';
+import React, { useState, useContext } from 'react';
+import { Platform } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import PropTypes from "prop-types";
 
 import { FirestoreContext } from '../../../../api/firebase';
-import { ThemeContext } from '../../../../components/theme';
+import { ThemeContext, shadow } from '../../../../components/theme';
 import { LocaleContext } from '../../../../components/locale';
 import { 
   Avoiding,
@@ -14,15 +14,11 @@ import {
   ChatInput,
 } from '../../../../components/styles';
 
-const Friend = ({chatId}) => {
+const New = ({talkId}) => {
   const {locale} = useContext(LocaleContext);
   const {theme} = useContext(ThemeContext);
-  const {user, createUserFriendMessage} = useContext(FirestoreContext);
-  const [name, setName] = useState('');
+  const {createUserWhisp} = useContext(FirestoreContext);
   const [textValue, setTextValue] = useState(null);
-
-  const profile = user?.profile;
-  const friendChatId = (chatId+'+'+profile.email);
 
   const requestValidation = async (text) => {
     setTextValue(text);
@@ -32,8 +28,7 @@ const Friend = ({chatId}) => {
     setTextValue('');
     if (textValue.text !== "") {
       try {
-        console.log(friendChatId);
-        await createUserFriendMessage(friendChatId, textValue);
+        await createUserWhisp(talkId, textValue);
       } catch (error) {
         console.error(error);
       }
@@ -45,20 +40,12 @@ const Friend = ({chatId}) => {
 
   };
 
-  useEffect(() => {
-    if (profile) {
-      const email = profile?.email.split("@")[0];
-      const nameFull = profile?.displayName? profile?.displayName : email;
-      setName(nameFull.split(" ")[0]);
-    }
-  }, [profile]);
   return (
     <Avoiding behavior={Platform.OS === "ios" ? "padding" : null} keyboardVerticalOffset={90}>
       <ChatBox style={Platform.OS === "ios" ? {paddingBottom: '8%'} : {paddingBottom: '5%'}}>
-        <ChatInput style={{...styles.shadow, flex: 1}}>
+        <ChatInput style={{...shadow, flex: 1}}>
           <ChatTextInput
             style={{fontSize: 15}}
-            placeholder={locale.home.chat_box.placeholder1+name+locale.home.chat_box.placeholder2}
             value={textValue}
             multiline={true}
             minHeight={50}
@@ -82,18 +69,8 @@ const Friend = ({chatId}) => {
   );
 };
 
-const styles = StyleSheet.create({
-  shadow: {
-    shadowColor: "#000000",
-    shadowOffset: {width: 0, height: 3},
-    shadowOpacity:  0.17,
-    shadowRadius: 3.05,
-    elevation: 4
-  }
-});
-
-Friend.propTypes = {
-  chatId: PropTypes.string.isRequired
+New.propTypes = {
+  talkId: PropTypes.string.isRequired
 };
 
-export default Friend;
+export default New;

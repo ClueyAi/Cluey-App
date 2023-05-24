@@ -289,6 +289,9 @@
       "accessibility": "sender message"
     }
   },
+  "talk": {
+    "title": "Talk"
+  },
   "settings": {
     "title": "Settings",
     "button_logout": {

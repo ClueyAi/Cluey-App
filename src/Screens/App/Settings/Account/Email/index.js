@@ -158,7 +158,6 @@ const Email = ({ navigation }) => {
                     size={72}
                     style={{ width: 72, height: 72, borderRadius: 100 }}
                     name={userName}
-                    src={photo}
                   />
                 </ProfilePicture>
               </Picture>

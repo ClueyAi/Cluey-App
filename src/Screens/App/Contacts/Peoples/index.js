@@ -46,7 +46,6 @@ const Peoples = ({ item }) => {
                 size={38}
                 style={{ width: 38, height: 38, borderRadius: 100 }}
                 name={contact?.displayName}
-                src={contact?.photoURL}
               />
             </ProfilePicture>
           </Picture>

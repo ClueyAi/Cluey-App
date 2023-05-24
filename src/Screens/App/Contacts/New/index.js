@@ -1,21 +1,26 @@
-import React, { useContext, useState } from 'react';
-import { StyleSheet } from 'react-native';
+import React, { useContext, useState, useRef } from 'react';
+import { StyleSheet, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import PropTypes from "prop-types";
 
-import { ThemeContext } from '../../../../components/theme';
+import { ThemeContext, shadow } from '../../../../components/theme';
 import {
   View,
   ButtonEmpyte,
   Input,
   TextInput,
-  H3Bold
 } from "../../../../components/styles";
 
 const New = ({ putContact }) => {
+  const chatContainerRef = useRef(null);
   const { theme } = useContext(ThemeContext);
   const [addContact, setAddContact] = useState(false);
   const [contactEmail, setContactEmail] = useState('');
+
+  const handleContainerPress = () => {
+    Keyboard.dismiss();
+    handlerAddContact();
+  };
 
   const handlerAddContact = () => {
     if (addContact) {
@@ -57,7 +62,7 @@ const New = ({ putContact }) => {
       marginTop: 5,
       marginBottom: 5,
       borderRadius: 20,
-      backgroundColor: theme.backgroundSecondary, 
+      backgroundColor: theme.background, 
       borderWidth: 0.1,
       borderColor: theme.background,
     },
@@ -72,55 +77,48 @@ const New = ({ putContact }) => {
       marginBottom: 5,
       borderRadius: 20,
       borderWidth: 0,
-      backgroundColor: theme.backgroundSecondary, 
+      backgroundColor: theme.background, 
     },
     chatBox: {
       width: '100%',
-
-    },
-    shadow: {
-      shadowColor: "#000000",
-      shadowOffset: {width: 0, height: 3},
-      shadowOpacity:  0.17,
-      shadowRadius: 3.05,
-      elevation: 4
     }
   });
 
   return (
-    <View style={styles.container}>
-      { !addContact ?
-        <ButtonEmpyte style={{...styles.shadow, ...styles.button}} onPress={handlerAddContact}>
-          <MaterialIcons style={{position: 'absolute', alignSelf: 'center', top: -15, padding: 2, zIndex: 1, borderRadius: 100, backgroundColor: theme.backgroundSecondary}} name="add" size={22} color={theme.text} />
-          <H3Bold style={{color: theme.text}}>New contact</H3Bold>
-        </ButtonEmpyte>
-      :
-      <View style={{ ...styles.chatBox}}>
-        <ButtonEmpyte style={{position: 'absolute', alignSelf: 'center', top: -10, padding: 2, zIndex: 1, borderRadius: 100, backgroundColor: theme.backgroundSecondary}} onPress={handlerAddContact}>
-          <MaterialIcons name="clear" size={20} color={theme.error} />
-        </ButtonEmpyte>
-        <Input style={{...styles.shadow, ...styles.input}}>
-          <TextInput
-            placeholder="New contact"
-            placeholderTextColor={theme.text}
-            value={contactEmail}
-            autoCapitalize="none"
-            autoCorrect={false}
-            autoFocus={true}
-            inputMode="email"
-            autoComplete="email"
-            maxLength={100}
-            returnKeyType="send"
-            onChangeText={handlerChatName}
-            onSubmitEditing={handleAddNewContact}
-          />
-          <ButtonEmpyte onPress={handleAddNewContact}>
-            <MaterialIcons style={{marginRight: 15}} name="check" size={24} color={theme.secondary} />
+    <TouchableWithoutFeedback onPress={handleContainerPress}>
+      <View style={styles.container} ref={chatContainerRef}>
+        { !addContact ?
+          <ButtonEmpyte style={{...shadow, backgroundColor: theme.background, borderRadius: 30, margin: 10}} onPress={handlerAddContact}>
+            <MaterialIcons style={{alignSelf: 'center', padding: 2, margin: 5, zIndex: 1, borderRadius: 100}} name="add" size={22} color={theme.text} />
           </ButtonEmpyte>
-        </Input>
-      </View>
-      }
-  </View>
+        :
+        <View style={{ ...styles.chatBox}}>
+          <ButtonEmpyte style={{position: 'absolute', alignSelf: 'center', top: -10, padding: 2, zIndex: 1, borderRadius: 100, backgroundColor: theme.background}} onPress={handlerAddContact}>
+            <MaterialIcons name="cancel" size={20} color={theme.error} />
+          </ButtonEmpyte>
+          <Input style={{...shadow, ...styles.input}}>
+            <TextInput
+              placeholder="New contact"
+              placeholderTextColor={theme.text}
+              value={contactEmail}
+              autoCapitalize="none"
+              autoCorrect={false}
+              autoFocus={true}
+              inputMode="email"
+              autoComplete="email"
+              maxLength={100}
+              returnKeyType="send"
+              onChangeText={handlerChatName}
+              onSubmitEditing={handleAddNewContact}
+            />
+            <ButtonEmpyte onPress={handleAddNewContact}>
+              <MaterialIcons style={{marginRight: 15}} name="check" size={24} color={theme.secondary} />
+            </ButtonEmpyte>
+          </Input>
+        </View>
+        }
+    </View>
+  </TouchableWithoutFeedback>
   );
 };
 

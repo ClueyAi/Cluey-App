@@ -11,20 +11,25 @@ import {
   Infor,
   H4,
   H5,
+  H6,
 } from "../../../../components/styles";
 
 const Talks = ({ item }) => {
+  const user = item?.userData.profile;
+  const talk = item?.talk;
+  const lastMessage= talk?.messages.length > 0 ? talk?.messages[talk?.messages.length - 1].text : '';
 
-  const user = item?.user.profile;
+  const fullTime = talk?.updatedAt.split(" ")[4];
+  const time = fullTime.split(":")[0] + ":" + fullTime.split(":")[1];
+  const fullDate = talk?.updatedAt.split(" ")[1] + "/" + talk?.updatedAt.split(" ")[2] + "/" + talk?.updatedAt.split(" ")[3];
 
 	const styles = StyleSheet.create({
     cards: {
-      flex: 1,
       flexDirection: 'column',
     },
     data: {
-      flex: 1,
-      flexDirection: 'column',
+      flexDirection: 'row',
+      justifyContent: 'space-between',
       alignItems: 'center',
     }
   });
@@ -37,7 +42,6 @@ const Talks = ({ item }) => {
             flexDirection: "row",
             justifyContent: "flex-start",
             alignItems: "center",
-            width: "100%",
             height: 50,
           }}
         >
@@ -47,7 +51,6 @@ const Talks = ({ item }) => {
                 size={38}
                 style={{ width: 38, height: 38, borderRadius: 100 }}
                 name={user?.displayName}
-                src={user?.photoURL}
               />
             </ProfilePicture>
           </Picture>
@@ -60,17 +63,20 @@ const Talks = ({ item }) => {
             }}
           >
             <H4>{user?.displayName}</H4>
-            <H5>{user?.email}</H5>
+            <H5>{lastMessage}</H5>
           </Infor>
         </Profile>
+        <View style={{position: 'absolute', right: 2, top: 10}}>
+          <H6>{fullDate}</H6>
+          <H6>{time}</H6>
+        </View>
       </View>
     </View>
   );
 };
 
 Talks.propTypes = {
-	item: PropTypes.object.isRequired,
-  contactList: PropTypes.object.isRequired,
+	item: PropTypes.object.isRequired
 };
 
 export default Talks;

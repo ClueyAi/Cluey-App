@@ -143,6 +143,12 @@ export const H5 = styled.Text`
   font-size: 12px;
   color: ${light.textDark};
 `;
+export const H6 = styled.Text`
+  font-family: 'Nunito-Bold';
+  text-align: center;
+  font-size: 10px;
+  color: ${light.textDark};
+`;
 export const P = styled.Text`
   font-family: 'Nunito';
   text-align: center;
@@ -299,7 +305,7 @@ export const ChatInput = styled.View`
   justify-content: space-between;
   align-items: center;
   border-radius: 30px;
-  background-color: ${light.backgroundSecondary};
+  background-color: ${light.background};
 `;
 export const ChatTextInput = styled.TextInput`
   flex: 1;
