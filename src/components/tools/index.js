@@ -132,6 +132,7 @@ AboutButton.propTypes = {
 };
 
 export const LanguageSelector = () => {
+  // eslint-disable-next-line no-unused-vars
   const {locale, changeLocale} = useContext(LocaleContext);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [iso, setIso] = useState(locale.language.iso);
@@ -228,12 +229,22 @@ export const MainTitle = () =>{
   );
 }
 
+export const TalkTitle = () =>{
+  const {locale} = useContext(LocaleContext);
+
+  return(
+   <View style={styles.mainMenu}>
+      <ChatTitle>{locale.talk.title}</ChatTitle>
+   </View>
+  );
+}
+
 const styles = StyleSheet.create({
   mainMenu: {
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 2,
+    marginTop: -5,
   },
   statusContainer: {
     flexDirection: 'row',

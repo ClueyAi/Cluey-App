@@ -166,7 +166,6 @@ const Settings = ({ navigation }) => {
                       size={102}
                       style={{ width: 102, height: 102, borderRadius: 100 }}
                       name={userName}
-                      src={photo}
                     />
                   </ProfilePicture>
                 </ButtonEmpyte>

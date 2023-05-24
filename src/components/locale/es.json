@@ -222,6 +222,9 @@
       "accessibility": "sender message"
     }
   },
+  "talk": {
+    "title": "Talk"
+  },
   "settings": {
     "title": "My Account",
     "button_logout": {

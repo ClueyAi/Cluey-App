@@ -5,12 +5,13 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 
 import { LocaleContext } from '../../components/locale';
 import { ThemeContext } from '../../components/theme';
-import { MainTitle, ContactsMenuButton, HomeButton, CloseMenuButton, LogoutButton, LanguageSelector, SettingsButton, CloseModal } from '../../components/tools';
+import { MainTitle, TalkTitle, ContactsMenuButton, LogoutButton, LanguageSelector, SettingsButton, CloseModal } from '../../components/tools';
 
 import Home from './Home';
 import Contacts from './Contacts';
 
 import Chat from './Chat';
+import Talk from './Talk';
 
 import Settings from './Settings';
 import Account from './Settings/Account';
@@ -54,10 +55,8 @@ const App = () => {
       <AppStack.Screen
         name="Contacts"
         component={Contacts}
-        options={({ navigation }) => ({
-          headerLeft: () => <HomeButton navigation={navigation} />,
-          headerTitle: () => <MainTitle />,
-          headerRight: () => <CloseMenuButton navigation={navigation} />,
+        options={() => ({
+          headerTitle: () => <TalkTitle />
         })}
       />
       <AppStack.Screen
@@ -65,6 +64,14 @@ const App = () => {
         component={Chat}
         options={({ navigation }) => ({
           headerTitle: () => <MainTitle />,
+          headerRight: () => <SettingsButton navigation={navigation} />,
+        })}
+      />
+      <AppStack.Screen
+        name="Talk"
+        component={Talk}
+        options={({ navigation }) => ({
+          headerTitle: () => <TalkTitle />,
           headerRight: () => <SettingsButton navigation={navigation} />,
         })}
       />

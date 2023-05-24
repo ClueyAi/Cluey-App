@@ -13,8 +13,7 @@ export const FirestoreProvider = ({ children }) => {
   const [chats, setChats] = useState(null);
   const [contacts, setContacts] = useState(null);
   const [talks, setTalks] = useState(null);
-
-  
+  const [whisps, setWhisps] = useState(null);
 
   useEffect(() => {
     if (isAuth) {
@@ -43,55 +42,13 @@ export const FirestoreProvider = ({ children }) => {
           setChats(data);
       });
 
-      const getContacts = async () => {
-        const querySnapshot = await firestore.collection('users')
-          .where('profile.email', 'in', user?.contacts)
-          .get();
-      
-        const contactsData = querySnapshot.docs.map((doc) => {
-          const data = doc.data();
-          return { ...data, id: doc.id };
-        });
-      
-         setContacts(contactsData);
-      };
-    
-      const getTalks = async () => {
-        const talksCollection = await firestore.collection('talks')
-          .where('emailFriend', 'in', user?.contacts)
-          .get();
-      
-        const talks = talksCollection.docs.map((doc) => {
-          const data = doc.data();
-          return { ...data, id: doc.id };
-        });
-    
-        const usersCollection = await firestore.collection('users')
-          .where('profile.email', 'in', user?.contacts)
-          .get();
-      
-        const users = usersCollection.docs.map((doc) => {
-          const data = doc.data();
-          return { ...data, id: doc.id };
-        });
-    
-        const combinedData = talks.map((talk) => {
-          const userData = users.find((user) => user.profile.email === talk.emailFriend);
-          return { talk, userData };
-        });
-      
-        setTalks(combinedData);
-      };
-
       return () => {
-        getContacts();
         getApp();
         getUser();
         getChats();
-        getTalks();
       }
     }
-  }, [authUser, isAuth, user, contacts]);
+  }, [authUser, isAuth]);
 
   const putUser = async () => {
     const timestamp = Date().toLocaleString();
@@ -122,6 +79,21 @@ export const FirestoreProvider = ({ children }) => {
       },
       updatedAt: timestamp,
     }, { merge: true })
+  };
+
+  const getContacts = async () => {
+    if (user?.contacts?.length > 0) {
+    const querySnapshot = await firestore.collection('users')
+      .where('profile.email', 'in', user?.contacts)
+      .get();
+  
+    const contactsData = querySnapshot.docs.map((doc) => {
+      const data = doc.data();
+      return { ...data, id: doc.id };
+    });
+  
+     setContacts(contactsData);
+    }
   };
 
   const putContact = async (contact) => {
@@ -211,6 +183,35 @@ export const FirestoreProvider = ({ children }) => {
     return await docRef.delete();
   };
 
+  const getTalks = async () => {
+    if (user?.contacts?.length > 0) {
+      const talksCollection = await firestore.collection('talks')
+        .where('emailFriend', 'in', user?.contacts)
+        .get();
+    
+      const talks = talksCollection.docs.map((doc) => {
+        const data = doc.data();
+        return { ...data, id: doc.id };
+      });
+
+      const usersCollection = await firestore.collection('users')
+        .where('profile.email', 'in', user?.contacts)
+        .get();
+    
+      const users = usersCollection.docs.map((doc) => {
+        const data = doc.data();
+        return { ...data, id: doc.id };
+      });
+
+      const combinedData = talks.map((talk) => {
+        const userData = users.find((user) => user.profile.email === talk.emailFriend);
+        return { talk, userData };
+      });
+
+      setTalks(combinedData);
+    }
+  };
+
   const createTalk = async (email) => {
     const timestamp = Date().toLocaleString();
     const chat = {
@@ -232,11 +233,23 @@ export const FirestoreProvider = ({ children }) => {
       return talk.docs[0].id;
     }
   };
-  
 
-  const createUserFriendMessage = async (chatId, text) => {
+  const getWhisps = async (id) => {
+    try {
+      const docRef = firestore.collection('talks').doc(id);
+      const docSnapshot = await docRef.get();
+      if (docSnapshot.exists) {
+        const data = docSnapshot.data();
+        setWhisps(data);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const createUserWhisp = async (talkId, text) => {
     const timestamp = Date().toLocaleString();
-    const chat = {
+    const talk = {
       updatedAt: timestamp,
     };
     const message = {
@@ -244,9 +257,9 @@ export const FirestoreProvider = ({ children }) => {
       createdAt: timestamp,
       text: text,
     };
-    await firestore.collection('talks').doc(chatId).set(chat, { merge: true })
+    await firestore.collection('talks').doc(talkId).set(talk, { merge: true })
       .then(() => {
-        firestore.collection('talks').doc(chatId)
+        firestore.collection('talks').doc(talkId)
         .update({
           messages: arrayUnion(message),
         });
@@ -261,8 +274,10 @@ export const FirestoreProvider = ({ children }) => {
     contacts,
     chats,
     talks,
+    whisps,
     putUser,
     putPreferences,
+    getContacts,
     putContact,
     putCountry,
     createChat,
@@ -270,9 +285,10 @@ export const FirestoreProvider = ({ children }) => {
     createAiMessage,
     editChat,
     deleteChat,
+    getTalks,
     createTalk,
-    createUserFriendMessage,
-
+    getWhisps,
+    createUserWhisp,
   };
 
   return <FirestoreContext.Provider value={value}>{children}</FirestoreContext.Provider>;

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { FlatList } from 'react-native';
 import PropTypes from "prop-types";
 
@@ -11,28 +11,40 @@ import Talks from './Talks';
 import New from './New';
 
 const Contacts = ({navigation}) => {
-  const {contacts, putContact, talks, createTalk} = useContext(FirestoreContext);
+  const {user, getContacts, contacts, putContact, getTalks, talks, createTalk} = useContext(FirestoreContext);
   const {theme} = useContext(ThemeContext);
 
   const handlerChat = async (item) => {
     try {
-      createTalk(item.profile.email).then((talk) => {
-        console.log(talk);
+      createTalk(item?.profile.email).then((talk) => {
         if (talk != null) {
-          navigation.navigate('Chat', {id: talk});
+          navigation.navigate('Talk', {id: talk});
         }
       });
     } catch (error) {
       console.error(error);
     }
   };
+  
+  useEffect(() => {
+    const unsubscribe = navigation.addListener('focus', () => {
+      try {
+        getContacts();
+        getTalks();
+      } catch (error) {
+        console.error(error);
+      }
+    });
+
+    return unsubscribe;
+  }, [navigation], user, contacts, talks);
 
   return (
     <Container>
       <FlatList
         data={talks}
         style={{width: '100%', paddingTop: 5, paddingBottom: 40}}
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item, index) => index.toString() + talks.length.toString()}
         renderItem={({ item }) => (
           <ButtonEmpyte 
             style={{
@@ -45,7 +57,7 @@ const Contacts = ({navigation}) => {
               paddingHorizontal: 10,
               backgroundColor: theme.background
             }} 
-            onPress={() => handlerChat(item)}
+            onPress={() => handlerChat(item.userData)}
           >
             <Talks item={item} />
           </ButtonEmpyte>
