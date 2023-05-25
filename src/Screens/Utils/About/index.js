@@ -75,7 +75,7 @@ const About = ({ navigation }) => {
                 <PMini>{locale.global.team.tester.office}</PMini>         
               </ButtonEmpyte>
             </Team>
-            <H3 style={{marginTop: 10}}>{locale.global.mentor.title}</H3>
+            <H3 style={{marginTop: 20}}>{locale.global.mentor.title}</H3>
             <Mentor>
               <ButtonEmpyte onPress={handleMentor1}>
                 <Picture>
@@ -111,16 +111,16 @@ const About = ({ navigation }) => {
               </ButtonEmpyte>
             </Partners>
             <View style={{marginTop: 30, alignItems: 'center'}}>
-              <Image style={{width: 99, height: 166.8}} source={require('../../../../assets/images/cluey.png')} />
+              <Image style={{width: 90.6, height: 132}} source={require('../../../../assets/images/cluey.png')} />
               <View style={{flexDirection: 'row', marginTop: -5}}>
-                <H1Mini style={{fontSize: 18, padding: 2}}>©</H1Mini>
-                <H1 style={{fontSize: 18, padding: 2}}>{locale.global.app.name}</H1>
-                <H1Mini style={{fontSize: 18, padding: 2}}>2023</H1Mini>
+                <H1Mini style={{fontSize: 16, padding: 2}}>©</H1Mini>
+                <H1 style={{fontSize: 16, padding: 2}}>{locale.global.app.name}</H1>
+                <H1Mini style={{fontSize: 16, padding: 2}}>2023</H1Mini>
               </View>
             </View>
             <View style={{marginTop: 30, marginBottom: 60, alignItems: 'center'}}>
               <H3Bold>{locale.global.app.resume_title}</H3Bold>
-              <P style={{marginTop: 5}}>{locale.global.app.resume}</P>
+              <P style={{width: '90%', textAlign: 'justify', marginTop: 5}}>{locale.global.app.resume}</P>
             </View>
           </ScrollView>
         </Main>

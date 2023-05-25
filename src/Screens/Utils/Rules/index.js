@@ -9,7 +9,7 @@ import {
   ScrollView,
   H1,
   H3Bold,
-  Tittle,
+  Title,
   Text,
   TextList,
   ButtonEmpyte,
@@ -102,9 +102,9 @@ const Rules = () => {
           </ScrollView>
         ) : (
           <ScrollView style={{ paddingHorizontal: 20 }}>
-            <Tittle>{locale.global.app.policy_terms.terms.t1}</Tittle>
+            <Title>{locale.global.app.policy_terms.terms.t1}</Title>
             <Text>{locale.global.app.policy_terms.terms.p1}</Text>
-            <Tittle>{locale.global.app.policy_terms.terms.t2}</Tittle>
+            <Title>{locale.global.app.policy_terms.terms.t2}</Title>
             <Text>{locale.global.app.policy_terms.terms.p2}</Text>
             <TextList>
               2.1. {locale.global.app.policy_terms.terms["p2.1"]}
@@ -124,17 +124,17 @@ const Rules = () => {
             <TextList>
               2.6. {locale.global.app.policy_terms.terms["p2.6"]}
             </TextList>
-            <Tittle>{locale.global.app.policy_terms.terms.t3}</Tittle>
+            <Title>{locale.global.app.policy_terms.terms.t3}</Title>
             <Text>{locale.global.app.policy_terms.terms.p3}</Text>
-            <Tittle>{locale.global.app.policy_terms.terms.t4}</Tittle>
+            <Title>{locale.global.app.policy_terms.terms.t4}</Title>
             <Text>{locale.global.app.policy_terms.terms.p4}</Text>
-            <Tittle>{locale.global.app.policy_terms.terms.t5}</Tittle>
+            <Title>{locale.global.app.policy_terms.terms.t5}</Title>
             <Text>{locale.global.app.policy_terms.terms.p5}</Text>
-            <Tittle>{locale.global.app.policy_terms.terms.t6}</Tittle>
+            <Title>{locale.global.app.policy_terms.terms.t6}</Title>
             <Text>{locale.global.app.policy_terms.terms.p6}</Text>
-            <Tittle>{locale.global.app.policy_terms.terms.t7}</Tittle>
+            <Title>{locale.global.app.policy_terms.terms.t7}</Title>
             <Text>{locale.global.app.policy_terms.terms.p7}</Text>
-            <Tittle>{locale.global.app.policy_terms.terms.t8}</Tittle>
+            <Title>{locale.global.app.policy_terms.terms.t8}</Title>
             <Text>{locale.global.app.policy_terms.terms.p8}</Text>
           </ScrollView>
         )}

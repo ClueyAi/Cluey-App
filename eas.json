@@ -17,22 +17,6 @@
     "preview": {
       "android": {
         "buildType": "apk"
-      },
-      "env": {
-        "EXPO_PROJECT_ID": "b6e3ae4c-c16e-493e-a186-1b1a40a5ebb5",
-        "REDIRECT_URI": "https://auth.expo.io/@gustavofalcao1/cluey",
-        "API_KEY": "AIzaSyD6g7nvgaiOtoXFjYei67p-0dvymjUhx0M",
-        "AUTH_DOMAIN": "cluey-33308.firebaseapp.com",
-        "PROJECT_ID": "cluey-33308",
-        "STORAGE_BUCKET": "cluey-33308.appspot.com",
-        "MESSAGING_SENDER_ID": "336677386791",
-        "APP_ID": "1:336677386791:web:2e2610fb758543d08fec02",
-        "MEASUREMENT_ID": "G-N4K8P4PFE7",
-        "GOOGLE_API_KEY": "AIzaSyD6g7nvgaiOtoXFjYei67p-0dvymjUhx0M",
-        "WEB_CLIENT_ID": "336677386791-caj1cov3n1vb5la53jnc0mvaqu4j2ft8.apps.googleusercontent.com",
-        "WEB_CLIENT_SECRET": "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",
-        "OPENAI_API_KEY": "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",
-        "OPENAI_ORG_ID=": "org-Eu29lJNtI2mtLuRsMvo9Jroy"
       }
     },
     "preview2": {

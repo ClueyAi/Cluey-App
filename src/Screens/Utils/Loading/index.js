@@ -6,13 +6,14 @@ import { ActivityIndicator, Container, Body, H1Mini } from '../../../components/
 import { UserContext, AuthContext, FirestoreContext } from '../../../api/firebase';
 import { LocaleContext } from '../../../components/locale';
 import { ThemeContext } from '../../../components/theme';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Load = ({ navigation }) => {
   const {locale} = useContext(LocaleContext);
   const {theme} = useContext(ThemeContext);
   const {isAuth, isVerify} = useContext(UserContext);
-  const {user} = useContext(FirestoreContext);
-  const {isNew} = useContext(AuthContext);
+  const {user, app} = useContext(FirestoreContext);
+  const {isNew, signOut} = useContext(AuthContext);
   const [loadingMsg] = useState(locale.loading.loading);
   const [loadedMsg, setLoadedMsg] = useState('');
   const [isLoading, setIsLoading] = useState(true);
@@ -52,6 +53,11 @@ const Load = ({ navigation }) => {
   useEffect(() => {
     selectScreen();
     setIsDone(true);
+    if (app?.logoutAll) {
+      AsyncStorage.clear();
+      signOut();
+      navigation.navigate('AuthStackNavigator', { screen: 'Welcome' });
+    }
     const timer = setTimeout(() => {
       if (isDone) {
         setIsLoading(false);
