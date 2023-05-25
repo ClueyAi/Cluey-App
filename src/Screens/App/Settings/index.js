@@ -33,12 +33,10 @@ import {
 const Settings = ({ navigation }) => {
   const { locale } = useContext(LocaleContext);
   const { theme } = useContext(ThemeContext);
-  const { updateUserPhoto, updateUserName } = useContext(UserContext);
-  const { user } = useContext(FirestoreContext);
+  const { updateUserName } = useContext(UserContext);
+  const { user, updateUserPhoto } = useContext(FirestoreContext);
   const [editingName, setEditingName] = useState(false);
   const [userName, setUserName] = useState("");
-
-  const profile = user?.profile;
 
   const handleEditPhoto = async () => {
     Alert.alert(
@@ -95,7 +93,6 @@ const Settings = ({ navigation }) => {
       const uri = result.assets[0].uri;
       try {
         await updateUserPhoto(uri);
-        await navigation.navigate("Loading");
       } catch (error) {
         console.log(error.code);
       }
@@ -133,12 +130,12 @@ const Settings = ({ navigation }) => {
 
   useEffect(() => {
     const unsubscribe = navigation.addListener("focus", () => {
-      const name = profile?.email.split("@")[0];
-      setUserName(profile?.displayName ? profile?.displayName : name);
+      const name = user?.profile.email.split("@")[0];
+      setUserName(user?.profile.displayName ? user?.profile.displayName : name);
     });
 
     return unsubscribe;
-  }, [profile]);
+  }, [navigation]);
 
   useFocusEffect(
     useCallback(() => {
@@ -155,16 +152,14 @@ const Settings = ({ navigation }) => {
               <Picture>
                 <ButtonEmpyte
                   onPress={handleEditPhoto}
-                  accessibilityLabel={
-                    locale.settings.photo_button.accessibility
-                  }
+                  accessibilityLabel={locale.settings.photo_button.accessibility}
                 >
                   <ProfilePicture>
                     <UserAvatar
                       size={102}
                       style={{ width: 102, height: 102, borderRadius: 100 }}
-                      name={userName}
-                      src={profile?.photoURL}
+                      name={user?.profile.displayName? user?.profile.displayName : user?.profile.email.split("@")[0]}
+                      src={user?.profile.photoURL}
                     />
                   </ProfilePicture>
                 </ButtonEmpyte>
@@ -190,9 +185,7 @@ const Settings = ({ navigation }) => {
                     <ButtonEmpyte
                       style={{ marginLeft: 5, marginRight: 10 }}
                       onPress={handleEditNameOf}
-                      accessibilityLabel={
-                        locale.settings.name_button.accessibility
-                      }
+                      accessibilityLabel={locale.settings.name_button.accessibility}
                     >
                       <Ionicons name="close" size={19} color={theme.error} />
                     </ButtonEmpyte>
@@ -207,9 +200,7 @@ const Settings = ({ navigation }) => {
                       alignItems: "center",
                     }}
                     onPress={handleEditNameOn}
-                    accessibilityLabel={
-                      locale.settings.name_button.accessibility
-                    }
+                    accessibilityLabel={locale.settings.name_button.accessibility}
                   >
                     <H3 style={{ marginRight: 10 }}>{userName}</H3>
                     <Ionicons name="create-outline" size={19} color={theme.textGray} />

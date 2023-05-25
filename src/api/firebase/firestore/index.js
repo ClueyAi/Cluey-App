@@ -1,7 +1,7 @@
 import React, { createContext, useState, useEffect, useContext } from 'react';
 import PropTypes from "prop-types";
 
-import { firestore, arrayUnion } from '../config';
+import { firestore, storage, arrayUnion } from '../config';
 import { sendMessageToOpenAI } from '../../openai';
 import { UserContext } from '../user';
 export const FirestoreContext = createContext();
@@ -42,6 +42,26 @@ export const FirestoreProvider = ({ children }) => {
           setChats(data);
       });
 
+      const putUser = async () => {
+        const timestamp = Date().toLocaleString();
+        const name = authUser?.email.split("@")[0];
+    
+        const docRef = firestore.collection('users').doc(authUser?.uid);
+        return await docRef.set({
+          uid: authUser?.uid,
+          createdAt: timestamp,
+          updatedAt: timestamp,
+          profile: {
+            displayName: authUser.displayName?authUser.displayName: name,
+            email: authUser.email,
+            emailVerified: authUser.emailVerified,
+            photoURL: authUser.photoURL? authUser.photoURL: '',
+          },
+        }, { merge: true })
+      };
+
+      putUser();
+
       return () => {
         getApp();
         getUser();
@@ -50,22 +70,18 @@ export const FirestoreProvider = ({ children }) => {
     }
   }, [authUser, isAuth]);
 
-  const putUser = async () => {
-    const timestamp = Date().toLocaleString();
-    const name = authUser?.email.split("@")[0];
+  const updateUserPhoto = async (uri) => {
+    const response = await fetch(uri);
+    const blob = await response.blob();
 
-    const docRef = firestore.collection('users').doc(authUser?.uid);
-    return await docRef.set({
-      uid: authUser?.uid,
-      createdAt: timestamp,
-      updatedAt: timestamp,
-      profile: {
-        displayName: authUser.displayName?authUser.displayName: name,
-        email: authUser.email,
-        emailVerified: authUser.emailVerified,
-        photoURL: authUser.photoURL? authUser.photoURL: '',
-      },
-    }, { merge: true })
+    const ref = storage.ref().child(`public/${authUser?.uid}/photoURL.jpg`);
+    const snapshot = await ref.put(blob);
+
+    const photoURL = await snapshot.getDownloadURL();
+
+    return await authUser.currentUser.updateProfile({
+      photoURL: photoURL
+    });
   };
 
   const putPreferences = async (focusItens, interestsItens) => {
@@ -275,7 +291,7 @@ export const FirestoreProvider = ({ children }) => {
     chats,
     talks,
     whisps,
-    putUser,
+    updateUserPhoto,
     putPreferences,
     getContacts,
     putContact,
