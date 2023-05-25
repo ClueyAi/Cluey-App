@@ -4,7 +4,7 @@ export const sendMessageToOpenAI = async (text) => {
   const OPENAI_API_KEY = Constants.manifest.extra.openai.apiKey;
   const OPENAI_ORG_ID = Constants.manifest.extra.openai.orgId;
   const OPENAI_MODAL = 'text-davinci-003';
-  const MAX_TOKENS = 100;
+  const MAX_TOKENS = 1000;
 
   try {
     let responseMessage = '';

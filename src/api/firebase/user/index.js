@@ -26,7 +26,7 @@ export const UserProvider = ({ children }) => {
     const response = await fetch(uri);
     const blob = await response.blob();
 
-    const ref = storage.ref().child(`${authUser?.uid}/photoURL.jpg`);
+    const ref = storage.ref().child(`public/${authUser?.uid}/photoURL.jpg`);
     const snapshot = await ref.put(blob);
 
     const photoURL = await snapshot.ref.getDownloadURL();

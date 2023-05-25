@@ -8,7 +8,6 @@
     "fix": "expo doctor --fix-dependencies",
     "bkp": "node bkp.js",
     "android": "expo run:android",
-    "android-build-run": "eas build:run -p android --latest",
     "android-build": "eas build --profile preview --platform android",
     "android-build-dev": "eas build --profile dev --platform android",
     "ios": "expo run:ios",

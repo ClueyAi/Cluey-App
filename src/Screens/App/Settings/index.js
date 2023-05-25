@@ -36,7 +36,6 @@ const Settings = ({ navigation }) => {
   const { updateUserPhoto, updateUserName } = useContext(UserContext);
   const { user } = useContext(FirestoreContext);
   const [editingName, setEditingName] = useState(false);
-  const [photo, setPhoto] = useState("");
   const [userName, setUserName] = useState("");
 
   const profile = user?.profile;
@@ -96,7 +95,7 @@ const Settings = ({ navigation }) => {
       const uri = result.assets[0].uri;
       try {
         await updateUserPhoto(uri);
-        setPhoto(profile?.photoURL ? profile?.photoURL : result.assets[0].uri);
+        await navigation.navigate("Loading");
       } catch (error) {
         console.log(error.code);
       }
@@ -135,7 +134,6 @@ const Settings = ({ navigation }) => {
   useEffect(() => {
     const unsubscribe = navigation.addListener("focus", () => {
       const name = profile?.email.split("@")[0];
-      setPhoto(profile?.photoURL);
       setUserName(profile?.displayName ? profile?.displayName : name);
     });
 
@@ -166,6 +164,7 @@ const Settings = ({ navigation }) => {
                       size={102}
                       style={{ width: 102, height: 102, borderRadius: 100 }}
                       name={userName}
+                      src={profile?.photoURL}
                     />
                   </ProfilePicture>
                 </ButtonEmpyte>
@@ -174,7 +173,7 @@ const Settings = ({ navigation }) => {
                 </PictureEdit>
               </Picture>
               {editingName ? (
-                <Infor>
+                <Infor style={{marginTop: 10}}>
                   <Input style={{ width: "50%", height: 30 }}>
                     <TextInput
                       style={{ height: 50 }}
@@ -200,7 +199,7 @@ const Settings = ({ navigation }) => {
                   </Input>
                 </Infor>
               ) : (
-                <Infor>
+                <Infor style={{marginTop: 10}}>
                   <ButtonEmpyte
                     style={{
                       marginLeft: 30,

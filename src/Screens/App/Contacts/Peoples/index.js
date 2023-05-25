@@ -16,6 +16,8 @@ import {
 const Peoples = ({ item }) => {
   const contact = item?.profile;
 
+  console.log(contact);
+
 	const styles = StyleSheet.create({
     cards: {
       flex: 1,
@@ -46,6 +48,7 @@ const Peoples = ({ item }) => {
                 size={38}
                 style={{ width: 38, height: 38, borderRadius: 100 }}
                 name={contact?.displayName}
+                src={contact?.photoURL}
               />
             </ProfilePicture>
           </Picture>
