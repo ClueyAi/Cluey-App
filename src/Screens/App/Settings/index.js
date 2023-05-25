@@ -158,8 +158,8 @@ const Settings = ({ navigation }) => {
                     <UserAvatar
                       size={102}
                       style={{ width: 102, height: 102, borderRadius: 100 }}
-                      name={user?.profile.displayName? user?.profile.displayName : user?.profile.email.split("@")[0]}
-                      src={user?.profile.photoURL}
+                      name={user?.profile.displayName}
+                      src={user?.profile.photoURL? user?.profile.photoURL : null}
                     />
                   </ProfilePicture>
                 </ButtonEmpyte>

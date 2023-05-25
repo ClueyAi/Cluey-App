@@ -51,7 +51,7 @@ const Talks = ({ item }) => {
                 size={38}
                 style={{ width: 38, height: 38, borderRadius: 100 }}
                 name={user?.displayName}
-                src={user?.photoURL}
+                src={user?.photoURL? user?.photoURL : null}
               />
             </ProfilePicture>
           </Picture>

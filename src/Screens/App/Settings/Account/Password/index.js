@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect, useRef } from "react";
+import React, { useState, useContext, useRef } from "react";
 import { TouchableWithoutFeedback, Keyboard, StyleSheet, Alert } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import UserAvatar from "react-native-user-avatar";
@@ -41,7 +41,6 @@ const Password = ({ navigation }) => {
   const currentPasswordRef = useRef(null);
   const passwordRef = useRef(null);
   const rePasswordRef = useRef(null);
-  const [userName, setUserName] = useState("");
   const [currentPassword, setCurrentPassword] = useState("");
   const [password, setPassword] = useState("");
   const [rePassword, setRePassword] = useState("");
@@ -120,15 +119,6 @@ const Password = ({ navigation }) => {
     }
   };
 
-  useEffect(() => {
-    const unsubscribe = navigation.addListener("focus", () => {
-      const name = user?.profile.email.split("@")[0];
-      setUserName(user?.profile.displayName ? user?.profile.displayName : name);
-    });
-
-    return unsubscribe;
-  }, []);
-
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
       <Container behavior="height">
@@ -150,7 +140,7 @@ const Password = ({ navigation }) => {
                   <UserAvatar
                     size={72}
                     style={{ width: 72, height: 72, borderRadius: 100 }}
-                    name={userName}
+                    name={user?.profile?.displayName}
                     src={user?.profile?.photoURL}
                   />
                 </ProfilePicture>
@@ -164,7 +154,7 @@ const Password = ({ navigation }) => {
                   marginBottom: 15,
                 }}
               >
-                <H3Bold>{userName}</H3Bold>
+                <H3Bold>{user?.profile.displayName}</H3Bold>
                 <H3>{user?.profile.email}</H3>
               </Infor>
             </Profile>
