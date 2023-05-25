@@ -40,7 +40,6 @@ const Email = ({ navigation }) => {
   const { theme } = useContext(ThemeContext);
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
-  const [photo, setPhoto] = useState("");
   const [userName, setUserName] = useState("");
   const [newEmail, setNewEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -51,8 +50,6 @@ const Email = ({ navigation }) => {
   const [error, setError] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
   const [errorEmail, setErrorEmail] = useState("");
-
-  const profile = user?.profile;
 
   const emailValidate = (text) => {
     // eslint-disable-next-line no-useless-escape
@@ -128,13 +125,12 @@ const Email = ({ navigation }) => {
 
   useEffect(() => {
     const unsubscribe = navigation.addListener("focus", () => {
-      const name = profile?.email.split("@")[0];
-      setPhoto(profile?.photoURL);
-      setUserName(profile?.displayName ? profile?.displayName : name);
+      const name = user?.profile.email.split("@")[0];
+      setUserName(user?.profile.displayName ? user?.profile.displayName : name);
     });
 
     return unsubscribe;
-  }, [profile]);
+  }, []);
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
@@ -158,7 +154,7 @@ const Email = ({ navigation }) => {
                     size={72}
                     style={{ width: 72, height: 72, borderRadius: 100 }}
                     name={userName}
-                    src={photo}
+                    src={user?.profile?.photoURL}
                   />
                 </ProfilePicture>
               </Picture>
@@ -172,7 +168,7 @@ const Email = ({ navigation }) => {
                 }}
               >
                 <H3Bold>{userName}</H3Bold>
-                <H3>{profile?.email}</H3>
+                <H3>{user?.profile.email}</H3>
               </Infor>
             </Profile>
             <Form style={{flex: 1, marginTop: 40, alignSelf: 'center'}}>

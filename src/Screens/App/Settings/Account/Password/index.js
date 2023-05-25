@@ -41,7 +41,6 @@ const Password = ({ navigation }) => {
   const currentPasswordRef = useRef(null);
   const passwordRef = useRef(null);
   const rePasswordRef = useRef(null);
-  const [photo, setPhoto] = useState("");
   const [userName, setUserName] = useState("");
   const [currentPassword, setCurrentPassword] = useState("");
   const [password, setPassword] = useState("");
@@ -56,7 +55,6 @@ const Password = ({ navigation }) => {
   const [errorMsg, setErrorMsg] = useState("");
   const [errorPassword, setErrorPassword] = useState("errorPassword");
 
-  const profile = user?.profile;
 
   const currentPasswordValidate = (text) => {
     setCurrentPassword(text);
@@ -124,13 +122,12 @@ const Password = ({ navigation }) => {
 
   useEffect(() => {
     const unsubscribe = navigation.addListener("focus", () => {
-      const name = profile?.email.split("@")[0];
-      setPhoto(profile?.photoURL);
-      setUserName(profile?.displayName ? profile?.displayName : name);
+      const name = user?.profile.email.split("@")[0];
+      setUserName(user?.profile.displayName ? user?.profile.displayName : name);
     });
 
     return unsubscribe;
-  }, [profile]);
+  }, []);
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
@@ -154,7 +151,7 @@ const Password = ({ navigation }) => {
                     size={72}
                     style={{ width: 72, height: 72, borderRadius: 100 }}
                     name={userName}
-                    src={photo}
+                    src={user?.profile?.photoURL}
                   />
                 </ProfilePicture>
               </Picture>
@@ -168,7 +165,7 @@ const Password = ({ navigation }) => {
                 }}
               >
                 <H3Bold>{userName}</H3Bold>
-                <H3>{profile?.email}</H3>
+                <H3>{user?.profile.email}</H3>
               </Infor>
             </Profile>
             <Form style={{flex: 1, marginTop: 40, alignSelf: 'center'}}>

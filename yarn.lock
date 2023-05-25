@@ -6726,6 +6726,11 @@ join-component@^1.1.0:
   resolved "https://registry.npmjs.org/join-component/-/join-component-1.1.0.tgz#b8417b750661a392bee2c2537c68b2a9d4977cd5"
   integrity sha512-bF7vcQxbODoGK1imE2P9GS9aw4zD0Sd+Hni68IMZLj7zRnquH7dXUmMw9hDI5S/Jzt7q+IyTXN0rSg2GI0IKhQ==
 
+js-md5@^0.7.3:
+  version "0.7.3"
+  resolved "https://registry.yarnpkg.com/js-md5/-/js-md5-0.7.3.tgz#b4f2fbb0b327455f598d6727e38ec272cd09c3f2"
+  integrity sha512-ZC41vPSTLKGwIRjqDh8DfXoCrdQIyBgspJVPXHBGu4nZlAEvG3nf+jO9avM9RmLiGakg7vz974ms99nEV0tmTQ==
+
 js-sdsl@^4.1.4:
   version "4.4.0"
   resolved "https://registry.npmjs.org/js-sdsl/-/js-sdsl-4.4.0.tgz#8b437dbe642daa95760400b602378ed8ffea8430"
@@ -8640,6 +8645,13 @@ react-native-user-avatar@^1.0.8:
     abortcontroller-polyfill "^1.4.0"
     initials "^3.0.1"
     prop-types "^15.7.2"
+
+react-native-userpic@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/react-native-userpic/-/react-native-userpic-1.0.0.tgz#52a681ec9fc52c16a22a231888be3c0c5d6bc36e"
+  integrity sha512-B7F/peLPsTdSrpDTzJSdYvm7/FbFdfG4xSn4Tgv3emOp7t+nBqU4mh2D7tReGjmE8k3Id+geMpXPdTnXJ6KGEw==
+  dependencies:
+    js-md5 "^0.7.3"
 
 react-native-uuid@^2.0.1:
   version "2.0.1"
