@@ -13,7 +13,7 @@ const Stack = createStackNavigator();
 const Screens = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
+      <Stack.Navigator screenOptions={{headerShown: false}}>
         <Stack.Screen name="Loading" component={Loading} />
         <Stack.Screen name="AuthStackNavigator" component={AuthStackNavigator} />
         <Stack.Screen name="AppStackNavigator" component={AppStackNavigator} />
