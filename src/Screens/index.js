@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import { createSwitchNavigator } from '@react-navigation/compat';
+import { createStackNavigator } from '@react-navigation/stack';
 
 import Loading from './Utils/Loading';
 import Test from './Others/Test';
@@ -8,21 +8,19 @@ import AuthStackNavigator from './Auth';
 import AppStackNavigator from './App';
 import OthersStackNavigator from './Others';
 
-const SwitchNavigator = createSwitchNavigator(
-  {
-    Loading: Loading,
-    AuthStackNavigator: AuthStackNavigator,
-    AppStackNavigator: AppStackNavigator,
-    OthersStackNavigator: OthersStackNavigator,
-  }
-);
+const Stack = createStackNavigator();
 
 const Screens = () => {
   return (
     <NavigationContainer>
-      <SwitchNavigator/>
+      <Stack.Navigator>
+        <Stack.Screen name="Loading" component={Loading} />
+        <Stack.Screen name="AuthStackNavigator" component={AuthStackNavigator} />
+        <Stack.Screen name="AppStackNavigator" component={AppStackNavigator} />
+        <Stack.Screen name="OthersStackNavigator" component={OthersStackNavigator} />
+      </Stack.Navigator>
     </NavigationContainer>
-  )
+  );
 };
 
 export default Screens;
