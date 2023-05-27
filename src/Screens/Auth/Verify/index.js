@@ -1,9 +1,9 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import PropTypes from "prop-types";
 
 import { AuthContext, FirestoreContext } from "../../../api/firebase";
-
+import { ThemeContext } from "../../../components/theme";
 import { LocaleContext } from "../../../components/locale";
 import {
   Container,
@@ -22,10 +22,9 @@ import {
 
 const Verify = ({ navigation }) => {
   const { emailVerify } = useContext(AuthContext);
+  const { theme } = useContext(ThemeContext);
   const { user } = useContext(FirestoreContext);
   const { locale } = useContext(LocaleContext);
-  const [dev, setDev] = useState(false);
-  const [devSure, setDevSure] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const profile = user?.profile;
@@ -51,51 +50,8 @@ const Verify = ({ navigation }) => {
     navigation.navigate("Loading");
   };
 
-  const handleDev1 = async () => {
-    setDev(true);
-  };
-  const handleDev2 = async () => {
-    setDevSure(true);
-  };
-  const handleDev3 = async () => {
-    if (devSure) {
-      navigation.navigate("AppStackNavigator");
-    }
-    console.log("is verifild?", profile?.emailVerified);
-    console.log("dev mod:", dev);
-  };
-
-  useEffect(() => {
-    setDev(false);
-  }, [profile]);
-
   return (
     <Container>
-      {/*Dev */}
-      <ButtonEmpyte
-        style={{
-          position: "absolute",
-          top: 0,
-          left: 100,
-          zIndex: 9999,
-          padding: 20,
-          backgroundColor: dev ? "#000000" : null,
-        }}
-        onPress={handleDev1}
-      ></ButtonEmpyte>
-      <ButtonEmpyte
-        style={{
-          position: "absolute",
-          bottom: 100,
-          right: 100,
-          zIndex: 9999,
-          padding: 20,
-          backgroundColor: devSure ? "#000000" : null,
-        }}
-        onPress={handleDev2}
-        onLongPress={handleDev3}
-      ></ButtonEmpyte>
-      {/*Dev */}
       <Heading style={{ marginTop: "10%", marginBottom: 15 }}>
         <H1 style={{ marginBottom: 10, fontSize: 25 }}>
           {locale.verify.title}
@@ -122,7 +78,7 @@ const Verify = ({ navigation }) => {
       </ButtonPrimary>
       {profile?.emailVerified ? (
         <View style={{ marginTop: "25%" }}>
-          <Ionicons name="checkmark" size={35} color="#2ECC71" />
+          <Ionicons name="checkmark" size={35} color={theme.secondary} />
         </View>
       ) : (
         <View>

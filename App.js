@@ -6,9 +6,9 @@ import {LocaleProvider} from './src/components/locale';
 import {Firebase} from './src/api/firebase';
 import {ProvidersProvider} from './src/api/providers';
 import {ThemeProvider} from './src/components/theme';
-import Screens from './src/Screens/';
+import Screens from './src/Screens';
 
-const Cluey = () => {
+const App = () => {
   const [loaded] = useFonts({
     'Nunito': require('./assets/fonts/Nunito/static/Nunito-Regular.ttf'),
     'Nunito-Medium': require('./assets/fonts/Nunito/static/Nunito-Medium.ttf'),
@@ -36,4 +36,4 @@ const Cluey = () => {
   );
 };
 
-export default Cluey;
+export default App;

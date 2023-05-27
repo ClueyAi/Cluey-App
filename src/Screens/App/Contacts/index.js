@@ -11,7 +11,7 @@ import Talks from './Talks';
 import New from './New';
 
 const Contacts = ({navigation}) => {
-  const {user, getContacts, contacts, putContact, getTalks, talks, createTalk} = useContext(FirestoreContext);
+  const {getContacts, contacts, putContact, getTalks, talks, createTalk} = useContext(FirestoreContext);
   const {theme} = useContext(ThemeContext);
 
   const handlerChat = async (item) => {
@@ -37,7 +37,7 @@ const Contacts = ({navigation}) => {
     });
 
     return unsubscribe;
-  }, [navigation], user, contacts, talks);
+  }, [navigation]);
 
   return (
     <Container>
