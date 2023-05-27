@@ -6,7 +6,7 @@ import {LocaleProvider} from './src/components/locale';
 import {Firebase} from './src/api/firebase';
 import {ProvidersProvider} from './src/api/providers';
 import {ThemeProvider} from './src/components/theme';
-import Screens from './src/Screens';
+import Screens from './src/Screens/';
 
 const Cluey = () => {
   const [loaded] = useFonts({
@@ -27,7 +27,7 @@ const Cluey = () => {
         <ProvidersProvider>
           <ThemeProvider>
             <MenuProvider>
-              <Screens />
+              <Screens/>
             </MenuProvider>
           </ThemeProvider>
         </ProvidersProvider>

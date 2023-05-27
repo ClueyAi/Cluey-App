@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 import { AuthContext } from "../../../api/firebase";
 
-import locale from "../../../components/locale";
+import { LocaleContext } from "../../../components/locale";
 import {
   Container,
   Heading,
@@ -15,6 +15,7 @@ import {
 } from "../../../components/styles";
 
 const Blank = ({ navigation }) => {
+  const { locale } = useContext(LocaleContext);
   const { emailVerify } = useContext(AuthContext);
 
   const handleEmailVerify = async () => {

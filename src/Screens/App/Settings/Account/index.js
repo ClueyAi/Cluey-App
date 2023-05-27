@@ -1,7 +1,7 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState } from 'react';
+import { Platform } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import PropTypes from "prop-types";
-import CountryPicker from 'react-native-country-picker-modal';
 import Flag from 'react-native-flags';
 
 import { FirestoreContext } from '../../../../api/firebase';
@@ -17,33 +17,23 @@ import {
   WideButton,
   FooterSmall,
 } from '../../../../components/styles';
+import Picker from './Picker'
 
 const Account = ({ navigation }) => {
   const {locale} = useContext(LocaleContext);
   const {theme} = useContext(ThemeContext);
-  const {user, putCountry} = useContext(FirestoreContext);
-  const [countryModalVisible, setCountryModalVisible] = useState(false);
+  const {user} = useContext(FirestoreContext);
+  const [modal, setModal] = useState(false);
 
   const profile = user?.profile;
   const country = user?.country;
 
-  const handleCountrySelect = async (country) => {
-    try {
-      const {cca2, name} = country;
-      await putCountry(cca2, name);
-    } catch (error) {
-      console.log(error);
-    }
-  };
   
   const handleChangeEmail = async () => {navigation.navigate('Email')};
   const handleChangePassword = async () => {navigation.navigate('Password')};
   const handleCountry = async () => {
-    setCountryModalVisible(true)
+    setModal(true)
   };
-  const handleCloseModal = () => {
-    setCountryModalVisible(false);
-  }
   
   return(
     <Container>
@@ -63,28 +53,20 @@ const Account = ({ navigation }) => {
               </View>
               <Ionicons name="chevron-forward" size={30} color={theme.textGray} />
             </WideButton>
-            <WideButton onPress={handleCountry}>
-              <View style={{alignItems: 'flex-start'}}>
-                <H3>{locale.country_config.title}</H3>
-                {country?
-                  <P><Flag code={country?.iso} size={16}/> {country?.name}</P>
-                :
-                  <P>{locale.country_config.description}</P>
-                }
-              </View>
-              <Ionicons name="chevron-forward" size={30} color={theme.textGray} />
-              {countryModalVisible?
-                <CountryPicker
-                  visible={countryModalVisible}
-                  onSelect={handleCountrySelect}
-                  withFilter={true}
-                  withFlag={true}
-                  withCountryNameButton={true}
-                  onClose={handleCloseModal}
-                  onModalClose={handleCloseModal}
-                />
-              :null}
-            </WideButton>
+            {Platform.OS !== 'web' ?
+              <WideButton onPress={handleCountry}>
+                <View style={{alignItems: 'flex-start'}}>
+                  <H3>{locale.country_config.title}</H3>
+                  {country?
+                    <P><Flag code={country?.iso} size={16}/> {country?.name}</P>
+                  :
+                    <P>{locale.country_config.description}</P>
+                  }
+                </View>
+                <Ionicons name="chevron-forward" size={30} color={theme.textGray} />
+                <Picker modal={modal} setModal={setModal}/>
+              </WideButton>
+            :null}
           </ScrollView>
           {/*
           <Provider>
